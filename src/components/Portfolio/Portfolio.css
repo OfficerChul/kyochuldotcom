@@ -1,0 +1,95 @@
+header {}
+
+.wrapper {
+    padding-top: 50px;
+    font-family: 'Bungee', cursive;
+    background-image: url('./background.jpg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: center;
+    height: 100vh;
+    background-size: cover;
+
+
+}
+
+h1,
+h2 {
+    font-weight: 900;
+    color: rgb(217, 255, 0);
+    text-shadow: 2px 2px #ff0000;
+
+}
+
+h3 {
+    text-shadow: 2px 2px #ff0000;
+}
+
+
+.appear {
+    transform-origin: center top;
+    animation: show 1.5s both;
+    padding-top: 25px;
+
+
+
+}
+
+.d2 {
+    font-size: 40px;
+    color: #E9FDFD;
+
+
+
+}
+
+.d3 {
+    font-size: 10vw;
+    color: aqua;
+}
+
+.d4 {
+    color: rgb(217, 255, 0);
+}
+
+span.appear {
+    display: inline-block;
+}
+
+.d1 {
+    animation-delay: 1s;
+}
+
+.d2 {
+    animation-delay: 2s;
+}
+
+.d3 {
+    animation-delay: 3s;
+}
+
+.d4 {
+    animation-delay: 4s;
+}
+
+.d8 {
+    animation-delay: 5s;
+}
+
+@keyframes show {
+    0% {
+        transform: translate(0, 2em);
+        opacity: 0;
+        text-shadow: 0 0 0 #888;
+    }
+
+    50% {
+        text-shadow: 0 0 0.5em #888;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+        text-shadow: none;
+    }
+}
