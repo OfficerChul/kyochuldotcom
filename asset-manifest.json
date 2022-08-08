@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/kyochuldotcom/static/css/main.43c072fe.css",
+    "main.js": "/kyochuldotcom/static/js/main.b6fbb74a.js",
+    "static/js/787.87e89b67.chunk.js": "/kyochuldotcom/static/js/787.87e89b67.chunk.js",
+    "static/media/triangle-green.png": "/kyochuldotcom/static/media/triangle-green.0fde2c93bc084f9a9e5c.png",
+    "index.html": "/kyochuldotcom/index.html",
+    "main.43c072fe.css.map": "/kyochuldotcom/static/css/main.43c072fe.css.map",
+    "main.b6fbb74a.js.map": "/kyochuldotcom/static/js/main.b6fbb74a.js.map",
+    "787.87e89b67.chunk.js.map": "/kyochuldotcom/static/js/787.87e89b67.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.43c072fe.css",
+    "static/js/main.b6fbb74a.js"
+  ]
+}
