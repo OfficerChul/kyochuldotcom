@@ -1,6 +1,14 @@
 #set-8 {
 	background: #fff;
 }
+
+.links {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+	flex-wrap: wrap;
+
+}
  .blurb-ripple-out {
 	display: inline-block;
 	font-size: 0px;
@@ -13,7 +21,7 @@
 	position: relative;
 	z-index: 1;
 	color: #fff; 
-	background: rgba(178, 221, 76, 0.781);
+	background: #b1d62a9d;
 	-webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
 	-moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
 	transition: transform ease-out 0.1s, background 0.2s;
@@ -93,4 +101,8 @@
 		transform: scale(1.5);
 		opacity: 0;
 	}
+}
+
+a {
+	text-decoration: none;
 }
