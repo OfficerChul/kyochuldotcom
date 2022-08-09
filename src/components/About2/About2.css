@@ -1,0 +1,10 @@
+.about-2 {
+    background-color: aliceblue;
+    padding-bottom: 40px;
+}
+
+.about2 {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
