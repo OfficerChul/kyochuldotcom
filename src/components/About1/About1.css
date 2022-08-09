@@ -1,0 +1,29 @@
+.about {
+    font-family: 'Bungee', cursive;
+}
+
+.myPic {
+    width: 70vh;
+}
+
+.about-title {
+    color: rgb(40, 97, 255);
+    text-shadow: rgb(85, 145, 255) 1px 0 10px;
+}
+
+.col {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;   
+}
+
+.about2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-context {
+    font-size:xx-large;
+    color:rgb(255, 222, 37);
+    text-shadow: rgb(238, 253, 103) 1px 0 10px;
+}
