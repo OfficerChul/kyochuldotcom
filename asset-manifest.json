@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/kyochuldotcom/static/css/main.45cf4a4b.css",
-    "main.js": "/kyochuldotcom/static/js/main.a6749a90.js",
+    "main.css": "/kyochuldotcom/static/css/main.6ccfd0cb.css",
+    "main.js": "/kyochuldotcom/static/js/main.e182db6a.js",
     "static/js/787.87e89b67.chunk.js": "/kyochuldotcom/static/js/787.87e89b67.chunk.js",
+    "static/media/mypic.jpg": "/kyochuldotcom/static/media/mypic.7a5d20e2b093f0d68a84.jpg",
     "static/media/background.jpg": "/kyochuldotcom/static/media/background.9ae8ea5e7f76d8674b4b.jpg",
     "static/media/myPicture.jpg": "/kyochuldotcom/static/media/myPicture.42132771e886070c5696.jpg",
     "static/media/triangle-green.png": "/kyochuldotcom/static/media/triangle-green.0fde2c93bc084f9a9e5c.png",
     "index.html": "/kyochuldotcom/index.html",
-    "main.45cf4a4b.css.map": "/kyochuldotcom/static/css/main.45cf4a4b.css.map",
-    "main.a6749a90.js.map": "/kyochuldotcom/static/js/main.a6749a90.js.map",
+    "main.6ccfd0cb.css.map": "/kyochuldotcom/static/css/main.6ccfd0cb.css.map",
+    "main.e182db6a.js.map": "/kyochuldotcom/static/js/main.e182db6a.js.map",
     "787.87e89b67.chunk.js.map": "/kyochuldotcom/static/js/787.87e89b67.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.45cf4a4b.css",
-    "static/js/main.a6749a90.js"
+    "static/css/main.6ccfd0cb.css",
+    "static/js/main.e182db6a.js"
   ]
 }
