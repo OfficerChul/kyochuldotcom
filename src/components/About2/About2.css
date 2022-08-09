@@ -8,3 +8,14 @@
     /* align-items: center; */
     justify-content: center;
 }
+
+.span-two {
+    color: black;
+}
+
+.emphasize-two {
+    color: blue;
+    /* filter: brightness(2); */
+    font-size: 30px;
+    margin: 0;
+}
