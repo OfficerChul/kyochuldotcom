@@ -12,11 +12,15 @@ export default function About2() {
                             <h2 className='about-title'>About Me</h2>
                             <h2 className='about-title1'>About Me</h2>
                         </div>
-                        <h1 className='about-context'><span className='span-two'><h1 className='emphasize-two'>My hobby</h1> is playing golf and cooking. <br />Since I love nature.
-                            So, I often go on a travel to a place with a huge nature.
-                            <h1 className='emphasize-two'>I am a</h1>very passionate person. <br /> I like to learn and challenge new things.<br />
-                            <h1 className='emphasize-two'>I also like</h1> to make new friends! Feel free to contact me!
-                            </span>
+                        <h1 className='about-context'><span className='span-two'><h1 className='emphasize-two'>My hobby</h1> is playing golf and cooking. <br />
+                            <h1 className='emphasize-two'>My favorite food is</h1> Korean food. I love to make Korean foods and share with other people from different cultures.
+                            <h1 className='emphasize-two'>I also like</h1> to make new friends, especially friends from various cultures to learn about their cultures share our cultures.
+                            <h1 className='emphasize-two'>I am a</h1>very passionate and ardent person. <br /> I like to learn and challenge new things.<br />
+                            <br/>
+                            <h1>If you are interested in me,</h1>
+
+                            <h1>Feel free to contact me!</h1>
+                        </span>
                         </h1>
                     </div>
                     <div className='col-sm about1'>
