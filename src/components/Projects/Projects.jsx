@@ -40,7 +40,7 @@ export default function Projects() {
 
                     <Carousel.Caption className='label'>
                         <h3 ><span className='label-title'>WebDeb101</span></h3>
-                        <p className='stacks'>JavaScript(React), HTML, CSS</p>
+                        <p className='stacks'>JavaScript(React), HTML, CSS, Firebase</p>
                         <p>
                             A course platform which contains 12-weeks web development course designed and written by myself.
                             <br />
