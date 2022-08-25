@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/kyochuldotcom/static/css/main.533d934c.css",
-    "main.js": "/kyochuldotcom/static/js/main.20ee51bf.js",
-    "static/js/787.87e89b67.chunk.js": "/kyochuldotcom/static/js/787.87e89b67.chunk.js",
-    "static/media/mypic.jpg": "/kyochuldotcom/static/media/mypic.7a5d20e2b093f0d68a84.jpg",
-    "static/media/background.jpg": "/kyochuldotcom/static/media/background.9ae8ea5e7f76d8674b4b.jpg",
-    "static/media/snu-dash-project.png": "/kyochuldotcom/static/media/snu-dash-project.417fdbedcfeafcaadbd4.png",
-    "static/media/old-website-project.png": "/kyochuldotcom/static/media/old-website-project.0f7997a15bc4713b9335.png",
-    "static/media/course-website.png": "/kyochuldotcom/static/media/course-website.45d2a25bdb8564e7bb21.png",
-    "static/media/myPicture.jpg": "/kyochuldotcom/static/media/myPicture.42132771e886070c5696.jpg",
-    "static/media/triangle-green.png": "/kyochuldotcom/static/media/triangle-green.0fde2c93bc084f9a9e5c.png",
-    "static/media/java-social-network-project.jpg": "/kyochuldotcom/static/media/java-social-network-project.ed314db971207f73c93f.jpg",
-    "index.html": "/kyochuldotcom/index.html",
-    "main.533d934c.css.map": "/kyochuldotcom/static/css/main.533d934c.css.map",
-    "main.20ee51bf.js.map": "/kyochuldotcom/static/js/main.20ee51bf.js.map",
-    "787.87e89b67.chunk.js.map": "/kyochuldotcom/static/js/787.87e89b67.chunk.js.map"
+    "main.css": "/static/css/main.7db7a0cb.css",
+    "main.js": "/static/js/main.0c67f8ff.js",
+    "static/js/787.87e89b67.chunk.js": "/static/js/787.87e89b67.chunk.js",
+    "static/media/mypic.jpg": "/static/media/mypic.7a5d20e2b093f0d68a84.jpg",
+    "static/media/background.jpg": "/static/media/background.9ae8ea5e7f76d8674b4b.jpg",
+    "static/media/snu-dash-project.png": "/static/media/snu-dash-project.417fdbedcfeafcaadbd4.png",
+    "static/media/old-website-project.png": "/static/media/old-website-project.0f7997a15bc4713b9335.png",
+    "static/media/course-website.png": "/static/media/course-website.45d2a25bdb8564e7bb21.png",
+    "static/media/myPicture.jpg": "/static/media/myPicture.42132771e886070c5696.jpg",
+    "static/media/triangle-green.png": "/static/media/triangle-green.0fde2c93bc084f9a9e5c.png",
+    "static/media/java-social-network-project.jpg": "/static/media/java-social-network-project.ed314db971207f73c93f.jpg",
+    "index.html": "/index.html",
+    "main.7db7a0cb.css.map": "/static/css/main.7db7a0cb.css.map",
+    "main.0c67f8ff.js.map": "/static/js/main.0c67f8ff.js.map",
+    "787.87e89b67.chunk.js.map": "/static/js/787.87e89b67.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.533d934c.css",
-    "static/js/main.20ee51bf.js"
+    "static/css/main.7db7a0cb.css",
+    "static/js/main.0c67f8ff.js"
   ]
 }
