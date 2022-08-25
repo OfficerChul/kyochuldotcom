@@ -18,7 +18,7 @@ export default function Projects() {
             </div>
             <Carousel variant='dark'>
 
-                <Carousel.Item>
+                <Carousel.Item >
                     <img
                         className="project"
                         src={snuProject}
