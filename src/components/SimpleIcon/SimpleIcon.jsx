@@ -8,12 +8,12 @@ export default function SimpleIcon() {
             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
             <section id="set-8">
                 <div class="blurb-ripple-out-wrap hi-icon-effect-8 mt-4 links">
-                    <i class="blurb-ripple-out fa  fa-twitter"><Link style={{ color: "black" }} to="http://twitter.com">twitter</Link></i>
-                    <i class="blurb-ripple-out fa  fa-facebook"><Link style={{ color: "black" }} to="http://facebook.com">facebook</Link></i>
-                    <i class="blurb-ripple-out fa  fa-google-plus"><Link style={{ color: "black" }} to="http://google.com">google</Link></i>
-                    <i class="blurb-ripple-out fa  fa-github-alt"><Link style={{ color: "black" }} to="http://github.com">github</Link></i>
-                    <i class="blurb-ripple-out fa  fa-dribbble"><Link style={{ color: "black" }} to="portfolio">sports</Link></i>
-                    <i class="blurb-ripple-out fa  fa-skype"><Link style={{ color: "black" }} to="http://skype.com">skype</Link></i>
+                    <Link to="http://twitter.com"><i class="blurb-ripple-out fa fa-file" style={{ color: "#454839" }}>Resume</i></Link>
+                    <Link to="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i class="blurb-ripple-out fa  fa-linkedin" style={{ color: "#0E76A8" }}>LinkedIn</i></Link>
+                    <Link to="https://www.instagram.com/kjang_hochul/"><i class="blurb-ripple-out fa  fa-instagram" style={{ color: "#E1306C" }}>Instagram</i></Link>
+                    <Link to="https://github.com/OfficerChul"><i class="blurb-ripple-out fa  fa-github-alt" style={{ color: "#77579d" }}>GitHub</i></Link>
+                    <Link to="portfolio"><i class="blurb-ripple-out fa  fa-star" style={{ color: "#fce903" }}>Portfolio</i></Link>
+                    <a href='mailto:gcj1234567890@gmail.com'><i class="blurb-ripple-out fa  fa-envelope" style={{ color: "#368BFE" }}>Email</i></a>
                 </div>
             </section>
         </div>

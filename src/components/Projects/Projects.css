@@ -32,3 +32,11 @@
     filter: brightness(1.7);
 }
 
+.stacks {
+    color: #0ec508;
+}
+
+.stacks:hover {
+    
+    filter: brightness(1.2);
+}

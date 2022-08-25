@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    
 }
 
 /* .footer-shadow {
@@ -58,8 +59,10 @@
 }
 
 .social-media {
+    position: relative;
     display: flex;
     justify-content: center;
+    margin-top: 14vh;
 }
 
 .social-media-wrap {
@@ -180,7 +183,7 @@
     /* margin-right: 5px; */
 }
 
-.fa-envelope:hover {
+.mail:hover {
     filter: drop-shadow(5px 5px 5px rgb(0, 174, 255));
 }
 

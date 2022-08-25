@@ -17,7 +17,7 @@ export default function Projects() {
                 <h2 className='wave-title1'>Projects</h2>
             </div>
             <Carousel variant='dark'>
-                
+
                 <Carousel.Item>
                     <img
                         className="project"
@@ -26,8 +26,9 @@ export default function Projects() {
                     />
 
                     <Carousel.Caption className='label'>
-                        <h3 ><span className='label-title'>Third slide label</span></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h3 ><span className='label-title'>Neural Data AutoPlot Program</span></h3>
+                        <p className='stacks'>Stacks: Python Libraries - Dash, SciPy(Signal Processing), etc</p>
+                        <p>A GUI web application that helps neuroscientists to plot and analyze neural data without writing a code.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -38,9 +39,12 @@ export default function Projects() {
                     />
 
                     <Carousel.Caption className='label'>
-                        <h3 ><span className='label-title'>Third slide label</span></h3>
+                        <h3 ><span className='label-title'>WebDeb101</span></h3>
+                        <p className='stacks'>JavaScript(React), HTML, CSS</p>
                         <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                            A course platform which contains 12-weeks web development course designed and written by myself.
+                            <br />
+                            Course Website: <a href='https://officerchul.github.io/webDev101/'>https://officerchul.github.io/webDev101/</a>
                         </p>
                     </Carousel.Caption>
                 </Carousel.Item>
@@ -52,9 +56,9 @@ export default function Projects() {
 
                     />
                     <Carousel.Caption className='label'>
-                        <h3 ><span className='label-title'>Third slide label</span></h3>
-                        <p className='stacks'>Stacks: Java</p>
-                        <h5>Built a social network platform for getting a job like LinkedIn. <br />Worked on testing apps by using JUnit Test.</h5>
+                        <h3 ><span className='label-title'>Online Networking Platform</span></h3>
+                        <p className='stacks'>Stacks: Java, JUit Test</p>
+                        <p>A social network application that job seekers can upload their introduction and interests for recruiters, like LinkedIn. <br />Worked on testing apps by using JUnit Test.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -65,9 +69,10 @@ export default function Projects() {
                     />
 
                     <Carousel.Caption className='label'>
-                        <h3 ><span className='label-title'>Third slide label</span></h3>
+                        <h3 ><span className='label-title'>My Old Website</span></h3>
+                        <p className='stacks'>Stacks: JavaScript(React), Netlify, HTML, CSS</p>
                         <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                            My old portfolio website. I am currently not using it.
                         </p>
                     </Carousel.Caption>
                 </Carousel.Item>

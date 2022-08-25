@@ -25,9 +25,12 @@ export default function Portfolio() {
             </header>
             <About1 />
             <About2 />
-            <Contact />
+
             <Projects />
-            
+            <footer>
+                <Contact />
+            </footer>
+
         </>
     )
 }
