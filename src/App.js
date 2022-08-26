@@ -12,6 +12,7 @@ function App() {
         <Route path='/kyochuldotcom' element={<Main />} />
         <Route path='/kyochuldotcom/portfolio' element={<Portfolio />} />
       </Routes>
+      {/* <Main /> */}
     </div>
   );
 }
