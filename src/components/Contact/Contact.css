@@ -227,11 +227,11 @@
     filter: brightness(1.5);
     font-family: 'Bungee', cursive;
     font-size: 20px;
-    margin-top: 100px;
+    /* margin-top: 100px; */
 }
 
 .wave-title1 {
-    margin-top: 100px;
+    /* margin-top: 100px; */
     color: #03a9f4;
     font-size: 20px;
     font-family: 'Bungee', cursive;
