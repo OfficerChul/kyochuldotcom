@@ -7,7 +7,6 @@
 	gap: 30px;
 	justify-content: center;
 	flex-wrap: wrap;
-
 }
  .blurb-ripple-out {
 	display: inline-block;
@@ -105,4 +104,18 @@
 
 a {
 	text-decoration: none;
+}
+
+.resume-modal {
+	/* z-index: 101; */
+	/* position: relative; */
+}
+
+.resume-modal-iframe {
+	width: 100vw;
+	height: 100vh;
+	/* z-index: 101; */
+	/* position: relative; */
+	/* position: fixed; */
+	/* position: sticky; */
 }

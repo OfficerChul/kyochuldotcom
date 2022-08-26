@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Contact.css";
-// import Modal from "react-modal";
+import Modal from "react-modal";
 
 export default function Contact() {
     const [isModalOpen, setIsModalOpen] = useState(0);
@@ -44,11 +44,6 @@ export default function Contact() {
                                 >
                                     <i class="fab fa-instagram" />
                                 </a>
-                            </li>
-                            <li className="social-icon">
-                                <div className="weixin" target="_blank" rel="noreferrer">
-                                    <i class="fab fa-weixin" onClick={() => setIsModalOpen(2)} />
-                                </div>
                             </li>
                             <li className="social-icon">
                                 <a
