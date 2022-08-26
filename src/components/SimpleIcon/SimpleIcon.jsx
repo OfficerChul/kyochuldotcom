@@ -28,8 +28,8 @@ export default function SimpleIcon() {
                     <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i class="blurb-ripple-out fa  fa-linkedin" style={{ color: "#0E76A8" }}>LinkedIn</i></a>
                     <a href="https://www.instagram.com/kjang_hochul/"><i class="blurb-ripple-out fa  fa-instagram" style={{ color: "#E1306C" }}>Instagram</i></a>
                     <a href="https://github.com/OfficerChul"><i class="blurb-ripple-out fa  fa-github-alt" style={{ color: "#77579d" }}>GitHub</i></a>
-                    {/* <Link to="portfolio"><i class="blurb-ripple-out fa  fa-star" style={{ color: "#fce903" }}>Portfolio</i></Link> */}
-                    <a href='portfolio'><i class="blurb-ripple-out fa  fa-star" style={{ color: "#fce903" }}>Portfolio</i></a>
+                    <Link to="portfolio"><i class="blurb-ripple-out fa  fa-star" style={{ color: "#fce903" }}>Portfolio</i></Link>
+                    {/* <a href='portfolio'><i class="blurb-ripple-out fa  fa-star" style={{ color: "#fce903" }}>Portfolio</i></a> */}
                     <a href='mailto:gcj1234567890@gmail.com'><i class="blurb-ripple-out fa  fa-envelope" style={{ color: "#368BFE" }}>Email</i></a>
                 </div>
             </section>
