@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/kyochuldotcom/static/css/main.533d934c.css",
-    "main.js": "/kyochuldotcom/static/js/main.172f45a2.js",
+    "main.css": "/kyochuldotcom/static/css/main.9b7a304e.css",
+    "main.js": "/kyochuldotcom/static/js/main.c8b2088e.js",
     "static/js/787.87e89b67.chunk.js": "/kyochuldotcom/static/js/787.87e89b67.chunk.js",
     "static/media/mypic.jpg": "/kyochuldotcom/static/media/mypic.7a5d20e2b093f0d68a84.jpg",
     "static/media/background.jpg": "/kyochuldotcom/static/media/background.9ae8ea5e7f76d8674b4b.jpg",
     "static/media/snu-dash-project.png": "/kyochuldotcom/static/media/snu-dash-project.417fdbedcfeafcaadbd4.png",
     "static/media/old-website-project.png": "/kyochuldotcom/static/media/old-website-project.0f7997a15bc4713b9335.png",
     "static/media/course-website.png": "/kyochuldotcom/static/media/course-website.45d2a25bdb8564e7bb21.png",
+    "static/media/Resume.pdf": "/kyochuldotcom/static/media/Resume.ab81f3ae1d1327c57e83.pdf",
     "static/media/myPicture.jpg": "/kyochuldotcom/static/media/myPicture.42132771e886070c5696.jpg",
     "static/media/triangle-green.png": "/kyochuldotcom/static/media/triangle-green.0fde2c93bc084f9a9e5c.png",
     "static/media/java-social-network-project.jpg": "/kyochuldotcom/static/media/java-social-network-project.ed314db971207f73c93f.jpg",
     "index.html": "/kyochuldotcom/index.html",
-    "main.533d934c.css.map": "/kyochuldotcom/static/css/main.533d934c.css.map",
-    "main.172f45a2.js.map": "/kyochuldotcom/static/js/main.172f45a2.js.map",
+    "main.9b7a304e.css.map": "/kyochuldotcom/static/css/main.9b7a304e.css.map",
+    "main.c8b2088e.js.map": "/kyochuldotcom/static/js/main.c8b2088e.js.map",
     "787.87e89b67.chunk.js.map": "/kyochuldotcom/static/js/787.87e89b67.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.533d934c.css",
-    "static/js/main.172f45a2.js"
+    "static/css/main.9b7a304e.css",
+    "static/js/main.c8b2088e.js"
   ]
 }
