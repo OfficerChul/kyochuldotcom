@@ -17,9 +17,6 @@ export default function About2() {
                             <h1 className='emphasize-two'>I also like</h1> to make new friends, especially friends from various cultures to learn about their cultures and share our cultures.
                             <h1 className='emphasize-two'>I am a</h1>very passionate and ardent person. <br /> I like to learn and challenge new things.<br />
                             <br/>
-                            <h1>If you are interested in me,</h1>
-
-                            <h1>Feel free to contact me!</h1>
                         </span>
                         </h1>
                     </div>

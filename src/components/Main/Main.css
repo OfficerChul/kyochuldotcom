@@ -10,7 +10,7 @@
 }
 
 .logo:hover {
-    animation: shake 5s infinite;
+    animation: shake 3s infinite;
 }
 
 @keyframes shake {
