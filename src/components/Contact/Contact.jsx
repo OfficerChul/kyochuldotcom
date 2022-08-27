@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import "./Contact.css";
 import Modal from "react-modal";
+import Mailer from '../Mailer/Mailer'
 
 export default function Contact() {
     const [isModalOpen, setIsModalOpen] = useState(0);
 
     return (
         <div className="footer-container">
+            {/* <div className="contact-wrapper">
             <div className="wave-content">
                 <h2 className='wave-title'>More About Me?</h2>
                 <h2 className='wave-title1'>More About Me?</h2>
-            </div>
+                </div>
+                </div> */}
+            <div className="wave-content">
+                <h2 className='wave-title'>Contact!</h2>
+                <h2 className='wave-title1'>Contact!</h2>
+                </div>
+            <Mailer />
+            <div className='last'>
             <section className="social-media">
                 <div className="social-media-wrap">
                     <div className="social-icons">
@@ -66,10 +75,16 @@ export default function Contact() {
                                 </a>
                             </li>
                         </ul>
+
                     </div>
-                    <small className="website-rights">KCJ © 2022</small>
+                    {/* <hr className='mid-line'/> */}
+                    
+
                 </div>
             </section>
+            <hr className='mid-line' />
+            <div className="website-rights">KCJ © 2022</div>
+            </div>
         </div>
     );
 }

@@ -14,7 +14,7 @@ export default function About2() {
                         </div>
                         <h1 className='about-context'><span className='span-two'><h1 className='emphasize-two'>My hobby</h1> is playing golf and cooking. <br />
                             <h1 className='emphasize-two'>My favorite food is</h1> Korean food. I love to make Korean foods and share with other people from different cultures.
-                            <h1 className='emphasize-two'>I also like</h1> to make new friends, especially friends from various cultures to learn about their cultures share our cultures.
+                            <h1 className='emphasize-two'>I also like</h1> to make new friends, especially friends from various cultures to learn about their cultures and share our cultures.
                             <h1 className='emphasize-two'>I am a</h1>very passionate and ardent person. <br /> I like to learn and challenge new things.<br />
                             <br/>
                             <h1>If you are interested in me,</h1>

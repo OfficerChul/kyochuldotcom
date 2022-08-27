@@ -5,6 +5,7 @@ import javaProject from './java-social-network-project.jpg';
 import snuProject from './snu-dash-project.png';
 import oldWebProject from './old-website-project.png';
 import webdev101 from './course-website.png';
+import newWebsite from './new_website.jpg';
 
 
 
@@ -59,6 +60,19 @@ export default function Projects() {
                         <h3 ><span className='label-title'>Online Networking Platform</span></h3>
                         <p className='stacks'>Stacks: Java, JUit Test</p>
                         <p>A social network application that job seekers can upload their introduction and interests for recruiters, like LinkedIn. <br />Worked on testing apps by using JUnit Test.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item >
+                    <img
+                        className="project"
+                        src={newWebsite}
+                        alt="Second slide"
+                    />
+
+                    <Carousel.Caption className='label'>
+                        <h3 ><span className='label-title'>Portfolio Website</span></h3>
+                        <p className='stacks'>Stacks: React, Vite, JavaScript, HTML, CSS</p>
+                        <p>A Portfolio Website that I am currently using. I made this website from the sratch without using any pre-made template.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>

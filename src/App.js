@@ -8,6 +8,7 @@ import Portfolio from './components/Portfolio/Portfolio';
 function App() {
   return (
     <div className="App">
+      {/* <Main /> */}
       <Routes>
         <Route path='/kyochuldotcom' element={<Main />} />
         <Route path='/kyochuldotcom/portfolio' element={<Portfolio />} />

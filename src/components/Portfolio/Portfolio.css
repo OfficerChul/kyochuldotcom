@@ -32,7 +32,7 @@
 .content h2:nth-child(2) {
 	color: #000000;
 	animation: animate 4s ease-in-out infinite;
-    text-shadow: rgb(255, 255, 255) 10px 10px 10px;
+    /* text-shadow: rgb(255, 255, 255) 10px 10px 10px; */
 	
 }
 

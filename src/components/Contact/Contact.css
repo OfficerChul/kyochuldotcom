@@ -1,91 +1,27 @@
 .footer-container {
-    display: flex;
     background: rgba(0, 5, 110, 0.29);
-    /* background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(186, 225, 255, 1) 100%
-    ); */
-    /* padding: 1rem 0 1rem 0; */
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    
+    text-align: center;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
 }
 
-/* .footer-shadow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 900;
-    flex-direction: row;
-    height: 3rem;
-    background: rgba(0, 0, 0, 0.2);
-  } */
-
-.wechat-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 23rem;
-    border: solid;
-    border-color: #baffc9;
-    outline: none;
-    background-color: aliceblue;
-}
-
-.wechat-modal-img {
-    width: 100%;
-    height: 100%;
-}
-
-.kakaotalk-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 23rem;
-    border: solid;
-    border-color: #baffc9;
-    outline: none;
-    background-color: aliceblue;
-}
-
-.kakaotalk-modal-img {
-    width: 100%;
-    height: 100%;
-}
-
-.social-media {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    margin-top: 14vh;
-}
-
-.social-media-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    align-items: center;
+* {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
 }
 
 .website-rights {
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
         "Lucida Sans", Arial, sans-serif;
     font-weight: 900;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
     color: rgba(34, 34, 34, 0.74);
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    /* position: relative; */
+    margin-bottom: 20px;
+    /* padding-bottom: 20px; */
 }
 
 .social-icons {
@@ -95,13 +31,20 @@
     width: 100%;
     max-width: 100%;
     font-size: 2rem;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 0;
+    align-items: center;
 }
 
 .social-icon {
     width: 100%;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    padding-left: 0;
+    gap: 20px;
     display: flex;
     flex-flow: row;
+    
 }
 
 .kakaotalk {
@@ -252,4 +195,8 @@
     right: 1%;
 
     -webkit-text-stroke: 2px rgb(0, 89, 255);
+}
+
+.mid-line {
+    /* width: 30vw; */
 }

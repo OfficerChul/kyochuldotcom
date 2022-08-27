@@ -1,0 +1,103 @@
+.contact-form {
+  padding-top: 1rem;
+  /* padding-bottom: 1.5rem; */
+  /* color: aliceblue; */
+}
+
+.form-wrapper {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  /* padding-bottom: 1rem; */
+}
+
+.name-email-wrapper {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.name-label {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+.email-label {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.form-label {
+  padding-top: 1rem;
+  /* padding-bottom: 1rem; */
+}
+
+.mail-sent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 23rem;
+  border: solid;
+  text-align: center;
+  /* border-color: #baffc9; */
+  outline: none;
+  background-color: aliceblue;
+  padding: 1rem;
+  /* padding-top: 1rem; */
+  /* padding-bottom: 1rem; */
+  font-size: 1.5rem;
+}
+
+textarea {
+  width: 90%;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  border-width: 2px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+input[type="text"] {
+  width: 20%;
+  height: 1.5rem;
+  border-radius: 6px;
+  padding-left: 10px;
+}
+
+input[type="email"] {
+  width: 20%rem;
+  height: 1.5rem;
+  border-radius: 6px;
+  padding-left: 10px;
+}
+
+input[type="submit"] {
+  width: 90%;
+  height: 30px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(63, 170, 120);
+  font-size: 17px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+input[type="submit"]:hover {
+  transition: ease-in-out 0.2s;
+  color: rgb(245, 162, 94);
+  background-color: rgba(255, 255, 255, 0.377);
+}
+
+.email-notification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mail-wrapper {
+  margin-top: 50px;
+}

@@ -14,6 +14,7 @@ export default function About1() {
                         <div className="about-content">
                             <h2 className='about-title'>About Me</h2>
                             <h2 className='about-title1'>About Me</h2>
+                            
                         </div>
                         <h1 className='about-context'><span>Hi, I am Kyochul Jang, <br />a Computer Science student at <br/><span className='univ'>Purdue University.</span>
                             <h1 className='emphasize'>My concentration</h1> is Machine Learning. I am also minoring in Mathematics. <br />

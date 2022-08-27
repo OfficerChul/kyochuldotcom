@@ -3,7 +3,6 @@ import './SimpleIcon.css'
 import { Link } from 'react-router-dom'
 import resume from './Resume_no_GPA.pdf';
 import Modal from 'react-modal';
-import Portfolio from '../Portfolio/Portfolio';
 
 export default function SimpleIcon() {
     const [isModalOpen, setIsModalOpen] = useState(0);

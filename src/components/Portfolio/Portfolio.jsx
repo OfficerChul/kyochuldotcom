@@ -5,6 +5,8 @@ import About2 from '../About2/About2'
 import Projects from '../Projects/Projects'
 import Contact from '../Contact/Contact'
 
+
+
 export default function Portfolio() {
     return (
         <>
@@ -25,8 +27,10 @@ export default function Portfolio() {
             </header>
             <About1 />
             <About2 />
+            
 
             <Projects />
+            
             <footer>
                 <Contact />
             </footer>
