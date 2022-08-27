@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/kyochuldotcom/static/css/main.f031564e.css",
-    "main.js": "/kyochuldotcom/static/js/main.78e78a9c.js",
+    "main.css": "/kyochuldotcom/static/css/main.fb3abde4.css",
+    "main.js": "/kyochuldotcom/static/js/main.0f08497b.js",
     "static/js/787.87e89b67.chunk.js": "/kyochuldotcom/static/js/787.87e89b67.chunk.js",
     "static/media/mypic.jpg": "/kyochuldotcom/static/media/mypic.7a5d20e2b093f0d68a84.jpg",
     "static/media/background.jpg": "/kyochuldotcom/static/media/background.9ae8ea5e7f76d8674b4b.jpg",
     "static/media/snu-dash-project.png": "/kyochuldotcom/static/media/snu-dash-project.417fdbedcfeafcaadbd4.png",
     "static/media/old-website-project.png": "/kyochuldotcom/static/media/old-website-project.0f7997a15bc4713b9335.png",
+    "static/media/new_website.jpg": "/kyochuldotcom/static/media/new_website.63aa85d262ef1c4c5a35.jpg",
     "static/media/course-website.png": "/kyochuldotcom/static/media/course-website.45d2a25bdb8564e7bb21.png",
-    "static/media/Resume_no_GPA.pdf": "/kyochuldotcom/static/media/Resume_no_GPA.877228804c9eb196ef26.pdf",
+    "static/media/Resume_no_GPA.pdf": "/kyochuldotcom/static/media/Resume_no_GPA.c7a0c6bdad4cad857a19.pdf",
     "static/media/myPicture.jpg": "/kyochuldotcom/static/media/myPicture.42132771e886070c5696.jpg",
     "static/media/triangle-green.png": "/kyochuldotcom/static/media/triangle-green.0fde2c93bc084f9a9e5c.png",
     "static/media/java-social-network-project.jpg": "/kyochuldotcom/static/media/java-social-network-project.ed314db971207f73c93f.jpg",
     "index.html": "/kyochuldotcom/index.html",
-    "main.f031564e.css.map": "/kyochuldotcom/static/css/main.f031564e.css.map",
-    "main.78e78a9c.js.map": "/kyochuldotcom/static/js/main.78e78a9c.js.map",
+    "main.fb3abde4.css.map": "/kyochuldotcom/static/css/main.fb3abde4.css.map",
+    "main.0f08497b.js.map": "/kyochuldotcom/static/js/main.0f08497b.js.map",
     "787.87e89b67.chunk.js.map": "/kyochuldotcom/static/js/787.87e89b67.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f031564e.css",
-    "static/js/main.78e78a9c.js"
+    "static/css/main.fb3abde4.css",
+    "static/js/main.0f08497b.js"
   ]
 }
