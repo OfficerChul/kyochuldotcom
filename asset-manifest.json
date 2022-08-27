@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/kyochuldotcom/static/css/main.fb3abde4.css",
-    "main.js": "/kyochuldotcom/static/js/main.0f08497b.js",
+    "main.css": "/kyochuldotcom/static/css/main.db96c779.css",
+    "main.js": "/kyochuldotcom/static/js/main.988ef630.js",
     "static/js/787.87e89b67.chunk.js": "/kyochuldotcom/static/js/787.87e89b67.chunk.js",
     "static/media/mypic.jpg": "/kyochuldotcom/static/media/mypic.7a5d20e2b093f0d68a84.jpg",
     "static/media/background.jpg": "/kyochuldotcom/static/media/background.9ae8ea5e7f76d8674b4b.jpg",
@@ -14,12 +14,12 @@
     "static/media/triangle-green.png": "/kyochuldotcom/static/media/triangle-green.0fde2c93bc084f9a9e5c.png",
     "static/media/java-social-network-project.jpg": "/kyochuldotcom/static/media/java-social-network-project.ed314db971207f73c93f.jpg",
     "index.html": "/kyochuldotcom/index.html",
-    "main.fb3abde4.css.map": "/kyochuldotcom/static/css/main.fb3abde4.css.map",
-    "main.0f08497b.js.map": "/kyochuldotcom/static/js/main.0f08497b.js.map",
+    "main.db96c779.css.map": "/kyochuldotcom/static/css/main.db96c779.css.map",
+    "main.988ef630.js.map": "/kyochuldotcom/static/js/main.988ef630.js.map",
     "787.87e89b67.chunk.js.map": "/kyochuldotcom/static/js/787.87e89b67.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb3abde4.css",
-    "static/js/main.0f08497b.js"
+    "static/css/main.db96c779.css",
+    "static/js/main.988ef630.js"
   ]
 }
