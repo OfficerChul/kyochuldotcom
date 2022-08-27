@@ -86,7 +86,7 @@ export default function Projects() {
                         <h3 ><span className='label-title'>My Old Website</span></h3>
                         <p className='stacks'>Stacks: JavaScript(React), Netlify, HTML, CSS</p>
                         <p>
-                            My old portfolio website. I am currently not using it.
+                            My old portfolio website. It also used React. I am currently not using it.
                         </p>
                     </Carousel.Caption>
                 </Carousel.Item>
