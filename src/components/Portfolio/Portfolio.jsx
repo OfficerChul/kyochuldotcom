@@ -19,8 +19,8 @@ export default function Portfolio() {
 
                     <div className="content">
 
-                        <h2 className='appear'>Kyochul Jang</h2>
-                        <h2 className='appear'>Kyochul Jang</h2>
+                        <h2 className=''>Kyochul Jang</h2>
+                        <h2 className=''>Kyochul Jang</h2>
 
                     </div>
                 </div>
