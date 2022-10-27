@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Contact.css";
-import Modal from "react-modal";
 import Mailer from '../Mailer/Mailer'
 
 export default function Contact() {
-    const [isModalOpen, setIsModalOpen] = useState(0);
 
     return (
         <div className="footer-container">
