@@ -16,7 +16,7 @@ export default function Portfolio() {
                 <div id="top" class="appear">
 
 
-                    <Link to='/kyochuldotcom'><img className='to-main' src={logo} alt='logo' /></Link>
+                    <Link to='/'><img className='to-main' src={logo} alt='logo' /></Link>
                     <h1 className='header-text'>Welcome to <span className="appear d1">my Website :)</span></h1>
 
                     <div className="content">
