@@ -9,6 +9,10 @@
 
 }
 
+#main-logo {
+	height: 400px;
+}
+
 .logo:hover {
     animation: shake 3s infinite;
 }
