@@ -48,3 +48,7 @@
 		transform: translate(2px, 1px) rotate(-1deg);
 	}
 }
+
+#search-bar {
+	height: 5vh;
+}
