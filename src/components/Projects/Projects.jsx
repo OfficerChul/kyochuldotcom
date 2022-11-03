@@ -25,12 +25,13 @@ export default function Projects() {
                         src={snuProject}
                         alt="Second slide"
                     />
-
-                    <Carousel.Caption className='label'>
+                    <div className="desc">
                         <h3 ><span className='label-title'>Neural Data AutoPlot Program</span></h3>
                         <p className='stacks'>Stacks: Python Libraries - Dash, SciPy(Signal Processing), etc</p>
-                        <p>A GUI web application that helps neuroscientists to plot and analyze neural data without writing a code.</p>
-                    </Carousel.Caption>
+                        <p className=''>A GUI web application that helps neuroscientists to plot and analyze neural data without writing a code.</p>
+                    </div>
+
+
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
@@ -39,7 +40,7 @@ export default function Projects() {
                         alt="Fourth slide"
                     />
 
-                    <Carousel.Caption className='label'>
+                    <div className="desc">
                         <h3 ><span className='label-title'>WebDeb101</span></h3>
                         <p className='stacks'>JavaScript(React), HTML, CSS, Firebase</p>
                         <p>
@@ -47,7 +48,7 @@ export default function Projects() {
                             <br />
                             Course Website: <a href='https://officerchul.github.io/webDev101/'>https://officerchul.github.io/webDev101/</a>
                         </p>
-                    </Carousel.Caption>
+                    </div>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
@@ -56,11 +57,10 @@ export default function Projects() {
                         alt="First slide"
 
                     />
-                    <Carousel.Caption className='label'>
+                    <div className="desc">
                         <h3 ><span className='label-title'>Online Networking Platform</span></h3>
                         <p className='stacks'>Stacks: Java, JUit Test</p>
-                        <p>A social network application that job seekers can upload their introduction and interests for recruiters, like LinkedIn. <br />Worked on testing apps by using JUnit Test.</p>
-                    </Carousel.Caption>
+                        <p>A social network application that job seekers can upload their introduction and interests for recruiters, like LinkedIn. <br />Worked on testing apps by using JUnit Test.</p></div>
                 </Carousel.Item>
                 <Carousel.Item >
                     <img
@@ -69,11 +69,11 @@ export default function Projects() {
                         alt="Second slide"
                     />
 
-                    <Carousel.Caption className='label'>
+                    <div className="desc">
                         <h3 ><span className='label-title'>Portfolio Website</span></h3>
                         <p className='stacks'>Stacks: React, Vite, JavaScript, HTML, CSS</p>
-                        <p>A Portfolio Website that I am currently using. I made this website from the sratch without using any pre-made template.</p>
-                    </Carousel.Caption>
+                        <p>A Portfolio Website that I am currently using. I created this website from the sratch without using any pre-made template.</p>
+                    </div>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
@@ -82,13 +82,13 @@ export default function Projects() {
                         alt="Third slide"
                     />
 
-                    <Carousel.Caption className='label'>
+                    <div className="desc">
                         <h3 ><span className='label-title'>My Old Website</span></h3>
                         <p className='stacks'>Stacks: JavaScript(React), Netlify, HTML, CSS</p>
                         <p>
                             My old portfolio website. It also used React. I am currently not using it.
                         </p>
-                    </Carousel.Caption>
+                    </div>
                 </Carousel.Item>
 
             </Carousel>
