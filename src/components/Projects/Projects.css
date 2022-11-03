@@ -3,17 +3,33 @@
     padding: 20px;
     /* background-color: black; */
     padding-bottom: 30px;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.temp {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 @media (min-width:320px) {
     .project {
-        width: 80vw;
-        height: 50vh;
+        width: 90vw;
+        height: 40vh;
         margin-top: 100px;
     }
 }
 
-@media (min-width:480px) {
+@media (min-width:481px) {
+    .project {
+        width: 90vw;
+        height: 40vh;
+        margin-top: 100px;
+    }
+}
+
+@media (min-width:641px) {
     .project {
         width: 80vw;
         height: 50vh;
@@ -21,17 +37,9 @@
     }
 }
 
-@media (min-width:600px) {
+@media (min-width:961px) {
     .project {
-        width: 80vw;
-        height: 50vh;
-        margin-top: 100px;
-    }
-}
-
-@media (min-width:801px) {
-    .project {
-        width: 80vw;
+        width: 70vw;
         height: 50vh;
         margin-top: 100px;
     }
@@ -40,15 +48,15 @@
 @media (min-width:1025px) {
     .project {
         width: 70vw;
-        height: 85vh;
+        height: 70vh;
         margin-top: 100px;
     }
 }
 
 @media (min-width:1281px) {
     .project {
-        width: 70vw;
-        height: 85vh;
+        width: 50vw;
+        
         margin-top: 100px;
 
     }
@@ -118,6 +126,9 @@
         height: 25vh;
         color: black;
         border-radius: 10px;
+        /* width: 50vw; */
+        /* display: flex;
+        justify-content: center; */
     }
 }
 
@@ -127,7 +138,9 @@
         background-color: aliceblue;
         padding-top: 30px;
         margin-bottom: 50px;
-        height: 20vh;
+        height: 23vh;
+        
+        
         color: black;
         border-radius: 10px;
     }

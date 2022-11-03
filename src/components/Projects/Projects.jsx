@@ -12,14 +12,15 @@ import newWebsite from './new_website.jpg';
 export default function Projects() {
     return (
 
-        <div className="container carousel-container">
+        <div className="container carousel-container" >
             <div className="wave-content project-title">
                 <h2 className='wave-title'>Projects</h2>
                 <h2 className='wave-title1'>Projects</h2>
             </div>
             <Carousel variant='dark'>
 
-                <Carousel.Item >
+                <Carousel.Item>
+
                     <img
                         className="project"
                         src={snuProject}
@@ -30,6 +31,7 @@ export default function Projects() {
                         <p className='stacks'>Stacks: Python Libraries - Dash, SciPy(Signal Processing), etc</p>
                         <p className=''>A GUI web application that helps neuroscientists to plot and analyze neural data without writing a code.</p>
                     </div>
+
 
 
                 </Carousel.Item>
