@@ -43,7 +43,7 @@ export default function Projects() {
                     />
 
                     <div className="desc">
-                        <h3 ><span className='label-title'>WebDeb101</span></h3>
+                        <h3 ><span className='label-title'>WebDev101</span></h3>
                         <p className='stacks'>JavaScript(React), HTML, CSS, Firebase</p>
                         <p>
                             A course platform which contains 12-weeks web development course designed and written by myself.
