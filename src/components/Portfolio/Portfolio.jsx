@@ -28,7 +28,7 @@ export default function Portfolio() {
                 </div>
             </header>
             <About1 />
-            <About2 />
+            {/* <About2 /> */}
             
             <Projects />
             
