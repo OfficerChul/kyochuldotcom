@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"); */
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 
 /* body {
 	display: flex;
@@ -69,7 +69,7 @@
 }
 
 #welcome-sign {
-	-webkit-text-stroke: 3px #ffffff;
+	-webkit-text-stroke: 1px #ffffff;
 }
 
 

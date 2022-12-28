@@ -1,21 +1,23 @@
 .about-2 {
-    background-color: aliceblue;
+    background-color: #84cdee;
     padding-bottom: 40px;
+}
+
+#pics {
+    margin-top: 20px;
 }
 
 .about2 {
     display: flex;
-    /* align-items: center; */
-    justify-content: center;
+    align-items: center;
+    /* justify-content: center; */
 }
 
-.span-two {
-    color: black;
-}
 
-.emphasize-two {
-    color: blue;
-    /* filter: brightness(2); */
-    font-size: 30px;
-    margin: 0;
+#about2-title {   
+    color: #edf7fc;
+    -webkit-text-stroke: 5px #b9e2f5;
+    font-family: 'Bungee', cursive;
+    font-size: 7vh;
+    
 }

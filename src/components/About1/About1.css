@@ -62,7 +62,7 @@
 }
 
 #about-title {
-    color: #50b8e7;
+    color: #84cdee;
     -webkit-text-stroke: 5px #b9e2f5;
     font-family: 'Bungee', cursive;
     font-size: 7vh;
@@ -113,7 +113,6 @@
     border-radius: 10px;
     /* padding-left: 5px; */
     padding-right: 5px;
-    /* -webkit-text-stroke: 0.001px #000; */
-    /* text-shadow: rgb(207, 185, 145) 5px 5px 10px; */
+    -webkit-text-stroke: 1px black;
 }
 

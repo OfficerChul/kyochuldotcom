@@ -1,7 +1,7 @@
 import React from 'react'
 import './Portfolio.css'
 import About1 from '../About1/About1'
-// import About2 from '../About2/About2'
+import About2 from '../About2/About2'
 import Projects from '../Projects/Projects'
 import Contact from '../Contact/Contact'
 import logo from '../Main/triangle-green.png';
@@ -25,10 +25,11 @@ export default function Portfolio() {
                         <h2 className=''>Kyochul Jang</h2>
 
                     </div>
+                    
                 </div>
             </header>
             <About1 />
-            {/* <About2 /> */}
+            <About2 />
             
             <Projects />
             
