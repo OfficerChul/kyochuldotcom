@@ -26,12 +26,14 @@
 .content h2:nth-child(1) {
 	color: transparent;
 	-webkit-text-stroke: 2px #94ff08;
+	font-size: 10vw;
     
 }
 
 .content h2:nth-child(2) {
 	color: #94ff08;
 	animation: animate 4s ease-in-out infinite;
+	font-size: 10vw;
     /* text-shadow: rgb(255, 255, 255) 10px 10px 10px; */
 	
 }
