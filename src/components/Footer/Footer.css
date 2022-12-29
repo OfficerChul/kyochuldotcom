@@ -151,3 +151,9 @@
 
     -webkit-text-stroke: 2px rgb(0, 89, 255);
 }
+
+#project-carousel {
+    position:relative;
+    top: -30px;
+    margin-bottom: 70px;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import './Portfolio.css'
 import About1 from '../About1/About1'
 import About2 from '../About2/About2'
-// import Projects from '../Projects/Projects'
+import Projects from '../Projects/Projects'
 import Footer from '../Footer/Footer'
 import logo from '../Main/triangle-green.png';
 import { Link } from 'react-router-dom';
@@ -37,7 +37,6 @@ export default function Portfolio() {
             
             <header className='wrapper'>
                 <div id="top" class="appear">
-
                     
                     <Link to='/'><img className='to-main' src={logo} alt='logo' /></Link>
                     <h1 className='header-text'><span id="welcome-sign">Welcome to </span><span className="appear d1">my Website :)</span></h1>
@@ -52,10 +51,11 @@ export default function Portfolio() {
             <About1 />
             <About2 />
 
-            {/* <Projects /> */}
+            
+            <Projects />
 
             <footer>
-                {/* <Contact /> */}
+                
                 <Footer />
             </footer>
 

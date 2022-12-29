@@ -1,0 +1,172 @@
+.carousel-container {
+  /* padding: 20px;
+  padding-bottom: 30px; */
+  top: 100px;
+}
+
+.carousel {
+  width:200px;
+  height:100px;
+  margin: auto;
+}
+
+#wave-title {
+  text-align: center;
+  color: #84cdee;
+  -webkit-text-stroke: 5px #b9e2f5;
+  font-family: "Bungee", cursive;
+  font-size: 7vh;
+}
+
+@media (min-width: 320px) {
+  .project {
+    width: 90vw;
+    height: 40vh;
+    margin-top: 100px;
+  }
+}
+
+@media (min-width: 481px) {
+  .project {
+    width: 90vw;
+    height: 50vh;
+    margin-top: 100px;
+  }
+}
+
+@media (min-width: 641px) {
+  .project {
+    width: 80vw;
+    height: 50vh;
+    margin-top: 100px;
+  }
+}
+
+@media (min-width: 961px) {
+  .project {
+    width: 70vw;
+    
+    margin-top: 100px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .project {
+    width: 70vw;
+    height: 70vh;
+    margin-top: 100px;
+  }
+}
+
+@media (min-width: 1281px) {
+  .project {
+    width: 50vw;
+    margin-top: 100px;
+  }
+}
+
+.project {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 130px;
+  height: 130px;
+  /* margin-bottom: 20px; */
+  
+}
+.desc {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  background-color: rgb(211, 211, 211);
+}
+
+@media (min-width: 320px) {
+  .desc {
+    margin-top: 10px;
+    
+    padding-top: 30px;
+    margin-bottom: 50px;
+    height: 230px;
+    color: black;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 481px) {
+  .desc {
+    margin-top: 10px;
+    
+    
+    padding-top: 30px;
+    margin-bottom: 50px;
+    height: 230px;
+    color: black;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 641px) {
+  .desc {
+    margin-top: 10px;
+    
+    padding-top: 30px;
+    margin-bottom: 50px;
+    height: 16vh;
+    color: black;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 961px) {
+  .desc {
+    margin-top: 10px;
+    
+    padding-top: 30px;
+    margin-bottom: 50px;
+    height: 27vh;
+    color: black;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .desc {
+    margin-top: 10px;
+    
+    padding-top: 30px;
+    margin-bottom: 50px;
+    height: 27vh;
+    color: black;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 1281px) {
+  .desc {
+    margin-top: 10px;
+    
+    padding-top: 30px;
+    margin-bottom: 50px;
+    height: 26vh;
+
+    color: black;
+    border-radius: 10px;
+  }
+}
+
+.label-title {
+  color: rgb(0, 212, 250);
+}
+
+.label-title:hover {
+  transition: ease 0.5s;
+  filter: brightness(1.7);
+}
+
+.stacks {
+  color: rgb(0, 212, 250);
+  filter: brightness(0.5);
+}

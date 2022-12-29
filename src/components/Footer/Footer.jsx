@@ -1,7 +1,7 @@
 import React from 'react'
 import Banner from './banner.png';
 import './Footer.css';
-import Projects from '../Projects/Projects';
+import Projects from '../Projects-Carousel/Projects-Carousel';
 
 function Footer() {
     return (
@@ -14,7 +14,7 @@ function Footer() {
 
                         </a>
                     </div>
-                    
+
                     <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
                             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
@@ -50,7 +50,9 @@ function Footer() {
                             </ul>
                         </div>
                     </div>
-                    <Projects />
+                    <div id='project-carousel' >
+                        <Projects />
+                    </div>
                 </div>
                 <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div class="sm:flex sm:items-center sm:justify-between">
