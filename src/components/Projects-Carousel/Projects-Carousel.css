@@ -5,9 +5,9 @@
 }
 
 .carousel {
-  width:200px;
+  width:300px;
   height:100px;
-  margin: auto;
+  /* margin: auto; */
 }
 
 #wave-title {

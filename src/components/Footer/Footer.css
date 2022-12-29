@@ -1,7 +1,9 @@
 .footer-container {
-    background-color: rgb(147 197 253);
+    /* background-color: rgb(63 131 248); */
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
         "Lucida Sans", Arial, sans-serif;
+    display:flex;
+    justify-content: center;
 }
 
 .website-rights {
@@ -153,7 +155,33 @@
 }
 
 #project-carousel {
-    position:relative;
-    top: -30px;
-    margin-bottom: 70px;
+    position: relative;
+ 
 }
+@media (min-width: 320px) {
+    #project-carousel {
+        position: relative;
+        margin-bottom: 160px;
+    }
+  }
+  
+  @media (min-width: 481px) {
+    #project-carousel {
+        position: relative;
+        margin: 0;
+    }
+  }
+  
+  @media (min-width: 641px) {
+    #project-carousel {
+        position: relative;
+     
+    }
+  }
+  
+  @media (min-width: 961px) {
+    #project-carousel {
+        position: relative;
+     
+    }
+  }

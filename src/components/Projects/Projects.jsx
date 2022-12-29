@@ -3,9 +3,9 @@ import logo from '../Main/triangle-green.png';
 import "./Projects.css";
 import { projectData } from './ProjectsData';
 
-export function Projects() {
+export function Projects({id}) {
     return (
-        <div>
+        <div id={id}>
             <h2 className='flex justify-center mt-8 mb-8' id='about2-title'>Projects</h2>
 
 

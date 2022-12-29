@@ -5,54 +5,63 @@ import Projects from '../Projects-Carousel/Projects-Carousel';
 
 function Footer() {
     return (
-        <div className="footer-container">
+        <div className="footer-container bg-blue-200 ">
             <footer class="p-4 bg-blue-200 sm:p-6 dark:bg-gray-900">
-                <div class="md:flex md:justify-between">
+                <div class="md:flex md:justify-between" >
                     <div class="mb-6 md:mb-0">
                         <a href="https://kyochuljang.com/" class="flex items-center">
-                            <img src={Banner} class="mr-3 h-20" alt="FlowBite Logo" />
+                            <img src={Banner} class="h-20" alt="FlowBite Logo" />
 
                         </a>
                     </div>
+                    <div id='project-carousel'>
+                        <a href='#projects'>
+                            <Projects />
+                        </a>
+                    </div>
 
-                    <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div class="ml-2 grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
                             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                             <ul class="text-gray-600 pl-0 dark:text-gray-400">
                                 <li class="mb-4">
                                     <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
                                 </li>
-                                <li>
+                                <li class="mb-4">
                                     <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
                                 </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
-                            <ul class="text-gray-600 pl-0 dark:text-gray-400">
                                 <li class="mb-4">
-                                    <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
-                                </li>
-                                <li>
-                                    <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                                    <a href="https://codepen.io/" class="hover:underline">CodePen</a>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow Me</h2>
                             <ul class="text-gray-600 pl-0 dark:text-gray-400">
                                 <li class="mb-4">
-                                    <a href="naver.com" class="hover:underline">Privacy Policy</a>
+                                    <a href="https://github.com/OfficerChul" class="hover:underline ">Github</a>
+                                </li>
+                                <li class="mb-4">
+                                    <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/" class="hover:underline">LinkedIn</a>
+                                </li>
+                                <li class="mb-4">
+                                    <a href="https://www.instagram.com/kjang_hochul/" class="hover:underline">Instagram</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">On Portfolio</h2>
+                            <ul class="text-gray-600 pl-0 dark:text-gray-400">
+                                <li class="mb-4">
+                                    <a href="#top" class="hover:underline">Top</a>
                                 </li>
                                 <li>
-                                    <a href="naver.com" class="hover:underline">Terms &amp; Conditions</a>
+                                    <a href="#about1" class="hover:underline">About Me</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div id='project-carousel' >
-                        <Projects />
-                    </div>
+                    
                 </div>
                 <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div class="sm:flex sm:items-center sm:justify-between">

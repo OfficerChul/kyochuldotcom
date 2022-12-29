@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 export default function Portfolio() {
     return (
         <>
-            <nav class="flex bg-slate-200" aria-label="Breadcrumb" >
+            <nav class="flex bg-slate-200" aria-label="Breadcrumb" id='top'>
                 <ol class="inline-flex items-center space-x-1 md:space-x-3 pt-1 mb-2">
                     <li class="inline-flex items-center arai-current='page'">
                         <div class="flex items-center">
@@ -59,7 +59,7 @@ export default function Portfolio() {
             <About2 />
 
 
-            <Projects />
+            <Projects id='projects'/>
 
             <footer>
 
