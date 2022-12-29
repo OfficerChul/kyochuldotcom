@@ -147,10 +147,9 @@ span.appear {
 
 .to-main {
 	position: absolute;
-	/* border-color: #000000; */
 	border-radius: 50%;
 	width: 60px;
-	top: -3vh;
+	
 	right: 3vw;
 	border: 2.5px solid rgb(225, 255, 142);
 	cursor: pointer;
@@ -160,4 +159,17 @@ span.appear {
 	transition: ease-in-out 0.5s;
 	filter: brightness(1.3);
 	animation: shake 3s infinite;
+}
+.to-main-dd {
+	position: absolute;
+	right: 3vw;
+	width: 10px;
+	
+	/* border: 2.5px solid rgb(225, 255, 142); */
+	cursor: pointer;
+}
+
+.nav-btn {
+	display:flex;
+	
 }

@@ -4,7 +4,7 @@
     padding-bottom: 40px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+/* @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"); */
 
 /* body {
 	display: flex;
@@ -96,6 +96,8 @@
 
 #aboutme-span {
     color: rgb(0, 0, 0);
+    font-family: 'Bungee';
+    font-size: 20px;
 }
 
 .emphasize {

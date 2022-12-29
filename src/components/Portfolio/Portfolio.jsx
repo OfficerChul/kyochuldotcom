@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 export default function Portfolio() {
     return (
         <>
-            <nav class="flex" aria-label="Breadcrumb" >
+            <nav class="flex bg-slate-200" aria-label="Breadcrumb" >
                 <ol class="inline-flex items-center space-x-1 md:space-x-3 pt-1 mb-2">
                     <li class="inline-flex items-center arai-current='page'">
                         <div class="flex items-center">
@@ -34,10 +34,11 @@ export default function Portfolio() {
                     </li>
                 </ol>
             </nav>
+            
             <header className='wrapper'>
                 <div id="top" class="appear">
 
-
+                    
                     <Link to='/'><img className='to-main' src={logo} alt='logo' /></Link>
                     <h1 className='header-text'><span id="welcome-sign">Welcome to </span><span className="appear d1">my Website :)</span></h1>
 
@@ -51,7 +52,7 @@ export default function Portfolio() {
             <About1 />
             <About2 />
 
-            <Projects />
+            {/* <Projects /> */}
 
             <footer>
                 {/* <Contact /> */}

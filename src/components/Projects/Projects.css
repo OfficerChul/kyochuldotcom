@@ -3,6 +3,12 @@
   padding-bottom: 30px;
 }
 
+.carousel {
+  width:100px;
+  height:100px;
+  margin: auto;
+}
+
 #wave-title {
   text-align: center;
   color: #84cdee;
@@ -22,7 +28,7 @@
 @media (min-width: 481px) {
   .project {
     width: 90vw;
-    height: 40vh;
+    height: 50vh;
     margin-top: 100px;
   }
 }
@@ -38,7 +44,7 @@
 @media (min-width: 961px) {
   .project {
     width: 70vw;
-    height: 50vh;
+    
     margin-top: 100px;
   }
 }
@@ -62,20 +68,24 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 10vw;
+  height: 10vw;
+  /* margin-bottom: 20px; */
+  
 }
 .desc {
   text-align: center;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 80%;
+  background-color: rgb(211, 211, 211);
 }
 
 @media (min-width: 320px) {
   .desc {
     margin-top: 10px;
-    background-color: aliceblue;
+    
     padding-top: 30px;
     margin-bottom: 50px;
     height: 230px;
@@ -87,7 +97,7 @@
 @media (min-width: 481px) {
   .desc {
     margin-top: 10px;
-    background-color: aliceblue;
+    
     
     padding-top: 30px;
     margin-bottom: 50px;
@@ -100,7 +110,7 @@
 @media (min-width: 641px) {
   .desc {
     margin-top: 10px;
-    background-color: aliceblue;
+    
     padding-top: 30px;
     margin-bottom: 50px;
     height: 16vh;
@@ -112,7 +122,7 @@
 @media (min-width: 961px) {
   .desc {
     margin-top: 10px;
-    background-color: aliceblue;
+    
     padding-top: 30px;
     margin-bottom: 50px;
     height: 27vh;
@@ -124,22 +134,19 @@
 @media (min-width: 1025px) {
   .desc {
     margin-top: 10px;
-    background-color: aliceblue;
+    
     padding-top: 30px;
     margin-bottom: 50px;
     height: 27vh;
     color: black;
     border-radius: 10px;
-    /* width: 50vw; */
-    /* display: flex;
-        justify-content: center; */
   }
 }
 
 @media (min-width: 1281px) {
   .desc {
     margin-top: 10px;
-    background-color: aliceblue;
+    
     padding-top: 30px;
     margin-bottom: 50px;
     height: 26vh;
@@ -150,7 +157,7 @@
 }
 
 .label-title {
-  color: rgb(0, 139, 81);
+  color: rgb(0, 212, 250);
 }
 
 .label-title:hover {
@@ -159,9 +166,6 @@
 }
 
 .stacks {
-  color: #0ec508;
-}
-
-.stacks:hover {
-  filter: brightness(1.2);
+  color: rgb(0, 212, 250);
+  filter: brightness(0.5);
 }
