@@ -5,6 +5,7 @@ import About2 from '../About2/About2'
 import Projects from '../Projects/Projects'
 import Footer from '../Footer/Footer'
 import logo from '../Main/triangle-green.png';
+import FancyBtn from '../FancyBtn/FancyBtn'
 import { Link } from 'react-router-dom';
 
 
@@ -34,10 +35,10 @@ export default function Portfolio() {
                     </li>
                 </ol>
             </nav>
-            
+
             <header className='wrapper'>
                 <div id="top" class="appear">
-                    
+
                     <Link to='/'><img className='to-main' src={logo} alt='logo' /></Link>
                     <h1 className='header-text'><span id="welcome-sign">Welcome to </span><br /><span className="appear d1">my Website :)</span></h1>
 
@@ -47,15 +48,21 @@ export default function Portfolio() {
                     </div>
 
                 </div>
+                <div className="flex absolute">
+                    <FancyBtn />
+                </div>
+
             </header>
-            <About1 />
+
+            <About1 id='about1'/>
+
             <About2 />
 
-            
+
             <Projects />
 
             <footer>
-                
+
                 <Footer />
             </footer>
 

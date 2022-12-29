@@ -2,9 +2,10 @@ import React from 'react'
 import myPic from './myPicture.jpg';
 import './About1.css';
 
-export default function About1() {
+function About1({ id }) {
     return (
-        <div className='about'>
+        <div className='about' id={id}>
+            
             <div className='container' fluid="md">
                 <div className="row">
                     <div className='col-sm about1'>
@@ -29,3 +30,5 @@ export default function About1() {
         </div>
     )
 }
+
+export default About1;
