@@ -11,12 +11,12 @@ export default function About2() {
                     <div className='col-sm mt-5 about2'>
 
                         <h2 id='about2-title'>About Me</h2>
-                        <h1 className='about-context' id='aboutme'><span id='aboutme-span'> I am currently looking for <span className='univ'>Summer 2023 Internship</span>. Feel free to contact me!<br />
+                        <h1 className='about-context' id='aboutme'><span id='aboutme-span'> I am currently looking for an <span className='univ'>Summer 2023 Internship</span>. Feel free to contact me!<br />
                             
                             
                         </span>
                         </h1>
-                        <img src={myPic2} alt='myPic' class="img-thumbnail myPic mt-3 p-3" />
+                        <img src={myPic2} alt='myPic' class="img-thumbnail myPic mt-5 p-3" id='myPic2'/>
 
 
 

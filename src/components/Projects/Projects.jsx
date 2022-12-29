@@ -14,8 +14,8 @@ export default function Projects() {
 
         <div className="container carousel-container" >
             <div className="wave-content project-title">
-                <h2 className='wave-title'>Projects</h2>
-                <h2 className='wave-title1'>Projects</h2>
+                <h2 id='wave-title'>Projects</h2>
+
             </div>
             <Carousel variant='dark'>
 
@@ -94,6 +94,7 @@ export default function Projects() {
                 </Carousel.Item>
 
             </Carousel>
+
         </div>
     );
 

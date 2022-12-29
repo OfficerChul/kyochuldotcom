@@ -7,6 +7,10 @@
     margin-top: 20px;
 }
 
+#myPic2 {
+    width: 30vw;
+}
+
 .about2 {
     display: flex;
     align-items: center;
