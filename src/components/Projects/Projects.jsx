@@ -13,10 +13,10 @@ export default function Projects() {
     return (
 
         <div className="container carousel-container" >
-            <div className="wave-content project-title">
+            {/* <div className="wave-content project-title">
                 <h2 id='wave-title'>Projects</h2>
 
-            </div>
+            </div> */}
             <Carousel variant='dark'>
 
                 <Carousel.Item>

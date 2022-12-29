@@ -2,7 +2,7 @@ import React from 'react'
 import './Portfolio.css'
 import About1 from '../About1/About1'
 import About2 from '../About2/About2'
-import Projects from '../Projects/Projects'
+// import Projects from '../Projects/Projects'
 import Footer from '../Footer/Footer'
 import logo from '../Main/triangle-green.png';
 import { Link } from 'react-router-dom';
