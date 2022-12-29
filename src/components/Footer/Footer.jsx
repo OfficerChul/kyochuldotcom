@@ -61,7 +61,7 @@ function Footer() {
                     <div class="flex space-x-6 sm:justify-center sm:mt-0 text-2xl">
                         <li className="social-icon">
                             <a
-                                href="mailto:jang128@purdue.edu"
+                                href="mailto:gcj1234567890@gmail.com"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="mail"

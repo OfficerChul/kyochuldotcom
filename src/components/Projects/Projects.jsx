@@ -17,10 +17,16 @@ export function Projects() {
 
                         </div>
                         <div class="h-2.5 dark:bg-gray-700 w-100 mb-4 font-bold">{project.title}</div>
+                        {/* <div class="inline-flex justify-center items-center w-full">
+                            <hr class=" w-64 h-1 bg-black rounded border-0 dark:bg-gray-700" />
+                        </div> */}
                         <hr />
                         <div class="h-2 dark:bg-gray-700 mb-24">{project.desc}</div>
-
-                        {/* <hr /> */}
+                        <br />
+                        <hr />
+                        {/* <div class="inline-flex justify-center items-center w-full">
+                            <hr class=" w-64 h-1 bg-black rounded border-0 dark:bg-gray-700" />
+                        </div> */}
                         <div class="flex items-center space-x-3">
 
                             <img className='w-14 h-14' src={logo} alt='logo' />
