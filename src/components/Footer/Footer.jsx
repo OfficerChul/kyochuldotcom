@@ -4,6 +4,20 @@ import './Footer.css';
 import Projects from '../Projects-Carousel/Projects-Carousel';
 
 function Footer() {
+
+    function remHash() {
+        setTimeout(() => {
+            var uri = window.location.toString();
+            if (uri.indexOf("#") > 0) {
+                var clean_uri = uri.substring(0, uri.indexOf("#"));
+                console.log(window.location.toString())
+                console.log(clean_uri)
+                window.history.replaceState('', document.title, clean_uri);
+
+            }
+        }, 5)
+    }
+
     return (
         <div className="footer-container bg-blue-200 ">
             <footer class="p-4 bg-blue-200 sm:p-6 dark:bg-gray-900">
@@ -53,15 +67,15 @@ function Footer() {
                             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">On Portfolio</h2>
                             <ul class="text-gray-600 pl-0 dark:text-gray-400">
                                 <li class="mb-4">
-                                    <a href="#top" class="hover:underline">Top</a>
+                                    <a href="#top" onClick={remHash} class="hover:underline">Top</a>
                                 </li>
                                 <li>
-                                    <a href="#about1" class="hover:underline">About Me</a>
+                                    <a href="#about1" onClick={remHash} class="hover:underline">About Me</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    
+
                 </div>
                 <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div class="sm:flex sm:items-center sm:justify-between">

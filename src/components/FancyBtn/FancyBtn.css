@@ -47,9 +47,10 @@
   height: 60px;
   cursor: pointer;
   background: transparent;
-  border: 1px solid #91C9FF;
+  border: 3px solid #b5ff0893;
   outline: none;
   transition: 1s ease-in-out;
+  /* border-radius: 20%; */
   
 }
 
@@ -63,11 +64,12 @@
   stroke-dasharray: 150 480;
   stroke-dashoffset: 150;
   transition: 1s ease-in-out;
+  /* border-radius: 20%; */
 }
 
 #fbtn:hover {
   transition: 1s ease-in-out;
-  background: #4F95DA;
+  background: #b5ff0893;
 }
 
 #fbtn:hover #fbtn-svg {

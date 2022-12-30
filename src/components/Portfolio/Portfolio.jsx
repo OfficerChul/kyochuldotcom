@@ -8,8 +8,6 @@ import logo from '../Main/triangle-green.png';
 import FancyBtn from '../FancyBtn/FancyBtn'
 import { Link } from 'react-router-dom';
 
-
-
 export default function Portfolio() {
     return (
         <>
@@ -54,12 +52,13 @@ export default function Portfolio() {
 
             </header>
 
-            <About1 id='about1'/>
+            <About1 id='about1' />
+            
 
             <About2 />
 
 
-            <Projects id='projects'/>
+            <Projects id='projects' />
 
             <footer>
 
