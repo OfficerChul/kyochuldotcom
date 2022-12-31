@@ -1,7 +1,6 @@
 import React from 'react'
 import './Portfolio.css'
 import About1 from '../About1/About1'
-import About2 from '../About2/About2'
 import Projects from '../Projects/Projects'
 import Footer from '../Footer/Footer'
 import logo from '../Main/triangle-green.png';
@@ -53,22 +52,22 @@ export default function Portfolio() {
                     </div>
                     <HeadShake forever={1} duration={2000}>
                         <div className="flex absolute">
-                            <FancyBtn />
+                            <FancyBtn url='#about1' btnText='About Me!'/>
                         </div>
                     </HeadShake>
 
 
 
+
                 </div>
+                
+
 
 
 
             </header>
-            
-                <About1 id='about1' />
-            
 
-            <About2 />
+            <About1 id='about1' />            
 
 
             <Projects id='projects' />

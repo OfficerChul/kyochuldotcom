@@ -1,7 +1,7 @@
 import React from 'react'
 import Banner from './banner.png';
 import './Footer.css';
-import Projects from '../Projects-Carousel/Projects-Carousel';
+import GitHubCalendar from 'react-github-calendar';
 
 function Footer() {
 
@@ -19,24 +19,22 @@ function Footer() {
     }
 
     return (
-        <div className="footer-container bg-blue-200 ">
-            <footer class="p-4 bg-blue-200 sm:p-6 dark:bg-gray-900">
-                <div class="md:flex md:justify-between" >
-                    <div class="mb-6 md:mb-0">
-                        <a href="https://kyochuljang.com/" class="flex items-center">
+        <div className="footer-container">
+            <footer class="p-4 bg-blue-100 sm:p-6 dark:bg-gray-900">
+                <div id="" className='sm:flex sm:justify-between' >
+                    <div class="flex justify-center">
+                        <a href="https://kyochuljang.com/" class="">
                             <img src={Banner} class="h-20" alt="FlowBite Logo" />
 
                         </a>
                     </div>
-                    <div id='project-carousel'>
-                        <a href='#projects' onClick={remHash}>
-                            <Projects />
-                        </a>
+                    <div className='footer-tab flex flex-col text-left gap-2 mx-4  bg-slate-300 p-4 rounded-lg'>
+                        <span className=' text-sm font-mono'>@OfficerChul on GitHub</span>
+                        <a href='https://github.com/OfficerChul' className='text-black font-mono'><GitHubCalendar dateFormat username="officerchul" /></a>
                     </div>
-
-                    <div class="ml-2 grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div class="footer-tab grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+                            <h2 class="mb-6 text-sm text-gray-900 uppercase dark:text-white">Resources</h2>
                             <ul class="text-gray-600 pl-0 dark:text-gray-400">
                                 <li class="mb-4">
                                     <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
@@ -64,7 +62,7 @@ function Footer() {
                             </ul>
                         </div>
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">On Portfolio</h2>
+                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">On Website</h2>
                             <ul class="text-gray-600 pl-0 dark:text-gray-400">
                                 <li class="mb-4">
                                     <a href="#top" onClick={remHash} class="hover:underline">Top</a>
@@ -77,10 +75,11 @@ function Footer() {
                     </div>
 
                 </div>
-                <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-                <div class="sm:flex sm:items-center sm:justify-between">
+                <hr class="my-6 border-black-200 sm:mx-auto dark:border-gray-700 lg:my-2 sm:w-0" />
+                <div class="flex items-center justify-between gap-2">
                     <span class="text-base text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://kyochuljang.com/" class="hover:underline">OfficerChul™</a>. All Rights Reserved.
                     </span>
+                    
                     <div class="flex space-x-6 sm:justify-center sm:mt-0 text-2xl">
                         <li className="social-icon">
                             <a

@@ -36,6 +36,13 @@
   }
 }
 
+@media (min-width: 961px) {
+  .fbtn-container {
+    position: absolute;
+    transform: translate(-25%, 20%);
+  }
+}
+
 .center {
   width: 180px;
   height: 60px;
@@ -69,7 +76,7 @@
 
 #fbtn:hover {
   transition: 1s ease-in-out;
-  background: #b5ff0893;
+  /* background: #b5ff0893; */
 }
 
 #fbtn:hover #fbtn-svg {

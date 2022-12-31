@@ -11,11 +11,13 @@
 .content {
 	position: relative;
 	
+	
+	
 }
 
 .content h2 {
 	/* color: #fff; */
-	font-size: 12vw;
+	/* font-size: 80vh; */
 	position: absolute;
 	-webkit-text-stroke: 5px #000000;
     
@@ -23,6 +25,7 @@
 
 @media (min-width: 320px) {
 	.content h2 {
+		font-size: 12vw;
 		-webkit-text-stroke: 2px #000000;
   }
 }
@@ -39,10 +42,12 @@
   }
 }
 
+
+
 .content h2:nth-child(1) {
 	color: transparent;
 	
-	font-size: 10vw;
+	
     
 }
 
@@ -50,7 +55,7 @@
 	color: #b5ff08;
 	
 	animation: animate 4s ease-in-out infinite;
-	font-size: 10vw;
+	/* font-size: 10vw; */
     /* text-shadow: rgb(255, 255, 255) 10px 10px 10px; */
 	
 }
@@ -109,7 +114,14 @@
 	text-align: left;
 	
 	padding-left: 1%;
+	font-size: 7vw;
 	
+}
+
+@media (min-width: 1024px) {
+	.header-text {
+		font-size: 4vw;
+	}
 }
 
 .appear {

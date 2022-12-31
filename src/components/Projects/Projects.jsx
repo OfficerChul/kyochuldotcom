@@ -27,11 +27,11 @@ export function Projects({ id }) {
                                 <div class="h-2 dark:bg-gray-700 mb-24">{project.desc}</div>
                                 <br />
                                 <hr />
-                                <div class="flex items-center space-x-3">
+                                <div class="flex justify-evenly space-x-3">
 
                                     
                                     <ProjectsBtn ghUrl={project.github} />
-                                    <div className='mb-5 flex flex-col justify-center'>
+                                    <div className='mb-5 flex flex-col'>
                                         <span class="w-24 mb-2 badge badge--info">Dev Stacks</span>
 
                                         <div class="font-mono w-48 h-2 dark:bg-gray-700">{project.stack}</div>

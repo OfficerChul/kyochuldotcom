@@ -1,23 +1,7 @@
-.footer-container {
-    /* background-color: rgb(63 131 248); */
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-        "Lucida Sans", Arial, sans-serif;
-    display:flex;
-    justify-content: center;
-}
-
-.website-rights {
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-        "Lucida Sans", Arial, sans-serif;
-    font-weight: 900;
-    color: rgba(34, 34, 34, 0.74);
-    margin-bottom: 20px;
-}
-
 .social-icon {
     display: flex;
     flex-flow: row;
-    
+
 }
 
 .social-icon:hover {
@@ -25,7 +9,7 @@
 }
 
 .kakaotalk {
-    
+
     align-items: center;
     width: 2.1rem;
     transition: all 0.5s;
@@ -127,61 +111,40 @@
     }
 }
 
-.wave-title {
-    color: rgb(0, 26, 255);
-    text-shadow: rgba(0, 89, 255, 0.418) 1px 0 10px;
-
-    filter: brightness(1.5);
-    font-family: 'Bungee', cursive;
-    font-size: 20px;
-}
-
-.wave-title1 {
-    color: #03a9f4;
-    font-size: 20px;
-    font-family: 'Bungee', cursive;
-    animation: animate 4s ease-in-out infinite;
-
-}
-
-
-.wave-content h2 {
-    font-size: 60px;
-    position: absolute;
-    left: 1%;
-    right: 1%;
-
-    -webkit-text-stroke: 2px rgb(0, 89, 255);
-}
 
 #project-carousel {
     position: relative;
- 
+
 }
+
 @media (min-width: 320px) {
-    #project-carousel {
-        position: relative;
-        margin-bottom: 160px;
+    #footer-top-object {
+        /* display:flex;
+        flex-direction: column; */
+
     }
-  }
-  
-  @media (min-width: 481px) {
-    #project-carousel {
-        position: relative;
-        margin: 0;
+}
+
+@media (min-width: 481px) {
+    #footer-top-object {}
+}
+
+@media (min-width: 641px) {
+    #footer-top-object {}
+}
+
+@media (min-width: 961px) {
+    #footer-top-object {}
+}
+
+.footer-tab {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 640px) {
+    .footer-tab {
+        margin-top: 0px;
     }
-  }
-  
-  @media (min-width: 641px) {
-    #project-carousel {
-        position: relative;
-     
-    }
-  }
-  
-  @media (min-width: 961px) {
-    #project-carousel {
-        position: relative;
-     
-    }
-  }
+}

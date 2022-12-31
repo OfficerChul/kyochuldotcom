@@ -1,6 +1,5 @@
 .about {
-
-    background-color:#edf7fc;
+    background-color: #edf7fc;
     padding-bottom: 40px;
 }
 
@@ -14,6 +13,24 @@
 	justify-content: center;
 } */
 
+#download-btn {
+    background-color: #7cd1f8;
+    border-radius: 20%;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s ease-in-out;
+
+}
+
+/* Darker background on mouse-over */
+#download-btn:hover {
+    filter: brightness(1.1);
+    border-color: black;   
+
+}
+
 .about-content {
     position: relative;
 }
@@ -26,8 +43,6 @@
 
     -webkit-text-stroke: 2px rgb(0, 89, 255);
 }
-
-
 
 @keyframes animate {
 
@@ -64,43 +79,36 @@
 #about-title {
     color: #84cdee;
     -webkit-text-stroke: 5px #b9e2f5;
-    font-family: 'Bungee', cursive;
+    font-family: "Bungee", cursive;
     font-size: 7vh;
     margin-top: 6vh;
-
 }
 
 #emphasize-about {
     color: #84cdee;
 }
 
-
 .col {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-
 }
 
 .about2 {
     display: flex;
     flex-direction: column;
-
 }
 
 .about-context {
     margin-top: 2vh;
     text-align: left;
-    
+
     font-size: 30px;
-
 }
-
-
 
 #aboutme-span {
     color: rgb(0, 0, 0);
-    font-family: 'Bungee';
+    font-family: "Bungee";
     font-size: 20px;
 }
 
