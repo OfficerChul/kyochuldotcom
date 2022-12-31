@@ -70,6 +70,10 @@
 
 }
 
+#emphasize-about {
+    color: #84cdee;
+}
+
 
 .col {
     display: flex;
@@ -117,4 +121,3 @@
     padding-right: 5px;
     -webkit-text-stroke: 1px black;
 }
-

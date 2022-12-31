@@ -29,7 +29,7 @@ function Footer() {
                         </a>
                     </div>
                     <div id='project-carousel'>
-                        <a href='#projects'>
+                        <a href='#projects' onClick={remHash}>
                             <Projects />
                         </a>
                     </div>

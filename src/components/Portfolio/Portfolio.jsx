@@ -7,6 +7,9 @@ import Footer from '../Footer/Footer'
 import logo from '../Main/triangle-green.png';
 import FancyBtn from '../FancyBtn/FancyBtn'
 import { Link } from 'react-router-dom';
+import { Bounce } from 'react-reveal';
+import HeadShake from 'react-reveal/HeadShake';
+
 
 export default function Portfolio() {
     return (
@@ -35,24 +38,34 @@ export default function Portfolio() {
             </nav>
 
             <header className='wrapper'>
-                <div id="top" class="appear">
 
-                    <Link to='/'><img className='to-main' src={logo} alt='logo' /></Link>
-                    <h1 className='header-text'><span id="welcome-sign">Welcome to </span><br /><span className="appear d1">my Website :)</span></h1>
+                <div id="top" class="">
+
+                    <Link to='/'><img style={{ zIndex: 1000 }} className='to-main' src={logo} alt='logo' /></Link>
+
+                    <h1 className='header-text'><span id="welcome-sign">Welcome to </span><br /><span className="appear">my Website :)</span></h1>
+
 
                     <div className="content ml-1">
-                        <h2 className=''>Kyochul Jang</h2>
-                        <h2 className=''>Kyochul Jang</h2>
+                        <h2 className=''>
+                            <Bounce left cascade>Kyochul Jang</Bounce></h2>
+                        <h2 className=''><Bounce left cascade>Kyochul Jang</Bounce></h2>
                     </div>
+                    <HeadShake forever={1} duration={2000}>
+                        <div className="flex absolute">
+                            <FancyBtn />
+                        </div>
+                    </HeadShake>
+
+
 
                 </div>
-                <div className="flex absolute">
-                    <FancyBtn />
-                </div>
+
+
 
             </header>
-
-            <About1 id='about1' />
+            
+                <About1 id='about1' />
             
 
             <About2 />
