@@ -19,7 +19,6 @@ export default function About2() {
                         </div>
                         <div className='col-sm' id='pics'>
                             <img src={myPic1} alt='myPic' class="img-thumbnail myPic mt-5 p-3" />
-
                         </div>
                     </Fade>
 
