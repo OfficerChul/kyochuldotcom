@@ -16,9 +16,6 @@ export default function About2() {
                             <h2 id='about2-title'>About Me</h2>
                             <img src={myPic2} alt='myPic' class="img-thumbnail myPic mt-5 p-3" id='myPic2' />
 
-
-
-
                         </div>
                         <div className='col-sm' id='pics'>
                             <img src={myPic1} alt='myPic' class="img-thumbnail myPic mt-5 p-3" />
