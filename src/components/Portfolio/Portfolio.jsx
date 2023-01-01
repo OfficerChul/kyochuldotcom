@@ -42,13 +42,13 @@ export default function Portfolio() {
 
                     <Link to='/'><img style={{ zIndex: 1000 }} className='to-main' src={logo} alt='logo' /></Link>
 
-                    <h1 className='header-text'><span id="welcome-sign">Welcome to </span><br /><span className="appear">my Website :)</span></h1>
+                    <h1 className='header-text bungee'><span id="welcome-sign">Welcome to </span><br /><span className="appear">my Website :)</span></h1>
 
 
                     <div className="content ml-1">
-                        <h2 className=''>
+                        <h2 className='bungee'>
                             <Bounce left cascade>Kyochul Jang</Bounce></h2>
-                        <h2 className=''><Bounce left cascade>Kyochul Jang</Bounce></h2>
+                        <h2 className='bungee'><Bounce left cascade>Kyochul Jang</Bounce></h2>
                     </div>
                     <HeadShake forever={1} duration={2000}>
                         <div className="flex absolute">

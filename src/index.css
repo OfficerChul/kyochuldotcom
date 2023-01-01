@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-element.style {
-  scroll-behavior: smooth;
-}
 
 /* body {
   margin: 0;
@@ -20,10 +17,8 @@ element.style {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-
-
-* {
-    font-family: 'Titillium Web', sans-serif;
 } */
+
+
+
+

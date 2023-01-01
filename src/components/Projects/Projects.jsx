@@ -10,7 +10,7 @@ export function Projects({ id }) {
     return (
         <div id={id}>
             <Fade left cascade>
-                <h2 className='flex justify-center mt-8 mb-8 ' id='about2-title'>Projects</h2>
+                <h2 className='flex justify-center mt-8 mb-8 ' id='about-title'>Projects</h2>
 
 
                 <ul className='flex justify-center gap-4 pr-8 flex-wrap'>
