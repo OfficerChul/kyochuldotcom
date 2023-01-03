@@ -9,10 +9,10 @@ export const projectData = [
 
     {
         img: javaProject,
-        title: 'Online Networking Platform',
+        title: 'Social Network Profile Application',
         desc: 'A social network application that job seekers can upload their introduction and interests for recruiters, like LinkedIn. Worked on testing apps by using JUnit Test.',
         stack: 'Java, JUit Test',
-        github: 'https://github.com/OfficerChul/project-05'
+        github: 'https://github.com/OfficerChul/Social-Network-Profile-Application'
     },
     {
         img: snuProject,

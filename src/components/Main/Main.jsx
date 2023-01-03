@@ -3,6 +3,7 @@ import logo from './triangle-green.png';
 import SimpleIcon from '../SimpleIcon/SimpleIcon';
 import './Main.css'
 import { Link } from 'react-router-dom';
+import Like from '../Like/Like';
 
 export default function Searchbar() {
     return (
@@ -32,6 +33,7 @@ export default function Searchbar() {
                     <input name='q' type='text' className='shadow-sm form-control rounded-pill mb-3' placeholder='Search Google or type a URL' id='search-bar' />
                 </div>
             </form>
+            <Like />
 
             <SimpleIcon />
 
