@@ -5,6 +5,7 @@ import './Main.css'
 import { Link } from 'react-router-dom';
 import Like from '../Like/Like';
 
+
 export default function Searchbar() {
     return (
         <div className="main">

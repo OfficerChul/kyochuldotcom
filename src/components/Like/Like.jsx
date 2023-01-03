@@ -1,6 +1,6 @@
 import "./Like.css";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase.jsx";
+import { db } from "../Firebase.jsx";
 import React, { useEffect, useState } from 'react';
 
 function Like() {
@@ -12,9 +12,9 @@ function Like() {
     }, [])
 
     useEffect(() => {
-        console.log(22);
-        console.log(likes);
-        console.log(11);
+        // console.log(22);
+        // console.log(process.env.REACT_APP_MEASUREMENTID)
+        // console.log(11);
     }, [likes])
 
     function getLikes() {
