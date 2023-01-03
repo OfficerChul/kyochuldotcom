@@ -32,11 +32,11 @@ const Mailer = () => {
         <form className="form-wrapper" onSubmit={sendEmail}>
           <div className="name-email-wrapper">
             {/* <label className="name-label">Name:</label>
-            <input classname="name-text" type="text" name="name" />
+            <input className="name-text" type="text" name="name" />
 
             <label className="email-label">Email:</label>
             <input
-              classname="email-text"
+              className="email-text"
               type="email"
               name="user_email"
               size=""
@@ -104,7 +104,7 @@ const Mailer = () => {
           ></textarea>
 
           <input
-            classname="message-text"
+            className="message-text"
             type="submit"
             value="Send"
             onClick={() => setIsModalOpen(true)}

@@ -12,7 +12,7 @@ function ProjectsBtn({ ghUrl }) {
                         <span></span>
                         <span></span>
                         <span></span>
-                        <span class="fa fa-github"></span>
+                        <span className="fa fa-github"></span>
                     </a>
                 </li>
 

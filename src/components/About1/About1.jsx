@@ -29,7 +29,7 @@ function About1({ id }) {
                 <div className="row">
                     <Fade left>
                         <div className='col-sm about1' id='leftAbout'>
-                            <img src={myPic} alt='myPic' class="img-thumbnail myPic mt-5 p-3" />
+                            <img src={myPic} alt='myPic' className="img-thumbnail myPic mt-5 p-3" />
                         </div>
 
                         <div className='col-sm mt-0 about2' id='rightAbout'>
@@ -48,7 +48,7 @@ function About1({ id }) {
                                 I am currently looking for a <span id='emphasize-about' className=''>Summer 2023 Internship</span>. <br /><br />Feel free to contact me via contacts at the <span id='emphasize-about' className=''>bottom</span> of the website!</h4>
                             
                             <button onClick={onButtonClick} className='mt-3' id='download-btn'>
-                            <i class="fa fa-download" /> Download Resume
+                            <i className="fa fa-download" /> Download Resume
                             </button>
                             
                         </div>
