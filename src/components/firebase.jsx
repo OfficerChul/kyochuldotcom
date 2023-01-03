@@ -14,7 +14,7 @@ import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
     //   apiKey: process.env.FB_APIKEY,
-    apiKey: "AIzaSyCCT9It3tVOho88yknm82kzzZStpFuqvIU",
+    apiKey: process.env.FB_APIKEY,
     authDomain: "kyochuldotcom.firebaseapp.com",
     databaseURL: "https://kyochuldotcom-default-rtdb.firebaseio.com",
     projectId: "kyochuldotcom",
@@ -22,7 +22,7 @@ const firebaseConfig = {
     messagingSenderId: "238445609698",
     appId: "1:238445609698:web:87b4957bda50800a10d4bb",
     // measurementId: process.env.MEASUREMENTID
-    measurementId: "G-66WXRJR9KL"
+    measurementId: process.env.MEASUREMENTID
 };
 
 // Initialize Firebase
