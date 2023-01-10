@@ -1,6 +1,6 @@
 import "./Like.css";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import db  from "../Firebase.jsx";
+import db  from "./Firebase.jsx";
 import React, { useEffect, useState } from 'react';
 
 function Like() {
