@@ -9,7 +9,7 @@ function Like() {
 
     useEffect(() => {
         getLikes()
-    })
+    });
 
     async function getLikes() {
 
