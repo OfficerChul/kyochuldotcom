@@ -1,9 +1,9 @@
 import "./Like.css";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
-import app from "../Firebase.jsx";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import db  from "../Firebase.jsx";
 import React, { useEffect, useState } from 'react';
 
- function Like() {
+function Like() {
     const [likes, setLikes] = useState([])
 
 
@@ -13,7 +13,7 @@ import React, { useEffect, useState } from 'react';
 
     async function getLikes() {
 
-        const db = getFirestore(app);
+
         const temp = doc(db, "userInput", 'doc1');
         const temp1 = getDoc(temp).then((resource) => {
             console.log("resouce", resource.data().age);
