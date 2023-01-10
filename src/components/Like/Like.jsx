@@ -1,38 +1,34 @@
 import "./Like.css";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../Firebase.jsx";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import app from "../Firebase.jsx";
 import React, { useEffect, useState } from 'react';
 
-function Like() {
+ function Like() {
     const [likes, setLikes] = useState([])
 
 
     useEffect(() => {
         getLikes()
-    }, [])
+    })
 
-    useEffect(() => {
-        // console.log(22);
-        // console.log(process.env.REACT_APP_MEASUREMENTID)
-        // console.log(11);
-    }, [likes])
+    async function getLikes() {
 
-    function getLikes() {
-        const collectionRef = collection(db, "userInput");
-
-        getDocs(collectionRef).then(response => {
-            const likey = response.docs.map(doc => ({
-                data: doc.data(),
-                id: doc.id, 
-            }))
-            setLikes(likey)
-        }).catch(error => console.log(error.message))
-        
+        const db = getFirestore(app);
+        const temp = doc(db, "userInput", 'doc1');
+        const temp1 = getDoc(temp).then((resource) => {
+            console.log("resouce", resource.data().age);
+            setLikes(parseInt(resource.data().age));
+        });
+        await setDoc(temp, {
+            age: likes + 1
+        })
+        console.log(temp1.data);
     }
 
     return (
         <div>
-            <ul></ul>
+            <ul>like: {likes}</ul>
+            <button onClick={getLikes}>button</button>
         </div>
     )
 }
