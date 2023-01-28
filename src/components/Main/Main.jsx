@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './triangle-green.png';
+import logo from './triangle-skyblue.png';
 import SimpleIcon from '../SimpleIcon/SimpleIcon';
 import './Main.css'
 import { Link } from 'react-router-dom';
