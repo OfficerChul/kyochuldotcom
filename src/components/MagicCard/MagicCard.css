@@ -45,6 +45,7 @@
   transition: color 1s;
   opacity: 1;
   background-size: cover;
+  animation: shake 3s infinite;
 }
 .card:hover:before, .card:hover:after {
   animation: none;
@@ -101,5 +102,5 @@
 }
 
 #qmark:hover {
-  animation: shake 3s infinite;
+  
 }
