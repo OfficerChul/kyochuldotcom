@@ -4,12 +4,13 @@ import SimpleIcon from '../SimpleIcon/SimpleIcon';
 import './Main.css'
 import { Link } from 'react-router-dom';
 import Like from '../Like/Like';
+import MagicCard from '../MagicCard/MagicCard';
 
 
 export default function Searchbar() {
     return (
         <div className="main">
-
+            
             <nav className="flex bg-slate-200" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 md:space-x-3 pt-1  mb-2">
                     <li className="inline-flex items-center aria-current='page'">
@@ -30,13 +31,23 @@ export default function Searchbar() {
 
             <img className="mx-auto mt-5 logo" src={logo} alt='logo' id='main-logo' />
             <form action='https://www.google.com/search' method='GET'>
-                <div style={{ width: '50%' }} className="mx-auto search-bar input-group mb-3" >
-                    <input name='q' type='text' className='shadow-sm form-control rounded-pill mb-3' placeholder='Search Google or type a URL' id='search-bar' />
+                <div style={{ width: '50%' }} className="mx-auto search-bar input-group" >
+                    <input name='q' type='text' className='shadow-sm form-control rounded-pill card' placeholder='Search Google or type a URL' id='search-bar' />
                 </div>
             </form>
-            <Like />
+          
+            
 
+            
+            <Like />
+            <div className="menu">
+                <Link to="portfolio"><MagicCard site='portfolio-img' /></Link>
+                <a href='https://officerchul.github.io/'><MagicCard site='blog-img'/></a>
+                
+                
+            </div>
             <SimpleIcon />
+            
 
         </div>
     )

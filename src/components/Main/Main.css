@@ -1,12 +1,15 @@
+body {
+	background: #212534;
+}
+
 .form-control {
-    border-color: greenyellow;
-    transition: ease 1s;
+	border-color: #5ddcff;
+	transition: all 1s linear;
+
 }
 
 .form-control:hover {
-
-    border-color: #e0ff2f;
-
+    border-color: black;
 }
 
 #main-logo {
@@ -56,3 +59,4 @@
 #search-bar {
 	height: 5vh;
 }
+
