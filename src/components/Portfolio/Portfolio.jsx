@@ -68,8 +68,6 @@ export default function Portfolio() {
             </header>
 
             <About1 id='about1' />            
-
-
             <Projects id='projects' />
 
             <footer>

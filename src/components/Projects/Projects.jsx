@@ -8,9 +8,9 @@ import Fade from 'react-reveal/Fade';
 
 export function Projects({ id }) {
     return (
-        <div id={id}>
+        <div id={id} className='bg-white'>
             <Fade left cascade>
-                <h2 className='flex justify-center mt-8 mb-8 ' id='about-title'>Projects</h2>
+                <h2 className='flex justify-center mb-8' id='about-title'>Projects</h2>
 
 
                 <ul className='flex justify-center gap-4 pr-8 flex-wrap'>
