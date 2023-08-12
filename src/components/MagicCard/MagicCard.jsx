@@ -11,7 +11,7 @@ export default function MagicCard(props) {
             
             <div className={combinedClsssName}>
                 <div className="blocker"></div>
-                <img src={qmark} id='qmark'/>
+                <img src={qmark} alt='question_mark' id='qmark'/>
             </div>
 
             
