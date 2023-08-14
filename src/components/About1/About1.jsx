@@ -51,9 +51,9 @@ function About1({ id }) {
                                 
                                 <br /><br />Feel free to contact me via contacts at the <span id='emphasize-about' className=''>bottom</span> of the website!</h4>
                             
-                            {/* <button onClick={onButtonClick} className='mt-3' id='download-btn'>
-                            <i className="fa fa-download" /> Download Resume
-                            </button> */}
+                            <button onClick={onButtonClick} className='mt-3' id='download-btn'>
+                                <i className="fa fa-download" /> Download Resume
+                            </button>
                             
                             
                         </div>
