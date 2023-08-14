@@ -33,6 +33,7 @@ export default function Portfolio() {
                             </Link>
                         </div>
                     </li>
+                    <p className="pt-2 text-sm absolute top-0 right-0">This website was created entirely by myself, without the use of any pre-made themes or templates.</p>
                 </ol>
             </nav>
 
