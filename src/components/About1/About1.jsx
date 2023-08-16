@@ -53,11 +53,11 @@ function About1({ id }) {
                                 <br /><span className='univ'>My interests</span> lie in Computer Vision, NLP, and Brain-Computer Interface (BCI).
                             </span>
                             </h1> */}
-                            <br /><h4 className='font-mono'>Hi, I am Kyochul Jang, a Computer Science student at <span id='emphasize-about' className=''>Purdue university</span>.
-                                My interests lie in <span id='emphasize-about' className=''>Machine Learning Engineering</span> and <span id='emphasize-about'>Data Mining</span>.<br /><br />
-                                During the Summer Vacation in 2023, and 2022, I did an internship at <span id='emphasize-about' className=''>Samsung Electronics</span> and <span id='emphasize-about' className=''>Seoul National University</span> as a SDE intern.<br /><br />
+                            <br /><h4 className='font-mono'>Hi, I am Kyochul Jang, a Computer Science student at <span id='emphasize-about' className=''>Purdue University</span>.
+                                My interests lie in <span id='emphasize-about' className=''>Natural Language Processing</span> and <span id='emphasize-about'>Data Mining</span>.<br /><br />
+                                During the Summer Vacation in 2023, and 2022, I did an internship at <span id='emphasize-about' className=''>Samsung Electronics</span> and <span id='emphasize-about' className=''>Seoul National University</span> as an SDE intern.<br /><br />
 
-                                I am, now, seeking a position in a <span id='emphasize-about'>fast-paced environment</span> where I can use my skills and experience to make a real impact.
+                                I am now seeking a position in a <span id='emphasize-about'>fast-paced environment</span> where I can use my skills and experience to make a real impact.
 
                                 
                                 <br /><br />Feel free to contact me via contacts at the <span id='emphasize-about' className=''>bottom</span> of the website!</h4>
