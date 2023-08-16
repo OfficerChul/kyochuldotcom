@@ -6,31 +6,31 @@ import { Fade } from 'react-reveal';
 
 function About1({ id }) {
 
-    // const onButtonClick = () => {
-    //     // using Java Script method to get PDF file
-    //     fetch('Resume_mp_no_GPA.pdf').then(response => {
-    //         response.blob().then(blob => {
-    //             // Creating new object of PDF file
-    //             const fileURL = window.URL.createObjectURL(blob);
-    //             // Setting various property values
-    //             let alink = document.createElement('a');
-    //             alink.href = fileURL;
-    //             alink.download = 'Kyochul_Resume.pdf';
-    //             alink.click();
-    //         })
-    //     })
-    // }
-
     const onButtonClick = () => {
         // using Java Script method to get PDF file
-        const file = 'Resume_mp_no_GPA.pdf';
-        const blob = new Blob([file], {type: 'application/pdf'});
-        const fileURL = window.URL.createObjectURL(blob);
-        let alink = document.createElement('a');
-        alink.href = fileURL;
-        alink.download = 'Kyochul_Resume.pdf';
-        alink.click();
+        fetch('Resume_mp_no_GPA.pdf').then(response => {
+            response.blob().then(blob => {
+                // Creating new object of PDF file
+                const fileURL = window.URL.createObjectURL(blob);
+                // Setting various property values
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'Kyochul_Resume.pdf';
+                alink.click();
+            })
+        })
     }
+
+    // const onButtonClick = () => {
+    //     // using Java Script method to get PDF file
+    //     const file = 'Resume_mp_no_GPA.pdf';
+    //     const blob = new Blob([file], {type: 'application/pdf'});
+    //     const fileURL = window.URL.createObjectURL(blob);
+    //     let alink = document.createElement('a');
+    //     alink.href = fileURL;
+    //     alink.download = 'Kyochul_Resume.pdf';
+    //     alink.click();
+    // }
 
     return (
         <div className='about' id={id}>
