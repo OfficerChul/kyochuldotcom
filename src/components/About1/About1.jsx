@@ -15,7 +15,7 @@ function About1({ id }) {
                 // Setting various property values
                 let alink = document.createElement('a');
                 alink.href = fileURL;
-                alink.download = 'Resume_mp_no_GPAss.pdf';
+                alink.download = 'Resume_mp_no_GPA.pdf';
                 alink.click();
             })
         })
