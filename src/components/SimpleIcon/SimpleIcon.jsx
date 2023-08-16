@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './SimpleIcon.css'
 import { Link } from 'react-router-dom'
-import resume from './Resume_mp_no_GPA.pdf';
+import resume from './CV_no_gpa.pdf';
 import Modal from 'react-modal';
 
 export default function SimpleIcon() {
