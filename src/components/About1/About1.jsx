@@ -23,7 +23,7 @@ function About1({ id }) {
 
     const onButtonClick = () => {
         // using Java Script method to get PDF file
-        const file = 'src/components/SimpleIcon/CV_no_gpa.pdf';
+        const file = './Resume_mp_no_GPA.pdf';
         const blob = new Blob([file], {type: 'application/pdf'});
         const fileURL = window.URL.createObjectURL(blob);
         let alink = document.createElement('a');
