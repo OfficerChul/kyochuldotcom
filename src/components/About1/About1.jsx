@@ -2,14 +2,13 @@ import React from 'react'
 import myPic from './myPicture.jpg';
 import './About1.css';
 import { Fade } from 'react-reveal';
-import resume from 'Resume_mp_no_GPA.pdf'
 
 
 function About1({ id }) {
 
     const onButtonClick = () => {
         // using Java Script method to get PDF file
-        fetch({'Resume_mp_no_GPA.pdf'}).then(response => {
+        fetch('Resume_mp_no_GPA.pdf').then(response => {
             response.blob().then(blob => {
                 // Creating new object of PDF file
                 const fileURL = window.URL.createObjectURL(blob);
