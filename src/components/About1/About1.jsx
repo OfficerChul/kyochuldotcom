@@ -2,7 +2,7 @@ import React from 'react'
 import myPic from './myPicture.jpg';
 import './About1.css';
 import { Fade } from 'react-reveal';
-import resume from './CV_no_gpa.pdf'
+import resume from 'Resume_mp_no_GPA.pdf'
 
 
 function About1({ id }) {
