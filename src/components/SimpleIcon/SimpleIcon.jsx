@@ -22,7 +22,7 @@ export default function SimpleIcon() {
                         closeTimeoutMS={200}
                         style={{ overlay: { zIndex: 1 } }}
                     >
-                        <iframe width="100%" height="100%" className='resume-modal-iframe' src={resume} title='Kyochul Resume'></iframe>
+                        <iframe width="100%" height="100%" className='resume-modal-iframe' src={'CV_no_gpa.pdf'} title='Kyochul Resume'></iframe>
                     </Modal>
                     <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i className="blurb-ripple-out fa  fa-linkedin" style={{ color: "#0E76A8" }}>LinkedIn</i></a>
                     <a href="https://www.instagram.com/kjang_hochul/"><i className="blurb-ripple-out fa  fa-instagram" style={{ color: "#E1306C" }}>Instagram</i></a>
