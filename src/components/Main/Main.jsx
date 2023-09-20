@@ -38,14 +38,14 @@ export default function Searchbar() {
             </form>
           
             
-
             
-            <Like />
-            <div className="menu">
-                <Link to="portfolio"><MagicCard site='portfolio-img' /></Link>
-                <a href='https://officerchul.github.io/'><MagicCard site='blog-img'/></a>
+            
+            {/* <Like /> */}
+            
+            <div className="menu mt-4">
                 
-                
+                <Link to="portfolio"><span className='text-sky-500 mb-3 flex justify-center'>Portfolio Website!</span><MagicCard site='portfolio-img' /></Link>
+                <a href='https://officerchul.github.io/'><span className='text-white mb-3 flex justify-center'>Jekyll Blog</span><MagicCard site='blog-img'/></a>                
             </div>
             <SimpleIcon />
             
