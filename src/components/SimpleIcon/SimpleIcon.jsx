@@ -13,12 +13,11 @@ export default function SimpleIcon() {
             <section id="set-8">
                 <div className="blurb-ripple-out-wrap hi-icon-effect-8 mt-4 links">
 
-                    <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-file" style={{ color: "#454839" }}>Resume</i>
+                    <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-file text-white">Resume</i>
                     <Modal
                         isModalOpen={1}
                         isOpen={isModalOpen}
                         onRequestClose={() => setIsModalOpen(false)}
-                        // className="resume-modal"
                         closeTimeoutMS={200}
                         style={{ overlay: { zIndex: 1 } }}
                     >
