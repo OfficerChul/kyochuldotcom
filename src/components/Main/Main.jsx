@@ -3,7 +3,6 @@ import logo from './triangle-skyblue.png';
 import SimpleIcon from '../SimpleIcon/SimpleIcon';
 import './Main.css'
 import { Link } from 'react-router-dom';
-import Like from '../Like/Like';
 import MagicCard from '../MagicCard/MagicCard';
 
 
