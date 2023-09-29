@@ -1,9 +1,11 @@
-import javaProject from './java-social-network-project.jpg'
+import javaProject from './java-social-network-project.jpg';
 import snuProject from './snu-dash-project.png';
 import UPS from './UPS.png';
 import webdev101 from './course-website.png';
 import kyochuldotcom from './new_website.jpg';
 
+const webdev101_url = <div>A course platform which contains 12-weeks web development course. All course materials are designed and written by OfficerChul. Please visit
+<a href='https://officerchul.github.io/webDev101/'> my course website!</a></div>;
 
 export const projectData = [
 
@@ -24,7 +26,7 @@ export const projectData = [
     {
         img: webdev101,
         title: 'WebDev101',
-        desc: 'A course platform which contains 12-weeks web development course. All course materials are designed and written by OfficerChul.',
+        desc: webdev101_url,
         stack: 'JavaScript(React), HTML, CSS, Firebase',
         github: 'https://github.com/OfficerChul/webDev101'
     },
