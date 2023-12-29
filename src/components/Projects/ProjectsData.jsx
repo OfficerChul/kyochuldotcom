@@ -3,6 +3,7 @@ import snuProject from './snu-dash-project.png';
 import UPS from './UPS.png';
 import webdev101 from './course-website.png';
 import kyochuldotcom from './new_website.jpg';
+import pkawebsite from './pka-website.png';
 
 const webdev101_url = <div>A course platform which contains 12-weeks web development course. All course materials are designed and written by OfficerChul. Please visit
 <a href='https://officerchul.github.io/webDev101/'> my course website!</a></div>;
@@ -43,5 +44,12 @@ export const projectData = [
         desc: 'My portfolio website that I created from the scratch without using any template.',
         stack: 'JavaScript(React), Tailwind, CSS, HTML, PostCSS',
         github: 'https://github.com/OfficerChul/kyochuldotcom'
+    },
+    {
+        img: pkawebsite,
+        title: 'Purdue Korean Association Official Website',
+        desc: 'A website that our team created for Purdue Korean Association. Backend is private repo, and frontend is partially private.',
+        stack: 'Typescript(React), Tailwind, Next.js, Nest.js',
+        github: 'https://github.com/OfficerChul/purdueka.org'
     }
 ];
