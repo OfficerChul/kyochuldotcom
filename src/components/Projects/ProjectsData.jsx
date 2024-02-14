@@ -50,6 +50,6 @@ export const projectData = [
         title: 'Purdue Korean Association Official Website',
         desc: 'A website that our team created for Purdue Korean Association. Backend is private repo, and frontend is partially private.',
         stack: 'Typescript(React), Tailwind, Next.js, Nest.js',
-        github: 'https://github.com/OfficerChul/purdueka.org'
+        github: 'https://dev.purdueka.org/'
     }
 ];
