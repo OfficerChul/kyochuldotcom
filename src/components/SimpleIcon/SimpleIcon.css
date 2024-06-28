@@ -8,7 +8,7 @@
 	display: inline-block;
 	font-size: 0px;
 	cursor: pointer;
-	margin: 10px;
+	margin: 5px;
 	width: 70px;
 	height: 70px;
 	border-radius: 50%;
@@ -16,12 +16,16 @@
 	position: relative;
 	z-index: 1;
 	color: #fff; 
-	background: #b1d62a9d;
+	background: #FFFFFF;
 	-webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
 	-moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
 	transition: transform ease-out 0.1s, background 0.2s;
+}
 
-    
+@media (min-width: 768px) {
+    .blurb-ripple-out {
+        margin: 10px;
+    }
 }
 
 .blurb-ripple-out-wrap {
@@ -69,7 +73,7 @@
 }
 
 .blurb-ripple-out:hover {
-	background: rgba(178, 221, 76, 1);
+	background: rgba(93, 220, 255, 1);
 	-webkit-transform: scale(0.93);
 	-moz-transform: scale(0.93);
 	-ms-transform: scale(0.93);
@@ -90,10 +94,10 @@
 	}
 	40% {
 		opacity: 0.7;
-		box-shadow: 0 0 0 2px rgba(178, 221, 76, 1), 0 0 10px 10px rgba(178, 221, 76, 1), 0 0 0 10px rgba(178, 221, 76, 1);
+		box-shadow: 0 0 0 2px rgba(93, 220, 255, 1), 0 0 10px 10px rgba(93, 220, 255, 1), 0 0 0 10px rgba(93, 220, 255, 1);
 	}
 	100% {
-		box-shadow: 0 0 0 2px rgba(178, 221, 76, 1), 0 0 10px 10px rgba(178, 221, 76, 1), 0 0 0 10px rgba(178, 221, 76, 1);
+		box-shadow: 0 0 0 2px rgba(93, 220, 255, 1), 0 0 10px 10px rgba(93, 220, 255, 1), 0 0 0 10px rgba(93, 220, 255, 1);
 		transform: scale(1.5);
 		opacity: 0;
 	}
@@ -111,8 +115,18 @@ a {
 .resume-modal-iframe {
 	width: 100vw;
 	height: 100vh;
-	/* z-index: 101; */
-	/* position: relative; */
-	/* position: fixed; */
-	/* position: sticky; */
 }
+
+@keyframes blink-border {
+	0%, 100% {
+	  border-color: transparent;
+	}
+	50% {
+	  border-color: #fce903;
+	}
+  }
+  
+  .blink-border {
+	animation: blink-border 1s linear infinite;
+	border: 3px solid transparent;
+  }

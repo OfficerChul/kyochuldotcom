@@ -1,19 +1,5 @@
 body {
-	background: #212534;
-}
-
-.form-control {
-	border-color: #5ddcff;
-	transition: all 1s linear;
-
-}
-
-.form-control:hover {
-    border-color: black;
-}
-
-#main-logo {
-	height: 350px;
+	background: #c9ebf5;
 }
 
 .logo:hover {
@@ -55,8 +41,3 @@ body {
 		transform: translate(2px, 1px) rotate(-1deg);
 	}
 }
-
-#search-bar {
-	height: 5vh;
-}
-
