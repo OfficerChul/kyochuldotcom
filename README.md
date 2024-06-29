@@ -1,6 +1,6 @@
 # Kyochul Jang's Portfolio Website
 
-  <div style='text-align:center'>
+  <div align='center'>
         <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5 Badge">
         <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3 Badge">
         <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="TailwindCSS Badge">
@@ -15,7 +15,7 @@
 
 Welcome to the repository for my personal portfolio website, [kyochuljang.com](https://kyochuljang.com/). This website showcases my work, skills, and projects as a professional in the field. Amazing this is that this website was built from the scratch without the use of any prebuilt themes ot templates. Feel free to explore the site and this repository to get a better understanding of my capabilities and experiences.
 
-<div style='text-align: center'>
+  <div align='center'>
 <img src="website_pic1.png" alt="Portfolio Website" width="450" height="auto"/>
 
 <img src="website_pic2.png" alt="Image" width="200" height="auto"/>
