@@ -24,7 +24,7 @@ function Footer() {
                 <div id="" className='sm:flex gap-3 sm:justify-between' >
                     <div className="flex justify-center">
                         <a href="https://kyochuljang.com/" className="">
-                            <img src={Banner} className="h-20" alt="FlowBite Logo" />
+                            <img src={Banner} className="h-20" alt="Banner" />
 
                         </a>
                     </div>
