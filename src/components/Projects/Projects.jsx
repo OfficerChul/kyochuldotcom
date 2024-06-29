@@ -3,7 +3,7 @@ import "./Projects.css";
 import { projectData } from './ProjectsData';
 import ProjectsBtn from './ProjectsBtn';
 import './Projects.css';
-import { Slide } from 'react-awesome-reveal';
+import { Slide, Fade } from 'react-awesome-reveal';
 
 
 export function Projects({ id }) {
@@ -13,6 +13,7 @@ export function Projects({ id }) {
                 <div className="">
                     <h2 className='font-mono text-6xl text-sky-300 font-extrabold flex justify-center py-6'>Projects</h2>
 
+                    <Fade cascade damping={0.1} triggerOnce direction={"right"}>
 
                     <ul className='flex justify-center gap-4 pr-8 flex-wrap'>
                         {projectData.map((project) => (
@@ -44,7 +45,8 @@ export function Projects({ id }) {
                                 </div>
                             </li>
                         ))}
-                    </ul>
+                        </ul>
+                        </Fade>
                 </div>
             </Slide>
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import myPic from './myPicture.jpg';
 import './About1.css';
-import { Slide } from 'react-awesome-reveal';
+import { Fade } from 'react-awesome-reveal';
 
 
 function About1({ id }) {
@@ -26,7 +26,7 @@ function About1({ id }) {
 
             <div className='container' fluid="md">
 
-                <Slide cascade damping={0.1} triggerOnce={true}>
+                <Fade cascade damping={0.1} triggerOnce={true} direction='left'>
                     <div className="sm:flex sm:p-10 p-2 items-center">
                         <div className="sm:w-1/2 sm:mr-3 md:mr-0">
                             <img src={myPic} alt="myPic" className="w-[100vw] sm:mt-5 md:w-5/6 img-thumbnail sm:p-3 p-2" />
@@ -71,7 +71,7 @@ function About1({ id }) {
 
 
 
-                </Slide>
+                </Fade>
 
 
 

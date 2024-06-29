@@ -21,7 +21,7 @@ function Footer() {
     return (
         <div className="footer-container">
             <footer className="p-4 bg-blue-100 sm:p-6 dark:bg-gray-900">
-                <div id="" className='sm:flex sm:justify-between' >
+                <div id="" className='sm:flex gap-3 sm:justify-between' >
                     <div className="flex justify-center">
                         <a href="https://kyochuljang.com/" className="">
                             <img src={Banner} className="h-20" alt="FlowBite Logo" />
