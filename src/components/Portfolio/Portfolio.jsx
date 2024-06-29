@@ -6,9 +6,8 @@ import Footer from '../Footer/Footer'
 import logo from '../Main/triangle-green.png';
 import FancyBtn from '../FancyBtn/FancyBtn'
 import { Link } from 'react-router-dom';
-import { Bounce } from 'react-reveal';
-import HeadShake from 'react-reveal/HeadShake';
 import Navigation from '../Navigation/Navigation';
+import { JackInTheBox} from 'react-awesome-reveal';
 
 
 export default function Portfolio() {
@@ -20,35 +19,35 @@ export default function Portfolio() {
 
                 <div id="top" className="">
 
-                    <Link to='/'><img style={{ zIndex: 1000 }} className='to-main' src={logo} alt='logo' /></Link>
+                    <Link to='/'><img style={{ zIndex: 1000 }} className='to-main absolute w-14 rounded-full right-5 blink-portfolio' src={logo} alt='logo' /></Link>
 
                     <h1 className='header-text bungee'><span id="welcome-sign">Welcome to </span><br /><span className="appear">my Website :)</span></h1>
 
-
-                    <div className="content ml-1">
-                        <h2 className='bungee'>
-                            <Bounce left cascade>Kyochul Jang</Bounce></h2>
-                        <h2 className='bungee'><Bounce left cascade>Kyochul Jang</Bounce></h2>
-                    </div>
-                    <HeadShake forever={1} duration={2000}>
-                        <div className="flex absolute">
-                            <FancyBtn url='#about1' btnText='About Me!'/>
+                    <JackInTheBox cascade triggerOnce={true}>
+                        <div className="content ml-1">
+                            <h2>{'Kyochul Jang'}</h2>
+                            <h2>{'Kyochul Jang'}</h2>
                         </div>
-                    </HeadShake>
+                    </JackInTheBox>
+                    
+                    <div className="flex absolute">
+                        <FancyBtn url='#about1' btnText='About Me!' />
+                    </div>
+                    
 
 
 
 
                 </div>
-                
+
 
 
 
 
             </header>
 
-            <About1 id='about1' />            
-            <Projects id='projects' />
+            <About1 id='about1'/>
+            <Projects id='projects'/>
 
             <footer>
 

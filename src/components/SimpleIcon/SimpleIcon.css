@@ -117,16 +117,16 @@ a {
 	height: 100vh;
 }
 
-@keyframes blink-border {
+@keyframes blink-outline {
 	0%, 100% {
-	  border-color: transparent;
+	  outline-color: transparent;
 	}
 	50% {
-	  border-color: #fce903;
+	  outline-color: #fce903;
 	}
-  }
-  
-  .blink-border {
-	animation: blink-border 1s linear infinite;
-	border: 3px solid transparent;
-  }
+}
+
+.blink-outline {
+	animation: blink-outline 1s linear infinite;
+	outline: 3px solid transparent;
+}

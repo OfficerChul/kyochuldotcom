@@ -28,7 +28,7 @@ function Footer() {
 
                         </a>
                     </div>
-                    <div className='footer-tab flex flex-col text-left gap-2 mx-4  bg-slate-300 p-4 rounded-lg'>
+                    <div className='footer-tab flex flex-col text-left gap-2 bg-sky-200 sm:p-4 p-2 rounded-lg'>
                         <span className=' text-sm font-mono'>@OfficerChul on GitHub</span>
                         <a href='https://github.com/OfficerChul' className='text-black font-mono'><GitHubCalendar dateFormat username="officerchul" /></a>
                     </div>
@@ -63,12 +63,15 @@ function Footer() {
                         </div>
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">On Website</h2>
-                            <ul className="text-gray-600 pl-0 dark:text-gray-400">
-                                <li className="mb-4">
+                            <ul className="text-gray-600 pl-0 dark:text-gray-400 flex flex-col gap-y-4">
+                                <li>
                                     <a href="#top" onClick={remHash} className="hover:underline">Top</a>
                                 </li>
                                 <li>
                                     <a href="#about1" onClick={remHash} className="hover:underline">About Me</a>
+                                </li>
+                                <li>
+                                    <a href="#projects" onClick={remHash} className="hover:underline">Projects</a>
                                 </li>
                             </ul>
                         </div>

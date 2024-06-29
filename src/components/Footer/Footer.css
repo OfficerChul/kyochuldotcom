@@ -5,7 +5,7 @@
 }
 
 .social-icon:hover {
-    filter: brightness(50%);
+    filter: brightness(150%);
 }
 
 .kakaotalk {
@@ -52,7 +52,7 @@
 }
 
 .linked-in {
-    color: blue;
+    /* color: blue; */
     transition: all 0.5s;
     animation: ease-in-out;
     /* margin-right: 5px; */

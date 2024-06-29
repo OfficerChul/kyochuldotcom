@@ -1,7 +1,7 @@
 import React from 'react'
 import myPic from './myPicture.jpg';
 import './About1.css';
-import { Fade } from 'react-reveal';
+import { Slide } from 'react-awesome-reveal';
 
 
 function About1({ id }) {
@@ -21,61 +21,60 @@ function About1({ id }) {
         })
     }
 
-    // const onButtonClick = () => {
-    //     // using Java Script method to get PDF file
-    //     const file = 'Resume_mp_no_GPA.pdf';
-    //     const blob = new Blob([file], {type: 'application/pdf'});
-    //     const fileURL = window.URL.createObjectURL(blob);
-    //     let alink = document.createElement('a');
-    //     alink.href = fileURL;
-    //     alink.download = 'Kyochul_Resume.pdf';
-    //     alink.click();
-    // }
-
     return (
         <div className='about' id={id}>
 
             <div className='container' fluid="md">
-                <div className="row">
-                    <Fade left>
-                        <div className='col-sm about1' id='leftAbout'>
-                            <img src={myPic} alt='myPic' className="img-thumbnail myPic mt-5 p-3" />
+
+                <Slide cascade damping={0.1} triggerOnce={true}>
+                    <div className="sm:flex sm:p-10 p-2 items-center">
+                        <div className="sm:w-1/2 sm:mr-3 md:mr-0">
+                            <img src={myPic} alt="myPic" className="w-[100vw] sm:mt-5 md:w-5/6 img-thumbnail sm:p-3 p-2" />
                         </div>
 
-                        <div className='col-sm mt-0 about2' id='rightAbout'>
+                        <div className="mt-3 sm:mt-0 sm:w-1/2">
+                            <h2 className="font-mono md:text-6xl text-3xl text-sky-300 font-extrabold">
+                                About Me
+                            </h2>
 
-                            <h2 id='about-title'>About Me</h2>
+                            <div className="mt-3 font-mono lg:text-lg sm:text-[13px] text-[12px] text-gray-700">
+                                <p>
+                                    Hi, I am Kyochul Jang, a Master’s/Ph.D. student in the
+                                    <span className="text-sky-400"> <a className='text-[#0F709D] underline hover:text-sky-400' href='https://gsai.snu.ac.kr/'>Interdisciplinary Program in Artificial Intelligence(IPAI) at Seoul National University(SNU)</a></span>, advised by Professor Bongwon Suh.
 
-
-                            {/* <h1 className='about-context' id='aboutme'><span id='aboutme-span'>Hi, I am Kyochul Jang, a Computer Science student at <span className='univ'>Purdue University.</span><br />
+                                </p>
                                 
-                                <br /><span className=' font-mono'>My concentration</span>is Machine Learning, and also minoring in Mathematics.<br />
-                                <br /><span className='univ'>My interests</span> lie in Computer Vision, NLP, and Brain-Computer Interface (BCI).
-                            </span>
-                            </h1> */}
-                            <br /><h4 className='font-mono'>Hi, I am Kyochul Jang, a Computer Science student at <span id='emphasize-about' className=''>Purdue University</span>.
-                                My interests lie in <span id='emphasize-about' className=''>Natural Language Processing</span> and <span id='emphasize-about'>Data Mining</span>.<br /><br />
-                                During the Summer Vacation in 2023, and 2022, I did an internship at <span id='emphasize-about' className=''>Samsung Electronics</span> and <span id='emphasize-about' className=''>Seoul National University</span> as an SDE intern.<br /><br />
+                                <p className="mt-3">
+                                    My research interests lie in <span className="text-sky-400">Natural Language Processing</span>, <span className='text-sky-400'>Graph Neural Network</span> and
+                                    <span className="text-sky-400"> Human+AI Interaction</span>.
+                                </p>
 
-                                I am now seeking a position in a <span id='emphasize-about'>fast-paced environment</span> where I can use my skills and experience to make a real impact.
+                                <p>
+                                    Prior to this, I obtained my Bachelor's degree in Computer Science from <a href='https://purdue.edu/' className="text-[#CEB888] underline hover:text-sky-400">Purdue University</a> in 2024, and worked as a Software Engineer Intern at <a href='https://www.samsung.com/' className="underline text-[#1428A0] hover:text-sky-400">Samsung Electronics</a>.
+
+                                </p>
 
                                 
-                                <br /><br />Feel free to contact me via contacts at the <span id='emphasize-about' className=''>bottom</span> of the website!</h4>
-                            
-                            <button onClick={onButtonClick} className='mt-3' id='download-btn'>
-                                <i className="fa fa-download" /> Download Resume
-                            </button>
-                            
-                            
+
+                                <p className="mt-3">
+                                    I welcome AI research intern offers, and feel free to contact me via contacts at the
+                                    <span className="text-sky-400"> bottom</span> of the website!
+                                </p>
+
+                                <button onClick={onButtonClick} className="px-4 py-2 bg-sky-400 hover:bg-sky-600 text-white font-bold rounded-lg shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-opacity-50">
+                                    <i className="fa fa-download"></i> Download Resume
+                                </button>
+                            </div>
                         </div>
+                    </div>
 
 
 
 
-                    </Fade>
+                </Slide>
 
 
-                </div>
+
 
             </div>
 
