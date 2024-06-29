@@ -45,19 +45,19 @@ function About1({ id }) {
                                 </p>
                                 
                                 <p className="mt-3">
-                                    My research interests lie in <span className="text-sky-400">Natural Language Processing</span>, <span className='text-sky-400'>Graph Neural Network</span> and
+                                    My research interests lie in <span className="text-sky-400">Natural Language Processing</span>, <span className='text-sky-400'>Graph Neural Networks</span>, and
                                     <span className="text-sky-400"> Human+AI Interaction</span>.
                                 </p>
 
                                 <p>
-                                    Prior to this, I obtained my Bachelor's degree in Computer Science from <a href='https://purdue.edu/' className="text-[#CEB888] underline hover:text-sky-400">Purdue University</a> in 2024, and worked as a Software Engineer Intern at <a href='https://www.samsung.com/' className="underline text-[#1428A0] hover:text-sky-400">Samsung Electronics</a>.
+                                    Prior to this, I obtained my Bachelor's degree in Computer Science from <a href='https://purdue.edu/' className="text-[#CEB888] underline hover:text-sky-400">Purdue University</a> in 2024 and worked as a Software Engineer Intern at <a href='https://www.samsung.com/' className="underline text-[#1428A0] hover:text-sky-400">Samsung Electronics</a>.
 
                                 </p>
 
                                 
 
                                 <p className="mt-3">
-                                    I welcome AI research intern offers, and feel free to contact me via contacts at the
+                                    I welcome AI research intern offers! Feel free to contact me via contacts at the
                                     <span className="text-sky-400"> bottom</span> of the website!
                                 </p>
 
