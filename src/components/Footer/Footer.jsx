@@ -80,7 +80,7 @@ function Footer() {
                 </div>
                 <hr className="my-6 border-black-200 sm:mx-auto dark:border-gray-700 lg:my-2 sm:w-0" />
                 <div className="flex items-center justify-between gap-2">
-                    <span className="text-base text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://kyochuljang.com/" className="hover:underline">OfficerChul™</a>. All Rights Reserved.
+                    <span className="text-base text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://kyochuljang.com/" className="hover:underline">OfficerChul™</a>. All Rights Reserved.
                     </span>
                     
                     <div className="flex space-x-6 sm:justify-center sm:mt-0 text-2xl">
