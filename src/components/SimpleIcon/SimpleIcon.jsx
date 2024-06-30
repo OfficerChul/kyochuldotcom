@@ -1,11 +1,19 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './SimpleIcon.css'
 import { Link } from 'react-router-dom'
-// import resume from '../../../public/CV_no_gpa.pdf';
 import Modal from 'react-modal';
+// import { Document, Page, pdfjs } from 'react-pdf';
+// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+
 
 export default function SimpleIcon() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [numPages, setNumPages] = useState();
+    // const [pageNumber, setPageNumber] = useState(1);
+
+    // function onDocumentLoadSuccess({ numPages }) {
+    //     setNumPages(numPages);
+    // }
 
     return (
         <div>
@@ -13,19 +21,80 @@ export default function SimpleIcon() {
             <section id="set-8">
                 <div className="blurb-ripple-out-wrap hi-icon-effect-8 links">
                     <Link to="portfolio"><i className="blurb-ripple-out fa  fa-star blink-outline shadow-custom" style={{ color: "#fce903" }}></i></Link>
-                    <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-file shadow-custom" style={{ color: '#808080'}}></i>
+                    <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-file shadow-custom" style={{ color: '#808080' }}></i>
                     <Modal
                         isModalOpen={1}
                         isOpen={isModalOpen}
                         onRequestClose={() => setIsModalOpen(false)}
                         closeTimeoutMS={200}
-                        style={{ overlay: { zIndex: 1 } }}
+                        style={{
+                            overlay: {
+                                zIndex: 1000, // zIndex 값을 조절하여 다른 요소들 위에 올라오도록 설정
+                                backgroundColor: 'rgba(0, 0, 0, 0.2)' // 배경색 추가
+                            },
+                            content: {
+
+                                position: 'fixed',
+                                top: '50%',
+                                left: '50%',
+                                right: 'auto',
+                                bottom: 'auto',
+                                transform: 'translate(-50%, -50%)',
+                                width: '50vw', // 전체 너비의 80%
+                                height: '90vh', // 전체 높이의 90%
+                                border: '1px solid #ccc',
+                                background: 'white',
+                                borderRadius: '10px',
+                                // overflow: 'hidden',
+                                display: 'flex', // Flexbox를 사용하여 자식 요소를 중앙에 배치
+                                justifyContent: 'center', // 가로 방향 중앙 정렬
+                                alignItems: 'center' // 세로 방향 중앙 정렬
+
+                            }
+                        }}
                     >
-                        <iframe width="100%" height="100%" className='resume-modal-iframe' src={'Kyochul_Jang___CV.pdf'} title='Kyochul Resume'></iframe>
+                        <iframe style={{
+                            width: '100%', // iframe 너비를 모달 크기에 맞춤
+                            height: '100%', // iframe 높이를 모달 크기에 맞춤
+                            border: 'none',
+                            position: 'fixed',
+                            top: '50%',
+                            left: '50%',
+                            right: 'auto',
+                            bottom: 'auto',
+                            transform: 'translate(-50%, -50%)',
+                            // width: '50vw', // 전체 너비의 80%
+                            // height: '90vh', // 전체 높이의 90%
+                            background: 'black',
+                            borderRadius: '10px',
+                            outline: 'none',
+                            padding: '20px',
+                            // paddingLeft: '20px',
+                            display: 'flex', // Flexbox를 사용하여 자식 요소를 중앙에 배치
+                            justifyContent: 'center', // 가로 방향 중앙 정렬
+                            alignItems: 'center' // 세로 방향 중앙 정렬
+                        }} className='resume-modal-iframe' src={'Kyochul_Jang___CV.pdf'} title='Kyochul Resume'></iframe>
+                        {/* <Document
+                                file="Kyochul_Jang___CV.pdf"
+                                onLoadSuccess={onDocumentLoadSuccess}>
+                                <Page pageNumber={pageNumber} />
+                            </Document>
+                            <p>
+                                <span onClick={() => pageNumber > 1 ? setPageNumber(pageNumber - 1) : null}>
+                                    &lt;
+                                </span>
+                                <span>Page {pageNumber} of {numPages}</span>
+       	//다음 페이지 보기
+                                <span onClick={() => pageNumber < numPages ? setPageNumber(pageNumber + 1) : null}>
+                                    &gt;
+                                </span>
+                            </p> */}
+
+
                     </Modal>
-                    
+
                     <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i className="blurb-ripple-out shadow-custom fa  fa-linkedin" style={{ color: "#0E76A8" }}></i></a>
-                    
+
                     <a href="https://www.instagram.com/kjang_hochul/"><i className="blurb-ripple-out fa fa-instagram shadow-custom" style={{ color: "#E1306C" }}></i></a>
                     <a href="https://github.com/OfficerChul"><i className="blurb-ripple-out fa  fa-github-alt shadow-custom" style={{ color: "#77579d" }}></i></a>
                     <a href='mailto:gcj1234567890@gmail.com'><i className="blurb-ripple-out fa  fa-envelope shadow-custom" style={{ color: "#368BFE" }}></i></a>

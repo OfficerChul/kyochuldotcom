@@ -7,10 +7,12 @@ import Navigation from '../Navigation/Navigation';
 
 
 export default function Searchbar() {
+
+
     return (
         <div className="main">
             <Navigation />
-            
+
             <div className="mt-20">
                 <img className="mx-auto mt-5 logo h-52 md:h-60" src={logo} alt='logo' id='main-logo' />
                 <form action='https://www.google.com/search' method='GET'>
@@ -33,6 +35,7 @@ export default function Searchbar() {
                     {/* <Link to="portfolio"><span className='text-sky-500 mb-3 flex justify-center'>Portfolio Website!</span><MagicCard site='portfolio-img' /></Link>
                 <a href='https://officerchul.github.io/'><span className='text-white mb-3 flex justify-center'>Jekyll Blog</span><MagicCard site='blog-img'/></a>                 */}
                 </div>
+                
                 <SimpleIcon />
             </div>
 
