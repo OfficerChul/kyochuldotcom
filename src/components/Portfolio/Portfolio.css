@@ -118,14 +118,13 @@
 	-webkit-text-stroke: 3px #000000;
 	color: #ffffff;
     transform-origin: center top;
-    /* animation: show 1.5s both; */
-    /* padding-top: 25px; */
-	
 }
 
-span.appear {
-    display: inline-block;
-	
+/* 핸드폰 화면 크기에 따른 미디어 쿼리 */
+@media (max-width: 600px) {
+    .appear {
+        -webkit-text-stroke: 2px #000000;
+    }
 }
 
 .d1 {

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Portfolio.css'
-import About1 from '../About1/About1'
+import AboutMe from '../AboutMe/AboutMe'
 import Projects from '../Projects/Projects'
 import Footer from '../Footer/Footer'
 import logo from '../Main/triangle-green.png';
@@ -24,13 +24,13 @@ export default function Portfolio() {
                     <h1 className='header-text bungee'><span id="welcome-sign">Welcome to </span><br /><span className="appear">my Website :)</span></h1>
 
                     <JackInTheBox cascade triggerOnce={true}>
-                        <div className="content ml-1">
+                        <div className="content ml-1 md:bottom-10">
                             <h2>{'Kyochul Jang'}</h2>
                             <h2>{'Kyochul Jang'}</h2>
                         </div>
                     </JackInTheBox>
                     
-                    <div className="flex absolute">
+                    <div className="flex absolute scale-50 left-[1px] mt-5 sm:scale-100 sm:top-40 md:top-48 2xl:top-72">
                         <FancyBtn url='#about1' btnText='About Me!' />
                     </div>
                     
@@ -46,7 +46,7 @@ export default function Portfolio() {
 
             </header>
 
-            <About1 id='about1'/>
+            <AboutMe id='about1'/>
             <Projects id='projects'/>
 
             <footer>

@@ -1,10 +1,10 @@
 import React from 'react'
 import myPic from './myPicture.jpg';
-import './About1.css';
+import './AboutMe.css';
 import { Fade } from 'react-awesome-reveal';
 
 
-function About1({ id }) {
+function AboutMe({ id }) {
 
     const onButtonClick = () => {
         // using Java Script method to get PDF file
@@ -22,7 +22,7 @@ function About1({ id }) {
     }
 
     return (
-        <div className='about' id={id}>
+        <div className='about flex justify-center' id={id}>
 
             <div className='container' fluid="md">
 
@@ -32,7 +32,7 @@ function About1({ id }) {
                             <img src={myPic} alt="myPic" className="w-[100vw] sm:mt-5 md:w-5/6 img-thumbnail sm:p-3 p-2" />
                         </div>
 
-                        <div className="mt-3 sm:mt-0 sm:w-1/2">
+                        <div className="mt-3 sm:mt-0 sm:w-1/2 px-4">
                             <h2 className="font-mono md:text-6xl text-3xl text-sky-300 font-extrabold">
                                 About Me
                             </h2>
@@ -61,7 +61,7 @@ function About1({ id }) {
                                     <span className="text-sky-400"> bottom</span> of the website!
                                 </p>
 
-                                <button onClick={onButtonClick} className="px-4 py-2 bg-sky-400 hover:bg-sky-600 text-white font-bold rounded-lg shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-opacity-50">
+                                <button onClick={onButtonClick} className="px-4 py-2 mt-3 bg-sky-400 hover:bg-sky-600 text-white font-bold rounded-lg shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-opacity-50">
                                     <i className="fa fa-download"></i> Download Resume
                                 </button>
                             </div>
@@ -82,4 +82,4 @@ function About1({ id }) {
     )
 }
 
-export default About1;
+export default AboutMe;

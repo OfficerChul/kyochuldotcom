@@ -96,7 +96,7 @@ export default function SimpleIcon() {
                         </Modal>
                     </div>
 
-                    <div className="flex justify-center sm:gap-12 gap-3  mt-3">
+                    <div className="flex justify-center gap-3 sm:gap-12 mt-4 sm:mt-3">
                         <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i className="blurb-ripple-out shadow-custom fa  fa-linkedin" style={{ color: "#0E76A8" }}></i></a>
 
                         <a href="https://www.instagram.com/kjang_hochul/"><i className="blurb-ripple-out fa fa-instagram shadow-custom" style={{ color: "#E1306C" }}></i></a>

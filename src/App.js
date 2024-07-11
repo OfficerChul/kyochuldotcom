@@ -1,5 +1,4 @@
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Main from "./components/Main/Main";
 import { Routes, Route } from "react-router-dom";
 import Portfolio from './components/Portfolio/Portfolio';
