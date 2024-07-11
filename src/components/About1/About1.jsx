@@ -40,7 +40,7 @@ function About1({ id }) {
                             <div className="mt-3 font-mono lg:text-lg sm:text-[13px] text-[12px] text-gray-700">
                                 <p>
                                     Hi, I am Kyochul Jang, a Master’s student in the
-                                    <span className="text-sky-400"> <a className='text-[#0F709D] underline hover:text-sky-400' href='https://gsai.snu.ac.kr/'>Interdisciplinary Program in Artificial Intelligence(IPAI) at Seoul National University(SNU)</a></span>, advised by Professor Bongwon Suh.
+                                    <span className="text-sky-400"> <a className='text-[#0F709D] underline hover:text-sky-400' href='https://gsai.snu.ac.kr/'>Seoul National University AI</a></span>, advised by Professor Bongwon Suh.
 
                                 </p>
                                 

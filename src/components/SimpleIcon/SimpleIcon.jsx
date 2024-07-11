@@ -19,62 +19,64 @@ export default function SimpleIcon() {
         <div>
             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossOrigin="anonymous" />
             <section id="set-8">
-                <div className="blurb-ripple-out-wrap hi-icon-effect-8 links">
-                    <Link to="portfolio"><i className="blurb-ripple-out fa  fa-star blink-outline shadow-custom" style={{ color: "#fce903" }}></i></Link>
-                    <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-file shadow-custom" style={{ color: '#808080' }}></i>
-                    <Modal
-                        isModalOpen={1}
-                        isOpen={isModalOpen}
-                        onRequestClose={() => setIsModalOpen(false)}
-                        closeTimeoutMS={200}
-                        style={{
-                            overlay: {
-                                zIndex: 1000, // zIndex 값을 조절하여 다른 요소들 위에 올라오도록 설정
-                                backgroundColor: 'rgba(0, 0, 0, 0.2)' // 배경색 추가
-                            },
-                            content: {
+                <div className="blurb-ripple-out-wrap flex justify-center flex-wrap flex-col">
+                    <div className="flex justify-center gap-3 sm:gap-12">
+                        <Link to="portfolio"><i className="blurb-ripple-out fa  fa-star blink-outline shadow-custom" style={{ color: "#fce903" }}></i></Link>
+                        <a href="https://officerchul.github.io/"><i className="blurb-ripple-out shadow-custom fa  fa-graduation-cap" style={{ color: "#C28E0E" }}></i></a>
+                        <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-address-card shadow-custom" style={{ color: '#004E89' }}></i>
+                        <Modal
+                            isModalOpen={1}
+                            isOpen={isModalOpen}
+                            onRequestClose={() => setIsModalOpen(false)}
+                            closeTimeoutMS={200}
+                            style={{
+                                overlay: {
+                                    zIndex: 1000, // zIndex 값을 조절하여 다른 요소들 위에 올라오도록 설정
+                                    backgroundColor: 'rgba(0, 0, 0, 0.2)' // 배경색 추가
+                                },
+                                content: {
 
+                                    position: 'fixed',
+                                    top: '50%',
+                                    left: '50%',
+                                    right: 'auto',
+                                    bottom: 'auto',
+                                    transform: 'translate(-50%, -50%)',
+                                    width: '50vw', // 전체 너비의 80%
+                                    height: '90vh', // 전체 높이의 90%
+                                    border: '1px solid #ccc',
+                                    background: 'white',
+                                    borderRadius: '10px',
+                                    // overflow: 'hidden',
+                                    display: 'flex', // Flexbox를 사용하여 자식 요소를 중앙에 배치
+                                    justifyContent: 'center', // 가로 방향 중앙 정렬
+                                    alignItems: 'center' // 세로 방향 중앙 정렬
+
+                                }
+                            }}
+                        >
+                            <iframe style={{
+                                width: '100%', // iframe 너비를 모달 크기에 맞춤
+                                height: '100%', // iframe 높이를 모달 크기에 맞춤
+                                border: 'none',
                                 position: 'fixed',
                                 top: '50%',
                                 left: '50%',
                                 right: 'auto',
                                 bottom: 'auto',
                                 transform: 'translate(-50%, -50%)',
-                                width: '50vw', // 전체 너비의 80%
-                                height: '90vh', // 전체 높이의 90%
-                                border: '1px solid #ccc',
-                                background: 'white',
+                                // width: '50vw', // 전체 너비의 80%
+                                // height: '90vh', // 전체 높이의 90%
+                                background: 'black',
                                 borderRadius: '10px',
-                                // overflow: 'hidden',
+                                outline: 'none',
+                                padding: '20px',
+                                // paddingLeft: '20px',
                                 display: 'flex', // Flexbox를 사용하여 자식 요소를 중앙에 배치
                                 justifyContent: 'center', // 가로 방향 중앙 정렬
                                 alignItems: 'center' // 세로 방향 중앙 정렬
-
-                            }
-                        }}
-                    >
-                        <iframe style={{
-                            width: '100%', // iframe 너비를 모달 크기에 맞춤
-                            height: '100%', // iframe 높이를 모달 크기에 맞춤
-                            border: 'none',
-                            position: 'fixed',
-                            top: '50%',
-                            left: '50%',
-                            right: 'auto',
-                            bottom: 'auto',
-                            transform: 'translate(-50%, -50%)',
-                            // width: '50vw', // 전체 너비의 80%
-                            // height: '90vh', // 전체 높이의 90%
-                            background: 'black',
-                            borderRadius: '10px',
-                            outline: 'none',
-                            padding: '20px',
-                            // paddingLeft: '20px',
-                            display: 'flex', // Flexbox를 사용하여 자식 요소를 중앙에 배치
-                            justifyContent: 'center', // 가로 방향 중앙 정렬
-                            alignItems: 'center' // 세로 방향 중앙 정렬
-                        }} className='resume-modal-iframe' src={'Kyochul_Jang___CV.pdf'} title='Kyochul Resume'></iframe>
-                        {/* <Document
+                            }} className='resume-modal-iframe' src={'Kyochul_Jang___CV.pdf'} title='Kyochul Resume'></iframe>
+                            {/* <Document
                                 file="Kyochul_Jang___CV.pdf"
                                 onLoadSuccess={onDocumentLoadSuccess}>
                                 <Page pageNumber={pageNumber} />
@@ -91,13 +93,16 @@ export default function SimpleIcon() {
                             </p> */}
 
 
-                    </Modal>
+                        </Modal>
+                    </div>
 
-                    <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i className="blurb-ripple-out shadow-custom fa  fa-linkedin" style={{ color: "#0E76A8" }}></i></a>
+                    <div className="flex justify-center sm:gap-12 gap-3  mt-3">
+                        <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i className="blurb-ripple-out shadow-custom fa  fa-linkedin" style={{ color: "#0E76A8" }}></i></a>
 
-                    <a href="https://www.instagram.com/kjang_hochul/"><i className="blurb-ripple-out fa fa-instagram shadow-custom" style={{ color: "#E1306C" }}></i></a>
-                    <a href="https://github.com/OfficerChul"><i className="blurb-ripple-out fa  fa-github-alt shadow-custom" style={{ color: "#77579d" }}></i></a>
-                    <a href='mailto:gcj1234567890@gmail.com'><i className="blurb-ripple-out fa  fa-envelope shadow-custom" style={{ color: "#368BFE" }}></i></a>
+                        <a href="https://www.instagram.com/kjang_hochul/"><i className="blurb-ripple-out fa fa-instagram shadow-custom" style={{ color: "#E1306C" }}></i></a>
+                        <a href="https://github.com/OfficerChul"><i className="blurb-ripple-out fa  fa-github shadow-custom" style={{ color: "#77579d" }}></i></a>
+                        <a href='mailto:gcj1234567890@gmail.com'><i className="blurb-ripple-out fa  fa-envelope shadow-custom" style={{ color: "#368BFE" }}></i></a>
+                    </div>
                 </div>
             </section>
         </div>

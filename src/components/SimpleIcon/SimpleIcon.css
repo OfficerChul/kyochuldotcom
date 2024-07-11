@@ -1,9 +1,4 @@
-.links {
-	display: flex;
-	gap: 30px;
-	justify-content: center;
-	flex-wrap: wrap;
-}
+
  .blurb-ripple-out {
 	display: inline-block;
 	font-size: 0px;
