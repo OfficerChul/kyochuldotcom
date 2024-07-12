@@ -1,8 +1,5 @@
 .content {
-	position: relative;
-	
-	
-	
+	position: relative;	
 }
 
 .content h2 {
@@ -183,10 +180,4 @@
 	transition: ease-in-out 0.5s;
 	filter: brightness(1.3);
 	animation: shake 3s infinite;
-}
-
-
-.nav-btn {
-	display:flex;
-	
 }

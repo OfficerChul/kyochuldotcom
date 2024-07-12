@@ -17,23 +17,32 @@ export function Projects({ id }) {
                             {projectData.map((project) => (
                                 <li className=''>
 
-                                    <div role="status" className="flex flex-col justify-end h-[500px] px-6 pb-6 mb-3 shadow-lg transition ease-in-out rounded-xl max-w-sm  hover:-translate-y-1 hover:scale-105 hover:border-purple-400 hover:duration-300 border-gray-200  dark:border-gray-700 border-solid border-4 ">
-                                        <div className="flex justify-center items-center mb-10 sm:mb-4 h-48 dark:bg-gray-700 ">
-                                            <a className='block w-68 h-52 overflow-hidden rounded-xl ' href={project.website}><img className='border-4 rounded-xl w-full h-full object-fill border-gray-300' src={project.img} alt={project.title} /></a>
-
+                                    <div role="status" className="flex flex-col justify-end h-[500px] px-6 pb-6 mb-3 shadow-lg transition ease-in-out rounded-xl max-w-xs border-solid border-4 hover:-translate-y-1 hover:scale-105 hover:border-purple-400 hover:duration-300 border-gray-200 dark:border-gray-700">
+                                        <div className="mb-4 sm:mb-4">
+                                            <a className='block overflow-hidden rounded-xl' href={project.website}>
+                                                <img className='sm:w-96 w-full h-56 object-cover rounded-xl border-4 border-gray-300' src={project.img} alt={project.title} />
+                                            </a>
                                         </div>
-                                        <div className="py-2 dark:bg-gray-700 w-100 font-bold sm:text-base text-xs">{project.title}</div>
-                                        <hr className='pb-2'/>
-                                        <div className="dark:bg-gray-700 sm:text-sm text-xs">{project.desc}</div>
-                                        <br />
+                                        <div className="relative top-2">
+                                            <div className="py-2 dark:bg-gray-700 w-full font-bold text-sm">
+                                                {project.title}
+                                            </div>
+                                            <hr className='my-2' />
+                                            <div className="dark:bg-gray-700 text-xs">
+                                                {project.desc}
+                                            </div>
+                                            <br />
+                                        </div>
 
 
-                                        <div className="flex justify-center gap-3 ml-8 sm:ml-0">
-                                                <ProjectsBtn ghUrl={project.github}/>
-                                                <div className=''>
-                                                    <span className="">Dev Stacks</span>
-                                                    <div className="font-mono w-48 dark:bg-gray-700 text-xs">{project.stack}</div>
+                                        <div className='flex justify-center gap-3 ml-12'>
+                                            <ProjectsBtn ghUrl={project.github} />
+                                            <div className=''>
+                                                <span className="">Dev Stacks</span>
+                                                <div className="font-mono text-xs w-48 dark:bg-gray-700">
+                                                    {project.stack}
                                                 </div>
+                                            </div>
                                         </div>
 
 

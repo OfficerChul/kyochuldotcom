@@ -21,7 +21,7 @@ export default function SimpleIcon() {
             <section id="set-8">
                 <div className="blurb-ripple-out-wrap flex justify-center flex-wrap flex-col">
                     <div className="flex justify-center gap-3 sm:gap-12">
-                        <Link to="portfolio"><i className="blurb-ripple-out fa  fa-star blink-outline shadow-custom" style={{ color: "#fce903" }}></i></Link>
+                        <Link to="portfolio"><i className="blurb-ripple-out fa  fa-star shadow-custom button-blink-bounce" style={{ color: "#fce903" }}></i></Link>
                         <a href="https://officerchul.github.io/"><i className="blurb-ripple-out shadow-custom fa  fa-graduation-cap" style={{ color: "#C28E0E" }}></i></a>
 
                         {/* <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-address-card shadow-custom" style={{ color: '#004E89' }}></i> */}

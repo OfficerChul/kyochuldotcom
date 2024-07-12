@@ -12,9 +12,9 @@ export const projectData = [
 
     {
         img: javaProject,
-        title: 'Social Network Profile Application',
+        title: 'Social Network Application',
         desc: 'A social network application that job seekers can upload their introduction and interests for recruiters, like LinkedIn. Worked on testing apps by using JUnit Test.',
-        stack: 'Java, JUit Test',
+        stack: 'Java, Java Socket, JUit Test',
         github: 'https://github.com/OfficerChul/Social-Network-Profile-Application',
         website: 'https://github.com/OfficerChul/Social-Network-Profile-Application',
     },
@@ -45,8 +45,8 @@ export const projectData = [
     {
         img: kyochuldotcom,
         title: 'kyochuldotcom',
-        desc: 'My portfolio website that I created from the scratch without using any template.',
-        stack: 'JavaScript(React), Tailwind, CSS, HTML, PostCSS',
+        desc: 'My portfolio website. I designed and developed this website from scratch. I am going to update this website continuously.',
+        stack: 'JavaScript(React), Tailwind, CSS, HTML, PostCSS, Netflify',
         github: 'https://github.com/OfficerChul/kyochuldotcom',
         website: 'https://kyochuljang.com/'
     },
