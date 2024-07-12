@@ -23,9 +23,11 @@ export default function SimpleIcon() {
                     <div className="flex justify-center gap-3 sm:gap-12">
                         <Link to="portfolio"><i className="blurb-ripple-out fa  fa-star blink-outline shadow-custom" style={{ color: "#fce903" }}></i></Link>
                         <a href="https://officerchul.github.io/"><i className="blurb-ripple-out shadow-custom fa  fa-graduation-cap" style={{ color: "#C28E0E" }}></i></a>
-                        
+
                         {/* <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-address-card shadow-custom" style={{ color: '#004E89' }}></i> */}
-                        <img onClick={() => setIsModalOpen(true)} className="blurb-ripple-out shadow-custom" src="./cv_icon.png" alt="cv" style={{ padding: '12px' }} />
+                        <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out shadow-custom flex justify-center items-center" style={{display: 'inline-flex' }}>
+                            <img className='w-10' src='./cv_icon.png' alt='cv' />
+                        </i>
                         <Modal
                             isModalOpen={1}
                             isOpen={isModalOpen}

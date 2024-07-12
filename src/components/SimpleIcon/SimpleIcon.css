@@ -1,4 +1,4 @@
-
+/* sonar effect */
  .blurb-ripple-out {
 	display: inline-block;
 	font-size: 0px;
@@ -102,16 +102,7 @@ a {
 	text-decoration: none;
 }
 
-.resume-modal {
-	/* z-index: 101; */
-	/* position: relative; */
-}
-
-.resume-modal-iframe {
-	width: 100vw;
-	height: 100vh;
-}
-
+/* blinking effect */
 @keyframes blink-outline {
 	0%, 100% {
 	  outline-color: transparent;
