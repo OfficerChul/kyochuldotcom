@@ -28,7 +28,7 @@ function AboutMe({ id }) {
 
                 <Fade cascade damping={0.1} triggerOnce={true} direction='left'>
                     <div className="sm:flex sm:p-10 p-2 items-center">
-                        <div className="sm:w-1/2 sm:mr-3 md:mr-0">
+                        <div className="sm:w-1/2 sm:mr-3 md:mr-0 ">
                             <img src={myPic} alt="myPic" className="w-[100vw] sm:mt-5 md:w-5/6 img-thumbnail sm:p-3 p-2" />
                         </div>
 

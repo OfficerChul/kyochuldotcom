@@ -11,9 +11,9 @@ function Footer() {
 
                 <div id="" className='flex flex-col' >
 
-                    <div className="flex flex-col sm:flex-row gap-5 sm:gap-10">
-                        <div className="flex flex-col items-center justify-between bg-[#bafcf1] rounded-lg shadow-xl p-5 transition duration-300 ease-in-out">
-                            <a href='#top' ><img src={profile_pic} className="button-blink-bounce w-32 h-32 rounded-full border-4 border-white" alt="Profile" /></a>
+                    <div className="flex flex-col sm:flex-row gap-5 sm:gap-6">
+                        <div className="flex flex-col items-center justify-between bg-[#bafcf1] rounded-lg shadow-xl p-5 ">
+                            <a href='#top' className='hover:scale-150 transition duration-300 ease-in-out' ><img src={profile_pic} className="button-blink-bounce w-32 h-32 rounded-full border-4 border-white" alt="Profile" /></a>
 
                             <div className="text-center mt-4">
                                 <p className="text-xl font-semibold text-gray-800">Get in Touch!!</p>
