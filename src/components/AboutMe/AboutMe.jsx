@@ -29,8 +29,7 @@ function AboutMe({ id }) {
                 <Fade cascade damping={0.1} triggerOnce={true} direction='left'>
                     <div className="sm:flex sm:p-10 p-2 items-center">
                         <div className="sm:w-1/2 sm:mr-3 md:mr-0 ">
-                            <img src={myPic} alt="myPic" className="w-[100vw] sm:mt-5 md:w-5/6 img-thumbnail sm:p-3 p-2" />
-                        </div>
+                            <img src={myPic} alt="myPic" className="w-[80vw] sm:mt-5 2xl:w-4/6 lg:w-5/6 md:w-5/6 img-thumbnail sm:p-3 p-2 border-8 border-gray-300 shadow-lg rounded-lg" />                        </div>
 
                         <div className="mt-3 sm:mt-0 sm:w-1/2 px-4">
                             <h2 className="font-mono md:text-6xl text-3xl text-sky-300 font-extrabold">
@@ -43,7 +42,7 @@ function AboutMe({ id }) {
                                     <span className="text-sky-400"> <a className='text-[#0F709D] underline hover:text-sky-400' href='https://gsai.snu.ac.kr/'>Seoul National University AI</a></span>, advised by Professor Bongwon Suh.
 
                                 </p>
-                                
+
                                 <p className="mt-3">
                                     My research interests lie in <span className="text-sky-400">Natural Language Processing</span>, <span className='text-sky-400'>Graph Neural Networks</span>, and
                                     <span className="text-sky-400"> Human+AI Interaction</span>.
@@ -54,7 +53,7 @@ function AboutMe({ id }) {
 
                                 </p>
 
-                                
+
 
                                 <p className="mt-3">
                                     I welcome AI research intern offers! Feel free to contact me via contacts at the
