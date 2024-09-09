@@ -45,14 +45,6 @@ export default function Portfolio() {
                         </div>
                     </JackInTheBox>
 
-                    {/* <JackInTheBox cascade triggerOnce={true}>
-                        <div className="content ml-1 md:bottom-10">
-                            <h2>{'Kyochul Jang'}</h2>
-                            <h2>{'Kyochul Jang'}</h2>
-                        </div>
-                    </JackInTheBox> */}
-
-                    
 
                     <div className="flex absolute scale-50 left-[1px] mt-5 sm:scale-100 sm:top-40 md:top-48 2xl:top-72">
                         <FancyBtn url='#about1' btnText='About Me!' />
