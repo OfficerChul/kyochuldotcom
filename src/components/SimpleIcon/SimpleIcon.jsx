@@ -22,10 +22,20 @@ export default function SimpleIcon() {
                 <div className="blurb-ripple-out-wrap flex justify-center flex-wrap flex-col">
                     <div className="flex justify-center gap-3 sm:gap-12">
                         <Link to="portfolio"><i className="blurb-ripple-out fa  fa-star shadow-custom button-blink-bounce" style={{ color: "#fce903" }}></i></Link>
-                        <a href="https://officerchul.github.io/"><i className="blurb-ripple-out shadow-custom fa  fa-graduation-cap" style={{ color: "#C28E0E" }}></i></a>
-
+                        <a href="https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao" target="_blank"  rel="noopener noreferrer">
+                            <i
+                                className="blurb-ripple-out shadow-custom flex justify-center items-center"
+                                style={{ display: 'flex' }}
+                            >
+                                <img
+                                    className="w-11"
+                                    src="./google_scholar_icon.png"
+                                    alt="google-scholar"
+                                />
+                            </i>
+                        </a>
                         {/* <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out fa fa-address-card shadow-custom" style={{ color: '#004E89' }}></i> */}
-                        <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out shadow-custom flex justify-center items-center" style={{display: 'inline-flex' }}>
+                        <i onClick={() => setIsModalOpen(true)} className="blurb-ripple-out shadow-custom flex justify-center items-center" style={{ display: 'inline-flex' }}>
                             <img className='w-10' src='./cv_icon.png' alt='cv' />
                         </i>
                         <Modal
@@ -101,11 +111,11 @@ export default function SimpleIcon() {
                     </div>
 
                     <div className="flex justify-center gap-3 sm:gap-12 mt-4 sm:mt-3">
-                        <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/"><i className="blurb-ripple-out shadow-custom fa  fa-linkedin" style={{ color: "#0E76A8" }}></i></a>
+                        <a href="https://www.linkedin.com/in/kyochul-jang-93b263208/" target="_blank"  rel="noopener noreferrer"><i className="blurb-ripple-out shadow-custom fa  fa-linkedin" style={{ color: "#0E76A8" }}></i></a>
 
-                        <a href="https://www.instagram.com/kjang_hochul/"><i className="blurb-ripple-out fa fa-instagram shadow-custom" style={{ color: "#E1306C" }}></i></a>
-                        <a href="https://github.com/OfficerChul"><i className="blurb-ripple-out fa  fa-github shadow-custom" style={{ color: "#77579d" }}></i></a>
-                        <a href='mailto:gcj1234567890@gmail.com'><i className="blurb-ripple-out fa  fa-envelope shadow-custom" style={{ color: "#368BFE" }}></i></a>
+                        <a href="https://www.instagram.com/kjang_hochul/" target="_blank"  rel="noopener noreferrer"><i className="blurb-ripple-out fa fa-instagram shadow-custom" style={{ color: "#E1306C" }}></i></a>
+                        <a href="https://github.com/OfficerChul" target="_blank"  rel="noopener noreferrer"><i className="blurb-ripple-out fa  fa-github shadow-custom" style={{ color: "#77579d" }}></i></a>
+                        <a href='mailto:gcj1234567890@gmail.com' target="_blank"  rel="noopener noreferrer"><i className="blurb-ripple-out fa  fa-envelope shadow-custom" style={{ color: "#368BFE" }}></i></a>
                     </div>
                 </div>
             </section>
