@@ -74,8 +74,8 @@ module.exports = {
         'card-hover': '0 20px 40px rgba(0, 0, 0, 0.15)',
       },
       fontFamily: {
-        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont'],
-        'mono': ['Fira Code', 'ui-monospace', 'SFMono-Regular', 'Consolas'],
+        'sans': ['Menlo', 'Monaco', 'Courier New', 'monospace'],
+        'mono': ['Menlo', 'Monaco', 'Courier New', 'monospace'],
       },
     },
   },

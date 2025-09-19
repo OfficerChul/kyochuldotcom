@@ -28,7 +28,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
               triggerOnce={true}
               delay={index * 200}
             >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 h-full flex flex-col">
                 <div className="relative overflow-hidden">
                   <img
                     src={project.img}
@@ -38,12 +38,12 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                   <div className="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                <div className="p-6 flex flex-col flex-grow border-t border-gray-200">
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">
                     {project.title}
                   </h3>
 
-                  <div className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  <div className="text-gray-600 text-sm mb-4 leading-relaxed min-h-[120px]">
                     {project.desc}
                   </div>
 
@@ -51,24 +51,68 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                     <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                       Tech Stack
                     </span>
-                    <p className="text-sm text-sky-600 font-medium mt-1">
-                      {project.stack}
-                    </p>
+                    <div className="flex flex-wrap gap-2 mt-2 min-h-[32px]">
+                      {project.stack.split(', ').map((tech, idx) => {
+                        // 기술별 맞춤 색상
+                        let colorClass = 'bg-gray-100 text-gray-800 border-gray-300';
+
+                        if (tech.toLowerCase().includes('react')) {
+                          colorClass = 'bg-cyan-50 text-cyan-700 border-cyan-300 hover:bg-cyan-100';
+                        } else if (tech.toLowerCase().includes('typescript')) {
+                          colorClass = 'bg-blue-50 text-blue-700 border-blue-300 hover:bg-blue-100';
+                        } else if (tech.toLowerCase().includes('node')) {
+                          colorClass = 'bg-green-50 text-green-700 border-green-300 hover:bg-green-100';
+                        } else if (tech.toLowerCase().includes('python')) {
+                          colorClass = 'bg-yellow-50 text-yellow-700 border-yellow-300 hover:bg-yellow-100';
+                        } else if (tech.toLowerCase().includes('java')) {
+                          colorClass = 'bg-orange-50 text-orange-700 border-orange-300 hover:bg-orange-100';
+                        } else if (tech.toLowerCase().includes('tailwind')) {
+                          colorClass = 'bg-teal-50 text-teal-700 border-teal-300 hover:bg-teal-100';
+                        } else if (tech.toLowerCase().includes('firebase')) {
+                          colorClass = 'bg-amber-50 text-amber-700 border-amber-300 hover:bg-amber-100';
+                        } else if (tech.toLowerCase().includes('sql') || tech.toLowerCase().includes('postgres') || tech.toLowerCase().includes('mysql')) {
+                          colorClass = 'bg-indigo-50 text-indigo-700 border-indigo-300 hover:bg-indigo-100';
+                        } else if (tech.toLowerCase().includes('mongo')) {
+                          colorClass = 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100';
+                        } else if (tech.toLowerCase().includes('express')) {
+                          colorClass = 'bg-gray-50 text-gray-700 border-gray-400 hover:bg-gray-100';
+                        } else if (tech.toLowerCase().includes('spring')) {
+                          colorClass = 'bg-lime-50 text-lime-700 border-lime-300 hover:bg-lime-100';
+                        } else if (tech.toLowerCase().includes('html')) {
+                          colorClass = 'bg-red-50 text-red-700 border-red-300 hover:bg-red-100';
+                        } else if (tech.toLowerCase().includes('css')) {
+                          colorClass = 'bg-purple-50 text-purple-700 border-purple-300 hover:bg-purple-100';
+                        } else if (tech.toLowerCase().includes('javascript') || tech.toLowerCase().includes('js')) {
+                          colorClass = 'bg-yellow-50 text-yellow-700 border-yellow-300 hover:bg-yellow-100';
+                        } else if (tech.toLowerCase().includes('bootstrap')) {
+                          colorClass = 'bg-violet-50 text-violet-700 border-violet-300 hover:bg-violet-100';
+                        }
+
+                        return (
+                          <span
+                            key={idx}
+                            className={`inline-flex items-center px-2 py-0.5 text-[10px] font-medium ${colorClass} border rounded transition-all duration-200`}
+                          >
+                            {tech}
+                          </span>
+                        );
+                      })}
+                    </div>
                   </div>
 
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mt-auto">
                     <ProjectsBtn ghUrl={project.github} />
 
-                    {project.website && (
+                    {project.website ? (
                       <a
                         href={project.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center px-3 py-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-opacity-50"
+                        className="group inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-500 rounded-xl shadow-md hover:shadow-lg hover:from-sky-600 hover:to-blue-600 transition-all duration-300 hover:-translate-y-0.5"
                         aria-label="Visit live website"
                       >
                         <svg
-                          className="w-4 h-4 mr-1"
+                          className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform duration-300"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -77,12 +121,14 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            strokeWidth={2}
+                            strokeWidth={2.5}
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                           />
                         </svg>
                         Live Demo
                       </a>
+                    ) : (
+                      <div className="w-24"></div>
                     )}
                   </div>
                 </div>
