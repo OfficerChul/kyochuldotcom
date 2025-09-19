@@ -30,31 +30,37 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
               triggerOnce={true}
               delay={index * 200}
             >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:scale-105 h-full flex flex-col">
-                <div className="relative overflow-hidden">
+              <div className="group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.03] h-full flex flex-col border border-gray-100">
+                <div className="relative overflow-hidden rounded-t-xl">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                   <img
                     src={project.img}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                    className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
                 </div>
 
-                <div className="p-6 flex flex-col flex-grow border-t border-gray-200">
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">
-                    {project.title}
-                  </h3>
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                      {project.title}
+                    </h3>
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-sky-300 to-transparent"></div>
+                  </div>
 
-                  <div className="text-gray-600 text-sm mb-4 leading-relaxed min-h-[120px]">
+                  <div className="text-gray-600 text-sm mb-4 leading-relaxed min-h-[120px] group-hover:text-gray-700 transition-colors duration-300">
                     {project.desc}
                   </div>
 
-                  <div className="mb-4">
-                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
                       Tech Stack
                     </span>
                     <div className="mt-2 min-h-[32px]">
-                      <p className="text-xs leading-relaxed flex flex-wrap gap-y-2 items-center">
+                      <p className="text-xs leading-relaxed flex flex-wrap gap-x-1 gap-y-2 items-center">
                         {project.stack.split(', ').map((tech, idx, arr) => {
                           let textColor = 'text-gray-600';
 
@@ -103,7 +109,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center mt-auto">
+                  <div className="flex justify-between items-center mt-auto pt-4 border-t border-gray-100">
                     <ProjectsBtn ghUrl={project.github} />
 
                     {project.website ? (
@@ -116,7 +122,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                         ariaLabel="Visit live website"
                       >
                         <svg
-                          className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform duration-300"
+                          className="w-3.5 h-3.5 group-hover/btn:rotate-12 transition-transform duration-300"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"

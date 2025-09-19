@@ -26,16 +26,16 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
   const buttonContent = (
     <button
       onClick={onClick}
-      className={`relative cursor-pointer bg-transparent outline-none transition-all duration-1000 ease-in-out group ${className}`}
+      className={`relative cursor-pointer bg-transparent outline-none transition-all duration-1000 ease-in-out group/btn ${className}`}
       style={{ border: borderColor === 'transparent' ? 'none' : `2px solid ${borderColor}` }}
       aria-label={ariaLabel}
     >
       {hoverBg && (
-        <span className={`absolute inset-0 ${hoverBg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></span>
+        <span className={`absolute inset-0 ${hoverBg} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500`}></span>
       )}
       {!noSvgBorder && (
         <svg
-          className="absolute left-0 top-0 w-full h-full fill-none stroke-current stroke-dasharray-[150_480] stroke-dashoffset-150 transition-all duration-1000 ease-in-out group-hover:stroke-dashoffset-[-480]"
+          className="absolute left-0 top-0 w-full h-full fill-none stroke-current stroke-dasharray-[150_480] stroke-dashoffset-150 transition-all duration-1000 ease-in-out group-hover/btn:stroke-dashoffset-[-480]"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
         >
@@ -47,7 +47,7 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
         {children}
       </span>
       <span className="absolute inset-0 overflow-hidden">
-        <span className={`absolute inset-0 -translate-x-full bg-gradient-to-r ${shineColor} group-hover:translate-x-full transition-transform duration-700 ease-out`}></span>
+        <span className={`absolute inset-0 -translate-x-full bg-gradient-to-r ${shineColor} group-hover/btn:translate-x-full transition-transform duration-700 ease-out`}></span>
       </span>
     </button>
   );
