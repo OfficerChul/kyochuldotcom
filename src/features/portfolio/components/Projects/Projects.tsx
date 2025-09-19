@@ -1,28 +1,28 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Fade, Slide } from 'react-awesome-reveal';
 import { ProjectsProps } from '../../types';
 import { projectsData } from './ProjectsData';
 import ProjectsBtn from './ProjectsBtn';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
-const Projects: React.FC<ProjectsProps> = ({ id }) => {
+const Projects: React.FC<ProjectsProps> = memo(({ id }) => {
   return (
-    <section className="bg-gray-50 py-16" id={id}>
-      <div className="container mx-auto px-4">
+    <section className="bg-gray-50 py-12 md:py-16 lg:py-20" id={id}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="text-center mb-12">
-            <h2 className="font-mono text-4xl md:text-6xl text-sky-300 font-extrabold mb-4">
+            <h2 className="font-mono text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-sky-300 font-extrabold mb-4">
               Projects
             </h2>
             <div className="w-20 h-1 bg-sky-300 mx-auto rounded-full mb-4"></div>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4 sm:px-0">
               Here are some of the projects I've worked on that showcase my skills and experience
               in software development and web technologies.
             </p>
           </div>
         </Fade>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {projectsData.map((project, index) => (
             <Slide
               key={index}
@@ -30,7 +30,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
               triggerOnce={true}
               delay={index * 200}
             >
-              <div className="group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.03] h-full flex flex-col border border-gray-100">
+              <div className="group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.01] h-full flex flex-col border-2 border-gray-100 hover:border-purple-500">
                 <div className="relative overflow-hidden rounded-t-xl">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                   <img
@@ -42,13 +42,13 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
 
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                    <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                       {project.title}
                     </h3>
                     <div className="w-12 h-0.5 bg-gradient-to-r from-sky-300 to-transparent"></div>
                   </div>
 
-                  <div className="text-gray-600 text-sm mb-4 leading-relaxed min-h-[120px] group-hover:text-gray-700 transition-colors duration-300">
+                  <div className="text-gray-600 text-sm mb-4 leading-relaxed min-h-[100px] sm:min-h-[120px] group-hover:text-gray-700 transition-colors duration-300">
                     {project.desc}
                   </div>
 
@@ -177,6 +177,8 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       </div>
     </section>
   );
-};
+});
+
+Projects.displayName = 'Projects';
 
 export default Projects;

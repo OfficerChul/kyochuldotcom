@@ -28,11 +28,11 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-sky-50 py-20" id={id}>
-      <div className="container mx-auto px-6 lg:px-20">
+    <div className="bg-gradient-to-br from-gray-50 to-sky-50 py-12 md:py-16 lg:py-20" id={id}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="text-center mb-12">
-            <h2 className="font-mono text-4xl md:text-6xl text-sky-300 font-extrabold mb-4">
+            <h2 className="font-mono text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-sky-300 font-extrabold mb-4">
               About Me
             </h2>
             <div className="w-20 h-1 bg-sky-300 mx-auto rounded-full"></div>
@@ -40,7 +40,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
         </Fade>
 
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <div className="lg:w-2/5 flex justify-center">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-sky-300 to-blue-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -53,7 +53,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
             </div>
 
             <div className="lg:w-3/5">
-              <div className="font-mono text-base lg:text-lg text-gray-700 leading-relaxed bg-white/50 p-6 rounded-lg shadow-sm backdrop-blur-sm">
+              <div className="font-mono text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed bg-white/50 p-4 sm:p-6 rounded-lg shadow-sm backdrop-blur-sm">
                 <p>
                   Hi, I am Kyochul Jang, a Master's student in the{' '}
                   <span className="text-sky-400">

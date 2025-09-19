@@ -1,107 +1,144 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GitHubCalendar from 'react-github-calendar';
-import profile_pic from '../../../../assets/images/profile/profile-pic.jpg';
+import { FancyButtonSmall } from '../Button';
 
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+  const [likes, setLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
+
+  const handleLike = () => {
+    if (!hasLiked) {
+      setLikes(likes + 1);
+      setHasLiked(true);
+    }
+  };
+
+  const handleDownloadCV = () => {
+    fetch('Kyochul_Jang___CV.pdf')
+      .then((response) => {
+        response.blob().then((blob) => {
+          const fileURL = window.URL.createObjectURL(blob);
+          const alink = document.createElement('a');
+          alink.href = fileURL;
+          alink.download = 'Kyochul_Resume.pdf';
+          alink.click();
+        });
+      })
+      .catch((error) => {
+        console.error('Error downloading resume:', error);
+      });
+  };
+
   return (
-    <div className="footer-container">
-      <footer className="flex justify-center p-4 bg-blue-100 sm:p-6 dark:bg-gray-900 font-mono">
-        <div className="flex flex-col">
-          <div className="flex flex-col sm:flex-row gap-5 sm:gap-6">
-            <div className="flex flex-col items-center justify-between bg-[#bafcf1] rounded-lg shadow-xl p-5">
-              <a
-                href="#top"
-                className="hover:scale-150 transition duration-300 ease-in-out"
-                aria-label="Go to top of page"
-              >
-                <img
-                  src={profile_pic}
-                  className="animate-pulse w-32 h-32 rounded-full border-4 border-white"
-                  alt="Kyochul Jang Profile"
-                />
-              </a>
+    <footer className="bg-gradient-to-br from-green-50 via-lime-50 to-emerald-50 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-emerald-600 font-mono">About</h3>
+            <p className="text-gray-700 text-sm leading-relaxed">
+              AI Researcher & Software Developer
+              <br />
+              Master's Student at Seoul National University
+              <br />
+              Specializing in NLP, GNN, and Human-AI Interaction
+            </p>
+          </div>
 
-              <div className="text-center mt-4">
-                <p className="text-xl font-semibold text-gray-800">Get in Touch!!</p>
-                <p className="text-sm text-gray-500">Press to go higher</p>
-              </div>
-
-              <ul className="flex gap-3 mt-4">
-                <li>
-                  <a
-                    href="https://www.instagram.com/"
-                    className="text-xl text-gray-600 hover:text-[#E1306C] transition-colors duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                  >
-                    <i className="fa fa-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/kyochul-jang/"
-                    className="text-xl text-gray-600 hover:text-[#0a66c2] transition-colors duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                  >
-                    <i className="fa fa-linkedin-in"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/OfficerChul"
-                    className="text-xl text-gray-600 hover:text-[#6e5494] transition-colors duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                  >
-                    <i className="fa fa-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://discordapp.com/users/407062512840998922"
-                    className="text-xl text-gray-600 hover:text-[#7289da] transition-colors duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Discord"
-                  >
-                    <i className="fa fa-discord"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col gap-2 bg-sky-200 sm:p-8 p-4 rounded-lg justify-center shadow-xl">
-              <span className="text-sm font-mono">@OfficerChul on GitHub</span>
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-emerald-600 font-mono">Connect</h3>
+            <div className="flex flex-col space-y-3">
               <a
                 href="https://github.com/OfficerChul"
-                className="text-black font-mono"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-gray-600 hover:text-purple-500 transition-colors duration-200 text-sm flex items-center group"
               >
-                <GitHubCalendar username="officerchul" />
+                <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/kyochul-jang"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-blue-500 transition-colors duration-200 text-sm flex items-center group"
+              >
+                <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                LinkedIn
+              </a>
+              <a
+                href="mailto:kyochul@snu.ac.kr"
+                className="text-gray-600 hover:text-emerald-500 transition-colors duration-200 text-sm flex items-center group"
+              >
+                <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                kyochul@snu.ac.kr
               </a>
             </div>
           </div>
 
-          <span className="mt-5 text-base font-mono text-gray-500 sm:text-center dark:text-gray-400">
-            © 2024{' '}
-            <a
-              href="https://kyochuljang.com/"
-              className="hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              OfficerChul™
-            </a>
-            . All Rights Reserved.
-          </span>
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-emerald-600 font-mono">Support</h3>
+            <div className="space-y-3">
+              <FancyButtonSmall
+                onClick={hasLiked ? undefined : handleLike}
+                className={`w-full px-3 py-2 text-xs font-medium font-mono ${
+                  hasLiked
+                    ? 'text-pink-600 stroke-pink-400 cursor-not-allowed opacity-75'
+                    : 'text-pink-500 stroke-pink-400 hover:stroke-pink-600'
+                }`}
+                borderColor="rgba(236, 72, 153, 0.5)"
+                noSvgBorder={true}
+                shineColor={hasLiked ? "" : "from-transparent via-pink-300/40 to-transparent"}
+                ariaLabel="Like this site"
+              >
+                <span className="mr-1">💗</span>
+                <span>{hasLiked ? 'Liked' : 'Like'} ({likes})</span>
+              </FancyButtonSmall>
+
+              <FancyButtonSmall
+                onClick={handleDownloadCV}
+                className="w-full px-3 py-2 text-xs font-medium text-emerald-600 font-mono stroke-emerald-400 hover:stroke-emerald-600"
+                borderColor="rgba(16, 185, 129, 0.5)"
+                noSvgBorder={true}
+                shineColor="from-transparent via-emerald-300/40 to-transparent"
+                ariaLabel="Download Resume"
+              >
+                <i className="fa fa-download mr-1"></i>
+                <span>Download CV</span>
+              </FancyButtonSmall>
+            </div>
+          </div>
+
+
         </div>
-      </footer>
-    </div>
+
+        <div className="w-full mb-8">
+          <div className="bg-white p-8 rounded-xl overflow-x-auto shadow-md border border-gray-200">
+            <GitHubCalendar
+              username="OfficerChul"
+              fontSize={16}
+              blockSize={20}
+              blockMargin={5}
+            />
+          </div>
+        </div>
+
+        <div className="border-t border-gray-300 pt-8 text-center">
+          <p className="text-gray-600 text-sm">
+            © {currentYear} Kyochul Jang. All rights reserved.
+          </p>
+          <p className="text-gray-500 text-xs mt-2">
+            Built with React, TypeScript, and Tailwind CSS
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 };
 
