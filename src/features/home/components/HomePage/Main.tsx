@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../../../../assets/images/logos/triangle-skyblue.png';
-import SimpleIcon from '../SocialLinks';
+import SocialLinks from '../SocialLinks';
 import Navigation from '../../../../shared/components/ui/Navigation';
 
 const Main: React.FC = () => {
@@ -35,7 +35,7 @@ const Main: React.FC = () => {
           {/* Portfolio and blog links commented out */}
         </div>
 
-        <SimpleIcon />
+        <SocialLinks />
       </div>
 
       <style>{`

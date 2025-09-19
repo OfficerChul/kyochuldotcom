@@ -1,1 +1,1 @@
-export { default } from './SimpleIcon';
+export { default } from './SocialLinks';
