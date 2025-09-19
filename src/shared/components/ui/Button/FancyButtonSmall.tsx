@@ -9,6 +9,7 @@ interface FancyButtonSmallProps {
   ariaLabel?: string;
   hoverBg?: string;
   noSvgBorder?: boolean;
+  shineColor?: string;
 }
 
 const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
@@ -19,7 +20,8 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
   borderColor = '#b5ff0893',
   ariaLabel,
   hoverBg,
-  noSvgBorder = false
+  noSvgBorder = false,
+  shineColor = 'from-transparent via-white/20 to-transparent'
 }) => {
   const buttonContent = (
     <button
@@ -45,7 +47,7 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
         {children}
       </span>
       <span className="absolute inset-0 overflow-hidden">
-        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-out"></span>
+        <span className={`absolute inset-0 -translate-x-full bg-gradient-to-r ${shineColor} group-hover:translate-x-full transition-transform duration-700 ease-out`}></span>
       </span>
     </button>
   );

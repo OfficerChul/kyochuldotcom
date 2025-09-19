@@ -14,6 +14,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
             <h2 className="font-mono text-4xl md:text-6xl text-sky-300 font-extrabold mb-4">
               Projects
             </h2>
+            <div className="w-20 h-1 bg-sky-300 mx-auto rounded-full mb-4"></div>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Here are some of the projects I've worked on that showcase my skills and experience
               in software development and web technologies.
@@ -108,10 +109,10 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                     {project.website ? (
                       <FancyButtonSmall
                         href={project.website}
-                        className="px-3 py-1.5 text-xs font-medium text-sky-600 stroke-sky-400 hover:stroke-sky-600 hover:text-white"
+                        className="px-3 py-1.5 text-xs font-medium text-sky-600 stroke-sky-400 hover:stroke-sky-600"
                         borderColor="rgba(14, 165, 233, 0.5)"
-                        hoverBg="bg-sky-500/30"
                         noSvgBorder={true}
+                        shineColor="from-transparent via-blue-300/40 to-transparent"
                         ariaLabel="Visit live website"
                       >
                         <svg
