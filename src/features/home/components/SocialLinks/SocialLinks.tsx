@@ -83,7 +83,7 @@ const SocialLinks: React.FC = () => {
               onClick={() => setIsModalOpen(true)}
               className="cursor-pointer mx-1 md:mx-2.5 w-[70px] h-[70px] rounded-full text-center relative z-10 text-white bg-white shadow-lg transition-all duration-100 ease-out hover:bg-[#5DDCFF] hover:scale-[0.93] hover:text-white after:absolute after:w-full after:h-full after:rounded-full after:content-[''] after:box-border after:top-0 after:left-0 after:p-0 after:-z-10 after:shadow-[0_0_0_2px_rgba(178,221,76,1)] after:opacity-0 after:scale-90 hover:after:animate-[sonarEffect_1.3s_ease-out_75ms] flex justify-center items-center"
             >
-              <img className="w-11" src="./cv_icon.png" alt="CV" />
+              <img className="w-10" src="./cv_icon.png" alt="CV" />
             </div>
 
             <Modal
