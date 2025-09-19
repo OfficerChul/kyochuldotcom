@@ -3,6 +3,7 @@ import { Fade, Slide } from 'react-awesome-reveal';
 import { ProjectsProps } from '../../types';
 import { projectsData } from './ProjectsData';
 import ProjectsBtn from './ProjectsBtn';
+import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
 const Projects: React.FC<ProjectsProps> = ({ id }) => {
   return (
@@ -28,7 +29,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
               triggerOnce={true}
               delay={index * 200}
             >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 h-full flex flex-col">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:scale-105 h-full flex flex-col">
                 <div className="relative overflow-hidden">
                   <img
                     src={project.img}
@@ -51,52 +52,53 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                     <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                       Tech Stack
                     </span>
-                    <div className="flex flex-wrap gap-2 mt-2 min-h-[32px]">
-                      {project.stack.split(', ').map((tech, idx) => {
-                        // 기술별 맞춤 색상
-                        let colorClass = 'bg-gray-100 text-gray-800 border-gray-300';
+                    <div className="mt-2 min-h-[32px]">
+                      <p className="text-xs leading-relaxed flex flex-wrap gap-y-2 items-center">
+                        {project.stack.split(', ').map((tech, idx, arr) => {
+                          let textColor = 'text-gray-600';
 
-                        if (tech.toLowerCase().includes('react')) {
-                          colorClass = 'bg-cyan-50 text-cyan-700 border-cyan-300 hover:bg-cyan-100';
-                        } else if (tech.toLowerCase().includes('typescript')) {
-                          colorClass = 'bg-blue-50 text-blue-700 border-blue-300 hover:bg-blue-100';
-                        } else if (tech.toLowerCase().includes('node')) {
-                          colorClass = 'bg-green-50 text-green-700 border-green-300 hover:bg-green-100';
-                        } else if (tech.toLowerCase().includes('python')) {
-                          colorClass = 'bg-yellow-50 text-yellow-700 border-yellow-300 hover:bg-yellow-100';
-                        } else if (tech.toLowerCase().includes('java')) {
-                          colorClass = 'bg-orange-50 text-orange-700 border-orange-300 hover:bg-orange-100';
-                        } else if (tech.toLowerCase().includes('tailwind')) {
-                          colorClass = 'bg-teal-50 text-teal-700 border-teal-300 hover:bg-teal-100';
-                        } else if (tech.toLowerCase().includes('firebase')) {
-                          colorClass = 'bg-amber-50 text-amber-700 border-amber-300 hover:bg-amber-100';
-                        } else if (tech.toLowerCase().includes('sql') || tech.toLowerCase().includes('postgres') || tech.toLowerCase().includes('mysql')) {
-                          colorClass = 'bg-indigo-50 text-indigo-700 border-indigo-300 hover:bg-indigo-100';
-                        } else if (tech.toLowerCase().includes('mongo')) {
-                          colorClass = 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100';
-                        } else if (tech.toLowerCase().includes('express')) {
-                          colorClass = 'bg-gray-50 text-gray-700 border-gray-400 hover:bg-gray-100';
-                        } else if (tech.toLowerCase().includes('spring')) {
-                          colorClass = 'bg-lime-50 text-lime-700 border-lime-300 hover:bg-lime-100';
-                        } else if (tech.toLowerCase().includes('html')) {
-                          colorClass = 'bg-red-50 text-red-700 border-red-300 hover:bg-red-100';
-                        } else if (tech.toLowerCase().includes('css')) {
-                          colorClass = 'bg-purple-50 text-purple-700 border-purple-300 hover:bg-purple-100';
-                        } else if (tech.toLowerCase().includes('javascript') || tech.toLowerCase().includes('js')) {
-                          colorClass = 'bg-yellow-50 text-yellow-700 border-yellow-300 hover:bg-yellow-100';
-                        } else if (tech.toLowerCase().includes('bootstrap')) {
-                          colorClass = 'bg-violet-50 text-violet-700 border-violet-300 hover:bg-violet-100';
-                        }
+                          if (tech.toLowerCase().includes('react')) {
+                            textColor = 'text-cyan-600';
+                          } else if (tech.toLowerCase().includes('typescript')) {
+                            textColor = 'text-blue-600';
+                          } else if (tech.toLowerCase().includes('node')) {
+                            textColor = 'text-green-600';
+                          } else if (tech.toLowerCase().includes('python')) {
+                            textColor = 'text-yellow-600';
+                          } else if (tech.toLowerCase().includes('java')) {
+                            textColor = 'text-orange-600';
+                          } else if (tech.toLowerCase().includes('tailwind')) {
+                            textColor = 'text-teal-600';
+                          } else if (tech.toLowerCase().includes('firebase')) {
+                            textColor = 'text-amber-600';
+                          } else if (tech.toLowerCase().includes('sql') || tech.toLowerCase().includes('postgres') || tech.toLowerCase().includes('mysql')) {
+                            textColor = 'text-indigo-600';
+                          } else if (tech.toLowerCase().includes('mongo')) {
+                            textColor = 'text-emerald-600';
+                          } else if (tech.toLowerCase().includes('express')) {
+                            textColor = 'text-gray-700';
+                          } else if (tech.toLowerCase().includes('spring')) {
+                            textColor = 'text-lime-600';
+                          } else if (tech.toLowerCase().includes('html')) {
+                            textColor = 'text-red-600';
+                          } else if (tech.toLowerCase().includes('css')) {
+                            textColor = 'text-purple-600';
+                          } else if (tech.toLowerCase().includes('javascript') || tech.toLowerCase().includes('js')) {
+                            textColor = 'text-yellow-600';
+                          } else if (tech.toLowerCase().includes('bootstrap')) {
+                            textColor = 'text-violet-600';
+                          }
 
-                        return (
-                          <span
-                            key={idx}
-                            className={`inline-flex items-center px-1.5 py-0 text-[10px] font-semibold ${colorClass} border rounded-full transition-all duration-200`}
-                          >
-                            {tech}
-                          </span>
-                        );
-                      })}
+                          return (
+                            <React.Fragment key={idx}>
+                              <span className={`inline-flex items-center px-2 py-0.5 font-semibold ${textColor} border border-gray-300 rounded-md hover:opacity-70 transition-opacity duration-200`}>
+                                {tech}
+                              </span>
+                              {idx < arr.length - 1 && <span className="text-gray-400 mx-1">•</span>}
+                            </React.Fragment>
+                          );
+                        })}
+                      </p>
                     </div>
                   </div>
 
@@ -104,12 +106,13 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                     <ProjectsBtn ghUrl={project.github} />
 
                     {project.website ? (
-                      <a
+                      <FancyButtonSmall
                         href={project.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-sky-600 bg-sky-50 border border-sky-200 rounded-lg hover:bg-sky-100 hover:text-sky-700 hover:border-sky-300 transition-all duration-300 hover:-translate-y-0.5"
-                        aria-label="Visit live website"
+                        className="px-3 py-1.5 text-xs font-medium text-sky-600 stroke-sky-400 hover:stroke-sky-600 hover:text-white"
+                        borderColor="rgba(14, 165, 233, 0.5)"
+                        hoverBg="bg-sky-500/30"
+                        noSvgBorder={true}
+                        ariaLabel="Visit live website"
                       >
                         <svg
                           className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform duration-300"
@@ -125,8 +128,8 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                           />
                         </svg>
-                        Live Demo
-                      </a>
+                        <span>Live Demo</span>
+                      </FancyButtonSmall>
                     ) : (
                       <div className="w-24"></div>
                     )}

@@ -1,6 +1,7 @@
 import React from 'react';
 import myPic from '../../../../assets/images/profile/myPicture.jpg';
 import { Fade } from 'react-awesome-reveal';
+import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
 interface AboutMeProps {
   id?: string;
@@ -94,15 +95,16 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                   <span className="text-sky-400">bottom</span> of the website!
                 </p>
 
-                <button
+                <FancyButtonSmall
                   onClick={onButtonClick}
-                  className="px-4 py-2 mt-3 bg-sky-400 hover:bg-sky-600 text-white font-bold rounded-lg shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-opacity-50"
-                  type="button"
-                  aria-label="Download Resume"
+                  className="px-4 py-2 mt-3 text-sky-600 font-bold stroke-sky-400 hover:stroke-sky-600"
+                  borderColor="rgba(56, 189, 248, 0.5)"
+                  noSvgBorder={true}
+                  ariaLabel="Download Resume"
                 >
-                  <i className="fa fa-download mr-2"></i>
-                  Download Resume
-                </button>
+                  <i className="fa fa-download"></i>
+                  <span>Download Resume</span>
+                </FancyButtonSmall>
               </div>
             </div>
           </div>

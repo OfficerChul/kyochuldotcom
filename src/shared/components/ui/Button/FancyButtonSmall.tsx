@@ -1,0 +1,64 @@
+import React from 'react';
+
+interface FancyButtonSmallProps {
+  href?: string;
+  onClick?: () => void;
+  children: React.ReactNode;
+  className?: string;
+  borderColor?: string;
+  ariaLabel?: string;
+  hoverBg?: string;
+  noSvgBorder?: boolean;
+}
+
+const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
+  href,
+  onClick,
+  children,
+  className = '',
+  borderColor = '#b5ff0893',
+  ariaLabel,
+  hoverBg,
+  noSvgBorder = false
+}) => {
+  const buttonContent = (
+    <button
+      onClick={onClick}
+      className={`relative cursor-pointer bg-transparent outline-none transition-all duration-1000 ease-in-out group ${className}`}
+      style={{ border: borderColor === 'transparent' ? 'none' : `2px solid ${borderColor}` }}
+      aria-label={ariaLabel}
+    >
+      {hoverBg && (
+        <span className={`absolute inset-0 ${hoverBg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></span>
+      )}
+      {!noSvgBorder && (
+        <svg
+          className="absolute left-0 top-0 w-full h-full fill-none stroke-current stroke-dasharray-[150_480] stroke-dashoffset-150 transition-all duration-1000 ease-in-out group-hover:stroke-dashoffset-[-480]"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          <polyline points="99,1 99,99 1,99 1,1 99,1" className="bg-line" />
+          <polyline points="99,1 99,99 1,99 1,1 99,1" className="hl-line" />
+        </svg>
+      )}
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        {children}
+      </span>
+      <span className="absolute inset-0 overflow-hidden">
+        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-out"></span>
+      </span>
+    </button>
+  );
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {buttonContent}
+      </a>
+    );
+  }
+
+  return buttonContent;
+};
+
+export default FancyButtonSmall;
