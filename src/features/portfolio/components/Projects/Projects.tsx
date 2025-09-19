@@ -91,7 +91,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                         return (
                           <span
                             key={idx}
-                            className={`inline-flex items-center px-2 py-0.5 text-[10px] font-medium ${colorClass} border rounded transition-all duration-200`}
+                            className={`inline-flex items-center px-1.5 py-0 text-[10px] font-semibold ${colorClass} border rounded-full transition-all duration-200`}
                           >
                             {tech}
                           </span>
@@ -108,7 +108,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                         href={project.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-500 rounded-xl shadow-md hover:shadow-lg hover:from-sky-600 hover:to-blue-600 transition-all duration-300 hover:-translate-y-0.5"
+                        className="group inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-sky-600 bg-sky-50 border border-sky-200 rounded-lg hover:bg-sky-100 hover:text-sky-700 hover:border-sky-300 transition-all duration-300 hover:-translate-y-0.5"
                         aria-label="Visit live website"
                       >
                         <svg
@@ -121,7 +121,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            strokeWidth={2.5}
+                            strokeWidth={2}
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                           />
                         </svg>

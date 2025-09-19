@@ -38,7 +38,7 @@ const Portfolio: React.FC = () => {
 
           <h1 className="text-white text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black [-webkit-text-stroke:3px_#000000] max-[600px]:[-webkit-text-stroke:2px_#000000] origin-center-top">
             <span>
-              <Fade cascade triggerOnce={true} damping={0.1} delay={1000} direction="right">
+              <Fade cascade triggerOnce={true} damping={0.1} delay={400} direction="right">
                 my Website :)
               </Fade>
             </span>
@@ -47,19 +47,19 @@ const Portfolio: React.FC = () => {
           <JackInTheBox cascade triggerOnce={true}>
             <div className="relative ml-1 md:bottom-10">
               <h2 className="absolute text-[12vw] [-webkit-text-stroke:2px_#000000] min-[481px]:[-webkit-text-stroke:3px_#000000] min-[641px]:[-webkit-text-stroke:5px_#000000] text-transparent">
-                <Fade cascade triggerOnce={true} damping={0.1} delay={2000} direction="right">
+                <Fade cascade triggerOnce={true} damping={0.1} delay={800} direction="right">
                   Kyochul Jang
                 </Fade>
               </h2>
               <h2 className="absolute text-[12vw] [-webkit-text-stroke:2px_#000000] min-[481px]:[-webkit-text-stroke:3px_#000000] min-[641px]:[-webkit-text-stroke:5px_#000000] text-[#b5ff08] animate-[animate_4s_ease-in-out_infinite]">
-                <Fade cascade triggerOnce={true} damping={0.1} delay={2000} direction="right">
+                <Fade cascade triggerOnce={true} damping={0.1} delay={800} direction="right">
                   Kyochul Jang
                 </Fade>
               </h2>
             </div>
           </JackInTheBox>
 
-          <div className="flex absolute scale-50 left-[1px] mt-5 sm:scale-100 sm:top-40 md:top-48 2xl:top-72">
+          <div className="flex absolute scale-50 left-[1px] mt-5 sm:scale-100 sm:top-20 md:top-24 2xl:top-28">
             <FancyBtn url="#about1" btnText="About Me!" />
           </div>
         </div>

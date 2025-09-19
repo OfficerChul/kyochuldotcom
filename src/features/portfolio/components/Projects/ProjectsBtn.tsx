@@ -7,11 +7,13 @@ const ProjectsBtn: React.FC<ProjectsBtnProps> = ({ ghUrl }) => {
       href={ghUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-xl shadow-md hover:shadow-lg hover:from-purple-700 hover:to-purple-900 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-xl shadow-md hover:shadow-2xl hover:from-purple-700 hover:to-purple-900 transition-all duration-500 hover:-translate-y-1 hover:scale-110 overflow-hidden"
       aria-label="View project on GitHub"
     >
+      <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+      <span className="absolute inset-0 w-full h-full bg-white opacity-0 group-hover:opacity-20 group-hover:animate-pulse transition-opacity duration-500"></span>
       <svg
-        className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
+        className="relative z-10 w-5 h-5 group-hover:scale-125 group-hover:rotate-[360deg] transition-all duration-700 ease-out"
         viewBox="0 0 24 24"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"

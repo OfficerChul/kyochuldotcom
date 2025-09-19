@@ -36,6 +36,9 @@ const FancyBtn: React.FC<FancyBtnProps> = ({ url, btnText }) => {
               <polyline points="179,1 179,59 1,59 1,1 179,1" className="hl-line" />
             </svg>
             <span className="text-white text-lg font-thin relative z-10">{btnText}</span>
+            <span className="absolute inset-0 overflow-hidden">
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-out"></span>
+            </span>
           </button>
         </a>
       </div>
