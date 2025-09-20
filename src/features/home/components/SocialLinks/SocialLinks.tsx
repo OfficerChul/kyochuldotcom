@@ -73,7 +73,7 @@ const SocialLinks: React.FC = () => {
           {/* First row of social links */}
           <div className="flex justify-center gap-3 sm:gap-12">
             <Link to="/portfolio" className="inline-block">
-              <div className="cursor-pointer mx-1 md:mx-2.5 w-[70px] h-[70px] rounded-full text-center relative z-10 text-white bg-white shadow-lg transition-all duration-100 ease-out hover:bg-[#5DDCFF] hover:scale-[0.93] hover:text-white after:absolute after:w-full after:h-full after:rounded-full after:content-[''] after:box-border after:top-0 after:left-0 after:p-0 after:-z-10 after:shadow-[0_0_0_2px_rgba(178,221,76,1)] after:opacity-0 after:scale-90 hover:after:animate-[sonarEffect_1.3s_ease-out_75ms] flex justify-center items-center animate-[yellowGlow_1s_ease-in-out_infinite,pulseYellow_1s_ease-in-out_infinite,bounce_2s_infinite]">
+              <div className="cursor-pointer mx-1 md:mx-2.5 w-[70px] h-[70px] rounded-full text-center relative z-10 text-white bg-white shadow-lg transition-all duration-100 ease-out hover:bg-[#5DDCFF] hover:scale-[0.93] hover:text-white after:absolute after:w-full after:h-full after:rounded-full after:content-[''] after:box-border after:top-0 after:left-0 after:p-0 after:-z-10 after:shadow-[0_0_0_2px_rgba(178,221,76,1)] after:opacity-0 after:scale-90 hover:after:animate-[sonarEffect_1.6s_ease-out] flex justify-center items-center animate-[yellowGlow_1s_ease-in-out_infinite,pulseYellow_1s_ease-in-out_infinite,bounce_2s_infinite]" style={{ ['--sonar-color' as any]: 'rgba(252, 233, 3, 0.6)' }}>
                 <FaStar className="text-[35px] text-[#fce903]" />
               </div>
             </Link>
@@ -81,6 +81,7 @@ const SocialLinks: React.FC = () => {
             <SocialLinkButton
               href="https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao"
               ariaLabel="Google Scholar Profile"
+              sonarColor="rgba(66, 133, 244, 0.6)"
             >
               <img
                 className="w-10"
@@ -93,6 +94,7 @@ const SocialLinks: React.FC = () => {
             <SocialLinkButton
               onClick={() => setIsModalOpen(true)}
               ariaLabel="View CV"
+              sonarColor="rgba(0, 0, 0, 0.25)"
             >
               <img
                 className="w-10"
@@ -108,6 +110,7 @@ const SocialLinks: React.FC = () => {
             <SocialLinkButton
               href="https://www.linkedin.com/in/kyochul-jang-93b263208/"
               ariaLabel="LinkedIn Profile"
+              sonarColor="rgba(14, 118, 168, 0.6)"
             >
               <FaLinkedinIn className="text-[35px] text-[#0E76A8]" />
             </SocialLinkButton>
@@ -115,6 +118,7 @@ const SocialLinks: React.FC = () => {
             <SocialLinkButton
               href="https://www.instagram.com/kjang_hochul/"
               ariaLabel="Instagram Profile"
+              sonarColor="rgba(225, 48, 108, 0.6)"
             >
               <FaInstagram className="text-[35px] text-[#E1306C]" />
             </SocialLinkButton>
@@ -122,6 +126,7 @@ const SocialLinks: React.FC = () => {
             <SocialLinkButton
               href="https://github.com/OfficerChul"
               ariaLabel="GitHub Profile"
+              sonarColor="rgba(119, 87, 157, 0.6)"
             >
               <FaGithub className="text-[35px] text-[#77579d]" />
             </SocialLinkButton>
@@ -129,6 +134,7 @@ const SocialLinks: React.FC = () => {
             <SocialLinkButton
               href="mailto:gcj1234567890@gmail.com"
               ariaLabel="Send Email"
+              sonarColor="rgba(54, 139, 254, 0.6)"
             >
               <FaEnvelope className="text-[35px] text-[#368BFE]" />
             </SocialLinkButton>
