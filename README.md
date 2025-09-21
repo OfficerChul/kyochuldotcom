@@ -55,11 +55,11 @@ cd kyochuljangdotcom
 ```
 3. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 4. Run the development server
 ```bash
-npm run start
+pnpm run dev
 ```
 
 ## Interested in contributing to my portfolio website project? Great to hear that! Here is how you can contribute:

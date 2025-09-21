@@ -1,0 +1,93 @@
+.portfolio-star-button {
+  cursor: pointer;
+  margin: 0.25rem;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 10;
+  background: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  animation: yellowGlow 1s ease-in-out infinite, pulseYellow 1s ease-in-out infinite, bounce 2s infinite;
+}
+
+.portfolio-star-button::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    var(--border-color) 60deg,
+    transparent 120deg,
+    var(--border-color) 180deg,
+    transparent 240deg,
+    var(--border-color) 300deg,
+    transparent 360deg
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  animation: none;
+  z-index: -1;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    white calc(100% - 3px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    white calc(100% - 3px)
+  );
+}
+
+.portfolio-star-button::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  z-index: -2;
+  background: radial-gradient(
+    circle at center,
+    transparent 32px,
+    var(--glow-color) 35px,
+    transparent 38px
+  );
+  box-shadow:
+    0 0 25px var(--glow-color),
+    inset 0 0 15px var(--inner-glow);
+}
+
+.portfolio-star-button:hover {
+  transform: scale(1.1);
+}
+
+.portfolio-star-button:hover::before {
+  opacity: 1;
+  animation: scifiBorder 2s linear infinite;
+}
+
+.portfolio-star-button:hover::after {
+  opacity: 1;
+  animation: borderPulse 1.5s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .portfolio-star-button {
+    margin: 0.625rem;
+  }
+}

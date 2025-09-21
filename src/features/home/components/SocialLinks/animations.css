@@ -1,23 +1,31 @@
-@keyframes sonarEffect {
+@keyframes scifiBorder {
   0% {
-    opacity: 0.45;
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 var(--sonar-color, rgba(93, 220, 255, 0.6)),
-      0 0 0 0 var(--sonar-color, rgba(93, 220, 255, 0.6)),
-      0 0 0 0 var(--sonar-color, rgba(93, 220, 255, 0.6));
-  }
-  45% {
-    opacity: 0.3;
-    box-shadow: 0 0 0 2px var(--sonar-color, rgba(93, 220, 255, 0.6)),
-      0 0 12px 12px var(--sonar-color, rgba(93, 220, 255, 0.6)),
-      0 0 0 14px var(--sonar-color, rgba(93, 220, 255, 0.6));
+    transform: rotate(0deg);
   }
   100% {
-    transform: scale(1.7);
-    opacity: 0;
-    box-shadow: 0 0 0 2px var(--sonar-color, rgba(93, 220, 255, 0.6)),
-      0 0 16px 18px var(--sonar-color, rgba(93, 220, 255, 0.6)),
-      0 0 0 24px var(--sonar-color, rgba(93, 220, 255, 0.6));
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes borderPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 

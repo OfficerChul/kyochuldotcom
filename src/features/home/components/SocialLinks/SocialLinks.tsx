@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope } from 'react-icons/fa';
 import SocialLinkButton from './SocialLinkButton';
 import './animations.css';
+import './SocialLinks.css';
 
 interface ModalStyles {
   overlay: React.CSSProperties;
@@ -73,7 +74,14 @@ const SocialLinks: React.FC = () => {
           {/* First row of social links */}
           <div className="flex justify-center gap-3 sm:gap-12">
             <Link to="/portfolio" className="inline-block">
-              <div className="cursor-pointer mx-1 md:mx-2.5 w-[70px] h-[70px] rounded-full text-center relative z-10 text-white bg-white shadow-lg transition-all duration-100 ease-out hover:bg-[#5DDCFF] hover:scale-[0.93] hover:text-white after:absolute after:w-full after:h-full after:rounded-full after:content-[''] after:box-border after:top-0 after:left-0 after:p-0 after:-z-10 after:shadow-[0_0_0_2px_rgba(178,221,76,1)] after:opacity-0 after:scale-90 hover:after:animate-[sonarEffect_1.6s_ease-out] flex justify-center items-center animate-[yellowGlow_1s_ease-in-out_infinite,pulseYellow_1s_ease-in-out_infinite,bounce_2s_infinite]" style={{ ['--sonar-color' as any]: 'rgba(252, 233, 3, 0.6)' }}>
+              <div
+                className="portfolio-star-button"
+                style={{
+                  '--border-color': 'rgba(252, 233, 3, 1)',
+                  '--glow-color': 'rgba(252, 233, 3, 0.8)',
+                  '--inner-glow': 'rgba(252, 233, 3, 0.2)',
+                } as React.CSSProperties}
+              >
                 <FaStar className="text-[35px] text-[#fce903]" />
               </div>
             </Link>
