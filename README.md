@@ -62,6 +62,51 @@ pnpm install
 pnpm run dev
 ```
 
+## Publications Automation
+
+This site auto-generates the `Publications` section from your CV PDF.
+
+- **Source PDF**: `public/Kyochul_Jang___CV.pdf` (the file in this repo)
+- **Generated file**: `src/features/portfolio/components/Publications/publications.json`
+- **Generator script**: `scripts/gen-publications.js`
+
+### Local preview
+
+Generate publications from the CV and start the dev server:
+
+```bash
+pnpm gen:pubs   # parses CV and writes publications.json
+pnpm dev        # run locally
+```
+
+You can update the CV (replace the PDF), then re-run `pnpm gen:pubs` to refresh `publications.json`.
+
+### Build & Deploy
+
+- The project uses a `prebuild` script to generate `publications.json` automatically during builds.
+- On Netlify, pushing to the repository triggers a build which runs `prebuild` → `build`.
+- No manual step is required beyond committing the updated PDF.
+
+Scripts involved:
+
+```json
+{
+  "scripts": {
+    "gen:pubs": "node scripts/gen-publications.js",
+    "prebuild": "node scripts/gen-publications.js",
+    "build": "react-scripts build"
+  }
+}
+```
+
+## Deployment
+
+This site is deployed on Netlify.
+
+- On every `git push`, Netlify runs the build (which includes `prebuild`).
+- Redirects are configured in `netlify.toml`.
+
+
 ## Interested in contributing to my portfolio website project? Great to hear that! Here is how you can contribute:
 1.	Fork the repository.
 2.	Create your feature branch (git checkout -b feature/AmazingFeature).

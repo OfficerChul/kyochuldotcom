@@ -1,0 +1,133 @@
+[
+  {
+    "title": "DICE-BENCH: Evaluating the Tool-Use Capabilities of Large Language Models in Multi-Round, Multi-Party Dialogues.ACL 2025 Findings.",
+    "authors": [
+      "i)Jang, K.",
+      "Lee, D.",
+      "Kim, K.",
+      "Heo, D.",
+      "Lee, T.",
+      "Kim, W.",
+      "Suh, B."
+    ],
+    "year": 2025,
+    "link": "https://snuhcc.github.io/DICE-Bench/"
+  },
+  {
+    "title": "ComPLUG: Efficient Multilingual Medical Reasoning via Compressed Pivot Language-guided Generation.AAAI 2025(Under Review).",
+    "authors": [
+      "Lee, D.",
+      "Song, M.",
+      "Kim, C.",
+      "Jang, K.",
+      "Kim, H.",
+      "Kang, J."
+    ],
+    "year": 2025
+  },
+  {
+    "title": "Large Language Model-based Construction Site Management for Severe Weather Preparedness.ASCE’s Journal of Construction Engineering and Management.",
+    "authors": [
+      "Lee, J.",
+      "Jang, K.",
+      "Sparkling, A. E.",
+      "Kang, K."
+    ],
+    "year": 2025,
+    "link": "https://www.researchgate.net/publication/386108841"
+  },
+  {
+    "title": "CodeVoyager: An Interactive Tool for Rapid Code Comprehension through LLM-Assisted Graph Navigation.UIST 2025 Poster (Accepted) & CHI 2026(WIP).",
+    "authors": [
+      "Kim, Y.",
+      "Jang, K.",
+      "Song, H.",
+      "Suh, B."
+    ],
+    "year": 2025
+  },
+  {
+    "title": "AltAuthor: A Context-Aware Alt Text Authoring Tool with Image Classification and LMM-Powered Accessibility Compliance.IUI 2025 Posters and Demos.",
+    "authors": [
+      "Song, H.",
+      "Shin, M.",
+      "Kim, Y.",
+      "Jang, K.",
+      "Choi, J.",
+      "Jung, H.",
+      "Suh, B."
+    ],
+    "year": 2025,
+    "link": "https://dl.acm.org/doi/10.1145/3708557.3716366"
+  },
+  {
+    "title": "OASIS: Enhancing Debate Quality and Mitigating Polarization through AI-Assisted Argumentation.CHI 2026",
+    "authors": [
+      "Park, K.",
+      "Kim, J.",
+      "Song, H.",
+      "Jang, K.",
+      "Suh, B."
+    ],
+    "venue": "(Under Review).",
+    "year": 2025
+  },
+  {
+    "title": "AltUs: Generating Alt Text to Improve E-Commerce Accessibility Through Blind and Low Vision User Participation.CHI 2026(WIP)",
+    "authors": [
+      "Song, H.",
+      "Shin, M.",
+      "Choi, J.",
+      "Park, Y.",
+      "Jang, K.",
+      "Suh, B."
+    ],
+    "venue": "(Under Review).",
+    "year": 2025
+  },
+  {
+    "title": "ETHIC: Evaluating Large Language Models on Long-Context Tasks with High Information Coverage.NAACL 2025.",
+    "authors": [
+      "Lee, T.",
+      "Yoon, C.",
+      "Jang, K.",
+      "Lee, D.",
+      "Song, M.",
+      "Kim, H.",
+      "Kang, J."
+    ],
+    "year": 2025,
+    "link": "https://arxiv.org/abs/2410.16848"
+  },
+  {
+    "title": "KU-DMIS at EHRSQL 2024: Generating SQL query via question templatization in EHR.NAACL 2024.",
+    "authors": [
+      "Kim, H.",
+      "Kim, C.",
+      "Lee, H.",
+      "Jang, K.",
+      "Lee, J.",
+      "Lee, K.",
+      "Kim, G.",
+      "Kang, J."
+    ],
+    "year": 2024,
+    "link": "https://aclanthology.org/2024.clinicalnlp-1.64"
+  },
+  {
+    "title": "Low-Cost Object Detection Models for Traffic Control Devices through Domain Adaption of Geographical Regions.Remote Sensing, MDPI",
+    "authors": [
+      "Oh, D.",
+      "Kang, K.",
+      "Seo, S.",
+      "Xiao, J.",
+      "Jang, K.",
+      "Kim, K.",
+      "Park, H.",
+      "Won, J."
+    ],
+    "venue": "Awards and Honors SKT AI Fellowship 7th06/2025 – 11/2025 Grand Prize (2nd Place), AI Demo Competition06/2025 1st Prize (LG AImers / LG AI Hackathon)01/2024 – 04/2024 Dean’s List08/2021 – 12/2023 Semester Honors01/2021 – 12/2023 Patents •LG Management Development Institute.Jang, K., Choi, J., Jang, K., Choi, S., Hong, Y.",
+    "year": 2023,
+    "link": "https://doi.org/10.3390/rs15102584"
+  }
+]
