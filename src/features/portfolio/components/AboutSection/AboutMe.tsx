@@ -55,7 +55,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
             <div className="lg:w-3/5">
               <div className="font-mono text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed bg-white/50 p-4 sm:p-6 rounded-lg shadow-sm backdrop-blur-sm">
                 <p>
-                  Hi, I am Kyochul Jang, a Master's student in the{' '}
+                  Hi, I am Kyochul Jang, a PhD student at{' '}
                   <span className="text-sky-400">
                     <a
                       className="text-[#0F709D] underline hover:text-sky-400 transition-colors duration-200"
@@ -63,15 +63,41 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Seoul National University AI
+                      Seoul National University, Graduate School of AI
                     </a>
                   </span>
-                  , advised by Professor Bongwon Suh.
+                  , advised by Professor{' '}
+                  <a
+                    className="text-[#0F709D] underline hover:text-sky-400 transition-colors duration-200"
+                    href="https://yj-yu.github.io/home/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Youngjae Yu
+                  </a>.
                   <br /><br />
                   My research interests lie in{' '}
-                  <span className="text-sky-400">Natural Language Processing</span>,{' '}
-                  <span className="text-sky-400">Graph Neural Networks</span>, and{' '}
-                  <span className="text-sky-400">Human+AI Interaction</span>.
+                  <span className="text-sky-400">GUI Agent</span>,{' '}
+                  <span className="text-sky-400">On-device AI</span>,{' '}
+                  <span className="text-sky-400">AI Safety</span>, and{' '}
+                  <span className="text-sky-400">Embodied AI</span>. Thanks to the support of the{' '}
+                  <a
+                    href="https://devocean.sk.com/community/aiFellowshipHistory.do"
+                    className="text-[#EA002C] underline hover:text-sky-400 transition-colors duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    SKT AI Fellowship
+                  </a>, currently I am conducting research on{' '}
+                  <span className="text-sky-400">On-device GUI Agent</span>. I am also serving as a Teaching Assistant for Generation for NLP at{' '}
+                  <a
+                    href="https://boostcamp.connect.or.kr/"
+                    className="text-[#00D659] underline hover:text-sky-400 transition-colors duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Naver Boostcamp
+                  </a>.
                   <br /><br />
                   Prior to this, I obtained my Bachelor's degree in Computer Science from{' '}
                   <a
@@ -82,7 +108,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                   >
                     Purdue University
                   </a>{' '}
-                  in 2024 and worked as a Software Engineer Intern at{' '}
+                  in 2024 and worked as a Software Development Engineer Intern at{' '}
                   <a
                     href="https://www.samsung.com/"
                     className="underline text-[#1428A0] hover:text-sky-400 transition-colors duration-200"
@@ -93,7 +119,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                   </a>
                   .
                   <br /><br />
-                  I welcome AI research intern offers! Feel free to contact me via contacts at the{' '}
+                  For more details, please check my CV below. I welcome AI research intern offers! Feel free to contact me via contacts at the{' '}
                   <span className="text-sky-400">bottom</span> of the website!
                 </p>
               </div>
@@ -104,10 +130,10 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                   borderColor="rgba(56, 189, 248, 0.5)"
                   noSvgBorder={true}
                   shineColor="from-transparent via-sky-300/40 to-transparent"
-                  ariaLabel="Download Resume"
+                  ariaLabel="Download CV"
                 >
                   <i className="fa fa-download"></i>
-                  <span className="font-mono">Download Resume</span>
+                  <span className="font-mono">Download CV</span>
                 </FancyButtonSmall>
               </div>
             </div>
