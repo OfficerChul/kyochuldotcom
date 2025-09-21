@@ -1,5 +1,6 @@
 import React from 'react';
 import './SocialLinkButton.css';
+import '../../../../shared/styles/animations.css';
 
 interface SocialLinkButtonProps {
   href?: string;
@@ -75,4 +76,4 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
   );
 };
 
-export default SocialLinkButton;
+export default React.memo(SocialLinkButton);

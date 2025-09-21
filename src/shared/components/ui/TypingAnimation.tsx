@@ -98,4 +98,4 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
   );
 };
 
-export default TypingAnimation;
+export default React.memo(TypingAnimation);
