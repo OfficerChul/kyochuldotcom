@@ -15,6 +15,39 @@ type Publication = {
   link?: string;
 };
 
+const getRomanNumeral = (num: number): string => {
+  if (num <= 0) {
+    return '';
+  }
+  const numerals: Array<[number, string]> = [
+    [1000, 'M'],
+    [900, 'CM'],
+    [500, 'D'],
+    [400, 'CD'],
+    [100, 'C'],
+    [90, 'XC'],
+    [50, 'L'],
+    [40, 'XL'],
+    [10, 'X'],
+    [9, 'IX'],
+    [5, 'V'],
+    [4, 'IV'],
+    [1, 'I']
+  ];
+
+  let remaining = num;
+  let result = '';
+
+  numerals.forEach(([value, symbol]) => {
+    while (remaining >= value) {
+      result += symbol;
+      remaining -= value;
+    }
+  });
+
+  return result;
+};
+
 const Publications: React.FC<PublicationsProps> = ({ id }) => {
   const [showAll, setShowAll] = useState(false);
 
@@ -49,25 +82,25 @@ const Publications: React.FC<PublicationsProps> = ({ id }) => {
               <p className="font-mono text-gray-600 text-center">No publications yet.</p>
             ) : (
               <>
-                <ol className="space-y-3">
+                <ol className="space-y-3 list-none">
                   {(showAll ? publications : publications.slice(0, 5)).map((pub, index) => (
                     <li
                       key={index}
-                      className="flex gap-2"
+                      className="flex gap-3 items-start"
                       style={{
                         animation: showAll && index >= 5 ? 'slideDown 0.3s ease-out forwards' : undefined,
                         animationDelay: showAll && index >= 5 ? `${(index - 5) * 0.1}s` : '0s'
                       }}
                     >
-                      <span className="text-sky-500 font-mono font-bold text-sm text-right -ml-10" style={{ minWidth: '20px', width: '20px' }}>
-                        {['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'][index]})
+                      <span className="text-sky-500 font-mono font-bold text-sm flex-shrink-0 w-11 text-right">
+                        {`${getRomanNumeral(index + 1).toLowerCase()})`}
                       </span>
                       <div className="flex-1">
                         <p className="text-gray-800 text-sm">
                           {pub.authors.map((author, i) => (
                             <span key={i}>
                               {author.includes('Jang, K') ? (
-                                <strong className="text-sky-500">{author}</strong>
+                                <strong className="text-sky-500 underline decoration-sky-500">{author}</strong>
                               ) : (
                                 author
                               )}
@@ -79,19 +112,34 @@ const Publications: React.FC<PublicationsProps> = ({ id }) => {
                         <p className="font-semibold text-gray-900 text-sm">
                           {pub.title}
                           {pub.link && (
-                            <>
-                              {' '}
-                              <FancyButtonSmall
-                                onClick={() => window.open(pub.link, '_blank')}
-                                className="inline-flex px-1 py-0 text-[9px] font-medium text-sky-600 font-mono stroke-sky-400 hover:stroke-sky-600"
-                                borderColor="rgba(56, 189, 248, 0.5)"
-                                noSvgBorder={true}
-                                shineColor="from-transparent via-sky-300/40 to-transparent"
-                                ariaLabel="View Paper"
-                              >
-                                <span style={{ padding: '0 2px' }}>Link</span>
-                              </FancyButtonSmall>
-                            </>
+                            <FancyButtonSmall
+                              href={pub.link}
+                              className="ml-2 inline-flex items-center justify-center px-1 py-[1.5px] text-[10px] leading-[1.18] text-sky-600 font-mono stroke-sky-400 hover:stroke-sky-600"
+                              borderColor="rgba(56, 189, 248, 0.42)"
+                              borderWidth={2}
+                              noSvgBorder={true}
+                              shineColor="from-transparent via-sky-300/35 to-transparent"
+                              ariaLabel="View publication"
+                            >
+                              <span className="flex items-center gap-0.5 lowercase tracking-wide">
+                                <span>link</span>
+                                <svg
+                                  className="h-[8px] w-[8px]"
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    d="M4 2H10V8M10 2L2 10"
+                                    stroke="currentColor"
+                                    strokeWidth="1.1"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              </span>
+                            </FancyButtonSmall>
                           )}
                         </p>
                         {pub.venue && (

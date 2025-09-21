@@ -6,6 +6,7 @@ interface FancyButtonSmallProps {
   children: React.ReactNode;
   className?: string;
   borderColor?: string;
+  borderWidth?: number;
   ariaLabel?: string;
   hoverBg?: string;
   noSvgBorder?: boolean;
@@ -18,6 +19,7 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
   children,
   className = '',
   borderColor = '#b5ff0893',
+  borderWidth = 2,
   ariaLabel,
   hoverBg,
   noSvgBorder = false,
@@ -27,7 +29,9 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
     <button
       onClick={onClick}
       className={`relative cursor-pointer bg-transparent outline-none transition-all duration-1000 ease-in-out group/btn ${className}`}
-      style={{ border: borderColor === 'transparent' ? 'none' : `2px solid ${borderColor}` }}
+      style={{
+        border: borderColor === 'transparent' ? 'none' : `${borderWidth}px solid ${borderColor}`
+      }}
       aria-label={ariaLabel}
     >
       {hoverBg && (
