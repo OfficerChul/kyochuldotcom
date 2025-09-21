@@ -116,7 +116,7 @@ const Portfolio: React.FC = () => {
             </div>
           )}
 
-          <div className="flex absolute scale-50 left-[1px] top-[45vh] sm:scale-100 sm:top-[40vh] md:top-[20vh] lg:top-[28vh] 2xl:top-[32vh]">
+          <div className="flex absolute scale-50 left-[8px] top-[20vh] sm:scale-100 sm:top-[12vh] md:top-[20vh] lg:top-[28vh] 2xl:top-[32vh]">
             <FancyBtn url="#about1" btnText="About Me!" />
           </div>
         </div>
