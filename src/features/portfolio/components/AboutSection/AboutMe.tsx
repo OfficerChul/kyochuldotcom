@@ -41,13 +41,13 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
 
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            <div className="lg:w-2/5 flex justify-center">
-              <div className="relative group">
+            <div className="lg:w-2/5 flex justify-center items-center">
+              <div className="relative group w-full max-w-md">
                 <div className="absolute -inset-1 bg-gradient-to-r from-sky-300 to-blue-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                 <img
                   src={myPic}
                   alt="Kyochul Jang profile"
-                  className="relative w-full h-auto max-w-sm object-cover rounded-2xl shadow-2xl transform transition duration-500 hover:scale-105"
+                  className="relative w-full h-full min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] object-cover rounded-2xl shadow-2xl transform transition duration-500 hover:scale-105"
                 />
               </div>
             </div>
@@ -56,16 +56,14 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
               <div className="font-mono text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed bg-white/50 p-4 sm:p-6 rounded-lg shadow-sm backdrop-blur-sm">
                 <p>
                   Hi, I am Kyochul Jang, a PhD student at{' '}
-                  <span className="text-sky-400">
-                    <a
-                      className="text-[#0F709D] underline hover:text-sky-400 transition-colors duration-200"
-                      href="https://gsai.snu.ac.kr/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Seoul National University, Graduate School of AI
-                    </a>
-                  </span>
+                  <a
+                    className="text-[#0F709D] underline hover:text-sky-400 transition-colors duration-200"
+                    href="https://gsai.snu.ac.kr/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Seoul National University, Graduate School of AI
+                  </a>
                   , advised by Professor{' '}
                   <a
                     className="text-[#0F709D] underline hover:text-sky-400 transition-colors duration-200"
@@ -74,7 +72,15 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                     rel="noopener noreferrer"
                   >
                     Youngjae Yu
-                  </a>.
+                  </a>
+                  {' '}(<a
+                    className="text-[#0F709D] underline hover:text-sky-400 transition-colors duration-200"
+                    href="https://pi.snu.ac.kr/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    SNUPI Lab
+                  </a>).
                   <br /><br />
                   My research interests lie in{' '}
                   <span className="text-sky-400">GUI Agent</span>,{' '}
@@ -116,11 +122,15 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                     rel="noopener noreferrer"
                   >
                     Samsung Electronics
-                  </a>
-                  .
+                  </a>.
                   <br /><br />
-                  For more details, please check my CV below. I welcome AI research intern offers! Feel free to contact me via contacts at the{' '}
-                  <span className="text-sky-400">bottom</span> of the website!
+                  I'm open to AI research internships and collaborations worldwide. Since I've lived in the US 🇺🇸 and China 🇨🇳 for many years, I'm fluent in{' '}
+                  <span className="text-sky-400">English</span>,{' '}
+                  <span className="text-sky-400">Korean</span> 🇰🇷, and{' '}
+                  <span className="text-sky-400">Chinese</span>. If our research interests align, I'd love to connect. You can reach me through the contact details at the{' '}
+                  <span className="text-sky-400">bottom</span> of this page!
+                  <br /><br />
+                  For more details, please check my CV below :)
                 </p>
               </div>
               <div className="mt-6">
