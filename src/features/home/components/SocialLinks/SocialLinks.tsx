@@ -13,7 +13,22 @@ interface ModalStyles {
 
 const SocialLinks: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor;
+      const isMobileDevice = /android|iphone|ipad|ipod/i.test(userAgent.toLowerCase()) ||
+        window.innerWidth <= 768;
+      setIsMobile(isMobileDevice);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Handle ESC key to close modal
   useEffect(() => {
@@ -164,20 +179,43 @@ const SocialLinks: React.FC = () => {
         <div
           ref={modalRef}
           tabIndex={-1}
-          style={{ height: '100%' }}
+          style={{ height: '100%', position: 'relative' }}
         >
+          {/* Close button only */}
           <button
             onClick={() => setIsModalOpen(false)}
-            className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
+            className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all"
             aria-label="Close CV"
           >
-            ×
+            <span className="text-2xl">×</span>
           </button>
-          <iframe
-            style={iframeStyles}
-            src="Kyochul_Jang___CV.pdf"
-            title="Kyochul Jang CV"
-          />
+
+          {/* PDF Viewer - Full height */}
+          {isMobile ? (
+            // Mobile: Use object tag for better compatibility
+            <object
+              data="Kyochul_Jang___CV.pdf#view=FitH&toolbar=0"
+              type="application/pdf"
+              width="100%"
+              height="100%"
+              style={{ borderRadius: '16px' }}
+            >
+              <embed
+                src="Kyochul_Jang___CV.pdf#view=FitH&toolbar=0"
+                type="application/pdf"
+                width="100%"
+                height="100%"
+                style={{ borderRadius: '16px' }}
+              />
+            </object>
+          ) : (
+            // Desktop: Use iframe
+            <iframe
+              style={iframeStyles}
+              src="Kyochul_Jang___CV.pdf#view=FitH&toolbar=0"
+              title="Kyochul Jang CV"
+            />
+          )}
         </div>
       </Modal>
     </div>
