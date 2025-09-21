@@ -31,7 +31,7 @@ const Portfolio: React.FC = () => {
           <h1 className="text-black text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black">
             <span className="[-webkit-text-stroke:1px_#ffffff]">
               <Fade cascade triggerOnce={true} damping={0.1} direction="right">
-                Welcome to{' '}
+                Welcome to
               </Fade>
             </span>
           </h1>
@@ -39,7 +39,7 @@ const Portfolio: React.FC = () => {
           <h1 className="text-white text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black [-webkit-text-stroke:3px_#000000] max-[600px]:[-webkit-text-stroke:2px_#000000] origin-center-top">
             <span>
               <Fade cascade triggerOnce={true} damping={0.1} delay={400} direction="right">
-                my Website :)
+                My Website :)
               </Fade>
             </span>
           </h1>
