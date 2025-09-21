@@ -13,10 +13,22 @@ const NEWS_ITEMS = [
 
 const News: React.FC<NewsProps> = ({ id }) => {
   const [showAll, setShowAll] = useState(false);
-  const displayItems = showAll ? NEWS_ITEMS : NEWS_ITEMS.slice(0, 3);
 
   return (
-    <section className="bg-white py-8 md:py-12 lg:py-16" id={id}>
+    <>
+      <style jsx>{`
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+      <section className="bg-white py-8 md:py-12 lg:py-16" id={id}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="text-center mb-8">
@@ -30,8 +42,15 @@ const News: React.FC<NewsProps> = ({ id }) => {
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="max-w-4xl mx-auto">
             <ul className="space-y-2">
-              {displayItems.map((item, index) => (
-                <li key={index} className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+              {(showAll ? NEWS_ITEMS : NEWS_ITEMS.slice(0, 3)).map((item, index) => (
+                <li
+                  key={index}
+                  className="flex flex-col sm:flex-row gap-2 sm:gap-4"
+                  style={{
+                    animation: showAll ? 'slideDown 0.3s ease-out forwards' : undefined,
+                    animationDelay: showAll && index >= 3 ? `${(index - 3) * 0.1}s` : '0s'
+                  }}
+                >
                   <span className="text-sky-500 font-mono font-semibold min-w-[90px]">{item.date}</span>
                   <span className="font-mono text-gray-700">{item.text}</span>
                 </li>
@@ -49,6 +68,7 @@ const News: React.FC<NewsProps> = ({ id }) => {
         </Fade>
       </div>
     </section>
+    </>
   );
 };
 
