@@ -153,7 +153,7 @@ const Projects: React.FC<ProjectsProps> = memo(({ id }) => {
               Want to see more of my work?
             </p>
             <a
-              href="https://github.com/kyochul-jang"
+              href="https://github.com/OfficerChul?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"

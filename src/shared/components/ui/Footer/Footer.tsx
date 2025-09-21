@@ -119,14 +119,21 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="w-full mb-8">
-          <div className="bg-white p-8 rounded-xl overflow-x-auto shadow-md border border-gray-200">
-            <GitHubCalendar
-              username="OfficerChul"
-              fontSize={16}
-              blockSize={20}
-              blockMargin={5}
-            />
-          </div>
+          <a
+            href="https://github.com/OfficerChul"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <div className="bg-white p-8 rounded-xl overflow-x-auto shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+              <GitHubCalendar
+                username="OfficerChul"
+                fontSize={16}
+                blockSize={20}
+                blockMargin={5}
+              />
+            </div>
+          </a>
         </div>
 
         <div className="border-t border-gray-300 pt-8 text-center">
@@ -134,7 +141,15 @@ const Footer: React.FC = () => {
             © {currentYear} Kyochul Jang. All rights reserved.
           </p>
           <p className="text-gray-500 text-xs mt-2">
-            Built with React, TypeScript, and Tailwind CSS
+            Source code available on{' '}
+            <a
+              href="https://github.com/OfficerChul/kyochuldotcom"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sky-500 hover:text-sky-600 underline"
+            >
+              GitHub
+            </a>
           </p>
         </div>
       </div>
