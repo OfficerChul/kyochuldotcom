@@ -11,18 +11,20 @@
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <link rel="prefetch" as="image" href="%PUBLIC_URL%/preload-background.jpg">
+    <link rel="dns-prefetch" href="https://kit.fontawesome.com">
     <style>
-      @font-face {
-        font-family: Bungee;
-        src: url("Bungee-Regular.ttf") format("embedded-opentype"),
-          /* Internet Explorer */ url("Bungee-Regular.ttf")
-            format("woff2"),
-          /* Super Modern Browsers */ url("Bungee-Regular.ttf")
-            format("woff"),
-          /* Pretty Modern Browsers */ url("Bungee-Regular.ttf")
-            format("truetype"),
-          /* Safari, Android, iOS */ url("Bungee-Regular.ttf")
-            format("svg"); /* Legacy iOS */
+      /* Critical CSS for portfolio page initial load */
+      .font-\[\'Bungee\'\] {
+        font-family: 'Bungee', cursive;
+      }
+      /* Preload background placeholder */
+      .bg-placeholder {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       }
     </style>
 

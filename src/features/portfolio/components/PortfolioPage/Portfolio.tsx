@@ -1,19 +1,28 @@
-import React from 'react';
-import AboutMe from '../AboutSection';
-import Projects from '../Projects';
-import Footer from '../../../../shared/components/ui/Footer';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import logo from '../../../../assets/images/logos/triangle-green.png';
 import FancyBtn from '../../../../shared/components/ui/Button';
 import { Link } from 'react-router-dom';
 import Navigation from '../../../../shared/components/ui/Navigation';
 import { JackInTheBox, Fade } from 'react-awesome-reveal';
 
+const AboutMe = lazy(() => import('../AboutSection'));
+const Projects = lazy(() => import('../Projects'));
+const Footer = lazy(() => import('../../../../shared/components/ui/Footer'));
+
 const Portfolio: React.FC = () => {
+  const [backgroundLoaded, setBackgroundLoaded] = useState(false);
+
+  useEffect(() => {
+    // Preload background image
+    const img = new Image();
+    img.src = require('../../../../assets/images/backgrounds/background.jpg');
+    img.onload = () => setBackgroundLoaded(true);
+  }, []);
   return (
     <>
       <Navigation />
 
-      <header className="pt-12 font-['Bungee'] bg-[url('./assets/images/backgrounds/background.jpg')] bg-no-repeat bg-cover bg-center h-screen relative">
+      <header className={`pt-12 font-['Bungee'] ${backgroundLoaded ? "bg-[url('./assets/images/backgrounds/background.jpg')]" : 'bg-placeholder'} bg-no-repeat bg-cover bg-center h-screen relative transition-all duration-500`}>
         <div id="top">
           <Link to="/">
             <img
@@ -59,17 +68,23 @@ const Portfolio: React.FC = () => {
             </div>
           </JackInTheBox>
 
-          <div className="flex absolute scale-50 left-[1px] mt-5 sm:scale-100 sm:top-20 md:top-24 2xl:top-28">
+          <div className="flex absolute scale-50 left-[1px] top-[45vh] sm:scale-100 sm:top-[40vh] md:top-[20vh] lg:top-[28vh] 2xl:top-[32vh]">
             <FancyBtn url="#about1" btnText="About Me!" />
           </div>
         </div>
       </header>
 
-      <AboutMe id="about1" />
-      <Projects id="projects" />
+      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+        <AboutMe id="about1" />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+        <Projects id="projects" />
+      </Suspense>
 
       <footer>
-        <Footer />
+        <Suspense fallback={<div className="h-20"></div>}>
+          <Footer />
+        </Suspense>
       </footer>
 
       <style>{`
