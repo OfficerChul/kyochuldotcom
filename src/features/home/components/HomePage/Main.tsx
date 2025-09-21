@@ -1,12 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, lazy, Suspense, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import logo from '../../../../assets/images/logos/triangle-skyblue.png';
-import SocialLinks from '../SocialLinks';
 import Navigation from '../../../../shared/components/ui/Navigation';
 import './animations.css';
 
+const SocialLinks = lazy(() => import('../SocialLinks'));
+
 const Main: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [logoLoaded, setLogoLoaded] = useState(false);
+  const [supportsWebP, setSupportsWebP] = useState(false);
+
+  // Check WebP support
+  useEffect(() => {
+    const webP = new Image();
+    webP.onload = webP.onerror = () => {
+      setSupportsWebP(webP.height === 2);
+    };
+    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+  }, []);
 
   // Auto-focus search bar on mount
   useEffect(() => {
@@ -18,15 +30,29 @@ const Main: React.FC = () => {
       <Navigation />
 
       <main className="mt-20">
-        {/* Logo Section */}
-        <div className="text-center">
-          <img
-            className="mx-auto mt-5 h-52 md:h-60 hover:animate-[shake_3s_infinite]"
-            src={logo}
-            alt="Kyochul Portfolio Logo"
-            id="main-logo"
-            loading="eager"
-          />
+        {/* Logo Section with Progressive Loading */}
+        <div className="text-center relative">
+          {!logoLoaded && (
+            <div className="mx-auto mt-5 h-52 md:h-60 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-full animate-pulse"
+                 style={{ width: '208px', height: '208px' }} />
+          )}
+          <picture>
+            {supportsWebP && (
+              <source srcSet="/logo-optimized.webp" type="image/webp" />
+            )}
+            <source srcSet="/logo-optimized.png" type="image/png" />
+            <img
+              className={`mx-auto mt-5 h-52 md:h-60 hover:animate-[shake_3s_infinite] transition-opacity duration-300 ${
+                logoLoaded ? 'opacity-100' : 'opacity-0 absolute top-0 left-1/2 -translate-x-1/2'
+              }`}
+              src={logo}
+              alt="Kyochul Portfolio Logo"
+              id="main-logo"
+              loading="eager"
+              onLoad={() => setLogoLoaded(true)}
+              fetchPriority="high"
+            />
+          </picture>
         </div>
 
         {/* Search Bar Section */}
@@ -56,9 +82,19 @@ const Main: React.FC = () => {
           </form>
         </section>
 
-        {/* Social Links Section */}
+        {/* Social Links Section with Lazy Loading */}
         <div className="mt-8">
-          <SocialLinks />
+          <Suspense fallback={
+            <div className="flex justify-center">
+              <div className="animate-pulse flex space-x-4">
+                <div className="rounded-full bg-gray-300 h-16 w-16"></div>
+                <div className="rounded-full bg-gray-300 h-16 w-16"></div>
+                <div className="rounded-full bg-gray-300 h-16 w-16"></div>
+              </div>
+            </div>
+          }>
+            <SocialLinks />
+          </Suspense>
         </div>
       </main>
     </div>
