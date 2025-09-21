@@ -6,6 +6,57 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Preload critical background image */
+body::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Smooth image transitions */
+.bg-transition {
+  transition: filter 0.7s ease-in-out, transform 0.7s ease-in-out;
+}
+
+/* Force GPU acceleration */
+.gpu-accelerated {
+  will-change: transform, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Typing cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+  font-weight: normal;
+}
+
+/* Character fade-in animation */
+@keyframes fadeInChar {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 /* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

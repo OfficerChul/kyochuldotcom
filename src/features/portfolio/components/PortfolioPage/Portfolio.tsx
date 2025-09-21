@@ -3,26 +3,62 @@ import logo from '../../../../assets/images/logos/triangle-green.png';
 import FancyBtn from '../../../../shared/components/ui/Button';
 import { Link } from 'react-router-dom';
 import Navigation from '../../../../shared/components/ui/Navigation';
-import { JackInTheBox, Fade } from 'react-awesome-reveal';
+import TypingAnimation from '../../../../shared/components/ui/TypingAnimation';
 
 const AboutMe = lazy(() => import('../AboutSection'));
 const Projects = lazy(() => import('../Projects'));
 const Footer = lazy(() => import('../../../../shared/components/ui/Footer'));
 
+// Base64 blur placeholder (20x20 heavily blurred version)
+const BLUR_PLACEHOLDER = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMBAgT/xAAYEAEBAQEBAAAAAAAAAAAAAAAAAQIRIf/EABYBAQEBAAAAAAAAAAAAAAAAAAIFBv/EABgRAQEAAwAAAAAAAAAAAAAAAAABERIh/9oADAMBAAIRAxEAPwDPYjhmlIqbM9JwTIMk8BZB/9k=';
+
 const Portfolio: React.FC = () => {
-  const [backgroundLoaded, setBackgroundLoaded] = useState(false);
+  const [backgroundStage, setBackgroundStage] = useState<'blur' | 'loading' | 'loaded'>('blur');
+  const [backgroundUrl, setBackgroundUrl] = useState(BLUR_PLACEHOLDER);
+  const [showSecondLine, setShowSecondLine] = useState(false);
+  const [showThirdLine, setShowThirdLine] = useState(false);
 
   useEffect(() => {
-    // Preload background image
-    const img = new Image();
-    img.src = require('../../../../assets/images/backgrounds/background.jpg');
-    img.onload = () => setBackgroundLoaded(true);
+    // First load the optimized version
+    const optimizedImg = new Image();
+    optimizedImg.src = process.env.PUBLIC_URL + '/preload-background.jpg';
+
+    optimizedImg.onload = () => {
+      setBackgroundUrl(process.env.PUBLIC_URL + '/preload-background.jpg');
+      setBackgroundStage('loading');
+
+      // Then load the full quality version
+      const fullImg = new Image();
+      fullImg.src = require('../../../../assets/images/backgrounds/background.jpg');
+      fullImg.onload = () => {
+        setBackgroundUrl(require('../../../../assets/images/backgrounds/background.jpg'));
+        setBackgroundStage('loaded');
+      };
+    };
+
+    // If optimized fails, load full directly
+    optimizedImg.onerror = () => {
+      const fullImg = new Image();
+      fullImg.src = require('../../../../assets/images/backgrounds/background.jpg');
+      fullImg.onload = () => {
+        setBackgroundUrl(require('../../../../assets/images/backgrounds/background.jpg'));
+        setBackgroundStage('loaded');
+      };
+    };
   }, []);
   return (
     <>
       <Navigation />
 
-      <header className={`pt-12 font-['Bungee'] ${backgroundLoaded ? "bg-[url('./assets/images/backgrounds/background.jpg')]" : 'bg-placeholder'} bg-no-repeat bg-cover bg-center h-screen relative transition-all duration-500`}>
+      <header
+        className={`pt-12 font-['Bungee'] bg-no-repeat bg-cover bg-center h-screen relative gpu-accelerated`}
+        style={{
+          backgroundImage: `url(${backgroundUrl})`,
+          filter: backgroundStage === 'blur' ? 'blur(20px)' : backgroundStage === 'loading' ? 'blur(2px)' : 'none',
+          transition: 'filter 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: 'scale(1.01)' // Slightly scale to hide blur edges
+        }}
+      >
         <div id="top">
           <Link to="/">
             <img
@@ -33,40 +69,52 @@ const Portfolio: React.FC = () => {
             />
           </Link>
 
-          <Fade cascade damping={3} direction="right">
-            <div />
-          </Fade>
-
-          <h1 className="text-black text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black">
+          <h1 className="text-black text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black h-[1.2em]">
             <span className="[-webkit-text-stroke:1px_#ffffff]">
-              <Fade cascade triggerOnce={true} damping={0.1} direction="right">
-                Welcome to
-              </Fade>
+              <TypingAnimation
+                text="Welcome to"
+                delay={300}
+                speed={50}
+                onComplete={() => setShowSecondLine(true)}
+                cursor={!showSecondLine}
+              />
             </span>
           </h1>
 
-          <h1 className="text-white text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black [-webkit-text-stroke:3px_#000000] max-[600px]:[-webkit-text-stroke:2px_#000000] origin-center-top">
-            <span>
-              <Fade cascade triggerOnce={true} damping={0.1} delay={400} direction="right">
-                My Website :)
-              </Fade>
-            </span>
+          <h1 className="text-white text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black [-webkit-text-stroke:3px_#000000] max-[600px]:[-webkit-text-stroke:2px_#000000] origin-center-top h-[1.2em]">
+            {showSecondLine && (
+              <span>
+                <TypingAnimation
+                  text="My Website :)"
+                  delay={100}
+                  speed={50}
+                  onComplete={() => setShowThirdLine(true)}
+                  cursor={!showThirdLine}
+                />
+              </span>
+            )}
           </h1>
 
-          <JackInTheBox cascade triggerOnce={true}>
+          {showThirdLine && (
             <div className="relative ml-1 md:bottom-10">
               <h2 className="absolute text-[12vw] [-webkit-text-stroke:2px_#000000] min-[481px]:[-webkit-text-stroke:3px_#000000] min-[641px]:[-webkit-text-stroke:5px_#000000] text-transparent">
-                <Fade cascade triggerOnce={true} damping={0.1} delay={800} direction="right">
-                  Kyochul Jang
-                </Fade>
+                <TypingAnimation
+                  text="Kyochul Jang"
+                  delay={100}
+                  speed={60}
+                  cursor={false}
+                />
               </h2>
               <h2 className="absolute text-[12vw] [-webkit-text-stroke:2px_#000000] min-[481px]:[-webkit-text-stroke:3px_#000000] min-[641px]:[-webkit-text-stroke:5px_#000000] text-[#b5ff08] animate-[animate_4s_ease-in-out_infinite]">
-                <Fade cascade triggerOnce={true} damping={0.1} delay={800} direction="right">
-                  Kyochul Jang
-                </Fade>
+                <TypingAnimation
+                  text="Kyochul Jang"
+                  delay={100}
+                  speed={60}
+                  cursor={false}
+                />
               </h2>
             </div>
-          </JackInTheBox>
+          )}
 
           <div className="flex absolute scale-50 left-[1px] top-[45vh] sm:scale-100 sm:top-[40vh] md:top-[20vh] lg:top-[28vh] 2xl:top-[32vh]">
             <FancyBtn url="#about1" btnText="About Me!" />
