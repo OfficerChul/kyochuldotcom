@@ -163,16 +163,18 @@ const Footer: React.FC = () => {
             rel="noopener noreferrer"
             className="block"
           >
-            <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-xl overflow-x-auto shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-              <GitHubCalendar
-                username="OfficerChul"
-                fontSize={isMobile ? 11 : 16}
-                blockSize={isMobile ? 9 : 18}
-                blockMargin={isMobile ? 2 : 4}
-                transformData={calendarTransformData}
-                labels={calendarLabels}
-                transformTotalCount={!isMobile}
-              />
+            <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-xl overflow-x-auto shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300 flex justify-center">
+              <div className="flex-shrink-0">
+                <GitHubCalendar
+                  username="OfficerChul"
+                  fontSize={isMobile ? 11 : 16}
+                  blockSize={isMobile ? 9 : 18}
+                  blockMargin={isMobile ? 2 : 4}
+                  transformData={calendarTransformData}
+                  labels={calendarLabels}
+                  transformTotalCount={!isMobile}
+                />
+              </div>
             </div>
           </a>
         </div>
