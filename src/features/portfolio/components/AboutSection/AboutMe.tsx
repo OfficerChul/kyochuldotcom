@@ -1,5 +1,6 @@
 import React from 'react';
-import myPic from '../../../../assets/images/profile/myPicture.jpg';
+import myPicOptimized from '../../../../assets/images/profile/myPicture-optimized.jpg';
+import myPicFull from '../../../../assets/images/profile/myPicture.jpg';
 import { Fade } from 'react-awesome-reveal';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
@@ -8,6 +9,14 @@ interface AboutMeProps {
 }
 
 const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
+  const [isImageLoaded, setIsImageLoaded] = React.useState(false);
+  const imgRef = React.useRef<HTMLImageElement | null>(null);
+
+  React.useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current?.naturalWidth) {
+      setIsImageLoaded(true);
+    }
+  }, []);
   const onButtonClick = (): void => {
     // Using JavaScript method to get PDF file
     fetch('Kyochul_Jang___CV.pdf')
@@ -43,13 +52,23 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <div className="lg:w-2/5 flex justify-center items-center">
               <div className="relative group w-full max-w-md">
-                <div className="absolute -inset-1 bg-gradient-to-r from-sky-300 to-blue-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                <div
+                  className={`absolute inset-0 z-10 rounded-2xl bg-slate-200 transition-opacity duration-500 ${isImageLoaded ? 'opacity-0' : 'opacity-100 animate-pulse'}`}
+                ></div>
+                <div className="pointer-events-none absolute -inset-1 z-0 bg-gradient-to-r from-sky-300/60 to-blue-400/60 rounded-2xl blur-lg opacity-0 group-hover:opacity-80 transition duration-500"></div>
                 <img
-                  src={myPic}
+                  ref={imgRef}
+                  src={myPicFull}
+                  srcSet={`${myPicOptimized} 600w, ${myPicFull} 1200w`}
                   alt="Kyochul Jang profile"
                   loading="lazy"
                   decoding="async"
-                  className="relative w-full h-full min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] object-cover rounded-2xl shadow-2xl transform transition duration-500 hover:scale-105"
+                  width={1200}
+                  height={1600}
+                  sizes="(min-width: 1280px) 480px, (min-width: 1024px) 420px, (min-width: 768px) 60vw, 80vw"
+                  onLoad={() => setIsImageLoaded(true)}
+                  onError={() => setIsImageLoaded(true)}
+                  className={`relative z-20 w-full h-full min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] object-cover rounded-2xl shadow-2xl transform transition duration-500 hover:scale-105 ${isImageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'}`}
                 />
               </div>
             </div>
