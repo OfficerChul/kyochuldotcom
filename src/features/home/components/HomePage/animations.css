@@ -23,7 +23,6 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(180deg, #eaf7ff 0%, #c9ebf5 55%, #f5f1e7 100%);
   overflow: hidden;
   pointer-events: none;
 }
@@ -35,15 +34,194 @@
   pointer-events: none;
 }
 
-.sky-layer::before {
+.sky-layer .time-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #1c2f4c 0%, #9fd4ff 52%, #ffffff 100%);
+  transition: background 1.5s ease, opacity 1.5s ease;
+}
+
+.sky-layer.stage-sunrise .time-gradient {
+  background: linear-gradient(180deg, #071830 0%, #ff8ba0 42%, #ffd8a3 72%, #ffffff 100%);
+}
+
+.sky-layer.stage-day .time-gradient {
+  background: linear-gradient(180deg, #5fbcff 0%, #9fe4ff 58%, #ffffff 100%);
+}
+
+.sky-layer.stage-sunset .time-gradient {
+  background: linear-gradient(180deg, #0f1d35 0%, #ff6f61 40%, #ffb774 68%, #ffffff 100%);
+}
+
+.sky-layer.stage-night .time-gradient {
+  background: linear-gradient(180deg, #040b1d 0%, #12213e 48%, #1c2f55 78%, #0b142b 100%);
+}
+
+.sky-layer .sun-halo {
+  position: absolute;
+  width: clamp(210px, 28vw, 320px);
+  height: clamp(210px, 28vw, 320px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 209, 140, 0.6) 0%, rgba(255, 209, 140, 0.35) 45%, rgba(255, 209, 140, 0) 75%);
+  filter: blur(10px);
+  transition: opacity 1.5s ease, background 1s ease;
+  z-index: 1;
+}
+
+.sky-layer.stage-sunrise .sun-halo {
+  background: radial-gradient(circle, rgba(255, 173, 135, 0.65) 0%, rgba(255, 173, 135, 0.35) 45%, rgba(255, 173, 135, 0) 75%);
+}
+
+.sky-layer.stage-sunset .sun-halo {
+  background: radial-gradient(circle, rgba(255, 142, 88, 0.7) 0%, rgba(255, 142, 88, 0.3) 50%, rgba(255, 142, 88, 0) 75%);
+}
+
+.sky-layer.stage-night .sun-halo {
+  opacity: 0;
+}
+
+.sky-layer .sun {
+  position: absolute;
+  width: clamp(150px, 18vw, 230px);
+  height: clamp(150px, 18vw, 230px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, #fff7d6, #ffc371 65%, #ff5f6d 100%);
+  box-shadow: 0 0 45px rgba(255, 196, 125, 0.75), 0 0 120px rgba(255, 209, 158, 0.45);
+  transition: opacity 1.5s ease, background 1s ease, box-shadow 1s ease;
+  z-index: 2;
+}
+
+.sky-layer.stage-sunrise .sun {
+  background: radial-gradient(circle at 40% 40%, #fff5ce, #ffb48a 60%, #ff7c6e 100%);
+}
+
+.sky-layer.stage-day .sun {
+  background: radial-gradient(circle at 30% 30%, #fffac0, #ffd166 65%, #f4a261 100%);
+  box-shadow: 0 0 60px rgba(255, 220, 140, 0.75), 0 0 150px rgba(255, 235, 170, 0.45);
+}
+
+.sky-layer.stage-sunset .sun {
+  background: radial-gradient(circle at 40% 40%, #ffe2ba, #ff9b6a 60%, #f15a29 100%);
+  box-shadow: 0 0 70px rgba(255, 134, 79, 0.75), 0 0 150px rgba(255, 94, 58, 0.4);
+}
+
+.sky-layer.stage-night .sun {
+  opacity: 0;
+}
+
+.sky-layer .moon {
+  position: absolute;
+  width: clamp(90px, 12vw, 140px);
+  height: clamp(90px, 12vw, 140px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, #ffffff, #dfe7ff 60%, #9aa9e1 100%);
+  box-shadow: 0 0 35px rgba(170, 190, 255, 0.75), 0 0 80px rgba(120, 150, 255, 0.4);
+  transition: opacity 1.5s ease, transform 1s ease;
+  opacity: 0;
+  z-index: 3;
+}
+
+.sky-layer .moon::after {
   content: '';
   position: absolute;
-  top: -90px;
-  right: 12%;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.92) 0%, rgba(255, 233, 163, 0.65) 40%, rgba(255, 210, 102, 0.15) 65%, transparent 75%);
-  filter: blur(0.5px);
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 60% 35%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
+  mix-blend-mode: screen;
+}
+
+.sky-layer .stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: 2;
+}
+
+.sky-layer .star {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+  animation: twinkle 3s ease-in-out infinite;
+  transform: scale(0.9);
+}
+
+.sky-layer .horizon-glow {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -34%;
+  height: 68%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 204, 173, 0.6) 0%, rgba(255, 204, 173, 0.05) 60%, rgba(255, 204, 173, 0) 80%);
+  filter: blur(30px);
+  transition: background 1.5s ease, opacity 1.5s ease;
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.sky-layer.stage-day .horizon-glow {
+  opacity: 0.35;
+  background: radial-gradient(ellipse at center, rgba(255, 220, 170, 0.45) 0%, rgba(255, 220, 170, 0.05) 60%, rgba(255, 220, 170, 0) 80%);
+}
+
+.sky-layer.stage-sunrise .horizon-glow {
+  opacity: 0.5;
+  background: radial-gradient(ellipse at center, rgba(255, 173, 135, 0.6) 0%, rgba(255, 173, 135, 0.1) 60%, rgba(255, 173, 135, 0) 80%);
+}
+
+.sky-layer.stage-sunset .horizon-glow {
+  opacity: 0.55;
+  background: radial-gradient(ellipse at center, rgba(255, 142, 88, 0.65) 0%, rgba(255, 142, 88, 0.12) 60%, rgba(255, 142, 88, 0) 80%);
+}
+
+.sky-layer.stage-night .horizon-glow {
+  opacity: 0.25;
+  background: radial-gradient(ellipse at center, rgba(80, 120, 255, 0.45) 0%, rgba(80, 120, 255, 0.08) 60%, rgba(80, 120, 255, 0) 80%);
+}
+
+.sky-layer .haze {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.55) 12%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0) 60%);
+  opacity: 0.42;
+  transition: opacity 1.5s ease, background 1.5s ease;
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+.sky-layer.stage-day .haze {
+  opacity: 0.32;
+}
+
+.sky-layer.stage-sunrise .haze {
+  opacity: 0.44;
+}
+
+.sky-layer.stage-sunset .haze {
+  opacity: 0.38;
+  background: linear-gradient(0deg, rgba(255, 183, 160, 0.6) 10%, rgba(255, 214, 186, 0.25) 45%, rgba(255, 214, 186, 0) 65%);
+}
+
+.sky-layer.stage-night .haze {
+  opacity: 0.24;
+  background: linear-gradient(0deg, rgba(28, 42, 86, 0.65) 0%, rgba(28, 42, 86, 0.2) 40%, rgba(28, 42, 86, 0) 65%);
+  mix-blend-mode: normal;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 .cloud {
