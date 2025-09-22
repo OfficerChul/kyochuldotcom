@@ -6,43 +6,61 @@ import './animations.css';
 
 const SocialLinks = lazy(() => import('../SocialLinks'));
 
+const CLOUD_CLASSES = [
+  { id: 'cloud-one', className: 'cloud--one' },
+  { id: 'cloud-two', className: 'cloud--two' },
+  { id: 'cloud-three', className: 'cloud--three' },
+  { id: 'cloud-four', className: 'cloud--four' }
+];
+
 const Main: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [supportsWebP, setSupportsWebP] = useState(false);
 
-  // Check WebP support
+  // Check WebP support (used by the logo source set)
   useEffect(() => {
     const webP = new Image();
     webP.onload = webP.onerror = () => {
       setSupportsWebP(webP.height === 2);
     };
-    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+    webP.src =
+      'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
   }, []);
 
-  // Auto-focus search bar on mount
+  // Auto-focus search bar on mount for a snappier UX
   useEffect(() => {
     searchInputRef.current?.focus();
   }, []);
 
   return (
-    <div className="bg-[#c9ebf5] min-h-screen">
-      <Navigation />
+    <div className="relative min-h-screen overflow-hidden bg-[#c9ebf5]">
+      <div className="sky-layer" aria-hidden="true" />
 
-      <main className="mt-20">
+      <div className="cloud-layer" aria-hidden="true">
+        {CLOUD_CLASSES.map(({ id, className }) => (
+          <span key={id} className={`cloud ${className}`} />
+        ))}
+      </div>
+
+      <div className="relative z-20">
+        <Navigation />
+      </div>
+
+      <main className="relative z-20 mt-20 pb-40 pointer-events-none">
         {/* Logo Section with Progressive Loading */}
-        <div className="text-center relative">
+        <div className="text-center relative pointer-events-none">
           {!logoLoaded && (
-            <div className="mx-auto mt-5 h-52 md:h-60 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-full animate-pulse"
-                 style={{ width: '208px', height: '208px' }} />
+            <div
+              className="mx-auto mt-5 h-52 md:h-60 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-full animate-pulse"
+              style={{ width: '208px', height: '208px' }}
+            />
           )}
-          <picture>
-            {supportsWebP && (
-              <source srcSet="/logo-optimized.webp" type="image/webp" />
-            )}
+          <picture className="pointer-events-auto">
+            {supportsWebP && <source srcSet="/logo-optimized.webp" type="image/webp" />}
             <source srcSet="/logo-optimized.png" type="image/png" />
             <img
-              className={`mx-auto mt-5 h-52 md:h-60 hover:animate-[shake_3s_infinite] transition-opacity duration-300 ${
+              className={`relative z-40 mx-auto mt-5 h-52 md:h-60 hover:animate-[shake_3s_infinite] transition-opacity duration-300 ${
                 logoLoaded ? 'opacity-100' : 'opacity-0 absolute top-0 left-1/2 -translate-x-1/2'
               }`}
               src={logo}
@@ -56,7 +74,7 @@ const Main: React.FC = () => {
         </div>
 
         {/* Search Bar Section */}
-        <section className="mt-8" aria-label="Google Search">
+        <section className="mt-8 pointer-events-auto" aria-label="Google Search">
           <form action="https://www.google.com/search" method="GET">
             <div className="w-full flex items-center justify-center">
               <div className="relative w-3/4 md:w-1/2 lg:w-2/5">
@@ -83,16 +101,18 @@ const Main: React.FC = () => {
         </section>
 
         {/* Social Links Section with Lazy Loading */}
-        <div className="mt-8">
-          <Suspense fallback={
-            <div className="flex justify-center">
-              <div className="animate-pulse flex space-x-4">
-                <div className="rounded-full bg-gray-300 h-16 w-16"></div>
-                <div className="rounded-full bg-gray-300 h-16 w-16"></div>
-                <div className="rounded-full bg-gray-300 h-16 w-16"></div>
+        <div className="mt-8 pointer-events-auto">
+          <Suspense
+            fallback={
+              <div className="flex justify-center">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="rounded-full bg-gray-300 h-16 w-16" />
+                  <div className="rounded-full bg-gray-300 h-16 w-16" />
+                  <div className="rounded-full bg-gray-300 h-16 w-16" />
+                </div>
               </div>
-            </div>
-          }>
+            }
+          >
             <SocialLinks />
           </Suspense>
         </div>
