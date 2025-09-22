@@ -47,6 +47,8 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                 <img
                   src={myPic}
                   alt="Kyochul Jang profile"
+                  loading="lazy"
+                  decoding="async"
                   className="relative w-full h-full min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] object-cover rounded-2xl shadow-2xl transform transition duration-500 hover:scale-105"
                 />
               </div>

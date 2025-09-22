@@ -7,12 +7,15 @@ const PDF_PATH = path.resolve(__dirname, '../public/Kyochul_Jang___CV.pdf');
 const OUT_PATH = path.resolve(__dirname, '../src/features/portfolio/components/Publications/publications.json');
 
 function parsePublicationItem(text) {
+  const stripped = text.replace(/^\s*[ivxlcdm]+\)\s*/i, '').trim();
+  const normalizedEntry = stripped.replace(/,\s*(?=[A-Z])/g, ', ').replace(/\s+/g, ' ').trim();
+
   // Extract from pattern: "Author1, Author2, ... (YEAR). Title. Venue. URL"
-  const yearMatch = text.match(/\((\d{4})\)/);
+  const yearMatch = normalizedEntry.match(/\((\d{4})\)/);
   const year = yearMatch ? parseInt(yearMatch[1], 10) : undefined;
   
   // Split by year to get authors part
-  const parts = text.split(/\(\d{4}\)\.?\s*/);
+  const parts = normalizedEntry.split(/\(\d{4}\)\.?\s*/);
   const authorsPart = parts[0] ? parts[0].trim() : '';
   const restPart = parts[1] ? parts[1].trim() : '';
   
@@ -55,42 +58,70 @@ function parsePublicationItem(text) {
 }
 
 function extractPublications(text) {
-  // Find Publications section
   const lines = text.split(/\r?\n/);
+  const sectionBoundaries = [
+    'Awards and Honors',
+    'Awards & Honors',
+    'Awards',
+    'Honors',
+    'Patents',
+    'Work Experience',
+    'Professional Experience',
+    'Teaching',
+    'Education',
+    'Service',
+    'Activities',
+    'Leadership',
+    'Talks',
+    'Presentations',
+    'Projects'
+  ].map(header => header.toLowerCase());
+
   let inPublications = false;
-  let publicationText = '';
-  
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    
-    // Start capturing when we find "Publications"
-    if (/^Publications?$/i.test(line)) {
-      inPublications = true;
-      continue;
+  const items = [];
+  let currentItem = '';
+
+  lines.forEach(rawLine => {
+    const line = rawLine.trim();
+
+    if (!inPublications) {
+      if (/^Publications?$/i.test(line)) {
+        inPublications = true;
+      }
+      return;
     }
-    
-    // Stop when we hit another major section (all caps header)
-    if (inPublications && /^[A-Z][A-Z\s]{2,}$/.test(line) && !/publications?/i.test(line)) {
-      break;
+
+    if (!line) {
+      return;
     }
-    
-    // Capture publication lines
-    if (inPublications && line) {
-      publicationText += line + '\n';
+
+    const normalized = line.toLowerCase();
+    if (sectionBoundaries.some(header => normalized.startsWith(header))) {
+      if (currentItem.trim()) {
+        items.push(currentItem.trim());
+      }
+      currentItem = '';
+      inPublications = false;
+      return;
     }
+
+    if (/^\s*[ivxlcdm]+\)/i.test(line)) {
+      if (currentItem.trim()) {
+        items.push(currentItem.trim());
+      }
+      currentItem = line;
+    } else {
+      currentItem = currentItem ? `${currentItem} ${line}` : line;
+    }
+  });
+
+  if (currentItem.trim()) {
+    items.push(currentItem.trim());
   }
-  
-  // Split by roman numerals pattern: i), ii), iii), etc.
-  const items = publicationText.split(/(?:^|\n)\s*[ivxlcdm]+\)\s+/gi)
-    .filter(item => item.trim().length > 0);
-  
-  // Parse each publication
-  const publications = items.map(item => {
-    const cleanItem = item.replace(/\s+/g, ' ').trim();
-    return parsePublicationItem(cleanItem);
-  }).filter(pub => pub.title && pub.title.length > 3);
-  
-  return publications;
+
+  return items
+    .map(item => parsePublicationItem(item))
+    .filter(pub => pub.title && pub.title.length > 3);
 }
 
 (async () => {

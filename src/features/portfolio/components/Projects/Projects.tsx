@@ -36,6 +36,8 @@ const Projects: React.FC<ProjectsProps> = memo(({ id }) => {
                   <img
                     src={project.img}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
