@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
-import publications from './publications.json';
+import publicationsData from './publications.json';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
 interface PublicationsProps {
@@ -14,6 +14,8 @@ type Publication = {
   year?: number;
   link?: string;
 };
+
+const publications = publicationsData as Publication[];
 
 const getRomanNumeral = (num: number): string => {
   if (num <= 0) {
