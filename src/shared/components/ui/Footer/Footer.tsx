@@ -5,7 +5,8 @@ import { FancyButtonSmall } from '../Button';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const [likes, setLikes] = useState(0);
+  // Start with 998 likes by default
+  const [likes, setLikes] = useState(998);
   const [hasLiked, setHasLiked] = useState(false);
   const [isMobile, setIsMobile] = useState(() => (typeof window !== 'undefined' ? window.innerWidth < 640 : false));
 
@@ -136,7 +137,9 @@ const Footer: React.FC = () => {
                 ariaLabel="Like this site"
               >
                 <span className="mr-1">💗</span>
-                <span>{hasLiked ? 'Liked' : 'Like'} ({likes})</span>
+                <span>
+                  {hasLiked ? 'Liked' : 'Like'} ({likes >= 999 ? '999+' : likes})
+                </span>
               </FancyButtonSmall>
 
               <FancyButtonSmall
