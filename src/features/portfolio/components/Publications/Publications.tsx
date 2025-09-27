@@ -52,6 +52,19 @@ const getRomanNumeral = (num: number): string => {
 
 const Publications: React.FC<PublicationsProps> = ({ id }) => {
   const [showAll, setShowAll] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleToggle = () => {
+    if (!showAll) {
+      setShowAll(true);
+    } else {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setShowAll(false);
+        setIsAnimating(false);
+      }, 600); // 애니메이션이 완료된 후 숨기기
+    }
+  };
 
   return (
     <>
@@ -64,6 +77,17 @@ const Publications: React.FC<PublicationsProps> = ({ id }) => {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(-20px);
           }
         }
       `}</style>
@@ -85,13 +109,14 @@ const Publications: React.FC<PublicationsProps> = ({ id }) => {
             ) : (
               <>
                 <ol className="space-y-3 list-none">
-                  {(showAll ? publications : publications.slice(0, 5)).map((pub, index) => (
+                  {(showAll || isAnimating ? publications : publications.slice(0, 5)).map((pub, index) => (
                     <li
                       key={index}
                       className="flex gap-3 items-start"
                       style={{
-                        animation: showAll && index >= 5 ? 'slideDown 0.3s ease-out forwards' : undefined,
-                        animationDelay: showAll && index >= 5 ? `${(index - 5) * 0.1}s` : '0s'
+                        animation: showAll && !isAnimating && index >= 5 ? 'slideDown 0.3s ease-out forwards' :
+                                 isAnimating && index >= 5 ? 'slideUp 0.3s ease-out forwards' : undefined,
+                        animationDelay: index >= 5 ? `${(index - 5) * 0.1}s` : '0s'
                       }}
                     >
                       <span className="text-sky-500 font-mono font-bold text-sm flex-shrink-0 w-11 text-right">
@@ -153,7 +178,7 @@ const Publications: React.FC<PublicationsProps> = ({ id }) => {
                 </ol>
                 {publications.length > 5 && (
                   <button
-                    onClick={() => setShowAll(!showAll)}
+                    onClick={handleToggle}
                     className="mt-6 mx-auto block px-6 py-2 text-sky-500 hover:text-sky-600 font-mono font-semibold border-2 border-sky-300 hover:border-sky-400 rounded-lg transition-colors duration-200"
                   >
                     {showAll ? 'Show Less ↑' : 'Show More ↓'}
