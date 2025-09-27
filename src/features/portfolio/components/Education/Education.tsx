@@ -10,7 +10,7 @@ const EDUCATIONS = [
     school: 'Seoul National University',
     department: 'Graduate School of AI',
     degree: 'Ph.D. in Artificial Intelligence',
-    period: '2025.09 - Present',
+    period: '2024.09 - Present',
     note: 'Advisor: Prof. Youngjae Yu',
   },
   {

@@ -5,10 +5,18 @@ interface NewsProps {
   id?: string;
 }
 
-const NEWS_ITEMS = [
-  { date: '2025-09', text: 'Started PhD at SNU GSAI (SNUPI Lab).' },
-  { date: '2025-08', text: 'Selected for SKT AI Fellowship.' },
-  // Add more news items as needed
+interface NewsItem {
+  date: string;
+  text: string;
+  link?: string;
+}
+
+const NEWS_ITEMS: NewsItem[] = [
+  { date: '2025-09', text: 'Teaching Assistant at SNU: Data Structures and Algorithms, and AI Seminar.' },
+  { date: '2025-09', text: 'Code Voyager accepted as UIST 2025 Poster.', link: '#' },
+  { date: '2025-05', text: 'DICE Bench accepted to ACL 2025 Findings.', link: '#' },
+  { date: '2025-05', text: 'Selected for SKT AI Fellowship.' },
+  { date: '2024-09', text: 'Started PhD at SNU GSAI (SNUPI Lab).' },
 ];
 
 const News: React.FC<NewsProps> = ({ id }) => {
@@ -52,7 +60,18 @@ const News: React.FC<NewsProps> = ({ id }) => {
                   }}
                 >
                   <span className="text-sky-500 font-mono font-semibold min-w-[90px]">{item.date}</span>
-                  <span className="font-mono text-gray-700">{item.text}</span>
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-gray-700 underline decoration-sky-300 hover:decoration-sky-400 underline-offset-2"
+                    >
+                      {item.text}
+                    </a>
+                  ) : (
+                    <span className="font-mono text-gray-700">{item.text}</span>
+                  )}
                 </li>
               ))}
             </ul>
