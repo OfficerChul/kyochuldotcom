@@ -134,9 +134,50 @@
 }
 
 .portfolio-button {
-  animation: blink-outline 1s linear infinite;
+  animation: jumpAndPress 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
   outline: 3px solid transparent;
   color: #fce903;
+  transform-origin: center bottom;
+  position: relative;
+}
+
+.portfolio-button::before {
+  opacity: 1 !important;
+  animation: yellowRotateBorder 2s linear infinite !important;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(252, 233, 3, 0.6) 60deg,
+    transparent 120deg,
+    rgba(252, 233, 3, 0.6) 180deg,
+    transparent 240deg,
+    rgba(252, 233, 3, 0.6) 300deg,
+    transparent 360deg
+  ) !important;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    white calc(100% - 3px)
+  ) !important;
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    white calc(100% - 3px)
+  ) !important;
+}
+
+.portfolio-button::after {
+  opacity: 1 !important;
+  animation: yellowPulse 1.5s ease-in-out infinite !important;
+  background: radial-gradient(
+    circle at center,
+    transparent 32px,
+    rgba(252, 233, 3, 0.8) 35px,
+    transparent 38px
+  ) !important;
+  box-shadow:
+    0 0 25px rgba(252, 233, 3, 0.6),
+    inset 0 0 15px rgba(252, 233, 3, 0.2) !important;
 }
 
 .portfolio-button .social-link-button__surface {
@@ -145,6 +186,7 @@
     inset 0 4px 0 rgba(255, 255, 255, 0.9),
     inset 0 -5px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px rgba(0, 0, 0, 0.12);
+  animation: surfacePress 3s ease-in-out infinite;
 }
 
 .portfolio-button:hover .social-link-button__surface {
@@ -166,5 +208,124 @@
 @media (min-width: 768px) {
   .social-link-button {
     margin: 0.625rem;
+  }
+}
+
+@keyframes jumpAndPress {
+  0%, 100% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  }
+  8% {
+    transform: translateY(2px) scaleX(1.1) scaleY(0.9);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  12% {
+    transform: translateY(-4px) scaleX(0.95) scaleY(1.08);
+    box-shadow: 0 14px 16px rgba(0, 0, 0, 0.16);
+  }
+  16% {
+    transform: translateY(-18px) scaleX(0.92) scaleY(1.1);
+    box-shadow: 0 28px 24px rgba(0, 0, 0, 0.12);
+  }
+  20% {
+    transform: translateY(-12px) scaleX(0.95) scaleY(1.05);
+    box-shadow: 0 22px 20px rgba(0, 0, 0, 0.14);
+  }
+  24% {
+    transform: translateY(0) scaleX(1.05) scaleY(0.95);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  }
+  26% {
+    transform: translateY(-2px) scaleX(0.98) scaleY(1.02);
+    box-shadow: 0 12px 15px rgba(0, 0, 0, 0.17);
+  }
+  28% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  }
+  40% {
+    transform: translateY(2px) scaleX(1.08) scaleY(0.92);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  42% {
+    transform: translateY(6px) scaleX(0.96) scaleY(0.94);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.24);
+  }
+  45% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  }
+  60% {
+    transform: translateY(1px) scaleX(1.06) scaleY(0.94);
+    box-shadow: 0 9px 13px rgba(0, 0, 0, 0.19);
+  }
+  62% {
+    transform: translateY(-10px) scaleX(0.94) scaleY(1.06);
+    box-shadow: 0 20px 18px rgba(0, 0, 0, 0.14);
+  }
+  65% {
+    transform: translateY(-3px) scaleX(0.98) scaleY(1.02);
+    box-shadow: 0 13px 15px rgba(0, 0, 0, 0.16);
+  }
+  68% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  }
+  82% {
+    transform: translateY(1px) scaleX(1.04) scaleY(0.96);
+    box-shadow: 0 9px 13px rgba(0, 0, 0, 0.19);
+  }
+  84% {
+    transform: translateY(4px) scaleX(0.97) scaleY(0.95);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.22);
+  }
+  86% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  }
+}
+
+@keyframes surfacePress {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(1px) scale(0.99);
+  }
+  28% {
+    transform: translateY(2px) scale(0.97);
+  }
+  65% {
+    transform: translateY(1px) scale(0.99);
+  }
+  67% {
+    transform: translateY(2px) scale(0.98);
+  }
+  78% {
+    transform: translateY(1px) scale(0.99);
+  }
+  80% {
+    transform: translateY(2px) scale(0.98);
+  }
+}
+
+@keyframes yellowRotateBorder {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes yellowPulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
   }
 }
