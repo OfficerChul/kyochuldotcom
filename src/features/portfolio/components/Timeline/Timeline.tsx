@@ -86,14 +86,14 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
               50% { filter: brightness(1.8); }
             }
           `}</style>
-          {/* center line (desktop only) */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 h-full w-[2px] bg-gradient-to-b from-sky-200 via-sky-300 to-sky-200 rounded-full" />
+          {/* central line under content (all breakpoints) */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-[2px] bg-gradient-to-b from-sky-200 via-sky-300 to-sky-200 rounded-full z-0" />
 
           <ol className="space-y-2 md:space-y-3">
             {ITEMS.map((item, idx) => {
               const isLeft = idx % 2 === 0;
               return (
-                <li key={`${item.org}-${idx}`} className="grid grid-cols-1 md:grid-cols-9 md:gap-6 lg:gap-8 items-center">
+                <li key={`${item.org}-${idx}`} className="relative grid grid-cols-1 md:grid-cols-9 md:gap-6 lg:gap-8 items-center z-10">
                   {/* left side (desktop) */}
                   <div className="hidden md:flex md:justify-end md:col-span-4">
                     {isLeft && (
@@ -103,8 +103,8 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
                     )}
                   </div>
 
-                  {/* marker (desktop) */}
-                  <div className="hidden md:flex items-center justify-center md:col-span-1">
+                  {/* marker */}
+                  <div className="flex md:flex items-center justify-center md:col-span-1 my-1">
                     <span
                       className="relative block h-3 w-3 rounded-full bg-sky-200"
                       style={{ boxShadow: '0 0 0 2px rgba(125,211,252,0.45)' }}
@@ -122,8 +122,12 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
                     )}
                   </div>
 
-                  {/* mobile single column */}
-                  <div className="md:hidden">
+                  {/* mobile marker aligned to center line */}
+                  <div className="md:hidden absolute left-1/2 -translate-x-1/2 top-2 z-0">
+                    <span className="block h-2.5 w-2.5 rounded-full bg-sky-400" style={{ animation: 'innerBlink 1.6s ease-in-out infinite' }}></span>
+                  </div>
+                  {/* mobile single column (full width with slight margin) */}
+                  <div className="md:hidden px-4">
                     <Card item={item} />
                   </div>
                 </li>
@@ -138,18 +142,18 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
 
 const Card: React.FC<{ item: TimelineItem; align?: 'left' | 'right' }> = ({ item }) => {
   return (
-    <div className={`relative bg-white rounded-md shadow-md border-2 border-sky-200 p-2 md:p-2 transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl hover:border-purple-500`}>
-      <h3 className="text-[12px] md:text-[13px] font-semibold text-gray-900 pr-14">{item.title}</h3>
+    <div className={`relative bg-white/80 backdrop-blur-sm rounded-md shadow-md border-2 border-sky-200 p-2 md:p-2 transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl hover:border-purple-500`}>
+      <h3 className="text-[12px] md:text-[13px] font-semibold text-gray-900 pr-20 break-words">{item.title}</h3>
       <span
-        className="absolute top-1 right-2 text-[8.5px] px-1 py-[0px] rounded border border-current whitespace-nowrap"
+        className="absolute top-1 right-2 text-[8.5px] px-1 py-[0px] rounded border border-current whitespace-nowrap bg-white/90 backdrop-blur-sm pointer-events-none"
         style={{ color: item.color, borderColor: item.color }}
       >
         {item.org}
       </span>
       {item.descNode ? (
-        <p className="mt-0.5 text-[10px] leading-tight text-gray-700">{item.descNode}</p>
+        <p className="mt-0.5 text-[10px] leading-tight text-gray-700 break-words">{item.descNode}</p>
       ) : item.desc ? (
-        <p className="mt-0.5 text-[10px] leading-tight text-gray-700">{item.desc}</p>
+        <p className="mt-0.5 text-[10px] leading-tight text-gray-700 break-words">{item.desc}</p>
       ) : null}
       {/* period at bottom-left for all alignments */}
       <div className="absolute left-2 bottom-1 text-[8px] uppercase tracking-wide text-gray-500">
