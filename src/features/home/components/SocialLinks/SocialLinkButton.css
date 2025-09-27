@@ -134,7 +134,18 @@
 }
 
 .portfolio-button {
-  animation: jumpAndPress 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  --jump-load: 4.5px;
+  --jump-apex: -18px;
+  --jump-secondary: -11px;
+  --jump-float: -5px;
+  --landing-depth: 5.5px;
+  --landing-rebound: -2px;
+  --surface-load: 2.6px;
+  --surface-apex: -6px;
+  --surface-float: -2.2px;
+  --surface-landing: 2.4px;
+  --surface-rebound: -1px;
+  animation: jumpAndPress 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   outline: 3px solid transparent;
   color: #fce903;
   transform-origin: center bottom;
@@ -186,7 +197,7 @@
     inset 0 4px 0 rgba(255, 255, 255, 0.9),
     inset 0 -5px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px rgba(0, 0, 0, 0.12);
-  animation: surfacePress 3s ease-in-out infinite;
+  animation: surfacePress 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .portfolio-button:hover .social-link-button__surface {
@@ -212,101 +223,96 @@
 }
 
 @keyframes jumpAndPress {
-  0%, 100% {
-    transform: translateY(0) scaleX(1) scaleY(1);
-    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  /* Rest position */
+  0%, 70%, 100% {
+    transform: translate3d(0, 0, 0) scaleX(1) scaleY(1);
   }
+  /* Anticipation squash */
   8% {
-    transform: translateY(2px) scaleX(1.1) scaleY(0.9);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: translate3d(0, var(--jump-load), 0) scaleX(1.05) scaleY(0.95);
   }
+  /* Launch */
   12% {
-    transform: translateY(-4px) scaleX(0.95) scaleY(1.08);
-    box-shadow: 0 14px 16px rgba(0, 0, 0, 0.16);
+    transform: translate3d(0, -2px, 0) scaleX(0.98) scaleY(1.02);
   }
-  16% {
-    transform: translateY(-18px) scaleX(0.92) scaleY(1.1);
-    box-shadow: 0 28px 24px rgba(0, 0, 0, 0.12);
-  }
-  20% {
-    transform: translateY(-12px) scaleX(0.95) scaleY(1.05);
-    box-shadow: 0 22px 20px rgba(0, 0, 0, 0.14);
-  }
-  24% {
-    transform: translateY(0) scaleX(1.05) scaleY(0.95);
-    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
-  }
+  /* Apex - highest point */
   26% {
-    transform: translateY(-2px) scaleX(0.98) scaleY(1.02);
-    box-shadow: 0 12px 15px rgba(0, 0, 0, 0.17);
+    transform: translate3d(0, var(--jump-apex), 0) scaleX(0.95) scaleY(1.05);
   }
-  28% {
-    transform: translateY(0) scaleX(1) scaleY(1);
-    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  /* Falling */
+  38% {
+    transform: translate3d(0, var(--jump-secondary), 0) scaleX(0.97) scaleY(1.03);
   }
-  40% {
-    transform: translateY(2px) scaleX(1.08) scaleY(0.92);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  /* Pre-landing glide */
+  48% {
+    transform: translate3d(0, -2px, 0) scaleX(1.01) scaleY(0.99);
   }
-  42% {
-    transform: translateY(6px) scaleX(0.96) scaleY(0.94);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.24);
+  /* First contact (softer) */
+  52% {
+    transform: translate3d(0, calc(var(--landing-depth) * 0.35), 0) scaleX(1.04) scaleY(0.96);
   }
-  45% {
-    transform: translateY(0) scaleX(1) scaleY(1);
-    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  /* Max compression */
+  56% {
+    transform: translate3d(0, var(--landing-depth), 0) scaleX(1.08) scaleY(0.92);
   }
+  /* Rebound */
   60% {
-    transform: translateY(1px) scaleX(1.06) scaleY(0.94);
-    box-shadow: 0 9px 13px rgba(0, 0, 0, 0.19);
+    transform: translate3d(0, var(--landing-rebound), 0) scaleX(0.99) scaleY(1.01);
   }
-  62% {
-    transform: translateY(-10px) scaleX(0.94) scaleY(1.06);
-    box-shadow: 0 20px 18px rgba(0, 0, 0, 0.14);
+  /* Dampened settle below */
+  63% {
+    transform: translate3d(0, calc(var(--landing-depth) * 0.08), 0) scaleX(1.01) scaleY(0.99);
   }
-  65% {
-    transform: translateY(-3px) scaleX(0.98) scaleY(1.02);
-    box-shadow: 0 13px 15px rgba(0, 0, 0, 0.16);
-  }
-  68% {
-    transform: translateY(0) scaleX(1) scaleY(1);
-    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
-  }
-  82% {
-    transform: translateY(1px) scaleX(1.04) scaleY(0.96);
-    box-shadow: 0 9px 13px rgba(0, 0, 0, 0.19);
-  }
-  84% {
-    transform: translateY(4px) scaleX(0.97) scaleY(0.95);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.22);
-  }
-  86% {
-    transform: translateY(0) scaleX(1) scaleY(1);
-    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
+  /* Near rest */
+  66% {
+    transform: translate3d(0, calc(var(--landing-depth) * 0.02), 0) scaleX(1.005) scaleY(0.995);
   }
 }
 
 @keyframes surfacePress {
-  0%, 100% {
-    transform: translateY(0) scale(1);
+  /* Rest position */
+  0%, 70%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
   }
-  25% {
-    transform: translateY(1px) scale(0.99);
+  /* Anticipation */
+  8% {
+    transform: translate3d(0, var(--surface-load), 0) scale(0.97);
   }
-  28% {
-    transform: translateY(2px) scale(0.97);
+  /* Launch */
+  12% {
+    transform: translate3d(0, -1px, 0) scale(1.01);
   }
-  65% {
-    transform: translateY(1px) scale(0.99);
+  /* Apex */
+  26% {
+    transform: translate3d(0, var(--surface-apex), 0) scale(1.02);
   }
-  67% {
-    transform: translateY(2px) scale(0.98);
+  /* Falling */
+  38% {
+    transform: translate3d(0, var(--surface-float), 0) scale(1.01);
   }
-  78% {
-    transform: translateY(1px) scale(0.99);
+  /* Pre-landing */
+  48% {
+    transform: translate3d(0, 0.5px, 0) scale(0.99);
   }
-  80% {
-    transform: translateY(2px) scale(0.98);
+  /* First contact (softer) */
+  52% {
+    transform: translate3d(0, calc(var(--surface-landing) * 0.35), 0) scale(0.985);
+  }
+  /* Landing impact */
+  56% {
+    transform: translate3d(0, var(--surface-landing), 0) scale(0.96);
+  }
+  /* Small bounce */
+  60% {
+    transform: translate3d(0, var(--surface-rebound), 0) scale(1.005);
+  }
+  /* Dampened settle */
+  63% {
+    transform: translate3d(0, calc(var(--surface-landing) * 0.08), 0) scale(0.997);
+  }
+  /* Near rest */
+  66% {
+    transform: translate3d(0, calc(var(--surface-landing) * 0.02), 0) scale(0.999);
   }
 }
 
