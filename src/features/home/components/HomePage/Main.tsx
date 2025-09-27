@@ -158,9 +158,9 @@ const Main: React.FC = () => {
       'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
   }, []);
 
-  // Auto-focus search bar on mount for a snappier UX
+  // Disable auto-focus on mount to avoid mobile keyboard popping up
   useEffect(() => {
-    searchInputRef.current?.focus();
+    // Intentionally do not focus the search input on load
   }, []);
 
   useEffect(() => {

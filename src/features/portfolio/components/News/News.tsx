@@ -69,14 +69,14 @@ const News: React.FC<NewsProps> = ({ id }) => {
 
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="max-w-4xl mx-auto">
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {NEWS_ITEMS.map((item, index) => (
                 <li
                   key={index}
-                  className="flex flex-col sm:flex-row gap-2 sm:gap-4"
+                  className="flex flex-row items-center gap-2 sm:gap-4"
                 >
-                  <span className="text-sky-500 font-mono font-semibold min-w-[90px]">{item.date}</span>
-                  <span className="font-mono text-gray-700">
+                  <span className="text-sky-500 font-mono font-semibold min-w-[84px] sm:min-w-[90px] whitespace-nowrap">{item.date}</span>
+                  <span className="font-mono text-gray-700 flex-1">
                     {highlightInstitutions(item.text)}{item.text.trimEnd().endsWith('!') ? '' : '!'}
                   </span>
                   {item.link && (

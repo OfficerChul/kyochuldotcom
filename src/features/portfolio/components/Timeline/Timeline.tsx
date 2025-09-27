@@ -93,7 +93,8 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
             {ITEMS.map((item, idx) => {
               const isLeft = idx % 2 === 0;
               return (
-                <li key={`${item.org}-${idx}`} className="relative grid grid-cols-1 md:grid-cols-9 md:gap-6 lg:gap-8 items-center z-10">
+                <React.Fragment key={`${item.org}-${idx}`}>
+                <li className="relative grid grid-cols-1 md:grid-cols-9 md:gap-6 lg:gap-8 items-center z-10">
                   {/* left side (desktop) */}
                   <div className="hidden md:flex md:justify-end md:col-span-4">
                     {isLeft && (
@@ -103,8 +104,8 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
                     )}
                   </div>
 
-                  {/* marker */}
-                  <div className="flex md:flex items-center justify-center md:col-span-1 my-1">
+                  {/* marker (desktop only here; mobile uses absolute marker below) */}
+                  <div className="hidden md:flex items-center justify-center md:col-span-1 my-1">
                     <span
                       className="relative block h-3 w-3 rounded-full bg-sky-200"
                       style={{ boxShadow: '0 0 0 2px rgba(125,211,252,0.45)' }}
@@ -122,15 +123,18 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
                     )}
                   </div>
 
-                  {/* mobile marker aligned to center line */}
-                  <div className="md:hidden absolute left-1/2 -translate-x-1/2 top-2 z-0">
-                    <span className="block h-2.5 w-2.5 rounded-full bg-sky-400" style={{ animation: 'innerBlink 1.6s ease-in-out infinite' }}></span>
-                  </div>
+                  {/* mobile marker between cards: render after li as separator */}
                   {/* mobile single column (full width with slight margin) */}
                   <div className="md:hidden px-4">
                     <Card item={item} />
                   </div>
                 </li>
+                {idx < ITEMS.length - 1 && (
+                  <div className="md:hidden relative h-6">
+                    <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-3 w-3 rounded-full bg-sky-400" style={{ animation: 'innerBlink 1.6s ease-in-out infinite' }}></span>
+                  </div>
+                )}
+                </React.Fragment>
               );
             })}
           </ol>
@@ -143,13 +147,15 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
 const Card: React.FC<{ item: TimelineItem; align?: 'left' | 'right' }> = ({ item }) => {
   return (
     <div className={`relative bg-white/80 backdrop-blur-sm rounded-md shadow-md border-2 border-sky-200 p-2 md:p-2 transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl hover:border-purple-500`}>
-      <h3 className="text-[12px] md:text-[13px] font-semibold text-gray-900 pr-20 break-words">{item.title}</h3>
-      <span
-        className="absolute top-1 right-2 text-[8.5px] px-1 py-[0px] rounded border border-current whitespace-nowrap bg-white/90 backdrop-blur-sm pointer-events-none"
-        style={{ color: item.color, borderColor: item.color }}
-      >
-        {item.org}
-      </span>
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="text-[12px] md:text-[13px] font-semibold text-gray-900 break-words flex-1">{item.title}</h3>
+        <span
+          className="text-[8.5px] px-1 py-[0px] rounded border border-current whitespace-nowrap bg-white/90 backdrop-blur-sm pointer-events-none"
+          style={{ color: item.color, borderColor: item.color }}
+        >
+          {item.org}
+        </span>
+      </div>
       {item.descNode ? (
         <p className="mt-0.5 text-[10px] leading-tight text-gray-700 break-words">{item.descNode}</p>
       ) : item.desc ? (
