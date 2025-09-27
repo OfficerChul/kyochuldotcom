@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, lazy, Suspense, useState } from 'rea
 import { FaSearch } from 'react-icons/fa';
 import logo from '../../../../assets/images/logos/triangle-skyblue.png';
 import Navigation from '../../../../shared/components/ui/Navigation';
+import WorldClock from '../WorldClock';
 import './animations.css';
 
 const SocialLinks = lazy(() => import('../SocialLinks'));
@@ -170,6 +171,7 @@ const Main: React.FC = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#c9ebf5]">
+      <WorldClock />
       <div className={`sky-layer stage-${timeStage.stage}`} aria-hidden="true">
         <div className="time-gradient" />
         <div
@@ -225,7 +227,7 @@ const Main: React.FC = () => {
         <Navigation />
       </div>
 
-      <main className="relative z-20 mt-20 pb-40 pointer-events-none">
+      <main className="relative z-20 mt-32 pb-40 pointer-events-none">
         {/* Logo Section with Progressive Loading */}
         <div className="text-center relative pointer-events-none">
           {!logoLoaded && (
