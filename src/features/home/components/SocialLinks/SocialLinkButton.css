@@ -6,7 +6,7 @@
   border-radius: 50%;
   position: relative;
   z-index: 10;
-  background: radial-gradient(circle at 50% 45%, #f4f5f6 0%, #f4f5f6 55%, #cfd3d8 58%, #b5b9be 100%);
+  background: radial-gradient(circle at 50% 45%, #f4f5f6 0%, #f4f5f6 55%, #a8adb4 58%, #8b9199 100%);
   box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
   transition:
     transform 120ms cubic-bezier(0.33, 1, 0.68, 1),
@@ -139,19 +139,27 @@
 }
 
 .portfolio-button .social-link-button__surface {
-  background: radial-gradient(circle at 50% 35%, #fff4a0 0%, #fde63c 55%, #f6bf00 100%);
+  background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 60%, #e8e8e8 100%) !important;
   box-shadow:
-    inset 0 4px 0 rgba(255, 255, 210, 0.85),
-    inset 0 -5px 0 rgba(167, 120, 0, 0.35),
+    inset 0 4px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -5px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 .portfolio-button:hover .social-link-button__surface {
-  background: radial-gradient(circle at 50% 35%, #fff8b8 0%, #fdea4d 55%, #f2b600 100%);
+  background: linear-gradient(145deg, #f8f8f8 0%, #eaeaea 65%, #dcdcdc 100%) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .portfolio-button:active .social-link-button__surface {
-  background: radial-gradient(circle at 50% 45%, #ffe16b 0%, #f3be00 60%, #d69c00 100%);
+  background: linear-gradient(155deg, #ededed 0%, #d3d5d8 65%, #babec4 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 @media (min-width: 768px) {
