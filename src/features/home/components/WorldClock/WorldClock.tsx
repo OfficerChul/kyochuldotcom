@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './WorldClock.css';
 
 interface TimeZoneInfo {
@@ -38,7 +38,7 @@ const WorldClock: React.FC = () => {
     };
   };
 
-  const updateTimes = () => {
+  const updateTimes = useCallback(() => {
     const now = new Date();
     const utc = now.getTime() + now.getTimezoneOffset() * 60000;
 
@@ -49,13 +49,13 @@ const WorldClock: React.FC = () => {
     });
 
     setTimes(newTimes);
-  };
+  }, []);
 
   useEffect(() => {
     updateTimes();
     const interval = setInterval(updateTimes, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [updateTimes]);
 
   return (
     <div className="world-clock">
