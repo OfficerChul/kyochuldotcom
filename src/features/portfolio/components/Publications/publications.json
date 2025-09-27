@@ -37,14 +37,16 @@
     "link": "https://www.researchgate.net/publication/386108841"
   },
   {
-    "title": "CodeVoyager: An Interactive Tool for Rapid Code Comprehension through LLM-Assisted Graph Navigation.UIST 2025 Poster (Accepted) & CHI 2026(WIP).",
+    "title": "CodeVoyager: An Interactive Tool for Rapid Code Comprehension through LLM-Assisted Graph Navigation.UIST 2025 Poster  & IUI 2026 (WIP).",
     "authors": [
       "Kim, Y.",
       "Jang, K.",
       "Song, H.",
+      "Shin, M.",
       "Suh, B."
     ],
-    "year": 2025
+    "year": 2025,
+    "link": "https://programs.sigchi.org/uist/2025/program/content/209380"
   },
   {
     "title": "AltAuthor: A Context-Aware Alt Text Authoring Tool with Image Classification and LMM-Powered Accessibility Compliance.IUI 2025 Posters and Demos.",
@@ -61,7 +63,7 @@
     "link": "https://dl.acm.org/doi/10.1145/3708557.3716366"
   },
   {
-    "title": "OASIS: Enhancing Debate Quality and Mitigating Polarization through AI-Assisted Argumentation.CHI 2026",
+    "title": "OASIS: Enhancing Debate Quality and Mitigating Polarization through AI-Assisted Argumentation.UIST 2026",
     "authors": [
       "Park, K.",
       "Kim, J.",
@@ -73,7 +75,7 @@
     "year": 2025
   },
   {
-    "title": "AltUs: Generating Alt Text to Improve E-Commerce Accessibility Through Blind and Low Vision User Participation.CHI 2026(WIP)",
+    "title": "AltUs: Generating Alt Text to Improve E-Commerce Accessibility Through Blind and Low Vision User Participation.UIST 2026",
     "authors": [
       "Song, H.",
       "Shin, M.",

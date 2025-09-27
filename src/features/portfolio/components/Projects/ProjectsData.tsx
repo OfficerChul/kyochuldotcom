@@ -38,7 +38,6 @@ export const projectsData: ProjectData[] = [
     desc: (
       <>
         Designed and implemented a Mobile GUI Agent for smartphone automation by post-training SVLAM and deploying it on-device.
-        Website: <a href="https://devocean.sk.com/community/detail.do?ID=167400" target="_blank" rel="noopener noreferrer">Project Details</a>
       </>
     ),
     stack: 'ADB, Huggingface TRL, UIAutomator2, Google AI Edge, Python',

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Fade } from 'react-awesome-reveal';
+import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
 interface NewsProps {
   id?: string;
@@ -12,16 +13,14 @@ interface NewsItem {
 }
 
 const NEWS_ITEMS: NewsItem[] = [
-  { date: '2025-09', text: 'Teaching Assistant at SNU: Data Structures and Algorithms, and AI Seminar.' },
-  { date: '2025-09', text: 'Code Voyager accepted as UIST 2025 Poster.', link: '#' },
-  { date: '2025-05', text: 'DICE Bench accepted to ACL 2025 Findings.', link: '#' },
-  { date: '2025-05', text: 'Selected for SKT AI Fellowship.' },
-  { date: '2024-09', text: 'Started PhD at SNU GSAI (SNUPI Lab).' },
+  { date: '2025-09', text: '🎓 Teaching Assistant at SNU: Data Structures and Algorithms, and AI Seminar' },
+  { date: '2025-09', text: '🧭 Code Voyager accepted as UIST 2025 Poster', link: 'https://programs.sigchi.org/uist/2025/program/content/209380' },
+  { date: '2025-05', text: '🧪 DICE Bench accepted to ACL 2025 Findings', link: 'https://snuhcc.github.io/DICE-Bench/' },
+  { date: '2025-05', text: '🏅 Selected for SKT AI Fellowship' },
+  { date: '2024-09', text: '🎓 Started PhD at SNU GSAI (SNUPI Lab)' },
 ];
 
 const News: React.FC<NewsProps> = ({ id }) => {
-  const [showAll, setShowAll] = useState(false);
-
   return (
     <>
       <style jsx>{`
@@ -50,39 +49,49 @@ const News: React.FC<NewsProps> = ({ id }) => {
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="max-w-4xl mx-auto">
             <ul className="space-y-2">
-              {(showAll ? NEWS_ITEMS : NEWS_ITEMS.slice(0, 3)).map((item, index) => (
+              {NEWS_ITEMS.map((item, index) => (
                 <li
                   key={index}
                   className="flex flex-col sm:flex-row gap-2 sm:gap-4"
-                  style={{
-                    animation: showAll ? 'slideDown 0.3s ease-out forwards' : undefined,
-                    animationDelay: showAll && index >= 3 ? `${(index - 3) * 0.1}s` : '0s'
-                  }}
                 >
                   <span className="text-sky-500 font-mono font-semibold min-w-[90px]">{item.date}</span>
-                  {item.link ? (
-                    <a
+                  <span className="font-mono text-gray-700">
+                    {item.text}{item.text.trimEnd().endsWith('!') ? '' : '!'}
+                  </span>
+                  {item.link && (
+                    <FancyButtonSmall
                       href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-gray-700 underline decoration-sky-300 hover:decoration-sky-400 underline-offset-2"
+                      className="inline-flex items-center justify-center px-2 py-[2px] text-[10px] leading-[1.18] text-sky-600 font-mono stroke-sky-400 hover:stroke-sky-600 ml-1"
+                      borderColor="rgba(56, 189, 248, 0.42)"
+                      borderWidth={2}
+                      noSvgBorder={true}
+                      shineColor="from-transparent via-sky-300/35 to-transparent"
+                      ariaLabel="Open link"
                     >
-                      {item.text}
-                    </a>
-                  ) : (
-                    <span className="font-mono text-gray-700">{item.text}</span>
+                      <span className="flex items-center gap-0.5 lowercase tracking-wide">
+                        <span>link</span>
+                        <svg
+                          className="h-[8px] w-[8px]"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M4 2H10V8M10 2L2 10"
+                            stroke="currentColor"
+                            strokeWidth="1.1"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </FancyButtonSmall>
                   )}
                 </li>
               ))}
             </ul>
-            {NEWS_ITEMS.length > 3 && (
-              <button
-                onClick={() => setShowAll(!showAll)}
-                className="mt-6 mx-auto block px-6 py-2 text-sky-500 hover:text-sky-600 font-mono font-semibold border-2 border-sky-300 hover:border-sky-400 rounded-lg transition-colors duration-200"
-              >
-                {showAll ? 'Show Less ↑' : `Show More (${NEWS_ITEMS.length - 3} more) ↓`}
-              </button>
-            )}
+            
           </div>
         </Fade>
       </div>
