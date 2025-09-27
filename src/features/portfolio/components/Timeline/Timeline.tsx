@@ -81,14 +81,9 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
 
         <div className="relative">
           <style>{`
-            @keyframes softblink { 
-              0%, 100% { opacity: 0.6; transform: scale(0.95); }
-              50% { opacity: 1; transform: scale(1.1); }
-            }
-            @keyframes pulseGlow {
-              0% { box-shadow: 0 0 0 0 rgba(125,211,252,0.6); opacity: 0.8; }
-              70% { box-shadow: 0 0 0 8px rgba(125,211,252,0); opacity: 0; }
-              100% { box-shadow: 0 0 0 0 rgba(125,211,252,0); opacity: 0; }
+            @keyframes innerBlink { 
+              0%, 100% { filter: brightness(1); }
+              50% { filter: brightness(1.8); }
             }
           `}</style>
           {/* center line (desktop only) */}
@@ -111,11 +106,10 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
                   {/* marker (desktop) */}
                   <div className="hidden md:flex items-center justify-center md:col-span-1">
                     <span
-                      className="relative block h-2.5 w-2.5 rounded-full bg-sky-300"
+                      className="relative block h-3 w-3 rounded-full bg-sky-200"
                       style={{ boxShadow: '0 0 0 2px rgba(125,211,252,0.45)' }}
                     >
-                      <span className="absolute inset-0 rounded-full bg-sky-300/80" style={{ animation: 'softblink 1.6s ease-in-out infinite' }}></span>
-                      <span className="absolute inset-0 rounded-full" style={{ animation: 'pulseGlow 1.8s ease-out infinite' }}></span>
+                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-sky-400" style={{ animation: 'innerBlink 1.6s ease-in-out infinite' }}></span>
                     </span>
                   </div>
 
