@@ -39,9 +39,9 @@ const VisitorMap: React.FC = () => {
     <section
       id="visitor-map"
       aria-label="Visitor map"
-      className="bg-[#74b2dd] py-10 md:py-14 lg:py-16"
+      className="bg-[#74b2dd] py-6 md:py-8 lg:py-10"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-2 sm:px-4 lg:px-6">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="font-mono text-3xl sm:text-4xl md:text-5xl text-white font-extrabold">
             Visitor Map
@@ -52,8 +52,8 @@ const VisitorMap: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-8 flex justify-center">
-          <div ref={containerRef} className="w-full max-w-2xl" />
+        <div className="mt-6 flex justify-center">
+          <div ref={containerRef} className="w-full max-w-4xl" />
         </div>
       </div>
     </section>

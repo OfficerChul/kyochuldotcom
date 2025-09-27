@@ -133,10 +133,10 @@ const Portfolio: React.FC = () => {
         <News id="news" />
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
-        <Education id="education" />
+        <Publications id="publications" />
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
-        <Publications id="publications" />
+        <Education id="education" />
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
         <Projects id="projects" />

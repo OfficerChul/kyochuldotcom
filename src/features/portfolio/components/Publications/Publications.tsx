@@ -50,6 +50,15 @@ const getRomanNumeral = (num: number): string => {
   return result;
 };
 
+// Ensure a space appears after a period when followed by an uppercase letter or digit
+// e.g., "Dialogues.ACL 2025 Findings." -> "Dialogues. ACL 2025 Findings."
+const formatTitle = (title: string): string => {
+  if (!title) {
+    return title;
+  }
+  return title.replace(/\.([A-Z0-9])/g, '. $1');
+};
+
 const Publications: React.FC<PublicationsProps> = ({ id }) => {
   const [showAll, setShowAll] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -137,7 +146,7 @@ const Publications: React.FC<PublicationsProps> = ({ id }) => {
                           {pub.year && ` (${pub.year}). `}
                         </p>
                         <p className="font-semibold text-gray-900 text-sm">
-                          {pub.title}
+                          {formatTitle(pub.title)}
                           {pub.link && (
                             <FancyButtonSmall
                               href={pub.link}
