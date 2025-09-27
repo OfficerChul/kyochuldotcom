@@ -58,7 +58,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                 <div className="pointer-events-none absolute -inset-1 z-0 bg-gradient-to-r from-sky-300/60 to-blue-400/60 rounded-2xl blur-lg opacity-0 group-hover:opacity-80 transition duration-500"></div>
                 <img
                   ref={imgRef}
-                  src={myPicFull}
+                  src={myPicOptimized}
                   srcSet={`${myPicOptimized} 600w, ${myPicFull} 1200w`}
                   alt="Kyochul Jang profile"
                   loading="lazy"

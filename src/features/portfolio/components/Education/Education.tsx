@@ -18,7 +18,7 @@ const EDUCATIONS = [
     department: 'Department of Computer Science',
     degree: 'Bachelor of Science in Computer Science',
     period: '2020.08 - 2024.05',
-    note: 'GPA: 3.8/4.0',
+    note: 'GPA: 3.71/4.0',
   },
 ];
 

@@ -96,6 +96,14 @@ const Projects: React.FC<ProjectsProps> = memo(({ id }) => {
                             textColor = 'text-yellow-600';
                           } else if (tech.toLowerCase().includes('bootstrap')) {
                             textColor = 'text-violet-600';
+                          } else if (tech.toLowerCase().includes('adb')) {
+                            textColor = 'text-red-500';
+                          } else if (tech.toLowerCase().includes('trl') || tech.toLowerCase().includes('huggingface')) {
+                            textColor = 'text-pink-600';
+                          } else if (tech.toLowerCase().includes('uiautomator')) {
+                            textColor = 'text-green-700';
+                          } else if (tech.toLowerCase().includes('edge')) {
+                            textColor = 'text-blue-700';
                           }
 
                           return (

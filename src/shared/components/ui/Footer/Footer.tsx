@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
               <br />
               Master's Student at Seoul National University
               <br />
-              Specializing in NLP, GNN, and Human-AI Interaction
+              Specializing in GUI Agent, On-device AI, Embodied AI and AI Safety
             </p>
           </div>
 

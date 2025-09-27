@@ -1,6 +1,7 @@
 import { ProjectData } from '../../types';
 import newWebsite from '../../../../assets/images/projects/new_website.jpg';
 import pkaWebsite from '../../../../assets/images/projects/pka-website.png';
+import mobileGUIAgent from '../../../../assets/images/projects/mobile_gui_agent.jpg';
 
 export const projectsData: ProjectData[] = [
   {
@@ -30,5 +31,18 @@ export const projectsData: ProjectData[] = [
     stack: 'React, Node.js, MongoDB, Express',
     github: 'https://github.com/kyochul98/pka-website',
     website: 'https://purdueka.org/'
+  },
+  {
+    img: mobileGUIAgent,
+    title: 'Mobile GUI Agent Development',
+    desc: (
+      <>
+        Designed and implemented a Mobile GUI Agent for smartphone automation by post-training SVLAM and deploying it on-device.
+        Website: <a href="https://devocean.sk.com/community/detail.do?ID=167400" target="_blank" rel="noopener noreferrer">Project Details</a>
+      </>
+    ),
+    stack: 'ADB, Huggingface TRL, UIAutomator2, Google AI Edge, Python',
+    github: '',
+    website: 'https://devocean.sk.com/community/detail.do?ID=167400'
   }
 ];
