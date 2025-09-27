@@ -61,7 +61,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Seoul National University, Graduate School of AI
+                    Seoul National University(SNU), Graduate School of AI
                   </a>
                   , advised by Professor{' '}
                   <a

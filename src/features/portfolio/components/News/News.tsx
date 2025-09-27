@@ -56,7 +56,7 @@ const News: React.FC<NewsProps> = ({ id }) => {
           }
         }
       `}</style>
-      <section className="bg-white py-8 md:py-12 lg:py-16" id={id}>
+      <section className="bg-gradient-to-br from-white to-sky-50 py-8 md:py-12 lg:py-16" id={id}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="text-center mb-8">

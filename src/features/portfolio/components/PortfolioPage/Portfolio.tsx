@@ -6,6 +6,7 @@ import Navigation from '../../../../shared/components/ui/Navigation';
 import TypingAnimation from '../../../../shared/components/ui/TypingAnimation';
 
 const AboutMe = lazy(() => import('../AboutSection'));
+const Timeline = lazy(() => import('../Timeline'));
 const News = lazy(() => import('../News'));
 const Education = lazy(() => import('../Education'));
 const Publications = lazy(() => import('../Publications'));
@@ -140,6 +141,9 @@ const Portfolio: React.FC = () => {
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
         <Projects id="projects" />
+      </Suspense>
+      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+        <Timeline id="timeline" />
       </Suspense>
       <Suspense fallback={<div className="h-48 flex items-center justify-center">Loading map...</div>}>
         <VisitorMap />
