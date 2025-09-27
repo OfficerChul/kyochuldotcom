@@ -11,6 +11,7 @@ const Education = lazy(() => import('../Education'));
 const Publications = lazy(() => import('../Publications'));
 const Projects = lazy(() => import('../Projects'));
 const Footer = lazy(() => import('../../../../shared/components/ui/Footer'));
+const VisitorMap = lazy(() => import('../VisitorMap'));
 
 // Base64 blur placeholder (20x20 heavily blurred version)
 const BLUR_PLACEHOLDER = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMBAgT/xAAYEAEBAQEBAAAAAAAAAAAAAAAAAQIRIf/EABYBAQEBAAAAAAAAAAAAAAAAAAIFBv/EABgRAQEAAwAAAAAAAAAAAAAAAAABERIh/9oADAMBAAIRAxEAPwDPYjhmlIqbM9JwTIMk8BZB/9k=';
@@ -139,6 +140,9 @@ const Portfolio: React.FC = () => {
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
         <Projects id="projects" />
+      </Suspense>
+      <Suspense fallback={<div className="h-48 flex items-center justify-center">Loading map...</div>}>
+        <VisitorMap />
       </Suspense>
 
       <footer>

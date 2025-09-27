@@ -6,13 +6,30 @@
   border-radius: 50%;
   position: relative;
   z-index: 10;
-  background: white;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-out;
+  background: radial-gradient(circle at 50% 45%, #f4f5f6 0%, #f4f5f6 55%, #cfd3d8 58%, #b5b9be 100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  transition: transform 0.1s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: visible;
+  transform: translateY(0);
+  color: inherit;
+}
+
+.social-link-button__surface {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 60%, #e8e8e8 100%);
+  box-shadow:
+    inset 0 4px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -5px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.12);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
 }
 
 .social-link-button::before {
@@ -72,7 +89,33 @@
 }
 
 .social-link-button:hover {
-  transform: scale(1.1);
+  transform: translateY(3px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  background: radial-gradient(circle at 50% 45%, #eef0f2 0%, #eef0f2 52%, #c7ccd1 57%, #adb2b8 100%);
+}
+
+.social-link-button:hover .social-link-button__surface {
+  transform: translateY(2px);
+  background: linear-gradient(145deg, #f8f8f8 0%, #eaeaea 65%, #dcdcdc 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.social-link-button:active {
+  transform: translateY(5px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+  background: radial-gradient(circle at 50% 50%, #e3e6e9 0%, #dfe2e6 50%, #aeb4ba 80%, #9aa1a7 100%);
+}
+
+.social-link-button:active .social-link-button__surface {
+  transform: translateY(4px);
+  background: linear-gradient(145deg, #ededed 0%, #d9d9d9 70%, #cacaca 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.22),
+    0 0 4px rgba(0, 0, 0, 0.08);
 }
 
 .social-link-button:hover::before {
@@ -86,8 +129,25 @@
 }
 
 .portfolio-button {
-  animation: blink-outline 1s linear infinite, bounce 5s infinite;
+  animation: blink-outline 1s linear infinite;
   outline: 3px solid transparent;
+  color: #fce903;
+}
+
+.portfolio-button .social-link-button__surface {
+  background: radial-gradient(circle at 50% 35%, #fff4a0 0%, #fde63c 55%, #f6bf00 100%);
+  box-shadow:
+    inset 0 4px 0 rgba(255, 255, 210, 0.85),
+    inset 0 -5px 0 rgba(167, 120, 0, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.portfolio-button:hover .social-link-button__surface {
+  background: radial-gradient(circle at 50% 35%, #fff8b8 0%, #fdea4d 55%, #f2b600 100%);
+}
+
+.portfolio-button:active .social-link-button__surface {
+  background: radial-gradient(circle at 50% 45%, #ffe16b 0%, #f3be00 60%, #d69c00 100%);
 }
 
 @media (min-width: 768px) {
@@ -95,4 +155,3 @@
     margin: 0.625rem;
   }
 }
-

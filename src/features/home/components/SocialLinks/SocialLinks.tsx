@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope } from 'react-icons/fa';
 import SocialLinkButton from './SocialLinkButton';
 import './animations.css';
-import './SocialLinks.css';
 
 interface ModalStyles {
   overlay: React.CSSProperties;
@@ -88,18 +86,14 @@ const SocialLinks: React.FC = () => {
         <div className="text-center mx-auto py-4 pb-12">
           {/* First row of social links */}
           <div className="flex justify-center gap-3 sm:gap-12">
-            <Link to="/portfolio" className="inline-block">
-              <div
-                className="portfolio-star-button"
-                style={{
-                  '--border-color': 'rgba(252, 233, 3, 1)',
-                  '--glow-color': 'rgba(252, 233, 3, 0.8)',
-                  '--inner-glow': 'rgba(252, 233, 3, 0.2)',
-                } as React.CSSProperties}
-              >
-                <FaStar className="text-[35px] text-[#fce903]" />
-              </div>
-            </Link>
+            <SocialLinkButton
+              to="/portfolio"
+              ariaLabel="View Portfolio"
+              sonarColor="rgba(252, 233, 3, 0.6)"
+              isPortfolio
+            >
+              <FaStar className="text-[35px] text-[#fce903]" />
+            </SocialLinkButton>
 
             <SocialLinkButton
               href="https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao"

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './SocialLinkButton.css';
 import '../../../../shared/styles/animations.css';
 
@@ -10,8 +11,16 @@ interface SocialLinkButtonProps {
   ariaLabel: string;
   target?: string;
   rel?: string;
-  isInternalLink?: boolean;
   sonarColor?: string;
+  /**
+   * Internal navigation target. When provided, the button renders
+   * a React Router Link instead of an anchor tag.
+   */
+  to?: string;
+  /**
+   * @deprecated Use `to` instead. Kept for backwards compatibility.
+   */
+  isInternalLink?: boolean;
 }
 
 const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
@@ -22,8 +31,9 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
   ariaLabel,
   target = '_blank',
   rel = 'noopener noreferrer',
-  isInternalLink = false,
-  sonarColor
+  sonarColor,
+  to,
+  isInternalLink = false
 }) => {
   const className = `
     social-link-button
@@ -36,6 +46,8 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
     '--inner-glow': sonarColor ? sonarColor.replace('0.6', '0.2') : 'rgba(93, 220, 255, 0.2)',
   } as React.CSSProperties;
 
+  const content = <span className="social-link-button__surface">{children}</span>;
+
   if (onClick) {
     return (
       <button
@@ -45,21 +57,23 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
         aria-label={ariaLabel}
         type="button"
       >
-        {children}
+        {content}
       </button>
+    );
+  }
+
+  const internalDestination = to ?? (isInternalLink ? href : undefined);
+
+  if (internalDestination) {
+    return (
+      <Link to={internalDestination} className={className} style={style} aria-label={ariaLabel}>
+        {content}
+      </Link>
     );
   }
 
   if (!href) {
     return null;
-  }
-
-  if (isInternalLink) {
-    return (
-      <div className={className} aria-label={ariaLabel} style={style}>
-        {children}
-      </div>
-    );
   }
 
   return (
@@ -71,7 +85,7 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
       style={style}
       aria-label={ariaLabel}
     >
-      {children}
+      {content}
     </a>
   );
 };

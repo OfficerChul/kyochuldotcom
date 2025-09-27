@@ -89,21 +89,24 @@
 
 @media (max-width: 768px) {
   .world-clock {
-    top: 65px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 12px;
+    left: 12px;
+    transform: none;
     flex-direction: column;
-    gap: 6px;
-    padding: 6px 10px;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 6px 8px;
     border-radius: 14px;
+    max-width: calc(100vw - 24px);
   }
 
   .world-clock:hover {
-    transform: translateX(-50%) translateY(-1px);
+    transform: translateY(-1px);
   }
 
   .clock-item {
     gap: 3px;
+    justify-content: flex-start;
   }
 
   .clock-flag {
@@ -112,11 +115,12 @@
 
   .clock-city {
     font-size: 8px;
-    min-width: 40px;
+    min-width: auto;
   }
 
   .clock-time {
     font-size: 10px;
+    gap: 1px;
   }
 
   .clock-period {
