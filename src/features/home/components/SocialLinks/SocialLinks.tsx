@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal';
-import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope, FaBook } from 'react-icons/fa';
 import SocialLinkButton from './SocialLinkButton';
 import './animations.css';
 
@@ -119,6 +119,14 @@ const SocialLinks: React.FC = () => {
                 alt="CV"
                 loading="lazy"
               />
+            </SocialLinkButton>
+
+            <SocialLinkButton
+              to="/diary"
+              ariaLabel="View Diary"
+              sonarColor="rgba(147, 112, 219, 0.6)"
+            >
+              <FaBook className="text-[35px] text-[#9370DB]" />
             </SocialLinkButton>
           </div>
 

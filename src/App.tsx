@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
+const DiaryPage = lazy(() => import('./pages/DiaryPage'));
 
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/diary" element={<DiaryPage />} />
         </Routes>
       </Suspense>
     </div>
