@@ -79,9 +79,9 @@ export function useDiaryParser() {
     loadDiary();
   }, []);
 
-  // 디코딩 시도
-  const attemptDecode = useCallback((userInput: string): DecoderResult => {
-    const result = decodeDiary(state.encodedContent, userInput);
+  // 디코딩 시도 (async)
+  const attemptDecode = useCallback(async (userInput: string): Promise<DecoderResult> => {
+    const result = await decodeDiary(state.encodedContent, userInput);
 
     if (result.success) {
       const entries = parseDiaryContent(result.content);

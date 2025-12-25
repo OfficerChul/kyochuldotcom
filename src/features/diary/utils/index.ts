@@ -1,1 +1,1 @@
-export { decodeDiary, DECODE_METHOD } from './decoder';
+export { decodeDiary } from './decoder';

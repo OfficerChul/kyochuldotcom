@@ -3,26 +3,34 @@ import { DecoderResult } from '../../types';
 
 interface DiaryDecoderProps {
   encodedContent: string;
-  onDecode: (userInput: string) => DecoderResult;
+  onDecode: (userInput: string) => Promise<DecoderResult>;
 }
 
 const DiaryDecoder: React.FC<DiaryDecoderProps> = ({ encodedContent, onDecode }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isShaking, setIsShaking] = useState(false);
+  const [isDecoding, setIsDecoding] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!inputValue.trim()) {
       setError('Please enter a decode key');
       return;
     }
 
-    const result = onDecode(inputValue);
+    setIsDecoding(true);
+    setError(null);
 
-    if (!result.success) {
-      setError(result.error || 'Invalid key');
-      setIsShaking(true);
-      setTimeout(() => setIsShaking(false), 500);
+    try {
+      const result = await onDecode(inputValue);
+
+      if (!result.success) {
+        setError(result.error || 'Invalid key');
+        setIsShaking(true);
+        setTimeout(() => setIsShaking(false), 500);
+      }
+    } finally {
+      setIsDecoding(false);
     }
   };
 
@@ -69,9 +77,10 @@ const DiaryDecoder: React.FC<DiaryDecoderProps> = ({ encodedContent, onDecode })
           />
           <button
             onClick={handleSubmit}
-            className="px-6 py-2 bg-purple-400 text-white font-mono text-sm rounded-full hover:bg-purple-500 transition-colors"
+            disabled={isDecoding}
+            className="px-6 py-2 bg-purple-400 text-white font-mono text-sm rounded-full hover:bg-purple-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Decode
+            {isDecoding ? 'Decoding...' : 'Decode'}
           </button>
         </div>
 
