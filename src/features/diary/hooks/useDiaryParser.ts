@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { DiaryEntry, DiaryState, DecoderResult } from '../types';
 import { decodeDiary } from '../utils';
 
-const DATE_REGEX = /^\d{2}-\d{2}-\d{2}$/;
+// Format: "YY-MM-DD | Title" or just "YY-MM-DD"
+const DATE_HEADER_REGEX = /^(\d{2}-\d{2}-\d{2})(?:\s*\|\s*(.+))?$/;
 
 function parseDateString(dateStr: string): Date {
   const [yy, mm, dd] = dateStr.split('-').map(Number);
@@ -12,20 +13,26 @@ function parseDateString(dateStr: string): Date {
 function parseDiaryContent(content: string): DiaryEntry[] {
   const lines = content.split('\n');
   const entries: DiaryEntry[] = [];
-  let currentEntry: { date: string; content: string[] } | null = null;
+  let currentEntry: { date: string; title: string; content: string[] } | null = null;
 
   for (const line of lines) {
-    if (DATE_REGEX.test(line.trim())) {
+    const match = line.trim().match(DATE_HEADER_REGEX);
+    if (match) {
       // 이전 엔트리 저장
       if (currentEntry) {
         entries.push({
           date: currentEntry.date,
+          title: currentEntry.title,
           content: currentEntry.content.join('\n').trim(),
           rawDate: parseDateString(currentEntry.date)
         });
       }
-      // 새 엔트리 시작
-      currentEntry = { date: line.trim(), content: [] };
+      // 새 엔트리 시작 (date | title 형식)
+      currentEntry = {
+        date: match[1],
+        title: match[2] || '',
+        content: []
+      };
     } else if (currentEntry) {
       currentEntry.content.push(line);
     }
@@ -35,6 +42,7 @@ function parseDiaryContent(content: string): DiaryEntry[] {
   if (currentEntry) {
     entries.push({
       date: currentEntry.date,
+      title: currentEntry.title,
       content: currentEntry.content.join('\n').trim(),
       rawDate: parseDateString(currentEntry.date)
     });

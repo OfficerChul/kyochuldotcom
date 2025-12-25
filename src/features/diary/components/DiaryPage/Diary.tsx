@@ -1,19 +1,23 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDiaryParser } from '../../hooks';
 import DiaryEntry from '../DiaryEntry';
-import Navigation from '../../../../shared/components/ui/Navigation';
-import logo from '../../../../assets/images/logos/triangle-green.png';
+import NavBar from '../../../../shared/components/ui/NavBar';
 
-// 일기 날짜들 (디코딩 전에도 보여줌)
-const DIARY_DATES = ['25-12-25', '25-12-24', '25-12-23', '25-12-22'];
+// 일기 날짜와 제목 (제목은 암호화하지 않음)
+const DIARY_ENTRIES_META = [
+  { date: '25-12-25', title: 'Christmas Morning Thoughts' },
+  { date: '25-12-24', title: 'Eve of Something New' },
+  { date: '25-12-23', title: 'Winter Reflections' },
+  { date: '25-12-22', title: 'A Quiet Sunday' },
+  { date: '25-12-21', title: 'First Day of Winter' },
+];
 
 function formatDate(dateStr: string): string {
   const [yy, mm, dd] = dateStr.split('-').map(Number);
   const date = new Date(2000 + yy, mm - 1, dd);
-  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  return `${months[date.getMonth()]} ${dd}, 20${yy} (${weekdays[date.getDay()]})`;
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return `${months[date.getMonth()]} ${dd}, 20${yy}`;
 }
 
 const Diary: React.FC = () => {
@@ -23,9 +27,10 @@ const Diary: React.FC = () => {
   const [initialized, setInitialized] = useState(false);
   const [keyInput, setKeyInput] = useState('');
   const [keyError, setKeyError] = useState<string | null>(null);
+  const [isDecoding, setIsDecoding] = useState(false);
 
   // 디코딩 후 모든 엔트리 펼치기
-  useMemo(() => {
+  useEffect(() => {
     if (isDecoded && entries.length > 0 && !initialized) {
       setExpandedDates(new Set(entries.map(e => e.date)));
       setInitialized(true);
@@ -52,14 +57,19 @@ const Diary: React.FC = () => {
     setExpandedDates(new Set());
   };
 
-  const handleDecode = () => {
+  const handleDecode = async () => {
     if (!keyInput.trim()) {
       setKeyError('Enter key');
       return;
     }
-    const result = attemptDecode(keyInput);
-    if (!result.success) {
-      setKeyError('Nope! Try again~');
+    setIsDecoding(true);
+    try {
+      const result = await attemptDecode(keyInput);
+      if (!result.success) {
+        setKeyError('Invalid key');
+      }
+    } finally {
+      setIsDecoding(false);
     }
   };
 
@@ -72,7 +82,7 @@ const Diary: React.FC = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-2xl font-mono text-sky-300 animate-pulse">Loading...</div>
+        <div className="text-xl text-gray-400">Loading...</div>
       </div>
     );
   }
@@ -80,41 +90,30 @@ const Diary: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center">
-        <p className="text-red-500 font-mono mb-4">Error: {error}</p>
-        <Link to="/" className="text-sky-400 hover:text-sky-500 underline">Go Home</Link>
+        <p className="text-red-500 mb-4">Error: {error}</p>
+        <Link to="/" className="text-sky-500 hover:underline">Go Home</Link>
       </div>
     );
   }
 
   return (
-    <>
-      <Navigation />
+    <div className="min-h-screen bg-white">
+      <NavBar variant="light" currentPage="diary" />
 
-      {/* Header */}
-      <header className="pt-12 bg-gradient-to-b from-sky-100 to-white min-h-[25vh] relative flex items-center justify-center">
-        <Link to="/">
-          <img
-            style={{ zIndex: 1000 }}
-            className="absolute w-14 rounded-full right-5 top-4 outline-3 outline-transparent hover:brightness-125 hover:animate-[shake_3s_infinite] transition-all duration-500 ease-in-out"
-            src={logo}
-            alt="logo"
-          />
-        </Link>
+      <main className="px-6 md:px-12 lg:px-24 py-16 max-w-5xl mx-auto">
+        {/* Title */}
+        <h1 className="text-5xl md:text-6xl font-normal text-sky-400 mb-16">
+          Diary
+        </h1>
 
-        {/* Decode Key Input - 왼쪽 위 구석 */}
+        {/* Decode Key Input */}
         {!isDecoded && (
-          <div className="absolute left-8 top-14 flex flex-col gap-1">
-            <p className="text-xs text-sky-400 font-mono italic">
-              🔮 Can you guess the magic key?
-            </p>
-            <p className="text-[10px] text-gray-400 font-mono">
-              (hint: only I know it hehe)
-            </p>
-            <div className="flex items-center gap-2 mt-1">
+          <div className="mb-12">
+            <div className="inline-flex items-center">
               <input
                 type="password"
-                className="px-3 py-1 text-xs border border-sky-200 rounded-full font-mono focus:outline-none focus:border-sky-400 w-28"
-                placeholder="decode key"
+                className="px-4 py-2.5 text-sm bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-sky-400 w-48 transition-colors placeholder-gray-400"
+                placeholder="Enter decode key"
                 value={keyInput}
                 onChange={(e) => {
                   setKeyInput(e.target.value);
@@ -124,109 +123,80 @@ const Diary: React.FC = () => {
               />
               <button
                 onClick={handleDecode}
-                className="px-3 py-1 text-xs bg-sky-400 text-white font-mono rounded-full hover:bg-sky-500 transition-colors"
+                disabled={isDecoding}
+                className="ml-4 px-5 py-2.5 text-sm text-sky-500 border border-sky-400 rounded-none hover:bg-sky-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Decode
+                {isDecoding ? 'Decoding...' : 'Unlock'}
               </button>
-              {keyError && (
-                <span className="text-xs text-red-400 font-mono">{keyError}</span>
-              )}
             </div>
+            {keyError && (
+              <p className="text-sm text-red-400 mt-2">{keyError}</p>
+            )}
           </div>
         )}
 
-        <div className="text-center">
-          <h1 className="font-mono text-5xl sm:text-6xl md:text-7xl text-sky-400 font-extrabold mb-4">
-            Diary
-          </h1>
-          <div className="w-20 h-1 bg-sky-300 mx-auto rounded-full"></div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <section className="bg-white py-8 md:py-10 lg:py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-4xl">
-          {!isDecoded ? (
-            /* 인코딩된 상태 - 일기 형태로 보여주지만 내용은 암호화됨 */
-            <div className="space-y-4">
-              {DIARY_DATES.map((date, idx) => (
-                <article
-                  key={idx}
-                  className="relative bg-white/80 backdrop-blur-sm rounded-md shadow-md border-2 border-sky-200 overflow-hidden"
-                >
-                  <header className="flex items-center justify-between p-3 md:p-4 bg-sky-50/50">
-                    <div className="flex items-center gap-3">
-                      <span className="text-xl">🔒</span>
-                      <h3 className="text-sm md:text-base font-semibold text-gray-700 font-mono">
-                        {formatDate(date)}
-                      </h3>
-                    </div>
-                  </header>
-                  <div className="px-4 pb-4 pt-2 border-t border-sky-100">
-                    <p className="text-sm text-gray-400 font-mono leading-relaxed break-all">
-                      {encodedContent.slice(idx * 80, idx * 80 + 80)}...
-                    </p>
-                  </div>
-                </article>
-              ))}
-              <p className="text-center text-gray-400 font-mono text-sm mt-6">
-                🔐 Unlock with the secret key to read my diary
-              </p>
+        {!isDecoded ? (
+          /* 암호화된 상태 */
+          <div>
+            {DIARY_ENTRIES_META.map((entry, idx) => (
+              <article key={idx} className="py-8 border-t border-gray-200 first:border-t-0">
+                <h3 className="text-xl font-medium text-gray-700 mb-1">
+                  🔒 {entry.title}
+                </h3>
+                <p className="text-gray-400 text-xs mb-3">
+                  {formatDate(entry.date)}
+                </p>
+                <p className="text-gray-400 text-xs font-mono leading-relaxed break-all">
+                  {encodedContent.slice(idx * 200, idx * 200 + 200) || encodedContent.slice(0, 200)}
+                </p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <>
+            {/* Controls */}
+            <div className="flex justify-end gap-4 mb-4 text-xs">
+              <button
+                onClick={expandAll}
+                className="text-gray-400 hover:text-sky-500 transition-colors"
+              >
+                Expand All
+              </button>
+              <span className="text-gray-300">|</span>
+              <button
+                onClick={collapseAll}
+                className="text-gray-400 hover:text-sky-500 transition-colors"
+              >
+                Collapse All
+              </button>
             </div>
-          ) : (
-            <>
-              {/* Controls */}
-              <div className="flex justify-end gap-3 mb-6">
-                <button
-                  onClick={expandAll}
-                  className="px-4 py-2 text-sm font-mono text-sky-500 border-2 border-sky-300 rounded-full hover:bg-sky-50 transition-all"
-                >
-                  Expand All
-                </button>
-                <button
-                  onClick={collapseAll}
-                  className="px-4 py-2 text-sm font-mono text-sky-500 border-2 border-sky-300 rounded-full hover:bg-sky-50 transition-all"
-                >
-                  Collapse All
-                </button>
+
+            {/* Diary Entries */}
+            {entries.length === 0 ? (
+              <p className="text-center text-gray-500 py-10">No diary entries found.</p>
+            ) : (
+              <div>
+                {entries.map(entry => (
+                  <DiaryEntry
+                    key={entry.date}
+                    entry={entry}
+                    isExpanded={expandedDates.has(entry.date)}
+                    onToggle={() => toggleEntry(entry.date)}
+                  />
+                ))}
               </div>
+            )}
+          </>
+        )}
+      </main>
 
-              {/* Diary Entries */}
-              {entries.length === 0 ? (
-                <p className="text-center text-gray-500 font-mono py-10">No diary entries found.</p>
-              ) : (
-                <div className="space-y-4">
-                  {entries.map(entry => (
-                    <DiaryEntry
-                      key={entry.date}
-                      entry={entry}
-                      isExpanded={expandedDates.has(entry.date)}
-                      onToggle={() => toggleEntry(entry.date)}
-                    />
-                  ))}
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      </section>
-
-      <style>{`
-        @keyframes shake {
-          0% { transform: translate(1px, 1px) rotate(0deg); }
-          10% { transform: translate(-1px, -1px) rotate(1deg); }
-          20% { transform: translate(-2px, 1px) rotate(-1deg); }
-          30% { transform: translate(1px, 2px) rotate(0deg); }
-          40% { transform: translate(-1px, 1px) rotate(1deg); }
-          50% { transform: translate(1px, -1px) rotate(-2deg); }
-          60% { transform: translate(2px, 1px) rotate(1deg); }
-          70% { transform: translate(-1px, 2px) rotate(2deg); }
-          80% { transform: translate(2px, -1px) rotate(1deg); }
-          90% { transform: translate(-1px, 2px) rotate(0deg); }
-          100% { transform: translate(2px, 1px) rotate(-1deg); }
-        }
-      `}</style>
-    </>
+      {/* Footer */}
+      <footer className="border-t border-gray-200 py-8 mt-auto">
+        <p className="text-center text-xs text-gray-400">
+          © Copyright {new Date().getFullYear()} Kyochul Jang
+        </p>
+      </footer>
+    </div>
   );
 };
 

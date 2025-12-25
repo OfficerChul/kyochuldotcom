@@ -10,42 +10,52 @@ interface DiaryEntryProps {
 function formatDate(dateStr: string): string {
   const [yy, mm, dd] = dateStr.split('-').map(Number);
   const date = new Date(2000 + yy, mm - 1, dd);
-  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return `${months[date.getMonth()]} ${dd}, 20${yy}`;
+}
 
-  return `${months[date.getMonth()]} ${dd}, 20${yy} (${weekdays[date.getDay()]})`;
+function getReadTime(content: string): number {
+  const words = content.split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
 }
 
 const DiaryEntry: React.FC<DiaryEntryProps> = ({ entry, isExpanded, onToggle }) => {
+  const readTime = getReadTime(entry.content);
+
   return (
-    <article className="relative bg-white/80 backdrop-blur-sm rounded-md shadow-md border-2 border-sky-200 transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl hover:border-sky-500 overflow-hidden">
+    <article className="py-8 border-t border-gray-200 first:border-t-0">
       {/* Header - Clickable */}
       <header
         onClick={onToggle}
-        className="flex items-center justify-between p-3 md:p-4 cursor-pointer select-none hover:bg-sky-50/50 transition-colors"
+        className="cursor-pointer group"
       >
-        <div className="flex items-center gap-3">
-          <span className="text-xl">{isExpanded ? '📖' : '📕'}</span>
-          <h3 className="text-sm md:text-base font-semibold text-gray-900 font-mono">
-            {formatDate(entry.date)}
-          </h3>
-        </div>
-        <span
-          className={`text-sky-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-        >
-          ▼
-        </span>
+        {/* Title */}
+        <h2 className="text-xl font-medium text-gray-900 underline decoration-1 underline-offset-4 decoration-gray-300 group-hover:text-sky-500 group-hover:decoration-sky-400 transition-colors mb-2">
+          {entry.title || formatDate(entry.date)}
+        </h2>
+
+        {/* Preview text when collapsed */}
+        {!isExpanded && (
+          <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
+            {entry.content.split('\n')[0]}
+          </p>
+        )}
+
+        {/* Meta info */}
+        <p className="text-gray-400 text-xs">
+          {readTime} min read · {formatDate(entry.date)}
+        </p>
       </header>
 
       {/* Content */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+          isExpanded ? 'max-h-[5000px] opacity-100 mt-6' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-4 pb-4 pt-2 border-t border-sky-100">
+        <div className="text-gray-700 leading-relaxed space-y-4">
           {entry.content.split('\n').map((line, i) => (
-            <p key={i} className="text-sm md:text-base text-gray-700 font-mono leading-relaxed my-1">
+            <p key={i} className="text-sm">
               {line || '\u00A0'}
             </p>
           ))}

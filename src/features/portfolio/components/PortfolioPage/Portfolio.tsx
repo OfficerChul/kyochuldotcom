@@ -1,9 +1,8 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import logo from '../../../../assets/images/logos/triangle-green.png';
 import FancyBtn from '../../../../shared/components/ui/Button';
 import { Link } from 'react-router-dom';
-import Navigation from '../../../../shared/components/ui/Navigation';
 import TypingAnimation from '../../../../shared/components/ui/TypingAnimation';
+import NavBar from '../../../../shared/components/ui/NavBar';
 
 const AboutMe = lazy(() => import('../AboutSection'));
 const Timeline = lazy(() => import('../Timeline'));
@@ -53,7 +52,9 @@ const Portfolio: React.FC = () => {
   }, []);
   return (
     <>
-      <Navigation />
+      <div className="absolute top-0 right-0 z-50">
+        <NavBar variant="dark" />
+      </div>
 
       <header
         className={`pt-12 font-['Bungee'] bg-no-repeat bg-cover bg-center h-screen relative gpu-accelerated`}
@@ -65,15 +66,6 @@ const Portfolio: React.FC = () => {
         }}
       >
         <div id="top">
-          <Link to="/">
-            <img
-              style={{ zIndex: 1000 }}
-              className="absolute w-14 rounded-full right-5 animate-[blink-portfolio_2s_linear_infinite] outline-3 outline-transparent hover:brightness-125 hover:animate-[shake_3s_infinite] transition-all duration-500 ease-in-out"
-              src={logo}
-              alt="logo"
-            />
-          </Link>
-
           <h1 className="text-black text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black h-[1.2em]">
             <span className="[-webkit-text-stroke:1px_#ffffff]">
               <TypingAnimation
