@@ -3,13 +3,14 @@
   "name": "kyochuldotcom",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@10.26.2",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "pdf-parse": "^1.1.1",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.12",
     "react-dom": "^18.2.0",
@@ -18,8 +19,7 @@
     "react-modal": "^3.15.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "pdf-parse": "^1.1.1"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "dev": "react-scripts start",
