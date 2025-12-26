@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import FancyBtn from '../../../../shared/components/ui/Button';
-import { Link } from 'react-router-dom';
 import TypingAnimation from '../../../../shared/components/ui/TypingAnimation';
 import NavBar from '../../../../shared/components/ui/NavBar';
 
