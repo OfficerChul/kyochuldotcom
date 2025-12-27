@@ -40,8 +40,8 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
 
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            <div className="lg:w-2/5 flex justify-center items-center">
-              <div className="relative group w-full max-w-md">
+            <div className="lg:w-1/2 flex justify-center items-center">
+              <div className="relative group w-full max-w-lg">
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-500"></div>
                 <img
                   src="/myPicture-optimized.jpg"
@@ -51,8 +51,8 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
               </div>
             </div>
 
-            <div className="lg:w-3/5">
-              <div className="font-mono text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed bg-white/50 p-4 sm:p-6 rounded-lg shadow-sm backdrop-blur-sm">
+            <div className="lg:w-1/2">
+              <div className="font-mono text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed bg-white/50 p-4 sm:p-6 rounded-lg shadow-sm backdrop-blur-sm">
                 <p>
                   Hi, I am Kyochul Jang, a PhD student at{' '}
                   <a
