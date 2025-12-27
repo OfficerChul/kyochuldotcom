@@ -18,7 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({ variant = 'light', currentPage }) => {
     : 'text-sky-500';
 
   return (
-    <nav className="flex justify-end items-center gap-6 py-5 px-6 md:px-12 lg:px-24 text-sm">
+    <nav className="flex justify-end items-center gap-6 py-5 pr-4 md:pr-6 lg:pr-10 text-sm">
       <Link
         to="/"
         className={`transition-colors ${currentPage === 'home' ? activeClass : baseClass}`}
@@ -31,6 +31,12 @@ const NavBar: React.FC<NavBarProps> = ({ variant = 'light', currentPage }) => {
       >
         about
       </Link>
+      <Link
+        to="/diary"
+        className={`transition-colors ${currentPage === 'diary' ? activeClass : baseClass}`}
+      >
+        diary
+      </Link>
       <a
         href="https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao"
         target="_blank"
@@ -39,12 +45,6 @@ const NavBar: React.FC<NavBarProps> = ({ variant = 'light', currentPage }) => {
       >
         publications
       </a>
-      <Link
-        to="/diary"
-        className={`transition-colors ${currentPage === 'diary' ? activeClass : baseClass}`}
-      >
-        diary
-      </Link>
     </nav>
   );
 };

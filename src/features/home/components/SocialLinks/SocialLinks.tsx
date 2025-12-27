@@ -96,6 +96,14 @@ const SocialLinks: React.FC = () => {
             </SocialLinkButton>
 
             <SocialLinkButton
+              to="/diary"
+              ariaLabel="View Diary"
+              sonarColor="rgba(139, 69, 19, 0.6)"
+            >
+              <FaBook className="text-[35px] text-[#8B4513]" />
+            </SocialLinkButton>
+
+            <SocialLinkButton
               href="https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao"
               ariaLabel="Google Scholar Profile"
               sonarColor="rgba(66, 133, 244, 0.6)"
@@ -119,14 +127,6 @@ const SocialLinks: React.FC = () => {
                 alt="CV"
                 loading="lazy"
               />
-            </SocialLinkButton>
-
-            <SocialLinkButton
-              to="/diary"
-              ariaLabel="View Diary"
-              sonarColor="rgba(147, 112, 219, 0.6)"
-            >
-              <FaBook className="text-[35px] text-[#9370DB]" />
             </SocialLinkButton>
           </div>
 

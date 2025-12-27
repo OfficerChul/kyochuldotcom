@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, lazy, Suspense, useState } from 'rea
 import { FaSearch } from 'react-icons/fa';
 import logo from '../../../../assets/images/logos/triangle-skyblue.png';
 import Navigation from '../../../../shared/components/ui/Navigation';
+import NavBar from '../../../../shared/components/ui/NavBar';
 import WorldClock from '../WorldClock';
 import './animations.css';
 
@@ -221,6 +222,10 @@ const Main: React.FC = () => {
         {CLOUD_CLASSES.map(({ id, className }) => (
           <span key={id} className={`cloud ${className}`} />
         ))}
+      </div>
+
+      <div className="absolute top-0 right-0 z-50">
+        <NavBar variant={timeStage.stage === 'night' ? 'dark' : 'light'} currentPage="home" />
       </div>
 
       <div className="relative z-20">

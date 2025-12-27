@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDiaryParser } from '../../hooks';
 import DiaryEntry from '../DiaryEntry';
-import NavBar from '../../../../shared/components/ui/NavBar';
+import HeroSection from '../../../../shared/components/ui/HeroSection';
+import SectionTitle from '../../../../shared/components/ui/SectionTitle';
 
 // 일기 날짜와 제목 (제목은 암호화하지 않음)
 const DIARY_ENTRIES_META = [
@@ -98,13 +99,11 @@ const Diary: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <NavBar variant="light" currentPage="diary" />
+      <HeroSection showAboutButton={false} currentPage="diary" secondLineText="My Diary :)" />
 
       <main className="px-6 md:px-12 lg:px-24 py-16 max-w-5xl mx-auto">
         {/* Title */}
-        <h1 className="text-5xl md:text-6xl font-normal text-sky-400 mb-16">
-          Diary
-        </h1>
+        <SectionTitle className="mb-16">Diary</SectionTitle>
 
         {/* Decode Key Input */}
         {!isDecoded && (
