@@ -70,18 +70,7 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
 
   return (
     <span className={className} style={{ position: 'relative' }}>
-      {displayText.split('').map((char, index) => (
-        <span
-          key={index}
-          style={{
-            opacity: 1,
-            animation: 'fadeInChar 0.15s ease-in forwards',
-            animationDelay: '0ms'
-          }}
-        >
-          {char}
-        </span>
-      ))}
+      {displayText}
       {showCursor && (
         <span
           className="typing-cursor"

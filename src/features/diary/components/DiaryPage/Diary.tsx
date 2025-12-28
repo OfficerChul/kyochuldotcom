@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Fade } from 'react-awesome-reveal';
 import { useDiaryParser } from '../../hooks';
 import DiaryEntry from '../DiaryEntry';
 import HeroSection from '../../../../shared/components/ui/HeroSection';
@@ -103,42 +104,47 @@ const Diary: React.FC = () => {
 
       <main className="px-6 md:px-12 lg:px-24 py-16 max-w-5xl mx-auto">
         {/* Title */}
-        <SectionTitle className="mb-16">Diary</SectionTitle>
+        <Fade direction="up" triggerOnce>
+          <SectionTitle className="mb-16">Diary</SectionTitle>
+        </Fade>
 
         {/* Decode Key Input */}
         {!isDecoded && (
-          <div className="mb-12">
-            <div className="inline-flex items-center">
-              <input
-                type="password"
-                className="px-4 py-2.5 text-sm bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-sky-400 w-48 transition-colors placeholder-gray-400"
-                placeholder="Enter decode key"
-                value={keyInput}
-                onChange={(e) => {
-                  setKeyInput(e.target.value);
-                  setKeyError(null);
-                }}
-                onKeyDown={handleKeyDown}
-              />
-              <button
-                onClick={handleDecode}
-                disabled={isDecoding}
-                className="ml-4 px-5 py-2.5 text-sm text-sky-500 border border-sky-400 rounded-none hover:bg-sky-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isDecoding ? 'Decoding...' : 'Unlock'}
-              </button>
+          <Fade direction="up" triggerOnce delay={100}>
+            <div className="mb-12">
+              <div className="inline-flex items-center">
+                <input
+                  type="password"
+                  className="px-4 py-2.5 text-sm bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-sky-400 w-48 transition-colors placeholder-gray-400"
+                  placeholder="Enter decode key"
+                  value={keyInput}
+                  onChange={(e) => {
+                    setKeyInput(e.target.value);
+                    setKeyError(null);
+                  }}
+                  onKeyDown={handleKeyDown}
+                />
+                <button
+                  onClick={handleDecode}
+                  disabled={isDecoding}
+                  className="ml-4 px-5 py-2.5 text-sm text-sky-500 border border-sky-400 rounded-none hover:bg-sky-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isDecoding ? 'Decoding...' : 'Unlock'}
+                </button>
+              </div>
+              {keyError && (
+                <p className="text-sm text-red-400 mt-2">{keyError}</p>
+              )}
             </div>
-            {keyError && (
-              <p className="text-sm text-red-400 mt-2">{keyError}</p>
-            )}
-          </div>
+          </Fade>
         )}
 
         {!isDecoded ? (
           /* 암호화된 상태 */
-          <div>
+          <Fade cascade damping={0.1} direction="up" triggerOnce>
             {DIARY_ENTRIES_META.map((entry, idx) => (
-              <article key={idx} className="py-8 border-t border-gray-200 first:border-t-0">
+              <article key={idx} className="py-8">
+                {idx > 0 && <div className="w-16 h-0.5 bg-sky-200 mx-auto mb-8"></div>}
                 <h3 className="text-xl font-medium text-gray-700 mb-1">
                   🔒 {entry.title}
                 </h3>
@@ -150,31 +156,33 @@ const Diary: React.FC = () => {
                 </p>
               </article>
             ))}
-          </div>
+          </Fade>
         ) : (
           <>
             {/* Controls */}
-            <div className="flex justify-end gap-4 mb-4 text-xs">
-              <button
-                onClick={expandAll}
-                className="text-gray-400 hover:text-sky-500 transition-colors"
-              >
-                Expand All
-              </button>
-              <span className="text-gray-300">|</span>
-              <button
-                onClick={collapseAll}
-                className="text-gray-400 hover:text-sky-500 transition-colors"
-              >
-                Collapse All
-              </button>
-            </div>
+            <Fade direction="up" triggerOnce>
+              <div className="flex justify-end gap-4 mb-4 text-xs">
+                <button
+                  onClick={expandAll}
+                  className="text-gray-400 hover:text-sky-500 transition-colors"
+                >
+                  Expand All
+                </button>
+                <span className="text-gray-300">|</span>
+                <button
+                  onClick={collapseAll}
+                  className="text-gray-400 hover:text-sky-500 transition-colors"
+                >
+                  Collapse All
+                </button>
+              </div>
+            </Fade>
 
             {/* Diary Entries */}
             {entries.length === 0 ? (
               <p className="text-center text-gray-500 py-10">No diary entries found.</p>
             ) : (
-              <div>
+              <Fade cascade damping={0.1} direction="up" triggerOnce>
                 {entries.map(entry => (
                   <DiaryEntry
                     key={entry.date}
@@ -183,18 +191,20 @@ const Diary: React.FC = () => {
                     onToggle={() => toggleEntry(entry.date)}
                   />
                 ))}
-              </div>
+              </Fade>
             )}
           </>
         )}
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 py-8 mt-auto">
-        <p className="text-center text-xs text-gray-400">
-          © Copyright {new Date().getFullYear()} Kyochul Jang
-        </p>
-      </footer>
+      <Fade direction="up" triggerOnce>
+        <footer className="border-t border-gray-200 py-8 mt-auto">
+          <p className="text-center text-xs text-gray-400">
+            © Copyright {new Date().getFullYear()} Kyochul Jang
+          </p>
+        </footer>
+      </Fade>
     </div>
   );
 };

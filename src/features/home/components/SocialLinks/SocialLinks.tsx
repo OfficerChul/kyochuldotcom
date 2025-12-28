@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import Modal from 'react-modal';
 import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope, FaBook } from 'react-icons/fa';
 import SocialLinkButton from './SocialLinkButton';
 import './animations.css';
+
+// Lazy load PDFViewer for code splitting
+const PDFViewer = lazy(() => import('./PDFViewer'));
 
 interface ModalStyles {
   overlay: React.CSSProperties;
@@ -11,21 +14,29 @@ interface ModalStyles {
 
 const SocialLinks: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [modalWidth, setModalWidth] = useState<number>(0);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Detect mobile device
+  // Calculate modal width for PDF
   useEffect(() => {
-    const checkMobile = () => {
-      const userAgent = navigator.userAgent || navigator.vendor;
-      const isMobileDevice = /android|iphone|ipad|ipod/i.test(userAgent.toLowerCase()) ||
-        window.innerWidth <= 768;
-      setIsMobile(isMobileDevice);
+    const updateWidth = () => {
+      const width = Math.min(window.innerWidth * 0.9, 800) - 32; // 90vw or 800px max, minus padding
+      setModalWidth(width);
     };
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    updateWidth();
+
+    let timeoutId: number;
+    const debouncedUpdate = () => {
+      clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(updateWidth, 150);
+    };
+
+    window.addEventListener('resize', debouncedUpdate);
+    return () => {
+      window.removeEventListener('resize', debouncedUpdate);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   // Handle ESC key to close modal
@@ -72,13 +83,6 @@ const SocialLinks: React.FC = () => {
     }
   };
 
-  // Responsive modal styles for mobile
-  const iframeStyles: React.CSSProperties = {
-    width: '100%',
-    height: '100%',
-    border: 'none',
-    borderRadius: '16px'
-  };
 
   return (
     <div>
@@ -192,32 +196,16 @@ const SocialLinks: React.FC = () => {
             <span className="text-2xl">×</span>
           </button>
 
-          {/* PDF Viewer - Full height */}
-          {isMobile ? (
-            // Mobile: Use object tag for better compatibility
-            <object
-              data="Kyochul_Jang___CV.pdf#view=FitH&toolbar=0"
-              type="application/pdf"
-              width="100%"
-              height="100%"
-              style={{ borderRadius: '16px' }}
-            >
-              <embed
-                src="Kyochul_Jang___CV.pdf#view=FitH&toolbar=0"
-                type="application/pdf"
-                width="100%"
-                height="100%"
-                style={{ borderRadius: '16px' }}
-              />
-            </object>
-          ) : (
-            // Desktop: Use iframe
-            <iframe
-              style={iframeStyles}
-              src="Kyochul_Jang___CV.pdf#view=FitH&toolbar=0"
-              title="Kyochul Jang CV"
-            />
-          )}
+          {/* PDF Viewer - react-pdf for cross-platform support */}
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-full">
+                <span className="text-gray-500">Loading PDF viewer...</span>
+              </div>
+            }
+          >
+            <PDFViewer file="/Kyochul_Jang___CV.pdf" width={modalWidth} />
+          </Suspense>
         </div>
       </Modal>
     </div>

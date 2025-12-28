@@ -23,7 +23,8 @@ const DiaryEntry: React.FC<DiaryEntryProps> = ({ entry, isExpanded, onToggle }) 
   const readTime = getReadTime(entry.content);
 
   return (
-    <article className="py-8 border-t border-gray-200 first:border-t-0">
+    <article className="py-8 group/entry first:pt-0">
+      <div className="w-16 h-0.5 bg-sky-200 mx-auto mb-8 group-first/entry:hidden"></div>
       {/* Header - Clickable */}
       <header
         onClick={onToggle}

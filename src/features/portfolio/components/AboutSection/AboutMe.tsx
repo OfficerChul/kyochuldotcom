@@ -8,18 +8,16 @@ interface AboutMeProps {
 
 const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
   const onButtonClick = (): void => {
-    // Using JavaScript method to get PDF file
     fetch('Kyochul_Jang___CV.pdf')
-      .then((response) => {
-        response.blob().then((blob) => {
-          // Creating new object of PDF file
-          const fileURL = window.URL.createObjectURL(blob);
-          // Setting various property values
-          const alink = document.createElement('a');
-          alink.href = fileURL;
-          alink.download = 'Kyochul_Resume.pdf';
-          alink.click();
-        });
+      .then((response) => response.blob())
+      .then((blob) => {
+        const fileURL = window.URL.createObjectURL(blob);
+        const alink = document.createElement('a');
+        alink.href = fileURL;
+        alink.download = 'Kyochul_Resume.pdf';
+        alink.click();
+        // Release blob URL to prevent memory leak
+        window.URL.revokeObjectURL(fileURL);
       })
       .catch((error) => {
         console.error('Error downloading resume:', error);
@@ -46,6 +44,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
                 <img
                   src="/myPicture-optimized.jpg"
                   alt="Kyochul Jang profile"
+                  loading="lazy"
                   className="relative w-full h-auto rounded-2xl shadow-2xl transform transition duration-500 group-hover:scale-[1.02]"
                 />
               </div>
