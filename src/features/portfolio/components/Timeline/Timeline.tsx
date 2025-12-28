@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionTitle from '../../../../shared/components/ui/SectionTitle';
 
 interface TimelineProps {
   id?: string;
@@ -74,10 +75,7 @@ const Timeline: React.FC<TimelineProps> = ({ id }) => {
   return (
     <section id={id} className="bg-white py-8 md:py-10 lg:py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-7xl">
-        <div className="text-center mb-12">
-          <h2 className="font-mono text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-sky-300 font-extrabold mb-4">Timeline</h2>
-          <div className="w-20 h-1 bg-sky-300 mx-auto rounded-full"></div>
-        </div>
+        <SectionTitle>Timeline</SectionTitle>
 
         <div className="relative">
           <style>{`

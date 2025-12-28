@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
+import SectionTitle from '../../../../shared/components/ui/SectionTitle';
 
 interface AboutMeProps {
   id?: string;
@@ -28,12 +29,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
     <div className="bg-gradient-to-br from-gray-50 to-sky-50 py-12 md:py-16 lg:py-20" id={id}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
-          <div className="text-center mb-12">
-            <h2 className="font-mono text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-sky-300 font-extrabold mb-4">
-              About Me
-            </h2>
-            <div className="w-20 h-1 bg-sky-300 mx-auto rounded-full"></div>
-          </div>
+          <SectionTitle>About Me</SectionTitle>
         </Fade>
 
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">

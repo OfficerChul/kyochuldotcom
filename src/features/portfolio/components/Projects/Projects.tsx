@@ -4,22 +4,18 @@ import { ProjectsProps } from '../../types';
 import { projectsData } from './ProjectsData';
 import ProjectsBtn from './ProjectsBtn';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
+import SectionTitle from '../../../../shared/components/ui/SectionTitle';
 
 const Projects: React.FC<ProjectsProps> = memo(({ id }) => {
   return (
     <section className="bg-gray-50 py-12 md:py-16 lg:py-20" id={id}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">
-          <div className="text-center mb-12">
-            <h2 className="font-mono text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-sky-300 font-extrabold mb-4">
-              Projects
-            </h2>
-            <div className="w-20 h-1 bg-sky-300 mx-auto rounded-full mb-4"></div>
-            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4 sm:px-0">
-              Here are some of the projects I've worked on that showcase my skills and experience
-              in software development and web technologies.
-            </p>
-          </div>
+          <SectionTitle>Projects</SectionTitle>
+          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4 sm:px-0 text-center -mt-8 mb-12">
+            Here are some of the projects I've worked on that showcase my skills and experience
+            in software development and web technologies.
+          </p>
         </Fade>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

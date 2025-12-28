@@ -171,7 +171,7 @@ const Main: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#c9ebf5]">
+    <div className="relative h-screen overflow-hidden bg-[#c9ebf5]">
       <WorldClock />
       <div className={`sky-layer stage-${timeStage.stage}`} aria-hidden="true">
         <div className="time-gradient" />
@@ -232,7 +232,7 @@ const Main: React.FC = () => {
         <Navigation />
       </div>
 
-      <main className="relative z-20 mt-32 pb-40 pointer-events-none">
+      <main className="relative z-20 mt-32 pointer-events-none">
         {/* Logo Section with Progressive Loading */}
         <div className="text-center relative pointer-events-none">
           {!logoLoaded && (
