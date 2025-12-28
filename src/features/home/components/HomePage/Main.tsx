@@ -179,62 +179,61 @@ const Main: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-screen overflow-hidden bg-[#c9ebf5]">
-      <WorldClock />
-      <div className={`sky-layer stage-${timeStage.stage}`} aria-hidden="true">
-        <div className="time-gradient" />
-        <div
-          className="sun-halo"
-          style={{
-            top: `${sunPosition.top}%`,
-            left: `${sunPosition.left}%`,
-            opacity: timeStage.stage === 'night' ? 0 : 0.85
-          }}
-        />
-        <div
-          className="sun"
-          style={{
-            top: `${sunPosition.top}%`,
-            left: `${sunPosition.left}%`,
-            opacity: timeStage.stage === 'night' ? 0 : 1
-          }}
-        />
-        <div
-          className="moon"
-          style={{
-            top: `${moonPosition.top}%`,
-            left: `${moonPosition.left}%`,
-            opacity: moonOpacity
-          }}
-        />
-        <div className="stars" style={{ opacity: starOpacity }}>
-          {STARS.map((star, index) => (
-            <span
-              key={`star-${index}`}
-              className="star"
-              style={{
-                top: `${star.top}%`,
-                left: `${star.left}%`,
-                width: `${star.size}px`,
-                height: `${star.size}px`,
-                animationDelay: `${star.delay}s`
-              }}
-            />
-          ))}
-        </div>
-        <div className="horizon-glow" />
-        <div className="haze" />
-      </div>
-
-      <div className="cloud-layer" aria-hidden="true">
-        {CLOUD_CLASSES.map(({ id, className }) => (
-          <span key={id} className={`cloud ${className}`} />
-        ))}
-      </div>
-
+    <div className="relative h-screen overflow-hidden bg-[#c9ebf5]" style={{ scrollbarGutter: 'stable' }}>
       <div className="absolute top-0 right-0 z-50">
         <NavBar variant={timeStage.stage === 'night' ? 'dark' : 'light'} currentPage="home" />
       </div>
+        <WorldClock />
+        <div className={`sky-layer stage-${timeStage.stage}`} aria-hidden="true">
+          <div className="time-gradient" />
+          <div
+            className="sun-halo"
+            style={{
+              top: `${sunPosition.top}%`,
+              left: `${sunPosition.left}%`,
+              opacity: timeStage.stage === 'night' ? 0 : 0.85
+            }}
+          />
+          <div
+            className="sun"
+            style={{
+              top: `${sunPosition.top}%`,
+              left: `${sunPosition.left}%`,
+              opacity: timeStage.stage === 'night' ? 0 : 1
+            }}
+          />
+          <div
+            className="moon"
+            style={{
+              top: `${moonPosition.top}%`,
+              left: `${moonPosition.left}%`,
+              opacity: moonOpacity
+            }}
+          />
+          <div className="stars" style={{ opacity: starOpacity }}>
+            {STARS.map((star, index) => (
+              <span
+                key={`star-${index}`}
+                className="star"
+                style={{
+                  top: `${star.top}%`,
+                  left: `${star.left}%`,
+                  width: `${star.size}px`,
+                  height: `${star.size}px`,
+                  animationDelay: `${star.delay}s`
+                }}
+              />
+            ))}
+          </div>
+          <div className="horizon-glow" />
+          <div className="haze" />
+        </div>
+
+        <div className="cloud-layer" aria-hidden="true">
+          {CLOUD_CLASSES.map(({ id, className }) => (
+            <span key={id} className={`cloud ${className}`} />
+          ))}
+        </div>
 
       <div className="relative z-20">
         <Navigation />

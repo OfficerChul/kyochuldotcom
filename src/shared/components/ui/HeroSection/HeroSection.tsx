@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FancyBtn from '../Button';
 import TypingAnimation from '../TypingAnimation';
 import NavBar from '../NavBar';
-
-// Base64 blur placeholder (20x20 heavily blurred version)
-const BLUR_PLACEHOLDER = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMBAgT/xAAYEAEBAQEBAAAAAAAAAAAAAAAAAQIRIf/EABYBAQEBAAAAAAAAAAAAAAAAAAIFBv/EABgRAQEAAwAAAAAAAAAAAAAAAAABERIh/9oADAMBAAIRAxEAPwDPYjhmlIqbM9JwTIMk8BZB/9k=';
+import backgroundImage from '../../../../assets/images/backgrounds/background.jpg';
 
 interface HeroSectionProps {
   showAboutButton?: boolean;
@@ -13,56 +11,22 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ showAboutButton = false, currentPage, secondLineText = "My Website :)" }) => {
-  const [backgroundStage, setBackgroundStage] = useState<'blur' | 'loading' | 'loaded'>('blur');
-  const [backgroundUrl, setBackgroundUrl] = useState(BLUR_PLACEHOLDER);
   const [showSecondLine, setShowSecondLine] = useState(false);
   const [showThirdLine, setShowThirdLine] = useState(false);
 
-  useEffect(() => {
-    // First load the optimized version
-    const optimizedImg = new Image();
-    optimizedImg.src = process.env.PUBLIC_URL + '/preload-background.jpg';
-
-    optimizedImg.onload = () => {
-      setBackgroundUrl(process.env.PUBLIC_URL + '/preload-background.jpg');
-      setBackgroundStage('loading');
-
-      // Then load the full quality version
-      const fullImg = new Image();
-      fullImg.src = require('../../../../assets/images/backgrounds/background.jpg');
-      fullImg.onload = () => {
-        setBackgroundUrl(require('../../../../assets/images/backgrounds/background.jpg'));
-        setBackgroundStage('loaded');
-      };
-    };
-
-    // If optimized fails, load full directly
-    optimizedImg.onerror = () => {
-      const fullImg = new Image();
-      fullImg.src = require('../../../../assets/images/backgrounds/background.jpg');
-      fullImg.onload = () => {
-        setBackgroundUrl(require('../../../../assets/images/backgrounds/background.jpg'));
-        setBackgroundStage('loaded');
-      };
-    };
-  }, []);
-
   return (
     <>
-      <div className="absolute top-0 right-0 z-50">
+      <header
+      className={`font-['Bungee'] bg-no-repeat bg-cover bg-center h-screen relative`}
+      style={{
+        backgroundImage: `url(${backgroundImage})`
+      }}
+    >
+      <div className="absolute top-0 right-0 z-50 font-sans">
         <NavBar variant="dark" currentPage={currentPage} />
       </div>
 
-      <header
-        className={`pt-12 font-['Bungee'] bg-no-repeat bg-cover bg-center h-screen relative gpu-accelerated`}
-        style={{
-          backgroundImage: `url(${backgroundUrl})`,
-          filter: backgroundStage === 'blur' ? 'blur(20px)' : backgroundStage === 'loading' ? 'blur(2px)' : 'none',
-          transition: 'filter 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-          transform: 'scale(1.01)' // Slightly scale to hide blur edges
-        }}
-      >
-        <div id="top">
+      <div id="top" className="pt-12">
           <h1 className="text-black text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black h-[1.2em]">
             <span className="[-webkit-text-stroke:1px_#ffffff]">
               <TypingAnimation

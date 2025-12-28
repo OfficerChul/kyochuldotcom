@@ -13,7 +13,7 @@ const VisitorMap = lazy(() => import('../VisitorMap'));
 const Portfolio: React.FC = () => {
   return (
     <>
-      <HeroSection />
+      <HeroSection currentPage="about" />
 
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
         <AboutMe id="about1" />
