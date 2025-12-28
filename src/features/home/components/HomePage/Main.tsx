@@ -270,7 +270,7 @@ const Main: React.FC = () => {
         <section className="mt-4 sm:mt-8 pointer-events-auto" aria-label="Google Search">
           <form action="https://www.google.com/search" method="GET">
             <div className="w-full flex items-center justify-center">
-              <div className="relative w-3/4 md:w-1/2 lg:w-1/2">
+              <div className="relative w-4/5 md:w-[440px] lg:w-[500px] xl:w-[560px]">
                 <label htmlFor="search-bar" className="sr-only">
                   Search Google or type a URL
                 </label>

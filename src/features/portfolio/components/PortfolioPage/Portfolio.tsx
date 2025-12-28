@@ -19,10 +19,10 @@ const Portfolio: React.FC = () => {
         <AboutMe id="about1" />
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
-        <News id="news" />
+        <Publications id="publications" />
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
-        <Publications id="publications" />
+        <News id="news" />
       </Suspense>
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
         <Education id="education" />
