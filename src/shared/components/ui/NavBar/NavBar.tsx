@@ -34,11 +34,11 @@ const NavBar: React.FC<NavBarProps> = ({ variant = 'light', currentPage }) => {
         home
       </Link>
       <Link
-        to="/portfolio#about1"
+        to="/portfolio"
         className={`transition-colors ${currentPage === 'about' ? activeClass : baseClass}`}
         onClick={() => setIsOpen(false)}
       >
-        about
+        portfolio
       </Link>
       <Link
         to="/diary"

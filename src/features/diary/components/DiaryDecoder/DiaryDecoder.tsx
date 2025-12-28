@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DecoderResult } from '../../types';
+import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
 interface DiaryDecoderProps {
   encodedContent: string;
@@ -75,13 +76,19 @@ const DiaryDecoder: React.FC<DiaryDecoderProps> = ({ encodedContent, onDecode })
             }}
             onKeyDown={handleKeyDown}
           />
-          <button
-            onClick={handleSubmit}
-            disabled={isDecoding}
-            className="px-6 py-2 bg-purple-400 text-white font-mono text-sm rounded-full hover:bg-purple-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          <FancyButtonSmall
+            onClick={isDecoding ? undefined : handleSubmit}
+            className={`inline-block px-6 py-2 font-mono text-sm text-purple-600 stroke-purple-400 hover:stroke-purple-600 overflow-hidden ${
+              isDecoding ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            borderColor="rgba(192, 132, 252, 0.5)"
+            noSvgBorder={true}
+            shineColor={isDecoding ? '' : 'from-transparent via-purple-300/40 to-transparent'}
+            ariaLabel="Decode diary entry"
           >
-            {isDecoding ? 'Decoding...' : 'Decode'}
-          </button>
+            <i className="fa fa-unlock-alt"></i>
+            <span>{isDecoding ? 'Decoding...' : 'Decode'}</span>
+          </FancyButtonSmall>
         </div>
 
         {error && (

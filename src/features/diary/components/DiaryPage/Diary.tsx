@@ -5,6 +5,7 @@ import { useDiaryParser } from '../../hooks';
 import DiaryEntry from '../DiaryEntry';
 import HeroSection from '../../../../shared/components/ui/HeroSection';
 import SectionTitle from '../../../../shared/components/ui/SectionTitle';
+import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
 // 일기 날짜와 제목 (제목은 암호화하지 않음)
 const DIARY_ENTRIES_META = [
@@ -124,13 +125,19 @@ const Diary: React.FC = () => {
                   }}
                   onKeyDown={handleKeyDown}
                 />
-                <button
-                  onClick={handleDecode}
-                  disabled={isDecoding}
-                  className="ml-4 px-5 py-2.5 text-sm text-sky-500 border border-sky-400 rounded-none hover:bg-sky-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                <FancyButtonSmall
+                  onClick={isDecoding ? undefined : handleDecode}
+                  className={`ml-4 px-5 py-2.5 text-sm text-sky-500 font-mono stroke-sky-400 hover:stroke-sky-600 ${
+                    isDecoding ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                  borderColor="rgba(56, 189, 248, 0.5)"
+                  noSvgBorder={true}
+                  shineColor={isDecoding ? '' : 'from-transparent via-sky-300/40 to-transparent'}
+                  ariaLabel="Unlock diary"
                 >
-                  {isDecoding ? 'Decoding...' : 'Unlock'}
-                </button>
+                  <i className="fa fa-unlock-alt"></i>
+                  <span>{isDecoding ? 'Decoding...' : 'Unlock'}</span>
+                </FancyButtonSmall>
               </div>
               {keyError && (
                 <p className="text-sm text-red-400 mt-2">{keyError}</p>

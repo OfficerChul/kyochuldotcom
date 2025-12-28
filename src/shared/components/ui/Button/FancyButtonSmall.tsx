@@ -28,7 +28,7 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
   const buttonContent = (
     <button
       onClick={onClick}
-      className={`relative cursor-pointer bg-transparent outline-none transition-all duration-1000 ease-in-out group/btn ${className}`}
+      className={`relative overflow-hidden cursor-pointer bg-transparent outline-none transition-all duration-1000 ease-in-out group/btn ${className}`}
       style={{
         border: borderColor === 'transparent' ? 'none' : `${borderWidth}px solid ${borderColor}`
       }}
@@ -50,7 +50,7 @@ const FancyButtonSmall: React.FC<FancyButtonSmallProps> = ({
       <span className="relative z-10 flex items-center justify-center gap-2">
         {children}
       </span>
-      <span className="absolute inset-0 overflow-hidden">
+      <span className="absolute inset-0 overflow-hidden z-20 pointer-events-none">
         <span className={`absolute inset-0 -translate-x-full bg-gradient-to-r ${shineColor} group-hover/btn:translate-x-full transition-transform duration-700 ease-out`}></span>
       </span>
     </button>
