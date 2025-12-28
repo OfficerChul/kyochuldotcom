@@ -306,7 +306,7 @@ const Main: React.FC = () => {
               </div>
             }
           >
-            <SocialLinks />
+            <SocialLinks variant={timeStage.stage === 'night' ? 'dark' : 'light'} />
           </Suspense>
         </div>
       </main>

@@ -443,10 +443,10 @@ const News: React.FC<NewsProps> = ({ id }) => {
               {visibleItems.map((item, index) => (
                 <li
                   key={index}
-                  className="flex flex-row items-center gap-2 sm:gap-4"
+                  className="flex flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm md:text-base"
                   style={getItemAnimation(index)}
                 >
-                  <span className="text-sky-500 font-mono font-semibold min-w-[84px] sm:min-w-[90px] whitespace-nowrap">{item.date}</span>
+                  <span className="text-sky-500 font-mono font-semibold min-w-[60px] sm:min-w-[84px] md:min-w-[90px] whitespace-nowrap">{item.date}</span>
                   <span className="font-mono text-gray-700 flex-1">
                     {highlightInstitutions(item.text)}{item.text.trimEnd().endsWith('!') ? '' : '!'}
                   </span>

@@ -13,7 +13,11 @@ interface ModalStyles {
   content: React.CSSProperties;
 }
 
-const SocialLinks: React.FC = () => {
+interface SocialLinksProps {
+  variant?: 'light' | 'dark';
+}
+
+const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalWidth, setModalWidth] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -101,6 +105,8 @@ const SocialLinks: React.FC = () => {
               ariaLabel="View Portfolio"
               sonarColor="rgba(252, 233, 3, 0.6)"
               isPortfolio
+              label="Portfolio"
+              variant={variant}
             >
               <FaStar className="text-[26px] sm:text-[35px] text-[#fce903]" />
             </SocialLinkButton>
@@ -109,6 +115,8 @@ const SocialLinks: React.FC = () => {
               to="/diary"
               ariaLabel="View Diary"
               sonarColor="rgba(139, 69, 19, 0.6)"
+              label="Diary"
+              variant={variant}
             >
               <FaBook className="text-[26px] sm:text-[35px] text-[#8B4513]" />
             </SocialLinkButton>
@@ -117,6 +125,8 @@ const SocialLinks: React.FC = () => {
               href="https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao"
               ariaLabel="Google Scholar Profile"
               sonarColor="rgba(66, 133, 244, 0.6)"
+              label="Scholar"
+              variant={variant}
             >
               <img
                 className="w-7 sm:w-10"
@@ -130,6 +140,8 @@ const SocialLinks: React.FC = () => {
               onClick={() => setIsModalOpen(true)}
               ariaLabel="View CV"
               sonarColor="rgba(0, 0, 0, 0.25)"
+              label="CV"
+              variant={variant}
             >
               <img
                 className="w-7 sm:w-10"
@@ -141,11 +153,13 @@ const SocialLinks: React.FC = () => {
           </div>
 
           {/* Second row of social links */}
-          <div className="flex justify-center gap-2 sm:gap-12 mt-3 sm:mt-3">
+          <div className="flex justify-center gap-2 sm:gap-12 mt-6 sm:mt-6">
             <SocialLinkButton
               href="https://www.linkedin.com/in/kyochul-jang-93b263208/"
               ariaLabel="LinkedIn Profile"
               sonarColor="rgba(14, 118, 168, 0.6)"
+              label="LinkedIn"
+              variant={variant}
             >
               <FaLinkedinIn className="text-[26px] sm:text-[35px] text-[#0E76A8]" />
             </SocialLinkButton>
@@ -154,6 +168,8 @@ const SocialLinks: React.FC = () => {
               href="https://www.instagram.com/kjang_hochul/"
               ariaLabel="Instagram Profile"
               sonarColor="rgba(225, 48, 108, 0.6)"
+              label="Instagram"
+              variant={variant}
             >
               <FaInstagram className="text-[26px] sm:text-[35px] text-[#E1306C]" />
             </SocialLinkButton>
@@ -162,6 +178,8 @@ const SocialLinks: React.FC = () => {
               href="https://github.com/OfficerChul"
               ariaLabel="GitHub Profile"
               sonarColor="rgba(119, 87, 157, 0.6)"
+              label="GitHub"
+              variant={variant}
             >
               <FaGithub className="text-[26px] sm:text-[35px] text-[#77579d]" />
             </SocialLinkButton>
@@ -170,6 +188,8 @@ const SocialLinks: React.FC = () => {
               href="mailto:gcj1234567890@gmail.com"
               ariaLabel="Send Email"
               sonarColor="rgba(54, 139, 254, 0.6)"
+              label="Email"
+              variant={variant}
             >
               <FaEnvelope className="text-[26px] sm:text-[35px] text-[#368BFE]" />
             </SocialLinkButton>

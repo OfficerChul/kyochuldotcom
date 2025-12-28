@@ -21,6 +21,14 @@ interface SocialLinkButtonProps {
    * @deprecated Use `to` instead. Kept for backwards compatibility.
    */
   isInternalLink?: boolean;
+  /**
+   * Label text displayed below the button
+   */
+  label?: string;
+  /**
+   * Visual variant for light/dark backgrounds
+   */
+  variant?: 'light' | 'dark';
 }
 
 const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
@@ -33,7 +41,9 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
   rel = 'noopener noreferrer',
   sonarColor,
   to,
-  isInternalLink = false
+  isInternalLink = false,
+  label,
+  variant = 'light'
 }) => {
   const portfolioRef = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null);
   const setPortfolioRef = (node: HTMLAnchorElement | HTMLButtonElement | null) => {
@@ -110,53 +120,69 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
 
   const content = <span className="social-link-button__surface">{children}</span>;
 
-  if (onClick) {
+  const renderButton = () => {
+    if (onClick) {
+      return (
+        <button
+          onClick={onClick}
+          className={className}
+          style={style}
+          aria-label={ariaLabel}
+          ref={isPortfolio ? setPortfolioRef : undefined}
+          type="button"
+        >
+          {content}
+        </button>
+      );
+    }
+
+    const internalDestination = to ?? (isInternalLink ? href : undefined);
+
+    if (internalDestination) {
+      return (
+        <Link
+          to={internalDestination}
+          className={className}
+          style={style}
+          aria-label={ariaLabel}
+          ref={isPortfolio ? setPortfolioRef : undefined}
+        >
+          {content}
+        </Link>
+      );
+    }
+
+    if (!href) {
+      return null;
+    }
+
     return (
-      <button
-        onClick={onClick}
+      <a
+        href={href}
+        target={target}
+        rel={rel}
         className={className}
         style={style}
         aria-label={ariaLabel}
         ref={isPortfolio ? setPortfolioRef : undefined}
-        type="button"
       >
         {content}
-      </button>
+      </a>
     );
-  }
+  };
 
-  const internalDestination = to ?? (isInternalLink ? href : undefined);
+  const button = renderButton();
+  if (!button) return null;
 
-  if (internalDestination) {
-    return (
-      <Link
-        to={internalDestination}
-        className={className}
-        style={style}
-        aria-label={ariaLabel}
-        ref={isPortfolio ? setPortfolioRef : undefined}
-      >
-        {content}
-      </Link>
-    );
-  }
-
-  if (!href) {
-    return null;
-  }
+  const labelClass = variant === 'dark'
+    ? 'social-link-label social-link-label--dark'
+    : 'social-link-label';
 
   return (
-    <a
-      href={href}
-      target={target}
-      rel={rel}
-      className={className}
-      style={style}
-      aria-label={ariaLabel}
-      ref={isPortfolio ? setPortfolioRef : undefined}
-    >
-      {content}
-    </a>
+    <div className="social-link-wrapper">
+      {button}
+      {label && <span className={labelClass}>{label}</span>}
+    </div>
   );
 };
 
