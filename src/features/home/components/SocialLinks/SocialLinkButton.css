@@ -1,8 +1,8 @@
 .social-link-button {
   cursor: pointer;
   margin: 0.25rem;
-  width: 70px;
-  height: 70px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   position: relative;
   z-index: 10;
@@ -25,8 +25,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 58px;
-  height: 58px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 60%, #e8e8e8 100%);
   box-shadow:
@@ -216,9 +216,16 @@
     0 0 2px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .social-link-button {
     margin: 0.625rem;
+    width: 70px;
+    height: 70px;
+  }
+
+  .social-link-button__surface {
+    width: 58px;
+    height: 58px;
   }
 }
 

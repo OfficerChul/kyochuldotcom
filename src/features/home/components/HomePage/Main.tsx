@@ -93,6 +93,7 @@ const Main: React.FC = () => {
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [supportsWebP, setSupportsWebP] = useState(false);
   const [timeStage, setTimeStage] = useState<StageState>(() => getStageState());
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 640);
 
   // Compute animated element positions and intensity based on current KST.
   const { sunPosition, moonPosition, moonOpacity, starOpacity } = useMemo(() => {
@@ -164,6 +165,13 @@ const Main: React.FC = () => {
     // Intentionally do not focus the search input on load
   }, []);
 
+  // Track mobile viewport for responsive placeholder
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     // Refresh the stage every 30 seconds to keep animation aligned with real time.
     const interval = window.setInterval(() => setTimeStage(getStageState()), 30000);
@@ -232,20 +240,20 @@ const Main: React.FC = () => {
         <Navigation />
       </div>
 
-      <main className="relative z-20 mt-32 pointer-events-none">
+      <main className="relative z-20 h-screen flex flex-col items-center justify-center pointer-events-none">
         {/* Logo Section with Progressive Loading */}
         <div className="text-center relative pointer-events-none">
           {!logoLoaded && (
             <div
-              className="mx-auto mt-5 h-52 md:h-60 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-full animate-pulse"
-              style={{ width: '208px', height: '208px' }}
+              className="mx-auto h-40 sm:h-52 md:h-60 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-full animate-pulse"
+              style={{ width: '160px', height: '160px' }}
             />
           )}
           <picture className="pointer-events-auto">
             {supportsWebP && <source srcSet="/logo-optimized.webp" type="image/webp" />}
             <source srcSet="/logo-optimized.png" type="image/png" />
             <img
-              className={`relative z-40 mx-auto mt-5 h-52 md:h-60 hover:animate-[shake_3s_infinite] transition-opacity duration-300 ${
+              className={`relative z-40 mx-auto h-40 sm:h-52 md:h-60 hover:animate-[shake_3s_infinite] transition-opacity duration-300 ${
                 logoLoaded ? 'opacity-100' : 'opacity-0 absolute top-0 left-1/2 -translate-x-1/2'
               }`}
               src={logo}
@@ -259,10 +267,10 @@ const Main: React.FC = () => {
         </div>
 
         {/* Search Bar Section */}
-        <section className="mt-8 pointer-events-auto" aria-label="Google Search">
+        <section className="mt-4 sm:mt-8 pointer-events-auto" aria-label="Google Search">
           <form action="https://www.google.com/search" method="GET">
             <div className="w-full flex items-center justify-center">
-              <div className="relative w-3/4 md:w-1/2 lg:w-2/5">
+              <div className="relative w-3/4 md:w-1/2 lg:w-1/2">
                 <label htmlFor="search-bar" className="sr-only">
                   Search Google or type a URL
                 </label>
@@ -276,7 +284,7 @@ const Main: React.FC = () => {
                   name="q"
                   type="text"
                   className="shadow-lg border-none w-full rounded-full h-10 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                  placeholder="Search Google or type a URL"
+                  placeholder={isMobile ? 'Search Google' : 'Search Google or type a URL'}
                   aria-label="Search Google"
                   autoComplete="off"
                 />
@@ -286,14 +294,14 @@ const Main: React.FC = () => {
         </section>
 
         {/* Social Links Section with Lazy Loading */}
-        <div className="mt-8 pointer-events-auto">
+        <div className="mt-4 sm:mt-8 pointer-events-auto">
           <Suspense
             fallback={
               <div className="flex justify-center">
-                <div className="animate-pulse flex space-x-4">
-                  <div className="rounded-full bg-gray-300 h-16 w-16" />
-                  <div className="rounded-full bg-gray-300 h-16 w-16" />
-                  <div className="rounded-full bg-gray-300 h-16 w-16" />
+                <div className="animate-pulse flex space-x-3 sm:space-x-4">
+                  <div className="rounded-full bg-gray-300 h-14 w-14 sm:h-16 sm:w-16" />
+                  <div className="rounded-full bg-gray-300 h-14 w-14 sm:h-16 sm:w-16" />
+                  <div className="rounded-full bg-gray-300 h-14 w-14 sm:h-16 sm:w-16" />
                 </div>
               </div>
             }

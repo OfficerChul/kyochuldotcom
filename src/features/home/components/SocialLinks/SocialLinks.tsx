@@ -93,16 +93,16 @@ const SocialLinks: React.FC = () => {
   return (
     <div>
       <section id="social-links" className="px-4">
-        <div className="text-center mx-auto py-4 pb-12">
+        <div className="text-center mx-auto py-2 sm:py-4 pb-6 sm:pb-12">
           {/* First row of social links */}
-          <div className="flex justify-center gap-3 sm:gap-12">
+          <div className="flex justify-center gap-2 sm:gap-12">
             <SocialLinkButton
               to="/portfolio"
               ariaLabel="View Portfolio"
               sonarColor="rgba(252, 233, 3, 0.6)"
               isPortfolio
             >
-              <FaStar className="text-[35px] text-[#fce903]" />
+              <FaStar className="text-[26px] sm:text-[35px] text-[#fce903]" />
             </SocialLinkButton>
 
             <SocialLinkButton
@@ -110,7 +110,7 @@ const SocialLinks: React.FC = () => {
               ariaLabel="View Diary"
               sonarColor="rgba(139, 69, 19, 0.6)"
             >
-              <FaBook className="text-[35px] text-[#8B4513]" />
+              <FaBook className="text-[26px] sm:text-[35px] text-[#8B4513]" />
             </SocialLinkButton>
 
             <SocialLinkButton
@@ -119,7 +119,7 @@ const SocialLinks: React.FC = () => {
               sonarColor="rgba(66, 133, 244, 0.6)"
             >
               <img
-                className="w-10"
+                className="w-7 sm:w-10"
                 src="./google_scholar_icon.png"
                 alt="Google Scholar"
                 loading="lazy"
@@ -132,7 +132,7 @@ const SocialLinks: React.FC = () => {
               sonarColor="rgba(0, 0, 0, 0.25)"
             >
               <img
-                className="w-10"
+                className="w-7 sm:w-10"
                 src="./cv_icon.png"
                 alt="CV"
                 loading="lazy"
@@ -141,13 +141,13 @@ const SocialLinks: React.FC = () => {
           </div>
 
           {/* Second row of social links */}
-          <div className="flex justify-center gap-3 sm:gap-12 mt-4 sm:mt-3">
+          <div className="flex justify-center gap-2 sm:gap-12 mt-3 sm:mt-3">
             <SocialLinkButton
               href="https://www.linkedin.com/in/kyochul-jang-93b263208/"
               ariaLabel="LinkedIn Profile"
               sonarColor="rgba(14, 118, 168, 0.6)"
             >
-              <FaLinkedinIn className="text-[35px] text-[#0E76A8]" />
+              <FaLinkedinIn className="text-[26px] sm:text-[35px] text-[#0E76A8]" />
             </SocialLinkButton>
 
             <SocialLinkButton
@@ -155,7 +155,7 @@ const SocialLinks: React.FC = () => {
               ariaLabel="Instagram Profile"
               sonarColor="rgba(225, 48, 108, 0.6)"
             >
-              <FaInstagram className="text-[35px] text-[#E1306C]" />
+              <FaInstagram className="text-[26px] sm:text-[35px] text-[#E1306C]" />
             </SocialLinkButton>
 
             <SocialLinkButton
@@ -163,7 +163,7 @@ const SocialLinks: React.FC = () => {
               ariaLabel="GitHub Profile"
               sonarColor="rgba(119, 87, 157, 0.6)"
             >
-              <FaGithub className="text-[35px] text-[#77579d]" />
+              <FaGithub className="text-[26px] sm:text-[35px] text-[#77579d]" />
             </SocialLinkButton>
 
             <SocialLinkButton
@@ -171,7 +171,7 @@ const SocialLinks: React.FC = () => {
               ariaLabel="Send Email"
               sonarColor="rgba(54, 139, 254, 0.6)"
             >
-              <FaEnvelope className="text-[35px] text-[#368BFE]" />
+              <FaEnvelope className="text-[26px] sm:text-[35px] text-[#368BFE]" />
             </SocialLinkButton>
           </div>
         </div>
