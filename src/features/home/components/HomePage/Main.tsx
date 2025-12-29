@@ -181,7 +181,7 @@ const Main: React.FC = () => {
   return (
     <div className="relative h-screen overflow-hidden bg-[#c9ebf5]" style={{ scrollbarGutter: 'stable' }}>
       <div className="absolute top-0 right-0 z-50">
-        <NavBar variant={timeStage.stage === 'night' ? 'dark' : 'light'} currentPage="home" />
+        <NavBar variant="dark" currentPage="home" />
       </div>
         <WorldClock />
         <div className={`sky-layer stage-${timeStage.stage}`} aria-hidden="true">
