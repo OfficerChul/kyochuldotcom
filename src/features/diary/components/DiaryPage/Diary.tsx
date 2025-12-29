@@ -9,11 +9,32 @@ import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 
 // 일기 날짜와 제목 (제목은 암호화하지 않음)
 const DIARY_ENTRIES_META = [
+  { date: '25-12-29', title: 'Year End Reflections' },
+  { date: '25-12-28', title: 'Lazy Saturday' },
+  { date: '25-12-27', title: 'Back to Routine' },
+  { date: '25-12-26', title: 'Boxing Day Adventures' },
   { date: '25-12-25', title: 'Christmas Morning Thoughts' },
   { date: '25-12-24', title: 'Eve of Something New' },
   { date: '25-12-23', title: 'Winter Reflections' },
   { date: '25-12-22', title: 'A Quiet Sunday' },
   { date: '25-12-21', title: 'First Day of Winter' },
+  { date: '25-12-20', title: 'Friday Night Vibes' },
+  { date: '25-12-19', title: 'Midweek Thoughts' },
+  { date: '25-12-18', title: 'Coffee and Code' },
+  { date: '25-12-17', title: 'Rainy Day Musings' },
+  { date: '25-12-16', title: 'Monday Motivation' },
+  { date: '25-12-15', title: 'Weekend Wrap-up' },
+  { date: '25-12-14', title: 'Saturday Stroll' },
+  { date: '25-12-13', title: 'Friday the 13th' },
+  { date: '25-12-12', title: 'Twelve Twelve' },
+  { date: '25-12-11', title: 'Midweek Check-in' },
+  { date: '25-12-10', title: 'Ten Days to Go' },
+  { date: '25-12-09', title: 'Tuesday Thoughts' },
+  { date: '25-12-08', title: 'New Week Energy' },
+  { date: '25-12-07', title: 'Lazy Sunday' },
+  { date: '25-12-06', title: 'Saturday Plans' },
+  { date: '25-12-05', title: 'End of Week' },
+  { date: '25-12-04', title: 'December Beginnings' },
 ];
 
 function formatDate(dateStr: string): string {
@@ -31,6 +52,9 @@ const Diary: React.FC = () => {
   const [keyInput, setKeyInput] = useState('');
   const [keyError, setKeyError] = useState<string | null>(null);
   const [isDecoding, setIsDecoding] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const ENTRIES_PER_PAGE = 5;
 
   // 디코딩 후 모든 엔트리 펼치기
   useEffect(() => {
@@ -148,10 +172,10 @@ const Diary: React.FC = () => {
 
         {!isDecoded ? (
           /* 암호화된 상태 */
-          <Fade cascade damping={0.1} direction="up" triggerOnce>
-            {DIARY_ENTRIES_META.map((entry, idx) => (
-              <article key={idx} className="py-8">
-                {idx > 0 && <div className="w-16 h-0.5 bg-sky-200 mx-auto mb-8"></div>}
+          <>
+            {DIARY_ENTRIES_META.slice((currentPage - 1) * ENTRIES_PER_PAGE, currentPage * ENTRIES_PER_PAGE).map((entry, idx) => (
+              <article key={entry.date} className="py-4">
+                {idx > 0 && <div className="w-16 h-0.5 bg-sky-200 mx-auto mb-4"></div>}
                 <h3 className="text-xl font-medium text-gray-700 mb-1">
                   🔒 {entry.title}
                 </h3>
@@ -163,7 +187,27 @@ const Diary: React.FC = () => {
                 </p>
               </article>
             ))}
-          </Fade>
+            {Math.ceil(DIARY_ENTRIES_META.length / ENTRIES_PER_PAGE) > 1 && (
+              <div className="flex justify-center gap-2 mt-8">
+                {Array.from({ length: Math.ceil(DIARY_ENTRIES_META.length / ENTRIES_PER_PAGE) }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`group relative overflow-hidden w-9 h-9 rounded-full text-sm transition-colors ${
+                      currentPage === page
+                        ? 'bg-sky-500 text-white'
+                        : 'text-sky-500 border border-sky-300 hover:bg-sky-50'
+                    }`}
+                  >
+                    <span className="relative z-10">{page}</span>
+                    <span className={`absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent group-hover:translate-x-full transition-transform duration-500 ease-out ${
+                      currentPage === page ? 'via-white/40' : 'via-sky-300/50'
+                    }`} />
+                  </button>
+                ))}
+              </div>
+            )}
+          </>
         ) : (
           <>
             {/* Controls */}
@@ -189,8 +233,8 @@ const Diary: React.FC = () => {
             {entries.length === 0 ? (
               <p className="text-center text-gray-500 py-10">No diary entries found.</p>
             ) : (
-              <Fade cascade damping={0.1} direction="up" triggerOnce>
-                {entries.map(entry => (
+              <>
+                {entries.slice((currentPage - 1) * ENTRIES_PER_PAGE, currentPage * ENTRIES_PER_PAGE).map(entry => (
                   <DiaryEntry
                     key={entry.date}
                     entry={entry}
@@ -198,7 +242,27 @@ const Diary: React.FC = () => {
                     onToggle={() => toggleEntry(entry.date)}
                   />
                 ))}
-              </Fade>
+                {Math.ceil(entries.length / ENTRIES_PER_PAGE) > 1 && (
+                  <div className="flex justify-center gap-2 mt-8">
+                    {Array.from({ length: Math.ceil(entries.length / ENTRIES_PER_PAGE) }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`group relative overflow-hidden w-9 h-9 rounded-full text-sm transition-colors ${
+                          currentPage === page
+                            ? 'bg-sky-500 text-white'
+                            : 'text-sky-500 border border-sky-300 hover:bg-sky-50'
+                        }`}
+                      >
+                        <span className="relative z-10">{page}</span>
+                        <span className={`absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent group-hover:translate-x-full transition-transform duration-500 ease-out ${
+                          currentPage === page ? 'via-white/40' : 'via-sky-300/50'
+                        }`} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </>
         )}
