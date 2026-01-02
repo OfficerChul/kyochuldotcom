@@ -40,19 +40,14 @@
   border-radius: 50%;
   position: relative;
   z-index: 10;
-  background: radial-gradient(circle at 50% 45%, #f4f5f6 0%, #f4f5f6 55%, #a8adb4 58%, #8b9199 100%);
-  box-shadow: 0 10px 14px rgba(0, 0, 0, 0.18);
-  transition:
-    transform 120ms cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 140ms cubic-bezier(0.33, 1, 0.68, 1),
-    background 160ms ease-out;
+  /* Gray base */
+  background: #6b6b6b;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: visible;
-  transform: translateY(0);
   color: inherit;
-  will-change: transform, box-shadow;
 }
 
 .social-link-button__surface {
@@ -62,13 +57,58 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 60%, #e8e8e8 100%);
+  position: relative;
+
+  /* Liquid Glass - white glass base */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+
+  /* Glass border */
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  /* Depth & glow */
   box-shadow:
-    inset 0 4px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -5px 0 rgba(0, 0, 0, 0.12),
-    0 2px 4px rgba(0, 0, 0, 0.12);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-  padding-bottom: 3px;
+    /* Cylinder side effect */
+    0 2px 0 rgba(240, 240, 240, 0.9),
+    0 4px 0 rgba(220, 220, 220, 0.8),
+    /* Drop shadow */
+    0 6px 16px rgba(0, 0, 0, 0.15),
+    /* Inner highlights */
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background 0.15s ease-out;
+  transform: translateY(-4px);
+}
+
+/* Dynamic highlight layer - white light with colored tint */
+.social-link-button__surface::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    /* White highlight center */
+    radial-gradient(
+      circle at var(--highlight-x, 50%) var(--highlight-y, 30%),
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.5) 25%,
+      transparent 50%
+    ),
+    /* Colored tint on edges */
+    radial-gradient(
+      circle at var(--highlight-x, 50%) var(--highlight-y, 30%),
+      transparent 30%,
+      rgba(var(--highlight-rgb, 255, 255, 255), 0.25) 60%,
+      rgba(var(--highlight-rgb, 255, 255, 255), 0.15) 80%,
+      transparent 100%
+    );
+  pointer-events: none;
+  transition: background 0.1s ease-out;
 }
 
 .social-link-button::before {
@@ -127,34 +167,29 @@
     inset 0 0 15px var(--inner-glow);
 }
 
-.social-link-button:hover {
-  transform: translateY(2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
-  background: radial-gradient(circle at 50% 42%, #eef0f2 0%, #eef0f2 52%, #c7ccd1 57%, #adb2b8 100%);
-}
-
+/* Hover: Button pressed halfway - Liquid Glass brightens */
 .social-link-button:hover .social-link-button__surface {
-  transform: translateY(2px);
-  background: linear-gradient(145deg, #f8f8f8 0%, #eaeaea 65%, #dcdcdc 100%);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85);
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -3px 0 rgba(0, 0, 0, 0.18),
-    0 1px 2px rgba(0, 0, 0, 0.08);
+    /* Cylinder side - reduced */
+    0 2px 0 rgba(230, 230, 230, 0.9),
+    /* Drop shadow */
+    0 4px 12px rgba(0, 0, 0, 0.18),
+    /* Inner highlights - intensified */
+    inset 0 2px 6px rgba(255, 255, 255, 1),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.social-link-button:active {
-  transform: translateY(6px);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.24);
-  background: radial-gradient(circle at 50% 50%, #dfe2e6 0%, #d7dbdf 55%, #a3aab2 90%, #939aa2 100%);
-}
-
+/* Active: Full press - Liquid Glass compressed */
 .social-link-button:active .social-link-button__surface {
-  transform: translateY(5px) scale(0.97);
-  background: linear-gradient(155deg, #ededed 0%, #d3d5d8 65%, #babec4 100%);
+  transform: translateY(0px);
+  background: rgba(245, 245, 245, 0.9);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
-    0 0 2px rgba(0, 0, 0, 0.1);
+    /* Drop shadow only */
+    0 1px 4px rgba(0, 0, 0, 0.12),
+    /* Inner highlight - subtle */
+    inset 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
 .social-link-button:hover::before {
@@ -226,46 +261,85 @@
 }
 
 .portfolio-button .social-link-button__surface {
-  background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 60%, #e8e8e8 100%) !important;
+  /* Liquid Glass with yellow highlight for portfolio */
+  --highlight-rgb: 252, 233, 3;
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(8px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(120%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
   box-shadow:
-    inset 0 4px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -5px 0 rgba(0, 0, 0, 0.12),
-    0 2px 4px rgba(0, 0, 0, 0.12);
+    0 2px 0 rgba(240, 240, 240, 0.9),
+    0 4px 0 rgba(220, 220, 220, 0.8),
+    0 6px 16px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.05);
   animation: surfacePress 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .portfolio-button:hover .social-link-button__surface {
-  background: linear-gradient(145deg, #f8f8f8 0%, #eaeaea 65%, #dcdcdc 100%) !important;
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85) !important;
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -3px 0 rgba(0, 0, 0, 0.18),
-    0 1px 2px rgba(0, 0, 0, 0.08);
+    0 2px 0 rgba(230, 230, 230, 0.9),
+    0 4px 12px rgba(0, 0, 0, 0.18),
+    inset 0 2px 6px rgba(255, 255, 255, 1),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .portfolio-button:active .social-link-button__surface {
-  background: linear-gradient(155deg, #ededed 0%, #d3d5d8 65%, #babec4 100%) !important;
+  transform: translateY(0px);
+  background: rgba(245, 245, 245, 0.9) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
-    0 0 2px rgba(0, 0, 0, 0.1);
+    0 1px 4px rgba(0, 0, 0, 0.12),
+    inset 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
 @media (min-width: 640px) {
   .social-link-label {
-    margin-top: 12px;
+    margin-top: 14px;
     padding: 4px 10px;
     font-size: 11px;
   }
 
   .social-link-button {
     margin: 0;
-    width: 70px;
-    height: 70px;
+    width: 68px;
+    height: 68px;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);
   }
 
   .social-link-button__surface {
-    width: 58px;
-    height: 58px;
+    width: 54px;
+    height: 54px;
+    transform: translateY(-5px);
+    box-shadow:
+      /* Cylinder side effect - white glass */
+      0 2px 0 rgba(240, 240, 240, 0.95),
+      0 4px 0 rgba(220, 220, 220, 0.9),
+      0 6px 0 rgba(200, 200, 200, 0.85),
+      /* Drop shadow */
+      0 8px 20px rgba(0, 0, 0, 0.15),
+      /* Inner highlights */
+      inset 0 2px 5px rgba(255, 255, 255, 0.9),
+      inset 0 -2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .social-link-button:hover .social-link-button__surface {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 0 rgba(230, 230, 230, 0.95),
+      0 4px 0 rgba(210, 210, 210, 0.9),
+      0 6px 14px rgba(0, 0, 0, 0.18),
+      inset 0 2px 6px rgba(255, 255, 255, 1),
+      inset 0 -1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .social-link-button:active .social-link-button__surface {
+    transform: translateY(0px);
+    box-shadow:
+      0 1px 0 rgba(220, 220, 220, 0.9),
+      0 2px 6px rgba(0, 0, 0, 0.12),
+      inset 0 1px 3px rgba(255, 255, 255, 0.8);
   }
 }
 

@@ -46,6 +46,90 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
   variant = 'light'
 }) => {
   const portfolioRef = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null);
+  const surfaceRef = useRef<HTMLSpanElement>(null);
+
+  // Liquid Glass light tracking effect (mouse + touch)
+  useEffect(() => {
+    const surface = surfaceRef.current;
+    if (!surface) return;
+
+    let rafId: number;
+
+    // Calculate highlight position based on light source position
+    const updateHighlight = (lightX: number, lightY: number) => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const rect = surface.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // Calculate direction from button to light source
+        const dx = lightX - centerX;
+        const dy = lightY - centerY;
+
+        // Convert to percentage (light comes from that direction)
+        // Clamp to reasonable range
+        const x = Math.max(0, Math.min(100, 50 + (dx / rect.width) * 50));
+        const y = Math.max(0, Math.min(100, 50 + (dy / rect.height) * 50));
+
+        surface.style.setProperty('--highlight-x', `${x}%`);
+        surface.style.setProperty('--highlight-y', `${y}%`);
+      });
+    };
+
+    // Mouse events (desktop)
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = surface.getBoundingClientRect();
+      // Only track if mouse is near the button
+      const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+      );
+      if (distance < 150) {
+        updateHighlight(e.clientX, e.clientY);
+      }
+    };
+
+    // Touch events (mobile) - track any touch on screen
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch) {
+        updateHighlight(touch.clientX, touch.clientY);
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch) {
+        updateHighlight(touch.clientX, touch.clientY);
+      }
+    };
+
+    const handleEnd = () => {
+      cancelAnimationFrame(rafId);
+      // Smoothly return to default position
+      surface.style.setProperty('--highlight-x', '50%');
+      surface.style.setProperty('--highlight-y', '30%');
+    };
+
+    // Desktop: track mouse near button
+    surface.addEventListener('mousemove', handleMouseMove);
+    surface.addEventListener('mouseleave', handleEnd);
+
+    // Mobile: track touch anywhere on screen
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleEnd);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      surface.removeEventListener('mousemove', handleMouseMove);
+      surface.removeEventListener('mouseleave', handleEnd);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleEnd);
+    };
+  }, []);
   const setPortfolioRef = (node: HTMLAnchorElement | HTMLButtonElement | null) => {
     portfolioRef.current = node;
   };
@@ -112,13 +196,25 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
     ${isPortfolio ? 'portfolio-button' : ''}
   `.trim();
 
+  // Extract RGB values from sonarColor for highlight
+  const extractRGB = (color: string) => {
+    const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    return match ? `${match[1]}, ${match[2]}, ${match[3]}` : '93, 220, 255';
+  };
+  const highlightRGB = sonarColor ? extractRGB(sonarColor) : '93, 220, 255';
+
   const style = {
     '--border-color': sonarColor || 'rgba(93, 220, 255, 1)',
     '--glow-color': sonarColor ? sonarColor.replace('0.6', '0.8') : 'rgba(93, 220, 255, 0.8)',
     '--inner-glow': sonarColor ? sonarColor.replace('0.6', '0.2') : 'rgba(93, 220, 255, 0.2)',
+    '--highlight-rgb': highlightRGB,
   } as React.CSSProperties;
 
-  const content = <span className="social-link-button__surface">{children}</span>;
+  const content = (
+    <span className="social-link-button__surface" ref={surfaceRef}>
+      {children}
+    </span>
+  );
 
   const renderButton = () => {
     if (onClick) {
