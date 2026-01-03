@@ -59,30 +59,35 @@
   border-radius: 50%;
   position: relative;
 
-  /* Liquid Glass - white glass base */
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(8px) saturate(120%);
-  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  /* Crystal Glass - subtle blue tint */
+  background: rgba(248, 250, 255, 0.8);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
 
-  /* Glass border */
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  /* Crystal edge border */
+  border: 1px solid rgba(255, 255, 255, 0.95);
 
-  /* Depth & glow */
+  /* Crystal depth & glow */
   box-shadow:
-    /* Cylinder side effect */
-    0 2px 0 rgba(240, 240, 240, 0.9),
-    0 4px 0 rgba(220, 220, 220, 0.8),
+    /* Outer crystal glow */
+    0 0 20px rgba(255, 255, 255, 0.2),
+    /* Cylinder side - transparent glass, no blur */
+    0 1px 0 rgba(255, 255, 255, 0.5),
+    0 2px 0 rgba(248, 250, 255, 0.45),
+    0 3px 0 rgba(240, 245, 255, 0.4),
+    0 4px 0 rgba(230, 238, 255, 0.35),
+    0 5px 0 rgba(220, 230, 250, 0.3),
     /* Drop shadow */
-    0 6px 16px rgba(0, 0, 0, 0.15),
-    /* Inner highlights */
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+    0 7px 18px rgba(0, 0, 0, 0.1),
+    /* Inner crystal reflections */
+    inset 0 3px 8px rgba(255, 255, 255, 1),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.04);
 
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background 0.15s ease-out;
   transform: translateY(-4px);
 }
 
-/* Dynamic highlight layer - white light with colored tint */
+/* Crystal highlight layer - multi-layer reflections */
 .social-link-button__surface::before {
   content: '';
   position: absolute;
@@ -92,23 +97,55 @@
   height: 100%;
   border-radius: 50%;
   background:
-    /* White highlight center */
+    /* Top arc reflection - crystal signature */
+    radial-gradient(
+      ellipse 80% 40% at 50% 10%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.6) 30%,
+      transparent 60%
+    ),
+    /* Dynamic highlight center */
     radial-gradient(
       circle at var(--highlight-x, 50%) var(--highlight-y, 30%),
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(255, 255, 255, 0.5) 25%,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.4) 25%,
+      transparent 45%
+    ),
+    /* Bottom soft reflection */
+    radial-gradient(
+      ellipse 60% 25% at 50% 90%,
+      rgba(255, 255, 255, 0.25) 0%,
       transparent 50%
     ),
     /* Colored tint on edges */
     radial-gradient(
       circle at var(--highlight-x, 50%) var(--highlight-y, 30%),
       transparent 30%,
-      rgba(var(--highlight-rgb, 255, 255, 255), 0.25) 60%,
-      rgba(var(--highlight-rgb, 255, 255, 255), 0.15) 80%,
+      rgba(var(--highlight-rgb, 255, 255, 255), 0.2) 60%,
+      rgba(var(--highlight-rgb, 255, 255, 255), 0.1) 80%,
       transparent 100%
     );
   pointer-events: none;
   transition: background 0.1s ease-out;
+}
+
+/* Crystal edge highlight - fresnel effect */
+.social-link-button__surface::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    transparent 60%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.3) 95%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  pointer-events: none;
 }
 
 .social-link-button::before {
@@ -167,29 +204,33 @@
     inset 0 0 15px var(--inner-glow);
 }
 
-/* Hover: Button pressed halfway - Liquid Glass brightens */
+/* Hover: Crystal Glass brightens - cylinder almost pressed */
 .social-link-button:hover .social-link-button__surface {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+  background: rgba(250, 252, 255, 0.88);
   box-shadow:
-    /* Cylinder side - reduced */
-    0 2px 0 rgba(230, 230, 230, 0.9),
-    /* Drop shadow */
-    0 4px 12px rgba(0, 0, 0, 0.18),
+    /* Enhanced crystal glow */
+    0 0 25px rgba(255, 255, 255, 0.3),
+    /* Cylinder side - almost fully pressed */
+    0 1px 0 rgba(255, 255, 255, 0.4),
+    /* Drop shadow - minimal */
+    0 2px 10px rgba(0, 0, 0, 0.1),
     /* Inner highlights - intensified */
-    inset 0 2px 6px rgba(255, 255, 255, 1),
-    inset 0 -1px 3px rgba(0, 0, 0, 0.05);
+    inset 0 3px 10px rgba(255, 255, 255, 1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.04);
 }
 
-/* Active: Full press - Liquid Glass compressed */
+/* Active: Crystal Glass compressed */
 .social-link-button:active .social-link-button__surface {
   transform: translateY(0px);
-  background: rgba(245, 245, 245, 0.9);
+  background: rgba(245, 248, 255, 0.92);
   box-shadow:
+    /* Subtle glow */
+    0 0 12px rgba(255, 255, 255, 0.15),
     /* Drop shadow only */
-    0 1px 4px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08),
     /* Inner highlight - subtle */
-    inset 0 1px 3px rgba(255, 255, 255, 0.8);
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
 }
 
 .social-link-button:hover::before {
@@ -261,37 +302,47 @@
 }
 
 .portfolio-button .social-link-button__surface {
-  /* Liquid Glass with yellow highlight for portfolio */
+  /* Crystal Glass with yellow highlight for portfolio */
   --highlight-rgb: 252, 233, 3;
-  background: rgba(255, 255, 255, 0.75) !important;
-  backdrop-filter: blur(8px) saturate(120%) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(120%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 253, 240, 0.8) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
   box-shadow:
-    0 2px 0 rgba(240, 240, 240, 0.9),
-    0 4px 0 rgba(220, 220, 220, 0.8),
-    0 6px 16px rgba(0, 0, 0, 0.15),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+    /* Outer crystal glow with yellow tint */
+    0 0 20px rgba(252, 233, 3, 0.15),
+    /* Cylinder side - transparent glass, no blur */
+    0 1px 0 rgba(255, 253, 240, 0.5),
+    0 2px 0 rgba(252, 250, 235, 0.45),
+    0 3px 0 rgba(250, 248, 225, 0.4),
+    0 4px 0 rgba(245, 242, 215, 0.35),
+    0 5px 0 rgba(240, 235, 210, 0.3),
+    /* Drop shadow */
+    0 7px 18px rgba(0, 0, 0, 0.1),
+    /* Inner crystal reflections */
+    inset 0 3px 8px rgba(255, 255, 255, 1),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.04);
   animation: surfacePress 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .portfolio-button:hover .social-link-button__surface {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.85) !important;
+  transform: translateY(-1px);
+  background: rgba(255, 254, 245, 0.88) !important;
   box-shadow:
-    0 2px 0 rgba(230, 230, 230, 0.9),
-    0 4px 12px rgba(0, 0, 0, 0.18),
-    inset 0 2px 6px rgba(255, 255, 255, 1),
-    inset 0 -1px 3px rgba(0, 0, 0, 0.05);
+    0 0 25px rgba(252, 233, 3, 0.25),
+    0 1px 0 rgba(255, 253, 245, 0.4),
+    0 2px 10px rgba(0, 0, 0, 0.1),
+    inset 0 3px 10px rgba(255, 255, 255, 1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .portfolio-button:active .social-link-button__surface {
   transform: translateY(0px);
-  background: rgba(245, 245, 245, 0.9) !important;
+  background: rgba(250, 248, 240, 0.92) !important;
   box-shadow:
-    0 1px 4px rgba(0, 0, 0, 0.12),
-    inset 0 1px 3px rgba(255, 255, 255, 0.8);
+    0 0 12px rgba(252, 233, 3, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
 }
 
 @media (min-width: 640px) {
@@ -313,33 +364,41 @@
     height: 54px;
     transform: translateY(-5px);
     box-shadow:
-      /* Cylinder side effect - white glass */
-      0 2px 0 rgba(240, 240, 240, 0.95),
-      0 4px 0 rgba(220, 220, 220, 0.9),
-      0 6px 0 rgba(200, 200, 200, 0.85),
+      /* Outer crystal glow */
+      0 0 24px rgba(255, 255, 255, 0.25),
+      /* Cylinder side - transparent glass, no blur */
+      0 1px 0 rgba(255, 255, 255, 0.5),
+      0 2px 0 rgba(248, 250, 255, 0.45),
+      0 3px 0 rgba(240, 245, 255, 0.4),
+      0 4px 0 rgba(232, 240, 255, 0.35),
+      0 5px 0 rgba(225, 235, 250, 0.3),
+      0 6px 0 rgba(215, 228, 248, 0.25),
       /* Drop shadow */
-      0 8px 20px rgba(0, 0, 0, 0.15),
-      /* Inner highlights */
-      inset 0 2px 5px rgba(255, 255, 255, 0.9),
-      inset 0 -2px 5px rgba(0, 0, 0, 0.05);
+      0 8px 22px rgba(0, 0, 0, 0.1),
+      /* Inner crystal reflections */
+      inset 0 4px 10px rgba(255, 255, 255, 1),
+      inset 0 -3px 8px rgba(0, 0, 0, 0.04);
   }
 
   .social-link-button:hover .social-link-button__surface {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow:
-      0 2px 0 rgba(230, 230, 230, 0.95),
-      0 4px 0 rgba(210, 210, 210, 0.9),
-      0 6px 14px rgba(0, 0, 0, 0.18),
-      inset 0 2px 6px rgba(255, 255, 255, 1),
-      inset 0 -1px 4px rgba(0, 0, 0, 0.05);
+      /* Enhanced crystal glow */
+      0 0 30px rgba(255, 255, 255, 0.35),
+      /* Cylinder side - almost fully pressed */
+      0 1px 0 rgba(255, 255, 255, 0.4),
+      /* Drop shadow - minimal */
+      0 2px 12px rgba(0, 0, 0, 0.1),
+      inset 0 4px 12px rgba(255, 255, 255, 1),
+      inset 0 -2px 6px rgba(0, 0, 0, 0.04);
   }
 
   .social-link-button:active .social-link-button__surface {
     transform: translateY(0px);
     box-shadow:
-      0 1px 0 rgba(220, 220, 220, 0.9),
-      0 2px 6px rgba(0, 0, 0, 0.12),
-      inset 0 1px 3px rgba(255, 255, 255, 0.8);
+      0 0 15px rgba(255, 255, 255, 0.2),
+      0 2px 6px rgba(0, 0, 0, 0.08),
+      inset 0 2px 5px rgba(255, 255, 255, 0.9);
   }
 }
 
