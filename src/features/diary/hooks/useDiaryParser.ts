@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { DiaryEntry, DiaryState, DecoderResult } from '../types';
 import { decodeDiary } from '../utils';
+import { ENCODED_DIARY } from '../data/diaryPosts';
 
 // Format: "YY-MM-DD | Title" or just "YY-MM-DD"
 const DATE_HEADER_REGEX = /^(\d{2}-\d{2}-\d{2})(?:\s*\|\s*(.+))?$/;
@@ -56,36 +57,10 @@ export function useDiaryParser() {
   const [state, setState] = useState<DiaryState>({
     isDecoded: false,
     entries: [],
-    encodedContent: '',
-    isLoading: true,
+    encodedContent: ENCODED_DIARY,
+    isLoading: false,
     error: null
   });
-
-  // 인코딩된 diary.txt 불러오기
-  useEffect(() => {
-    const loadDiary = async () => {
-      try {
-        const response = await fetch('/diary.txt');
-        if (!response.ok) {
-          throw new Error('Failed to load diary');
-        }
-        const encodedContent = await response.text();
-        setState(prev => ({
-          ...prev,
-          encodedContent,
-          isLoading: false
-        }));
-      } catch (error) {
-        setState(prev => ({
-          ...prev,
-          isLoading: false,
-          error: error instanceof Error ? error.message : 'Unknown error'
-        }));
-      }
-    };
-
-    loadDiary();
-  }, []);
 
   // 디코딩 시도 (async)
   const attemptDecode = useCallback(async (userInput: string): Promise<DecoderResult> => {

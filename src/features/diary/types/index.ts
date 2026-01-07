@@ -18,3 +18,12 @@ export interface DecoderResult {
   content: string;
   error?: string;
 }
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;      // "YY-MM-DD" 형식
+  summary: string;
+  content: string;
+  tags?: string[];
+}

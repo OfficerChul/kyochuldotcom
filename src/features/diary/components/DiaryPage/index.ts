@@ -1,1 +1,1 @@
-export { default } from './Diary';
+export { default } from './Blog';

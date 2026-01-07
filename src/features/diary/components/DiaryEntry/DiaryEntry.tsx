@@ -1,68 +1,55 @@
 import React from 'react';
 import { DiaryEntry as DiaryEntryType } from '../../types';
+import { estimateReadTime, formatDiaryDate } from '../../utils';
 
 interface DiaryEntryProps {
   entry: DiaryEntryType;
-  isExpanded: boolean;
-  onToggle: () => void;
+  isSelected: boolean;
+  onSelect: () => void;
 }
 
-function formatDate(dateStr: string): string {
-  const [yy, mm, dd] = dateStr.split('-').map(Number);
-  const date = new Date(2000 + yy, mm - 1, dd);
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  return `${months[date.getMonth()]} ${dd}, 20${yy}`;
-}
-
-function getReadTime(content: string): number {
-  const words = content.split(/\s+/).length;
-  return Math.max(1, Math.ceil(words / 200));
-}
-
-const DiaryEntry: React.FC<DiaryEntryProps> = ({ entry, isExpanded, onToggle }) => {
-  const readTime = getReadTime(entry.content);
+const DiaryEntry: React.FC<DiaryEntryProps> = ({ entry, isSelected, onSelect }) => {
+  const readTime = estimateReadTime(entry.content);
+  const preview = entry.content.split('\n').find(line => line.trim()) || '';
 
   return (
-    <article className="py-8 group/entry first:pt-0">
-      <div className="w-16 h-0.5 bg-sky-200 mx-auto mb-8 group-first/entry:hidden"></div>
-      {/* Header - Clickable */}
-      <header
-        onClick={onToggle}
-        className="cursor-pointer group"
-      >
-        {/* Title */}
-        <h2 className="text-xl font-medium text-gray-900 underline decoration-1 underline-offset-4 decoration-gray-300 group-hover:text-sky-500 group-hover:decoration-sky-400 transition-colors mb-2">
-          {entry.title || formatDate(entry.date)}
-        </h2>
-
-        {/* Preview text when collapsed */}
-        {!isExpanded && (
-          <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
-            {entry.content.split('\n')[0]}
+    <button
+      type="button"
+      onClick={onSelect}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
+      className={`w-full text-left p-5 rounded-2xl border transition-all cursor-pointer group focus:outline-none focus:ring-2 focus:ring-sky-200 ${
+        isSelected
+          ? 'bg-sky-50 border-sky-200 shadow-sm'
+          : 'bg-white border-gray-100 hover:border-sky-200 hover:bg-sky-50/70'
+      }`}
+    >
+      <header className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-medium text-gray-900 group-hover:text-sky-600">
+            {entry.title || formatDiaryDate(entry.date)}
+          </h2>
+          <p className="text-gray-400 text-xs mt-1">
+            {readTime} min read · {formatDiaryDate(entry.date)}
           </p>
-        )}
-
-        {/* Meta info */}
-        <p className="text-gray-400 text-xs">
-          {readTime} min read · {formatDate(entry.date)}
-        </p>
+        </div>
+        <span
+          className={`text-[10px] font-semibold uppercase tracking-[0.08em] rounded-full px-3 py-1 ${
+            isSelected ? 'bg-sky-500 text-white' : 'bg-gray-100 text-gray-500'
+          }`}
+        >
+          {isSelected ? 'Reading' : 'Open'}
+        </span>
       </header>
 
-      {/* Content */}
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isExpanded ? 'max-h-[5000px] opacity-100 mt-6' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="text-gray-700 leading-relaxed space-y-4">
-          {entry.content.split('\n').map((line, i) => (
-            <p key={i} className="text-sm">
-              {line || '\u00A0'}
-            </p>
-          ))}
-        </div>
-      </div>
-    </article>
+      <p className="text-gray-600 text-sm leading-relaxed mt-3 line-clamp-2">
+        {preview}
+      </p>
+    </button>
   );
 };
 

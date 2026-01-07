@@ -17,6 +17,18 @@ interface SocialLinksProps {
   variant?: 'light' | 'dark';
 }
 
+type LinkConfig = {
+  key: string;
+  label: string;
+  sonarColor: string;
+  ariaLabel: string;
+  renderIcon: () => React.ReactNode;
+  to?: string;
+  href?: string;
+  onClick?: () => void;
+  isPortfolio?: boolean;
+};
+
 const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalWidth, setModalWidth] = useState<number>(0);
@@ -93,106 +105,106 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
     }
   };
 
+  const primaryLinks: LinkConfig[] = [
+    {
+      key: 'portfolio',
+      label: 'Portfolio',
+      sonarColor: 'rgba(252, 233, 3, 0.6)',
+      ariaLabel: 'View Portfolio',
+      to: '/portfolio',
+      isPortfolio: true,
+      renderIcon: () => <FaStar className="text-[26px] sm:text-[35px] text-[#fce903]" />
+    },
+    {
+      key: 'blog',
+      label: 'Blog',
+      sonarColor: 'rgba(139, 69, 19, 0.6)',
+      ariaLabel: 'View Blog',
+      to: '/blog',
+      renderIcon: () => <FaBook className="text-[26px] sm:text-[35px] text-[#8B4513]" />
+    },
+    {
+      key: 'scholar',
+      label: 'Scholar',
+      sonarColor: 'rgba(66, 133, 244, 0.6)',
+      ariaLabel: 'Google Scholar Profile',
+      href: 'https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao',
+      renderIcon: () => (
+        <img className="w-7 sm:w-10" src="./google_scholar_icon.png" alt="Google Scholar" loading="lazy" />
+      )
+    },
+    {
+      key: 'cv',
+      label: 'CV',
+      sonarColor: 'rgba(0, 0, 0, 0.25)',
+      ariaLabel: 'View CV',
+      onClick: () => setIsModalOpen(true),
+      renderIcon: () => <img className="w-7 sm:w-10" src="./cv_icon.png" alt="CV" loading="lazy" />
+    }
+  ];
+
+  const secondaryLinks: LinkConfig[] = [
+    {
+      key: 'linkedin',
+      label: 'LinkedIn',
+      sonarColor: 'rgba(14, 118, 168, 0.6)',
+      ariaLabel: 'LinkedIn Profile',
+      href: 'https://www.linkedin.com/in/kyochul-jang-93b263208/',
+      renderIcon: () => <FaLinkedinIn className="text-[26px] sm:text-[35px] text-[#0E76A8]" />
+    },
+    {
+      key: 'instagram',
+      label: 'Instagram',
+      sonarColor: 'rgba(225, 48, 108, 0.6)',
+      ariaLabel: 'Instagram Profile',
+      href: 'https://www.instagram.com/kjang_hochul/',
+      renderIcon: () => <FaInstagram className="text-[26px] sm:text-[35px] text-[#E1306C]" />
+    },
+    {
+      key: 'github',
+      label: 'GitHub',
+      sonarColor: 'rgba(119, 87, 157, 0.6)',
+      ariaLabel: 'GitHub Profile',
+      href: 'https://github.com/OfficerChul',
+      renderIcon: () => <FaGithub className="text-[26px] sm:text-[35px] text-[#77579d]" />
+    },
+    {
+      key: 'email',
+      label: 'Email',
+      sonarColor: 'rgba(54, 139, 254, 0.6)',
+      ariaLabel: 'Send Email',
+      href: 'mailto:gcj1234567890@gmail.com',
+      renderIcon: () => <FaEnvelope className="text-[26px] sm:text-[35px] text-[#368BFE]" />
+    }
+  ];
+
+  const renderLinkButton = (link: LinkConfig) => (
+    <SocialLinkButton
+      key={link.key}
+      to={link.to}
+      href={link.href}
+      onClick={link.onClick}
+      ariaLabel={link.ariaLabel}
+      sonarColor={link.sonarColor}
+      isPortfolio={link.isPortfolio}
+      label={link.label}
+      variant={variant}
+    >
+      {link.renderIcon()}
+    </SocialLinkButton>
+  );
+
 
   return (
     <div>
       <section id="social-links" className="px-4">
         <div className="text-center mx-auto py-2 sm:py-4 pb-6 sm:pb-12">
-          {/* First row of social links */}
           <div className="flex justify-center gap-2 sm:gap-12">
-            <SocialLinkButton
-              to="/portfolio"
-              ariaLabel="View Portfolio"
-              sonarColor="rgba(252, 233, 3, 0.6)"
-              isPortfolio
-              label="Portfolio"
-              variant={variant}
-            >
-              <FaStar className="text-[26px] sm:text-[35px] text-[#fce903]" />
-            </SocialLinkButton>
-
-            <SocialLinkButton
-              to="/diary"
-              ariaLabel="View Diary"
-              sonarColor="rgba(139, 69, 19, 0.6)"
-              label="Diary"
-              variant={variant}
-            >
-              <FaBook className="text-[26px] sm:text-[35px] text-[#8B4513]" />
-            </SocialLinkButton>
-
-            <SocialLinkButton
-              href="https://scholar.google.com/citations?user=N8R4s1kAAAAJ&hl=ko&oi=ao"
-              ariaLabel="Google Scholar Profile"
-              sonarColor="rgba(66, 133, 244, 0.6)"
-              label="Scholar"
-              variant={variant}
-            >
-              <img
-                className="w-7 sm:w-10"
-                src="./google_scholar_icon.png"
-                alt="Google Scholar"
-                loading="lazy"
-              />
-            </SocialLinkButton>
-
-            <SocialLinkButton
-              onClick={() => setIsModalOpen(true)}
-              ariaLabel="View CV"
-              sonarColor="rgba(0, 0, 0, 0.25)"
-              label="CV"
-              variant={variant}
-            >
-              <img
-                className="w-7 sm:w-10"
-                src="./cv_icon.png"
-                alt="CV"
-                loading="lazy"
-              />
-            </SocialLinkButton>
+            {primaryLinks.map(renderLinkButton)}
           </div>
 
-          {/* Second row of social links */}
           <div className="flex justify-center gap-2 sm:gap-12 mt-6 sm:mt-6">
-            <SocialLinkButton
-              href="https://www.linkedin.com/in/kyochul-jang-93b263208/"
-              ariaLabel="LinkedIn Profile"
-              sonarColor="rgba(14, 118, 168, 0.6)"
-              label="LinkedIn"
-              variant={variant}
-            >
-              <FaLinkedinIn className="text-[26px] sm:text-[35px] text-[#0E76A8]" />
-            </SocialLinkButton>
-
-            <SocialLinkButton
-              href="https://www.instagram.com/kjang_hochul/"
-              ariaLabel="Instagram Profile"
-              sonarColor="rgba(225, 48, 108, 0.6)"
-              label="Instagram"
-              variant={variant}
-            >
-              <FaInstagram className="text-[26px] sm:text-[35px] text-[#E1306C]" />
-            </SocialLinkButton>
-
-            <SocialLinkButton
-              href="https://github.com/OfficerChul"
-              ariaLabel="GitHub Profile"
-              sonarColor="rgba(119, 87, 157, 0.6)"
-              label="GitHub"
-              variant={variant}
-            >
-              <FaGithub className="text-[26px] sm:text-[35px] text-[#77579d]" />
-            </SocialLinkButton>
-
-            <SocialLinkButton
-              href="mailto:gcj1234567890@gmail.com"
-              ariaLabel="Send Email"
-              sonarColor="rgba(54, 139, 254, 0.6)"
-              label="Email"
-              variant={variant}
-            >
-              <FaEnvelope className="text-[26px] sm:text-[35px] text-[#368BFE]" />
-            </SocialLinkButton>
+            {secondaryLinks.map(renderLinkButton)}
           </div>
         </div>
       </section>
