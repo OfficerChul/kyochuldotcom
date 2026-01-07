@@ -446,81 +446,87 @@ const BlogPage: React.FC = () => {
           <SectionTitle className="mb-8">{activeTab === 'blog' ? 'Blog' : 'Diary'}</SectionTitle>
         </Fade>
 
-        <div className="mb-6 space-y-3">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-3">
-              <FancyButtonSmall
-                onClick={() => handleTabChange('blog')}
-                className={`${tabButtonBaseClasses} ${
-                  blogActive
-                    ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
-                    : 'text-sky-500 hover:text-sky-600'
-                }`}
-                borderColor={blogActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
-                borderWidth={2}
-                shineColor="from-transparent via-sky-300/55 to-transparent"
-                hoverBg="bg-sky-50/50"
-                noSvgBorder
-                ariaLabel="Show blog posts"
-              >
-                Blog
-              </FancyButtonSmall>
-              <FancyButtonSmall
-                onClick={() => handleTabChange('diary')}
-                className={`${tabButtonBaseClasses} ${
-                  diaryActive
-                    ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
-                    : 'text-sky-500 hover:text-sky-600'
-                }`}
-                borderColor={diaryActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
-                borderWidth={2}
-                shineColor="from-transparent via-sky-300/55 to-transparent"
-                hoverBg="bg-sky-50/50"
-                noSvgBorder
-                ariaLabel="Show diary entries"
-              >
-                Diary
-              </FancyButtonSmall>
+        <div className="mb-6">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <FancyButtonSmall
+                  onClick={() => handleTabChange('blog')}
+                  className={`${tabButtonBaseClasses} ${
+                    blogActive
+                      ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
+                      : 'text-sky-500 hover:text-sky-600'
+                  }`}
+                  borderColor={blogActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
+                  borderWidth={2}
+                  shineColor="from-transparent via-sky-300/55 to-transparent"
+                  hoverBg="bg-sky-50/50"
+                  noSvgBorder
+                  ariaLabel="Show blog posts"
+                >
+                  Blog
+                </FancyButtonSmall>
+                <FancyButtonSmall
+                  onClick={() => handleTabChange('diary')}
+                  className={`${tabButtonBaseClasses} ${
+                    diaryActive
+                      ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
+                      : 'text-sky-500 hover:text-sky-600'
+                  }`}
+                  borderColor={diaryActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
+                  borderWidth={2}
+                  shineColor="from-transparent via-sky-300/55 to-transparent"
+                  hoverBg="bg-sky-50/50"
+                  noSvgBorder
+                  ariaLabel="Show diary entries"
+                >
+                  Diary
+                </FancyButtonSmall>
+              </div>
+              <p className="text-xs text-gray-400">
+                Blog posts are open. Diary entries require the decode key.
+              </p>
             </div>
-            <div className="flex items-center gap-2 ml-auto">
-              <div className="relative inline-grid grid-cols-3 items-stretch rounded-full border-2 border-sky-200 bg-white overflow-hidden">
-                <div className="absolute inset-0">
-                  <div
-                    className="absolute top-0 bottom-0 left-0 bg-sky-500 transition-transform duration-300 ease-out"
-                    style={{
-                      width: `${100 / LANG_OPTIONS.length}%`,
-                      transform: `translateX(${LANG_OPTIONS.findIndex((opt) => opt.code === language) * 100}%)`
-                    }}
-                    aria-hidden
-                  />
+
+            <div className="flex flex-col gap-3 items-start lg:items-end w-full lg:w-auto">
+              <div className="flex items-center gap-2 lg:self-end">
+                <div className="relative inline-grid grid-cols-3 items-stretch rounded-full border-2 border-sky-200 bg-white overflow-hidden">
+                  <div className="absolute inset-0">
+                    <div
+                      className="absolute top-0 bottom-0 left-0 bg-sky-500 transition-transform duration-300 ease-out"
+                      style={{
+                        width: `${100 / LANG_OPTIONS.length}%`,
+                        transform: `translateX(${LANG_OPTIONS.findIndex((opt) => opt.code === language) * 100}%)`
+                      }}
+                      aria-hidden
+                    />
+                  </div>
+                  {LANG_OPTIONS.map((opt) => {
+                    const isActive = language === opt.code;
+                    return (
+                      <button
+                        key={opt.code}
+                        type="button"
+                        onClick={() => setLanguage(opt.code)}
+                        className={`relative z-10 px-3 py-2 text-xs font-semibold transition-colors ${
+                          isActive ? 'text-white' : 'text-sky-600 hover:text-sky-700'
+                        }`}
+                        aria-label={`Switch to ${opt.label}`}
+                      >
+                        {opt.label}
+                      </button>
+                    );
+                  })}
                 </div>
-                {LANG_OPTIONS.map((opt) => {
-                  const isActive = language === opt.code;
-                  return (
-                    <button
-                      key={opt.code}
-                      type="button"
-                      onClick={() => setLanguage(opt.code)}
-                      className={`relative z-10 px-3 py-2 text-xs font-semibold transition-colors ${
-                        isActive ? 'text-white' : 'text-sky-600 hover:text-sky-700'
-                      }`}
-                      aria-label={`Switch to ${opt.label}`}
-                    >
-                      {opt.label}
-                    </button>
-                  );
-                })}
               </div>
+
+              {activeTab === 'diary' ? (
+                <div className="w-full lg:w-auto lg:self-end">
+                  {decodeControlsNode || <div className="h-[72px]" aria-hidden />}
+                </div>
+              ) : null}
             </div>
-            {activeTab === 'diary' ? (
-              <div className="w-full">
-                {decodeControlsNode || <div className="h-[72px]" aria-hidden />}
-              </div>
-            ) : null}
           </div>
-          <p className="text-xs text-gray-400">
-            Blog posts are open. Diary entries require the decode key.
-          </p>
         </div>
 
         {activeTab === 'blog' ? blogDetailView : diaryDetailView}

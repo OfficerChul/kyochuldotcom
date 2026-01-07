@@ -75,7 +75,7 @@ const DiaryDecoder: React.FC<DiaryDecoderProps> = ({
         </div>
       )}
 
-      <div className={`text-center space-y-4 ${mode === 'inline' ? 'sm:text-right' : ''}`}>
+      <div className={`space-y-4 ${mode === 'inline' ? 'text-left sm:text-right w-full' : 'text-center'}`}>
         {mode === 'full' && (
           <p className="text-gray-600 font-mono text-sm">
             Enter the decode key to view diary entries
@@ -85,7 +85,7 @@ const DiaryDecoder: React.FC<DiaryDecoderProps> = ({
         <div
           className={`${
             mode === 'inline'
-              ? 'flex flex-col sm:flex-row items-start sm:items-center justify-end gap-2'
+              ? 'flex flex-row flex-wrap items-center justify-start sm:justify-end gap-3'
               : 'flex justify-center gap-3 flex-wrap'
           } ${isShaking ? 'animate-shake' : ''}`}
         >
@@ -93,7 +93,7 @@ const DiaryDecoder: React.FC<DiaryDecoderProps> = ({
             type="password"
             className={`px-4 py-2 text-sm font-mono focus:outline-none transition-colors ${
               mode === 'inline'
-                ? 'bg-transparent border-b-2 border-gray-300 focus:border-sky-400 w-48'
+                ? 'bg-transparent border-b-2 border-gray-300 focus:border-sky-400 w-48 sm:w-56'
                 : 'border-2 border-purple-200 rounded-full focus:border-purple-400 w-64'
             }`}
             placeholder={placeholder}
