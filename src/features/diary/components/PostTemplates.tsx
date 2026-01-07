@@ -4,9 +4,9 @@ import { Fade } from 'react-awesome-reveal';
 export interface PostListItem {
   id: string;
   title: string;
-  dateLabel: string;
-  description?: React.ReactNode;
-  badges?: React.ReactNode;
+  summary?: React.ReactNode;
+  meta?: React.ReactNode;
+  subMeta?: React.ReactNode;
   locked?: boolean;
   onSelect: () => void;
 }
@@ -17,24 +17,30 @@ interface PostListProps {
 }
 
 export const PostList: React.FC<PostListProps> = ({ items, footer }) => (
-  <div className="space-y-6">
-    {items.map((item, idx) => (
-      <button
-        key={item.id}
-        type="button"
-        onClick={item.onSelect}
-        className="w-full text-left py-4 group focus:outline-none"
-      >
-        {idx > 0 && <div className="w-16 h-0.5 bg-sky-200 mx-auto mb-4"></div>}
-        <h3 className="text-xl font-medium text-gray-700 mb-1 group-hover:text-sky-600">
-          {item.title}
-        </h3>
-        <p className="text-gray-400 text-xs mb-3">{item.dateLabel}</p>
-        {item.description ? <div className="text-left">{item.description}</div> : null}
-        {item.badges ? <div className="mt-3">{item.badges}</div> : null}
-      </button>
-    ))}
-    {footer}
+  <div className="space-y-8">
+    {items.map((item, idx) => {
+      const hasBorder = idx > 0;
+      return (
+        <div key={item.id}>
+          {hasBorder ? <div className="border-t border-gray-200 mb-6" /> : null}
+          <button
+            type="button"
+            onClick={item.onSelect}
+            className="w-full text-left group focus:outline-none"
+          >
+            <h3 className="text-2xl font-semibold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
+              {item.title}
+            </h3>
+            {item.summary ? (
+              <div className="text-gray-600 text-base leading-relaxed mb-4">{item.summary}</div>
+            ) : null}
+            {item.meta ? <p className="text-sm text-gray-400 mb-1">{item.meta}</p> : null}
+            {item.subMeta ? <div className="text-sm text-gray-400">{item.subMeta}</div> : null}
+          </button>
+        </div>
+      );
+    })}
+    {footer ? <div className="pt-4">{footer}</div> : null}
   </div>
 );
 

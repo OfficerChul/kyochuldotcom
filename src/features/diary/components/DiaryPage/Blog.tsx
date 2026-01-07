@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useMatch, useNavigate } from 'react-router-dom';
 import { Fade } from 'react-awesome-reveal';
+import ReactMarkdown, { Components as MarkdownComponents } from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useDiaryParser } from '../../hooks';
 import { BlogPost, DiaryEntry as DiaryEntryType } from '../../types';
 import { DiaryEntryDetail } from '../DiaryEntry';
@@ -42,8 +44,87 @@ const DIARY_ENTRIES_META = [
 ];
 
 type TabKey = 'blog' | 'diary';
+type Language = 'en' | 'ko' | 'zh';
+const LANG_OPTIONS: { code: Language; label: string }[] = [
+  { code: 'en', label: 'Eng' },
+  { code: 'zh', label: '中' },
+  { code: 'ko', label: '한' }
+];
 
 const ENTRIES_PER_PAGE = 5;
+
+const readTimeLabel: Record<Language, string> = {
+  en: 'min read',
+  ko: '분 소요',
+  zh: '分钟阅读'
+};
+
+const readMoreLabel: Record<Language, string> = {
+  en: '(Read more)',
+  ko: '(더 보기)',
+  zh: '(阅读全文)'
+};
+
+const markdownComponents: MarkdownComponents = {
+  h1: ({ node, children, ...props }) => (
+    <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-4" {...props}>
+      {children}
+    </h1>
+  ),
+  h2: ({ node, children, ...props }) => (
+    <h2 className="text-2xl font-semibold text-gray-900 mt-6 mb-3" {...props}>
+      {children}
+    </h2>
+  ),
+  h3: ({ node, children, ...props }) => (
+    <h3 className="text-xl font-semibold text-gray-800 mt-5 mb-2" {...props}>
+      {children}
+    </h3>
+  ),
+  p: ({ node, children, ...props }) => (
+    <p className="text-base md:text-lg leading-relaxed text-gray-700 mb-4" {...props}>
+      {children}
+    </p>
+  ),
+  ul: ({ node, ordered, children, ...props }) => (
+    <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-700" {...props}>
+      {children}
+    </ul>
+  ),
+  ol: ({ node, ordered, children, ...props }) => (
+    <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-700" {...props}>
+      {children}
+    </ol>
+  ),
+  li: ({ node, ordered, children, ...props }) => (
+    <li className="leading-relaxed" {...props}>
+      {children}
+    </li>
+  ),
+  blockquote: ({ node, children, ...props }) => (
+    <blockquote className="border-l-4 border-sky-200 pl-4 italic text-gray-600 mb-4" {...props}>
+      {children}
+    </blockquote>
+  ),
+  code: ({ node, inline, className, children, ...props }) =>
+    inline ? (
+      <code className="px-1.5 py-0.5 rounded bg-gray-100 text-sm font-mono text-gray-800" {...props}>
+        {children}
+      </code>
+    ) : (
+      <pre className="bg-gray-900 text-gray-100 text-sm rounded-lg p-4 overflow-auto mb-4">
+        <code className={className} {...props}>
+          {children}
+        </code>
+      </pre>
+    ),
+  a: ({ node, children, ...props }) => (
+    <a className="text-sky-600 hover:underline" target="_blank" rel="noreferrer" {...props}>
+      {children}
+    </a>
+  ),
+  img: ({ node, alt, ...props }) => <img className="my-4 rounded-lg shadow-sm" alt={alt || ''} {...props} />
+};
 
 const BlogPage: React.FC = () => {
   const { isDecoded, entries, encodedContent, isLoading, error, attemptDecode } = useDiaryParser();
@@ -55,11 +136,21 @@ const BlogPage: React.FC = () => {
   const slugParam = blogMatch?.params.slug;
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [language, setLanguage] = useState<Language>('en');
 
-  const buildPreviewText = (text: string, limit = 200) => {
+  const parseShortDate = (dateStr: string): number => {
+    const [yy, mm, dd] = dateStr.split('-').map(Number);
+    return new Date(2000 + yy, mm - 1, dd).getTime();
+  };
+
+  const sortedBlogPosts = useMemo(
+    () => [...BLOG_POSTS].sort((a, b) => parseShortDate(b.date) - parseShortDate(a.date)),
+    []
+  );
+
+  const buildPreviewText = (text: string, limit = 300) => {
     if (!text) return '';
-    const normalized = text.replace(/\s+/g, ' ').trim();
-    return normalized.length > limit ? `${normalized.slice(0, limit).trimEnd()}…` : normalized;
+    return text.length > limit ? `${text.slice(0, limit).trimEnd()}…` : text;
   };
 
   const activeTab: TabKey = location.pathname.startsWith('/blog/diary') ? 'diary' : 'blog';
@@ -72,8 +163,9 @@ const BlogPage: React.FC = () => {
     isDecoded && dateParam ? entries.find((entry) => entry.date === dateParam) || null : null;
 
   const selectedBlogPost: BlogPost | undefined = slugParam
-    ? BLOG_POSTS.find((post) => post.slug === slugParam)
+    ? sortedBlogPosts.find((post) => post.slug === slugParam)
     : undefined;
+  const localizedSelected = selectedBlogPost ? getLocalizedPost(selectedBlogPost, language) : undefined;
 
   const orderedMeta = useMemo(
     () =>
@@ -138,39 +230,44 @@ const BlogPage: React.FC = () => {
 
   const blogListItems: PostListItem[] = BLOG_POSTS.map((post) => {
     const readTime = estimateReadTime(post.content);
-    const summaryPreview = buildPreviewText(post.content, 200);
+    const summaryPreview = truncateText(post.summary, 160);
     return {
       id: post.slug,
       title: post.title,
       dateLabel: `${formatDiaryDate(post.date)} · ${readTime} min read`,
       description: (
-        <div className="space-y-2">
-          <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{summaryPreview}</p>
+        <>
+          <p className="text-gray-600 text-xs md:text-sm mb-2">
+            {summaryPreview}
+            <span className="ml-2 text-sky-300 font-medium text-[11px]">(Read more)</span>
+          </p>
           {post.tags?.length ? (
             <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
+              {tags!.map((tag) => (
                 <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
                   {tag}
                 </span>
               ))}
             </div>
           ) : null}
-        </div>
+        </>
       ),
       locked: false,
       onSelect: () => navigate(`/blog/post/${post.slug}`)
     };
   });
 
-  const blogIndex = slugParam ? BLOG_POSTS.findIndex((post) => post.slug === slugParam) : -1;
-  const prevBlogSlug = blogIndex > 0 ? BLOG_POSTS[blogIndex - 1].slug : null; // older
-  const nextBlogSlug = blogIndex >= 0 && blogIndex < BLOG_POSTS.length - 1 ? BLOG_POSTS[blogIndex + 1].slug : null; // newer
+  const blogIndex = slugParam ? sortedBlogPosts.findIndex((post) => post.slug === slugParam) : -1;
+  const prevBlogSlug = blogIndex > 0 ? sortedBlogPosts[blogIndex - 1].slug : null; // older
+  const nextBlogSlug = blogIndex >= 0 && blogIndex < sortedBlogPosts.length - 1 ? sortedBlogPosts[blogIndex + 1].slug : null; // newer
 
-  const paginatedDiaryEntries = orderedMeta.slice((currentPage - 1) * ENTRIES_PER_PAGE, currentPage * ENTRIES_PER_PAGE);
-
-  const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry, idx) => {
-    const globalIndex = (currentPage - 1) * ENTRIES_PER_PAGE + idx;
-    const preview = buildPreviewText(getDiaryPreviewSource(entry.date, globalIndex), 200);
+  const diaryListItems: PostListItem[] = DIARY_ENTRIES_META.slice(
+    (currentPage - 1) * ENTRIES_PER_PAGE,
+    currentPage * ENTRIES_PER_PAGE
+  ).map((entry, idx) => {
+    const snippetIndex = ((currentPage - 1) * ENTRIES_PER_PAGE + idx) * 200;
+    const snippet = encodedContent.slice(snippetIndex, snippetIndex + 200) || encodedContent.slice(0, 200);
+    const preview = truncateText(snippet, 140);
     return {
       id: entry.date,
       title: entry.title,
@@ -178,9 +275,10 @@ const BlogPage: React.FC = () => {
       description: (
         <p className="text-gray-500 text-xs md:text-sm font-mono leading-relaxed break-all">
           {preview}
+          <span className="ml-2 text-sky-300 font-medium text-[11px]">(Read more)</span>
         </p>
       ),
-      locked: !isDecoded,
+      locked: true,
       onSelect: () => navigate(`/blog/diary/${entry.date}`)
     };
   });
@@ -210,31 +308,31 @@ const BlogPage: React.FC = () => {
   const blogDetailView = slugParam ? (
     <PostDetailLayout
       dateLabel={
-        selectedBlogPost ? `${formatDiaryDate(selectedBlogPost.date)} · ${estimateReadTime(selectedBlogPost.content)} min read` : ''
+        localizedSelected
+          ? `${getReadTimeText(localizedSelected.content, language)} · ${formatDateByLanguage(selectedBlogPost.date, language)}`
+          : ''
       }
-      title={selectedBlogPost?.title || 'Post'}
+      title={localizedSelected?.title || 'Post'}
       prev={prevBlogSlug ? { label: 'Previous', onClick: () => navigate(`/blog/post/${prevBlogSlug}`) } : null}
       next={nextBlogSlug ? { label: 'Next', onClick: () => navigate(`/blog/post/${nextBlogSlug}`) } : null}
       onBack={() => navigate('/blog')}
       backLabel="← Back to blog"
     >
       {selectedBlogPost ? (
-        <div className="space-y-4 text-gray-700 leading-relaxed">
-          {selectedBlogPost.tags?.length ? (
+        <article className="space-y-6 text-gray-700 leading-relaxed">
+          {localizedSelected?.tags?.length ? (
             <div className="flex flex-wrap gap-2 mb-2">
-              {selectedBlogPost.tags.map((tag) => (
+              {localizedSelected.tags.map((tag) => (
                 <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
                   {tag}
                 </span>
               ))}
             </div>
           ) : null}
-          {selectedBlogPost.content.split('\n').map((line, index) => (
-            <p key={index} className="text-sm md:text-base">
-              {line || '\u00A0'}
-            </p>
-          ))}
-        </div>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+            {localizedSelected?.content || ''}
+          </ReactMarkdown>
+        </article>
       ) : (
         <p className="text-sm text-red-400">Post not found.</p>
       )}
@@ -338,6 +436,36 @@ const BlogPage: React.FC = () => {
                 aria-hidden={activeTab !== 'diary'}
               >
                 {decodeControlsNode || <div className="h-[72px]" aria-hidden />}
+              </div>
+            </div>
+            <div className="flex items-center gap-2 ml-auto">
+              <div className="relative inline-grid grid-cols-3 items-stretch rounded-full border-2 border-sky-200 bg-white overflow-hidden">
+                <div className="absolute inset-0">
+                  <div
+                    className="absolute top-0 bottom-0 left-0 bg-sky-500 transition-transform duration-300 ease-out"
+                    style={{
+                      width: `${100 / LANG_OPTIONS.length}%`,
+                      transform: `translateX(${LANG_OPTIONS.findIndex((opt) => opt.code === language) * 100}%)`
+                    }}
+                    aria-hidden
+                  />
+                </div>
+                {LANG_OPTIONS.map((opt) => {
+                  const isActive = language === opt.code;
+                  return (
+                    <button
+                      key={opt.code}
+                      type="button"
+                      onClick={() => setLanguage(opt.code)}
+                      className={`relative z-10 px-3 py-2 text-xs font-semibold transition-colors ${
+                        isActive ? 'text-white' : 'text-sky-600 hover:text-sky-700'
+                      }`}
+                      aria-label={`Switch to ${opt.label}`}
+                    >
+                      {opt.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>

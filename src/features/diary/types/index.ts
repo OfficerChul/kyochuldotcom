@@ -26,4 +26,9 @@ export interface BlogPost {
   summary: string;
   content: string;
   tags?: string[];
+  translations?: {
+    en?: Partial<Pick<BlogPost, 'title' | 'summary' | 'content' | 'tags'>>;
+    ko?: Partial<Pick<BlogPost, 'title' | 'summary' | 'content' | 'tags'>>;
+    zh?: Partial<Pick<BlogPost, 'title' | 'summary' | 'content' | 'tags'>>;
+  };
 }
