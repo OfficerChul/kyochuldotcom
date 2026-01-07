@@ -447,47 +447,40 @@ const BlogPage: React.FC = () => {
         </Fade>
 
         <div className="mb-6 space-y-3">
-          <div className="flex flex-wrap items-start gap-3">
-            <FancyButtonSmall
-              onClick={() => handleTabChange('blog')}
-              className={`${tabButtonBaseClasses} ${
-                blogActive
-                  ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
-                  : 'text-sky-500 hover:text-sky-600'
-              }`}
-              borderColor={blogActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
-              borderWidth={2}
-              shineColor="from-transparent via-sky-300/55 to-transparent"
-              hoverBg="bg-sky-50/50"
-              noSvgBorder
-              ariaLabel="Show blog posts"
-            >
-              Blog
-            </FancyButtonSmall>
-            <FancyButtonSmall
-              onClick={() => handleTabChange('diary')}
-              className={`${tabButtonBaseClasses} ${
-                diaryActive
-                  ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
-                  : 'text-sky-500 hover:text-sky-600'
-              }`}
-              borderColor={diaryActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
-              borderWidth={2}
-              shineColor="from-transparent via-sky-300/55 to-transparent"
-              hoverBg="bg-sky-50/50"
-              noSvgBorder
-              ariaLabel="Show diary entries"
-            >
-              Diary
-            </FancyButtonSmall>
-            <div className="flex-1 min-w-[220px]">
-              <div
-                className={`${activeTab === 'diary' ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
-                style={{ visibility: activeTab === 'diary' ? 'visible' : 'hidden' }}
-                aria-hidden={activeTab !== 'diary'}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-3">
+              <FancyButtonSmall
+                onClick={() => handleTabChange('blog')}
+                className={`${tabButtonBaseClasses} ${
+                  blogActive
+                    ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
+                    : 'text-sky-500 hover:text-sky-600'
+                }`}
+                borderColor={blogActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
+                borderWidth={2}
+                shineColor="from-transparent via-sky-300/55 to-transparent"
+                hoverBg="bg-sky-50/50"
+                noSvgBorder
+                ariaLabel="Show blog posts"
               >
-                {decodeControlsNode || <div className="h-[72px]" aria-hidden />}
-              </div>
+                Blog
+              </FancyButtonSmall>
+              <FancyButtonSmall
+                onClick={() => handleTabChange('diary')}
+                className={`${tabButtonBaseClasses} ${
+                  diaryActive
+                    ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
+                    : 'text-sky-500 hover:text-sky-600'
+                }`}
+                borderColor={diaryActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
+                borderWidth={2}
+                shineColor="from-transparent via-sky-300/55 to-transparent"
+                hoverBg="bg-sky-50/50"
+                noSvgBorder
+                ariaLabel="Show diary entries"
+              >
+                Diary
+              </FancyButtonSmall>
             </div>
             <div className="flex items-center gap-2 ml-auto">
               <div className="relative inline-grid grid-cols-3 items-stretch rounded-full border-2 border-sky-200 bg-white overflow-hidden">
@@ -519,6 +512,11 @@ const BlogPage: React.FC = () => {
                 })}
               </div>
             </div>
+            {activeTab === 'diary' ? (
+              <div className="w-full">
+                {decodeControlsNode || <div className="h-[72px]" aria-hidden />}
+              </div>
+            ) : null}
           </div>
           <p className="text-xs text-gray-400">
             Blog posts are open. Diary entries require the decode key.
