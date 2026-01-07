@@ -4,9 +4,15 @@ import { estimateReadTime, formatDiaryDate } from '../../utils';
 
 interface DiaryEntryDetailProps {
   entry: DiaryEntry | null;
+  readTimeSuffix?: string;
+  formattedDate?: string;
 }
 
-const DiaryEntryDetail: React.FC<DiaryEntryDetailProps> = ({ entry }) => {
+const DiaryEntryDetail: React.FC<DiaryEntryDetailProps> = ({
+  entry,
+  readTimeSuffix = 'min read',
+  formattedDate
+}) => {
   if (!entry) {
     return (
       <article className="bg-white border border-dashed border-gray-200 rounded-2xl p-10 flex items-center justify-center text-sm text-gray-400">
@@ -16,11 +22,12 @@ const DiaryEntryDetail: React.FC<DiaryEntryDetailProps> = ({ entry }) => {
   }
 
   const readTime = estimateReadTime(entry.content);
+  const dateLabel = formattedDate || formatDiaryDate(entry.date);
 
   return (
     <article className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-10">
       <p className="text-xs text-gray-400 mb-2">
-        {formatDiaryDate(entry.date)} · {readTime} min read
+        {dateLabel} · {readTime} {readTimeSuffix}
       </p>
       <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 leading-tight">
         {entry.title || formatDiaryDate(entry.date)}

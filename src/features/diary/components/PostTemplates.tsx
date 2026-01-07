@@ -35,7 +35,7 @@ export const PostList: React.FC<PostListProps> = ({ items, footer }) => (
               <div className="text-gray-600 text-base leading-relaxed mb-4">{item.summary}</div>
             ) : null}
             {item.meta ? <p className="text-sm text-gray-400 mb-1">{item.meta}</p> : null}
-            {item.subMeta ? <div className="text-sm text-gray-400">{item.subMeta}</div> : null}
+            {item.subMeta ? <div className="text-sm text-gray-400 mt-4">{item.subMeta}</div> : null}
           </button>
         </div>
       );

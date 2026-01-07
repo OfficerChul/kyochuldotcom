@@ -1,1 +1,50 @@
-export const ENCODED_DIARY = `q21N/iFH36afJ1xI427F56r+NdI5SVRFUqPkcMjSvX841vzX3u/7gZmFpbE2xLO2r2KJhPzrnVRHDye6cUwROuDXzqwVNnOAR7qZEMfTeO5S/8EzPr9eWMUQ9GRtR1u9NvSOIXHMPEivKvcG8wIGFURXYhP5A4pnlrn+SLdoa3B1MXaRjD/8gYxn3aMr+Y67dUSeuk1zyaZrVnWX+O+Wb3gBB5jTHTWMV3tjUmIUeIhAgnhDprfnbU5sDw5IyXhYhPLh7Vgsqo3iCiNJqxgRGfSdjtp5giQ8TKfHTvBmowglgu/9/8LWFzBRcjLaMPciUexeIIKkspXUm+KNqam6SK+V+LbC+uQrU1yBgH17YyyfDPw71xHUEof01jwz8uxrzEXEWEIOzavBV8vdjS1uwhX7oDmRNzJfcOp5nZZszpAu3XXOhaTK7+sBx3rtc8PebL589dxyH5uHjwW8utLKq8bqdia3FY10uohVH4jo+23WebZ1jn7lTCKIoLmhBoIU+psI1x4Obqyf13HVtjXUBqHLJ0lOT24WLcKLyBKK24qAUJCPZbrwZcNJF1ja/6AyIi+52+p55sP7A+VPvYGUCHBdfw3ZATn4yM+66V9fiJxJxU9ui5df/b76j05fmaX+u8RWBmfJpoZHT+AagvXL8x0wKvBqqL5DQ3BTQXR56XkXBSt/esyzpFZauPhFesDRt8VggNoNifPripIS6yXHSWgrdggI5sgjaXkMx2z2hB0dw0d3QC92QMFfCNpLw176nUrXj6iQbHU5LQNX4a3r2+2dfgNUYnt14NLgL00NI8lGBLNbpxnc4/tMshRqYIwbJ/usbEQv/mJSZ2H7FH14I4+9dx4H1RRtlCFYSm6BoCqJmz6UMr30RvXDVGQGl/a3Mz0kCJc7PB5lvSDbatH1kEwD9YI3oCuxwet8Ds+W0XWUa2sGXsO2a+VjaJcZgrmeLcHhGundQuKUzggKp0ghFw/DjVe+VaVfPiP7KAIqEDy0V9onf1MrIaM8EQPGn0GNdixeahtHNxlEDZ/9otYZotZ/N0YE/WtfFse/wuiRTU9cznLRTheMdcuUx4/j8mXUbCR63dzbIFc1XileAl9M/c0ip5qMfzFCi2UlG6DDEJJsuytqXssCG1LqPvruOn9Tc+eo8BPDx1yo7lVBKkjts5/5K29wTlDVihqLX7O4fxFiYVW2UyetaeMAdQbPRqRvyotiTln1PI45LSDR0/q2Hx7AJ/tL3VNxJ7OPZQ7lsErU`;
+import { DiaryEntry } from '../types';
+
+const parseShortDate = (dateStr: string): Date => {
+  const [yy, mm, dd] = dateStr.split('-').map(Number);
+  return new Date(2000 + yy, mm - 1, dd);
+};
+
+const RAW_DIARY_ENTRIES: Omit<DiaryEntry, 'rawDate'>[] = [
+  {
+    date: '26-01-08',
+    title: '1.5년 - 27년 7월에 나에게',
+    content: `올해 내 다짐이 있다. 여러가지가 있다. 자기 전에 책 읽기, 기초 다지기, 퇴근할때 중국어 공부하기, 운동 일주일에 최소 세번하기, 논문 꾸준히 읽기, SNS 끊기, 자기 탐구하기, 그리고 성장하기. (사실 성장하기가 앞의 내용들을 모두 포함하고 있는 내용이다.) 지금 일기를 작성하면서 돌이켜보고 있는데, 논문 읽기와 운동하기를 안지키고 있다. 운동하는 건 정말 큰 의지를 필요한다. 그래서 못했다. 논문 읽는 건 사실 까먹고 있었다. 다시 논문 읽어야겠다. 오늘 아침에 일어나면 교수님과 연구 미팅 내용 정리하고, 다른 더 급한 일은 없는 것 같으니까 논문 읽어야겠다. Second Move 그 논문 읽어야겠다.
+
+지금 나는 성장에 혈안되어있다. 연구실에 자리도 잡았고, 내가 하고싶은 것들도 할 수 있겠다, 이제 나는 성장을 하고싶다. 나 자신에게 집중에서 1.5년이 되는 시간동안 기초를 다지고 연구를 하면서 앞으로 인생에 얼마 없을 큰 성장을 하고 싶다. 이 전에는 인턴에 신경 쓰고 돈 버는데 신경 쓰고 그랬다면, 이제 나는 무조건 다른 곳에 눈 안돌리고 성장하는데에만 집중할 것 이다. SNS도 삭제 했다. 자기 전에 책을 읽으면서 논리력도 기를 것이다. 이렇게 성장해서 1.5년이 되는 순간 내가 얼마나 성장했는지 되돌아봤을때 나 자신이 자랑스러울 정도로 성장 했으면 좋겠다.
+
+그때는 2027년 7월 초가 될거다. 그때 다시 보자. 내가 얼마나 성장했는지...
+
+지금 너무 바빠서 계속 내 연구에 신경을 못쓰고 내 연구를 다름 사람에게 맡기게 되는 것 같다. 너무 창피하다. 이러지 말아야겠다. 네붙캠 조교 활동도 끝났다, 대학원 신입생 연구도 이제 곧 끝나간다. 이제 시간이 적지 않기 때문에 내 성장에 더 집중하고, 내 연구에 집중해야겠다. 
+
+지금 내 일기도 그냥 생각나는대로 적어서 글이 정리도 안되어있고 읽기도 불편하댜. 앞으로는 일기도 좀 정돈되게 적어야겠다.
+
+어쨌든, 이제 나의 세상이다. 나에게 환경은 너무 잘 갖춰져있다. 앞으로는 나 자신에게 집중해서 성장하면 된다. 지인들과 약속도 그만 잡고, 카톡도 그만보고, 책 읽고, 논문 읽고, 기초 다지면서, 운동하자. 이것들 다 할 수 있다. 어려운거 아니다. 성장! 성장! 무조건 성장!! 내년에 내가 나를 자랑스러워 했으면 좋겠다.`
+  },
+  {
+    date: '25-12-24',
+    title: '크리스마스 이브',
+    content: `크리스마스 이브. 선물 포장을 마치고 트리 아래에 놓았다.
+저녁에는 가족들과 함께 특별한 저녁 식사를 했다.
+내일이 기대된다.`
+  },
+  {
+    date: '25-12-23',
+    title: '연말 정리',
+    content: `연말 정리를 시작했다. 올해 있었던 일들을 되돌아보니 감회가 새롭다.
+새해에는 더 열심히 살아야겠다는 다짐을 했다.
+밤에는 좋아하는 음악을 들으며 일기를 썼다.`
+  },
+  {
+    date: '25-12-22',
+    title: '정훈이와 만남',
+    content: `오랜만에 친구 정훈이를 만났다. 같이 운동도 하고 밥도 먹었다.
+요즘 바빠서 자주 못 만났는데, 오늘 만나니 너무 좋았다.
+다음에는 더 자주 만나기로 약속했다.`
+  }
+];
+
+export const DIARY_POSTS: DiaryEntry[] = RAW_DIARY_ENTRIES.map((entry) => ({
+  ...entry,
+  rawDate: parseShortDate(entry.date)
+})).sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime());

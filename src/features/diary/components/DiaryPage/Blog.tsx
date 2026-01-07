@@ -1,47 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation, useMatch, useNavigate } from 'react-router-dom';
+import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import { Fade } from 'react-awesome-reveal';
 import ReactMarkdown, { Components as MarkdownComponents } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useDiaryParser } from '../../hooks';
 import { BlogPost, DiaryEntry as DiaryEntryType } from '../../types';
 import { DiaryEntryDetail } from '../DiaryEntry';
-import DiaryDecoder from '../DiaryDecoder';
 import HeroSection from '../../../../shared/components/ui/HeroSection';
 import SectionTitle from '../../../../shared/components/ui/SectionTitle';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
-import { estimateReadTime, formatDiaryDate } from '../../utils';
+import { estimateReadTime } from '../../utils';
 import { BLOG_POSTS } from '../../data/blogPosts';
+import { DIARY_POSTS } from '../../data/diaryPosts';
 import { PostDetailLayout, PostList, PostListItem } from '../PostTemplates';
-
-const DIARY_ENTRIES_META = [
-  { date: '25-12-29', title: 'Year End Reflections' },
-  { date: '25-12-28', title: 'Lazy Saturday' },
-  { date: '25-12-27', title: 'Back to Routine' },
-  { date: '25-12-26', title: 'Boxing Day Adventures' },
-  { date: '25-12-25', title: 'Christmas Morning Thoughts' },
-  { date: '25-12-24', title: 'Eve of Something New' },
-  { date: '25-12-23', title: 'Winter Reflections' },
-  { date: '25-12-22', title: 'A Quiet Sunday' },
-  { date: '25-12-21', title: 'First Day of Winter' },
-  { date: '25-12-20', title: 'Friday Night Vibes' },
-  { date: '25-12-19', title: 'Midweek Thoughts' },
-  { date: '25-12-18', title: 'Coffee and Code' },
-  { date: '25-12-17', title: 'Rainy Day Musings' },
-  { date: '25-12-16', title: 'Monday Motivation' },
-  { date: '25-12-15', title: 'Weekend Wrap-up' },
-  { date: '25-12-14', title: 'Saturday Stroll' },
-  { date: '25-12-13', title: 'Friday the 13th' },
-  { date: '25-12-12', title: 'Twelve Twelve' },
-  { date: '25-12-11', title: 'Midweek Check-in' },
-  { date: '25-12-10', title: 'Ten Days to Go' },
-  { date: '25-12-09', title: 'Tuesday Thoughts' },
-  { date: '25-12-08', title: 'New Week Energy' },
-  { date: '25-12-07', title: 'Lazy Sunday' },
-  { date: '25-12-06', title: 'Saturday Plans' },
-  { date: '25-12-05', title: 'End of Week' },
-  { date: '25-12-04', title: 'December Beginnings' }
-];
 
 type TabKey = 'blog' | 'diary';
 type Language = 'en' | 'ko' | 'zh';
@@ -63,6 +33,60 @@ const readMoreLabel: Record<Language, string> = {
   en: '(Read more)',
   ko: '(더 보기)',
   zh: '(阅读全文)'
+};
+
+const DIARY_KEY = process.env.REACT_APP_DIARY_KEY || 'diary-demo-key';
+
+const getLocalizedDiaryEntry = (entry: DiaryEntryType, lang: Language): DiaryEntryType => {
+  const localized = entry.translations?.[lang];
+  return {
+    ...entry,
+    title: localized?.title ?? entry.title,
+    content: localized?.content ?? entry.content
+  };
+};
+
+const uiCopy = {
+  decodePlaceholder: {
+    en: 'Enter decode key...',
+    ko: '디코드 키를 입력하세요...',
+    zh: '请输入解锁密钥...'
+  },
+  decodeButton: {
+    en: 'Unlock',
+    ko: '잠금 해제',
+    zh: '解锁'
+  },
+  decodeButtonLoading: {
+    en: 'Unlocking...',
+    ko: '해제 중...',
+    zh: '解锁中...'
+  },
+  decodeEmptyError: {
+    en: 'Please enter a decode key',
+    ko: '디코드 키를 입력하세요',
+    zh: '请输入解锁密钥'
+  },
+  decodeInvalidError: {
+    en: 'Invalid key',
+    ko: '키가 맞지 않습니다',
+    zh: '密钥不正确'
+  },
+  lockedPreview: {
+    en: '🔒 Locked. Enter the key to view.',
+    ko: '🔒 잠겨 있습니다. 키를 입력해 주세요.',
+    zh: '🔒 已锁定。请输入密钥查看。'
+  },
+  lockedDetail: {
+    en: 'This diary entry is locked. Enter the key above to read it.',
+    ko: '이 일기는 잠겨 있습니다. 상단의 키를 입력해 주세요.',
+    zh: '此日记已锁定。请在上方输入密钥解锁。'
+  },
+  unlockedLabel: {
+    en: 'Unlocked ✓',
+    ko: '잠금 해제 ✓',
+    zh: '已解锁 ✓'
+  }
 };
 
 const markdownComponents: MarkdownComponents = {
@@ -127,7 +151,6 @@ const markdownComponents: MarkdownComponents = {
 };
 
 const BlogPage: React.FC = () => {
-  const { isDecoded, entries, encodedContent, isLoading, error, attemptDecode } = useDiaryParser();
   const navigate = useNavigate();
   const location = useLocation();
   const diaryMatch = useMatch('/blog/diary/:date');
@@ -137,11 +160,50 @@ const BlogPage: React.FC = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [language, setLanguage] = useState<Language>('en');
+  const [diaryUnlocked, setDiaryUnlocked] = useState(false);
+  const [decodeInput, setDecodeInput] = useState('');
+  const [decodeError, setDecodeError] = useState<string | null>(null);
+  const [isDecoding, setIsDecoding] = useState(false);
 
   const parseShortDate = (dateStr: string): number => {
     const [yy, mm, dd] = dateStr.split('-').map(Number);
     return new Date(2000 + yy, mm - 1, dd).getTime();
   };
+
+  const handleDecode = () => {
+    if (!decodeInput.trim()) {
+      setDecodeError(uiCopy.decodeEmptyError[language]);
+      return;
+    }
+    setIsDecoding(true);
+    const trimmed = decodeInput.trim();
+    const matched = trimmed === DIARY_KEY;
+    setTimeout(() => {
+      setDiaryUnlocked(matched);
+      setDecodeError(matched ? null : uiCopy.decodeInvalidError[language]);
+      setIsDecoding(false);
+    }, 150);
+  };
+
+  const handleDecodeKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleDecode();
+    }
+  };
+
+  useEffect(() => {
+    setDecodeError(null);
+  }, [language]);
+
+  const diaryEntries = useMemo(
+    () => [...DIARY_POSTS].sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()),
+    []
+  );
+
+  const localizedDiaryEntries = useMemo(
+    () => diaryEntries.map((entry) => getLocalizedDiaryEntry(entry, language)),
+    [diaryEntries, language]
+  );
 
   const sortedBlogPosts = useMemo(
     () => [...BLOG_POSTS].sort((a, b) => parseShortDate(b.date) - parseShortDate(a.date)),
@@ -180,10 +242,12 @@ const BlogPage: React.FC = () => {
   const blogActive = activeTab === 'blog';
   const diaryActive = activeTab === 'diary';
   const tabButtonBaseClasses =
-    'inline-flex items-center justify-center px-4 py-2 font-mono text-[10px] sm:text-xs tracking-[0.12em] uppercase transition-all duration-300';
+    'inline-flex items-center justify-center px-4 py-2 font-mono font-normal text-[10px] sm:text-xs tracking-[0.12em] uppercase transition-colors duration-200';
 
   const selectedEntry: DiaryEntryType | null =
-    isDecoded && dateParam ? entries.find((entry) => entry.date === dateParam) || null : null;
+    diaryUnlocked && dateParam
+      ? localizedDiaryEntries.find((entry) => entry.date === dateParam) || null
+      : null;
 
   const selectedBlogPost: BlogPost | undefined = slugParam
     ? sortedBlogPosts.find((post) => post.slug === slugParam)
@@ -192,27 +256,27 @@ const BlogPage: React.FC = () => {
 
   const orderedMeta = useMemo(
     () =>
-      (isDecoded && entries.length ? entries : DIARY_ENTRIES_META).map((entry) => ({
+      localizedDiaryEntries.map((entry) => ({
         date: entry.date,
-        title: 'title' in entry ? entry.title || formatDiaryDate(entry.date) : entry.title
+        title: entry.title || formatDateByLanguage(entry.date, language)
       })),
-    [isDecoded, entries]
+    [localizedDiaryEntries, language]
   );
-  const totalDiaryEntries = orderedMeta.length;
+  const totalDiaryEntries = localizedDiaryEntries.length;
 
   const currentIndex = dateParam ? orderedMeta.findIndex((item) => item.date === dateParam) : -1;
   const prevDate = currentIndex >= 0 && currentIndex < orderedMeta.length - 1 ? orderedMeta[currentIndex + 1].date : null;
   const nextDate = currentIndex > 0 ? orderedMeta[currentIndex - 1].date : null;
 
   useEffect(() => {
-    if (!isDecoded || !dateParam) return;
-    const idx = entries.findIndex((entry) => entry.date === dateParam);
+    if (!dateParam) return;
+    const idx = localizedDiaryEntries.findIndex((entry) => entry.date === dateParam);
     if (idx === -1) return;
     const targetPage = Math.floor(idx / ENTRIES_PER_PAGE) + 1;
     if (targetPage !== currentPage) {
       setCurrentPage(targetPage);
     }
-  }, [isDecoded, dateParam, entries, currentPage]);
+  }, [dateParam, localizedDiaryEntries, currentPage]);
 
   const handleChangePage = (page: number) => {
     setCurrentPage(page);
@@ -229,58 +293,31 @@ const BlogPage: React.FC = () => {
     }
   };
 
-  const decodeControlsNode = !isDecoded ? (
-    <DiaryDecoder
-      mode="inline"
-      encodedContent={encodedContent}
-      onDecode={attemptDecode}
-      placeholder="Enter decode key"
-      buttonLabel="Unlock"
-      buttonLoadingLabel="Decoding..."
-    />
-  ) : null;
-
-  const getDiaryPreviewSource = (date: string, snippetIndex: number) => {
-    if (isDecoded) {
-      const matchedEntry = entries.find((entry) => entry.date === date);
-      if (matchedEntry?.content) {
-        return matchedEntry.content;
-      }
+  const getDiaryPreviewSource = (date: string) => {
+    if (!diaryUnlocked) {
+      return uiCopy.lockedPreview[language];
     }
-    const start = snippetIndex * 200;
-    return encodedContent.slice(start, start + 200) || encodedContent.slice(0, 200);
+    const matchedEntry = localizedDiaryEntries.find((entry) => entry.date === date);
+    return matchedEntry?.content ?? '';
   };
 
   const blogListItems: PostListItem[] = sortedBlogPosts.map((post) => {
     const localized = getLocalizedPost(post, language);
     const readTimeText = getReadTimeText(localized.content, language);
     const summaryPreview = buildPreviewText(localized.content, 300);
-    const [yearStr] = post.date.split('-');
-    const year = yearStr ? 2000 + Number(yearStr) : undefined;
     const tags = localized.tags;
     const hasTags = Boolean(tags && tags.length);
-    const subMetaContent =
-      year || hasTags ? (
-        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400">
-          {year ? (
-            <span className="inline-flex items-center gap-2">
-              <span role="img" aria-label="calendar">
-                📅
-              </span>
-              {year}
+    const subMetaContent = hasTags ? (
+      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400 mt-1">
+        <div className="flex flex-wrap gap-2">
+          {tags!.map((tag) => (
+            <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
+              {tag}
             </span>
-          ) : null}
-          {hasTags ? (
-            <div className="flex flex-wrap gap-2">
-              {tags!.map((tag) => (
-                <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          ) : null}
+          ))}
         </div>
-      ) : null;
+      </div>
+    ) : null;
     return {
       id: post.slug,
       title: localized.title,
@@ -292,7 +329,7 @@ const BlogPage: React.FC = () => {
           </span>
         </p>
       ),
-      meta: `${readTimeText} \u00B7 ${formatDateByLanguage(post.date, language)}`,
+      meta: `\u{1F4C5} ${formatDateByLanguage(post.date, language)} \u00B7 ${readTimeText}`,
       subMeta: subMetaContent,
       onSelect: () => navigate(`/blog/post/${post.slug}`)
     };
@@ -302,14 +339,14 @@ const BlogPage: React.FC = () => {
   const prevBlogSlug = blogIndex > 0 ? sortedBlogPosts[blogIndex - 1].slug : null; // older
   const nextBlogSlug = blogIndex >= 0 && blogIndex < sortedBlogPosts.length - 1 ? sortedBlogPosts[blogIndex + 1].slug : null; // newer
 
-  const paginatedDiaryEntries = orderedMeta.slice((currentPage - 1) * ENTRIES_PER_PAGE, currentPage * ENTRIES_PER_PAGE);
+  const paginatedDiaryEntries = localizedDiaryEntries.slice(
+    (currentPage - 1) * ENTRIES_PER_PAGE,
+    currentPage * ENTRIES_PER_PAGE
+  );
 
   const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry, idx) => {
-    const globalIndex = (currentPage - 1) * ENTRIES_PER_PAGE + idx;
-    const preview = buildPreviewText(getDiaryPreviewSource(entry.date, globalIndex), 300);
+    const preview = buildPreviewText(getDiaryPreviewSource(entry.date), 300);
     const readTime = estimateReadTime(preview);
-    const [yy] = entry.date.split('-').map(Number);
-    const year = yy ? 2000 + yy : undefined;
     return {
       id: entry.date,
       title: entry.title,
@@ -321,15 +358,8 @@ const BlogPage: React.FC = () => {
           </span>
         </p>
       ),
-      meta: `${readTime} ${readTimeLabel[language]} \u00B7 ${formatDiaryDate(entry.date)}`,
-      subMeta: year ? (
-        <div className="flex items-center gap-2 text-sm text-gray-400">
-          <span role="img" aria-label="calendar">
-            📅
-          </span>
-          {year}
-        </div>
-      ) : null,
+      meta: `\u{1F4C5} ${formatDateByLanguage(entry.date, language)} \u00B7 ${readTime} ${readTimeLabel[language]}`,
+      subMeta: null,
       onSelect: () => navigate(`/blog/diary/${entry.date}`)
     };
   });
@@ -360,7 +390,7 @@ const BlogPage: React.FC = () => {
     <PostDetailLayout
       dateLabel={
         localizedSelected
-          ? `${getReadTimeText(localizedSelected.content, language)} · ${formatDateByLanguage(selectedBlogPost.date, language)}`
+          ? `\u{1F4C5} ${formatDateByLanguage(selectedBlogPost.date, language)} · ${getReadTimeText(localizedSelected.content, language)}`
           : ''
       }
       title={localizedSelected?.title || 'Post'}
@@ -372,7 +402,7 @@ const BlogPage: React.FC = () => {
       {selectedBlogPost ? (
         <article className="space-y-6 text-gray-700 leading-relaxed">
           {localizedSelected?.tags?.length ? (
-            <div className="flex flex-wrap gap-2 mb-2">
+            <div className="flex flex-wrap gap-2 mb-2 mt-4">
               {localizedSelected.tags.map((tag) => (
                 <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
                   {tag}
@@ -394,21 +424,25 @@ const BlogPage: React.FC = () => {
 
   const diaryDetailView = dateParam ? (
     <PostDetailLayout
-      dateLabel={formatDiaryDate(dateParam)}
+      dateLabel={formatDateByLanguage(dateParam, language)}
       title={selectedEntry?.title || orderedMeta.find((meta) => meta.date === dateParam)?.title || 'Diary'}
       prev={prevDate ? { label: 'Previous', onClick: () => navigate(`/blog/diary/${prevDate}`) } : null}
       next={nextDate ? { label: 'Next', onClick: () => navigate(`/blog/diary/${nextDate}`) } : null}
       onBack={() => navigate('/blog/diary')}
     >
-      {isDecoded ? (
+      {diaryUnlocked ? (
         selectedEntry ? (
-          <DiaryEntryDetail entry={selectedEntry} />
+          <DiaryEntryDetail
+            entry={selectedEntry}
+            readTimeSuffix={readTimeLabel[language]}
+            formattedDate={formatDateByLanguage(selectedEntry.date, language)}
+          />
         ) : (
           <p className="text-sm text-red-400">Entry not found.</p>
         )
       ) : (
-        <div className="text-sm text-gray-400 font-mono break-all">
-          {encodedContent.slice(0, 400) || 'This entry is locked.'}
+        <div className="space-y-3">
+          <p className="text-sm text-gray-500">{uiCopy.lockedDetail[language]}</p>
         </div>
       )}
     </PostDetailLayout>
@@ -417,25 +451,6 @@ const BlogPage: React.FC = () => {
       <PostList items={diaryListItems} footer={diaryPagination || undefined} />
     </div>
   );
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-xl text-gray-400">Loading...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col items-center justify-center">
-        <p className="text-red-500 mb-4">Error: {error}</p>
-        <Link to="/" className="text-sky-500 hover:underline">
-          Go Home
-        </Link>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -454,13 +469,11 @@ const BlogPage: React.FC = () => {
                   onClick={() => handleTabChange('blog')}
                   className={`${tabButtonBaseClasses} ${
                     blogActive
-                      ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
-                      : 'text-sky-500 hover:text-sky-600'
+                      ? 'text-sky-700 bg-sky-100'
+                      : 'text-sky-500 bg-white hover:text-sky-600'
                   }`}
-                  borderColor={blogActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
+                  borderColor={blogActive ? 'rgba(14, 165, 233, 0.9)' : 'rgba(148, 163, 184, 0.4)'}
                   borderWidth={2}
-                  shineColor="from-transparent via-sky-300/55 to-transparent"
-                  hoverBg="bg-sky-50/50"
                   noSvgBorder
                   ariaLabel="Show blog posts"
                 >
@@ -470,22 +483,17 @@ const BlogPage: React.FC = () => {
                   onClick={() => handleTabChange('diary')}
                   className={`${tabButtonBaseClasses} ${
                     diaryActive
-                      ? 'text-sky-700 shadow-[0_10px_30px_-18px_rgba(56,189,248,0.9)]'
-                      : 'text-sky-500 hover:text-sky-600'
+                      ? 'text-sky-700 bg-sky-100'
+                      : 'text-sky-500 bg-white hover:text-sky-600'
                   }`}
-                  borderColor={diaryActive ? 'rgba(56, 189, 248, 0.75)' : 'rgba(148, 163, 184, 0.55)'}
+                  borderColor={diaryActive ? 'rgba(14, 165, 233, 0.9)' : 'rgba(148, 163, 184, 0.4)'}
                   borderWidth={2}
-                  shineColor="from-transparent via-sky-300/55 to-transparent"
-                  hoverBg="bg-sky-50/50"
                   noSvgBorder
                   ariaLabel="Show diary entries"
                 >
                   Diary
                 </FancyButtonSmall>
               </div>
-              <p className="text-xs text-gray-400">
-                Blog posts are open. Diary entries require the decode key.
-              </p>
             </div>
 
             <div className="flex flex-col gap-3 items-start lg:items-end w-full lg:w-auto">
@@ -493,7 +501,7 @@ const BlogPage: React.FC = () => {
                 <div className="relative inline-grid grid-cols-3 items-stretch rounded-full border-2 border-sky-200 bg-white overflow-hidden">
                   <div className="absolute inset-0">
                     <div
-                      className="absolute top-0 bottom-0 left-0 bg-sky-500 transition-transform duration-300 ease-out"
+                      className="absolute top-0 bottom-0 left-0 lang-highlight transition-transform duration-300 ease-out"
                       style={{
                         width: `${100 / LANG_OPTIONS.length}%`,
                         transform: `translateX(${LANG_OPTIONS.findIndex((opt) => opt.code === language) * 100}%)`
@@ -520,10 +528,40 @@ const BlogPage: React.FC = () => {
                 </div>
               </div>
 
-              {activeTab === 'diary' ? (
-                <div className="w-full lg:w-auto lg:self-end">
-                  {decodeControlsNode || <div className="h-[72px]" aria-hidden />}
+              {diaryActive ? (
+                <div className="flex flex-row flex-wrap items-center justify-start lg:justify-end gap-3 w-full">
+                  <input
+                    type="password"
+                    value={decodeInput}
+                    onChange={(e) => {
+                      setDecodeInput(e.target.value);
+                      setDecodeError(null);
+                    }}
+                    onKeyDown={handleDecodeKeyDown}
+                    placeholder={uiCopy.decodePlaceholder[language]}
+                    className="px-4 py-2 text-sm font-mono bg-transparent border-b-2 border-gray-300 focus:border-sky-400 transition-colors w-48 sm:w-56 focus:outline-none"
+                  />
+                  <FancyButtonSmall
+                    onClick={isDecoding ? undefined : handleDecode}
+                    className={`inline-block px-6 py-2 font-mono text-sm overflow-hidden text-sky-500 ${
+                      diaryUnlocked ? 'text-sky-700' : 'text-sky-500'
+                    } ${isDecoding ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    borderColor="rgba(56, 189, 248, 0.5)"
+                    noSvgBorder
+                    shineColor={isDecoding ? '' : 'from-transparent via-sky-300/40 to-transparent'}
+                    ariaLabel="Decode diary"
+                  >
+                    <i className="fa fa-unlock-alt"></i>
+                    <span>{isDecoding ? uiCopy.decodeButtonLoading[language] : uiCopy.decodeButton[language]}</span>
+                  </FancyButtonSmall>
+                  {diaryUnlocked ? (
+                    <span className="text-[11px] text-sky-600 font-mono">{uiCopy.unlockedLabel[language]}</span>
+                  ) : null}
                 </div>
+              ) : null}
+
+              {diaryActive && decodeError ? (
+                <p className="text-xs text-red-500">{decodeError}</p>
               ) : null}
             </div>
           </div>
@@ -531,6 +569,18 @@ const BlogPage: React.FC = () => {
 
         {activeTab === 'blog' ? blogDetailView : diaryDetailView}
       </main>
+
+      <style>{`
+        .lang-highlight {
+          background: linear-gradient(120deg, #67e8f9, #38bdf8 45%, #0ea5e9 80%, #38bdf8);
+          background-size: 150% 150%;
+          border-radius: 9999px;
+          filter: drop-shadow(0 8px 18px rgba(56, 189, 248, 0.18));
+          overflow: hidden;
+          opacity: 0.9;
+          pointer-events: none;
+        }
+      `}</style>
 
       <Fade direction="up" triggerOnce>
         <footer className="border-t border-gray-200 py-8 mt-auto">
