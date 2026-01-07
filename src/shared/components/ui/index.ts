@@ -5,3 +5,4 @@ export { default as SectionTitle } from './SectionTitle';
 export { default as ExpandableList } from './ExpandableList';
 export { default as SectionWrapper } from './SectionWrapper';
 export { default as Card } from './Card';
+export { default as LoadingQuote } from './LoadingQuote';

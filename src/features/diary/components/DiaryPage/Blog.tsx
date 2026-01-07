@@ -56,9 +56,10 @@ const BlogPage: React.FC = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const truncateText = (text: string, limit = 150) => {
+  const buildPreviewText = (text: string, limit = 200) => {
     if (!text) return '';
-    return text.length > limit ? `${text.slice(0, limit).trimEnd()}…` : text;
+    const normalized = text.replace(/\s+/g, ' ').trim();
+    return normalized.length > limit ? `${normalized.slice(0, limit).trimEnd()}…` : normalized;
   };
 
   const activeTab: TabKey = location.pathname.startsWith('/blog/diary') ? 'diary' : 'blog';
@@ -82,6 +83,7 @@ const BlogPage: React.FC = () => {
       })),
     [isDecoded, entries]
   );
+  const totalDiaryEntries = orderedMeta.length;
 
   const currentIndex = dateParam ? orderedMeta.findIndex((item) => item.date === dateParam) : -1;
   const prevDate = currentIndex >= 0 && currentIndex < orderedMeta.length - 1 ? orderedMeta[currentIndex + 1].date : null;
@@ -123,19 +125,27 @@ const BlogPage: React.FC = () => {
     />
   ) : null;
 
+  const getDiaryPreviewSource = (date: string, snippetIndex: number) => {
+    if (isDecoded) {
+      const matchedEntry = entries.find((entry) => entry.date === date);
+      if (matchedEntry?.content) {
+        return matchedEntry.content;
+      }
+    }
+    const start = snippetIndex * 200;
+    return encodedContent.slice(start, start + 200) || encodedContent.slice(0, 200);
+  };
+
   const blogListItems: PostListItem[] = BLOG_POSTS.map((post) => {
     const readTime = estimateReadTime(post.content);
-    const summaryPreview = truncateText(post.summary, 160);
+    const summaryPreview = buildPreviewText(post.content, 200);
     return {
       id: post.slug,
       title: post.title,
       dateLabel: `${formatDiaryDate(post.date)} · ${readTime} min read`,
       description: (
-        <>
-          <p className="text-gray-600 text-xs md:text-sm mb-2">
-            {summaryPreview}
-            <span className="ml-2 text-sky-300 font-medium text-[11px]">(Read more)</span>
-          </p>
+        <div className="space-y-2">
+          <p className="text-gray-600 text-xs md:text-sm leading-relaxed">{summaryPreview}</p>
           {post.tags?.length ? (
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
@@ -145,7 +155,7 @@ const BlogPage: React.FC = () => {
               ))}
             </div>
           ) : null}
-        </>
+        </div>
       ),
       locked: false,
       onSelect: () => navigate(`/blog/post/${post.slug}`)
@@ -156,13 +166,11 @@ const BlogPage: React.FC = () => {
   const prevBlogSlug = blogIndex > 0 ? BLOG_POSTS[blogIndex - 1].slug : null; // older
   const nextBlogSlug = blogIndex >= 0 && blogIndex < BLOG_POSTS.length - 1 ? BLOG_POSTS[blogIndex + 1].slug : null; // newer
 
-  const diaryListItems: PostListItem[] = DIARY_ENTRIES_META.slice(
-    (currentPage - 1) * ENTRIES_PER_PAGE,
-    currentPage * ENTRIES_PER_PAGE
-  ).map((entry, idx) => {
-    const snippetIndex = ((currentPage - 1) * ENTRIES_PER_PAGE + idx) * 200;
-    const snippet = encodedContent.slice(snippetIndex, snippetIndex + 200) || encodedContent.slice(0, 200);
-    const preview = truncateText(snippet, 140);
+  const paginatedDiaryEntries = orderedMeta.slice((currentPage - 1) * ENTRIES_PER_PAGE, currentPage * ENTRIES_PER_PAGE);
+
+  const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry, idx) => {
+    const globalIndex = (currentPage - 1) * ENTRIES_PER_PAGE + idx;
+    const preview = buildPreviewText(getDiaryPreviewSource(entry.date, globalIndex), 200);
     return {
       id: entry.date,
       title: entry.title,
@@ -170,18 +178,17 @@ const BlogPage: React.FC = () => {
       description: (
         <p className="text-gray-500 text-xs md:text-sm font-mono leading-relaxed break-all">
           {preview}
-          <span className="ml-2 text-sky-300 font-medium text-[11px]">(Read more)</span>
         </p>
       ),
-      locked: true,
+      locked: !isDecoded,
       onSelect: () => navigate(`/blog/diary/${entry.date}`)
     };
   });
 
   const diaryPagination =
-    Math.ceil(DIARY_ENTRIES_META.length / ENTRIES_PER_PAGE) > 1 ? (
+    Math.ceil(totalDiaryEntries / ENTRIES_PER_PAGE) > 1 ? (
       <div className="flex justify-center gap-2 mt-8">
-        {Array.from({ length: Math.ceil(DIARY_ENTRIES_META.length / ENTRIES_PER_PAGE) }, (_, i) => i + 1).map((page) => (
+        {Array.from({ length: Math.ceil(totalDiaryEntries / ENTRIES_PER_PAGE) }, (_, i) => i + 1).map((page) => (
           <button
             key={page}
             onClick={() => handleChangePage(page)}
@@ -304,9 +311,9 @@ const BlogPage: React.FC = () => {
               shineColor="from-transparent via-sky-300/55 to-transparent"
               hoverBg="bg-sky-50/50"
               noSvgBorder
-              ariaLabel="Show public blog posts"
+              ariaLabel="Show blog posts"
             >
-              Blog (public)
+              Blog
             </FancyButtonSmall>
             <FancyButtonSmall
               onClick={() => handleTabChange('diary')}
@@ -320,9 +327,9 @@ const BlogPage: React.FC = () => {
               shineColor="from-transparent via-sky-300/55 to-transparent"
               hoverBg="bg-sky-50/50"
               noSvgBorder
-              ariaLabel="Show locked diary entries"
+              ariaLabel="Show diary entries"
             >
-              Diary (locked)
+              Diary
             </FancyButtonSmall>
             <div className="flex-1 min-w-[220px]">
               <div

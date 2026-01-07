@@ -1,14 +1,18 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import LoadingQuote from './shared/components/ui/LoadingQuote';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 
 const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
-    <div className="text-2xl font-bold animate-pulse">Loading...</div>
-  </div>
+  <LoadingQuote
+    className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+    quoteClassName="text-gray-800 dark:text-gray-100"
+    authorClassName="text-gray-500 dark:text-gray-300"
+    spinnerClassName="border-b-2 border-gray-600 dark:border-gray-200"
+  />
 );
 
 const App: React.FC = () => {

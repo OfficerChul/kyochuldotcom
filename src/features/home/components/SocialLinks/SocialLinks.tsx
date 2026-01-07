@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, lazy, Suspense, useMemo } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import Modal from 'react-modal';
 import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope, FaBook } from 'react-icons/fa';
+import LoadingQuote from '../../../../shared/components/ui/LoadingQuote';
 import SocialLinkButton from './SocialLinkButton';
-import { getRandomQuote } from './PDFViewer';
 import './animations.css';
 
 // Lazy load PDFViewer for code splitting
@@ -34,9 +34,6 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
   const [modalWidth, setModalWidth] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
-
-  // Pick a random quote for suspense fallback
-  const suspenseQuote = useMemo(() => getRandomQuote(), []);
 
   // Calculate modal width for PDF
   useEffect(() => {
@@ -237,17 +234,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
           {/* PDF Viewer - react-pdf for cross-platform support */}
           <Suspense
             fallback={
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center px-8 max-w-md">
-                  <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-600 mx-auto mb-6"></div>
-                  <p className="text-gray-600 italic text-lg leading-relaxed">
-                    "{suspenseQuote.quote}"
-                  </p>
-                  <p className="text-gray-500 mt-3 text-sm">
-                    — {suspenseQuote.author}
-                  </p>
-                </div>
-              </div>
+              <LoadingQuote className="absolute inset-0 bg-white" quoteClassName="text-gray-700" />
             }
           >
             <PDFViewer file="/Kyochul_Jang___CV.pdf" width={modalWidth} />

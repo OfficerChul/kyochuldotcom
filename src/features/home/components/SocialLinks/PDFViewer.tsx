@@ -1,45 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
+import { getRandomQuote } from '../../../../shared/data/loadingQuotes';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
 // PDF.js worker 설정
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-// Motivational quotes for loading screen
-export const MOTIVATIONAL_QUOTES = [
-  {
-    quote: "The only way to do great work is to love what you do.",
-    author: "Steve Jobs"
-  },
-  {
-    quote: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-    author: "Winston Churchill"
-  },
-  {
-    quote: "Believe you can and you're halfway there.",
-    author: "Theodore Roosevelt"
-  },
-  {
-    quote: "The future belongs to those who believe in the beauty of their dreams.",
-    author: "Eleanor Roosevelt"
-  },
-  {
-    quote: "It does not matter how slowly you go as long as you do not stop.",
-    author: "Confucius"
-  }
-];
-
 interface PDFViewerProps {
   file: string;
   width?: number;
 }
-
-// Helper function to get a random quote
-export const getRandomQuote = () => {
-  const randomIndex = Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length);
-  return MOTIVATIONAL_QUOTES[randomIndex];
-};
 
 const PDFViewer: React.FC<PDFViewerProps> = ({ file, width }) => {
   const [numPages, setNumPages] = useState<number>(0);
