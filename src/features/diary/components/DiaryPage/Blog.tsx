@@ -150,7 +150,30 @@ const BlogPage: React.FC = () => {
 
   const buildPreviewText = (text: string, limit = 300) => {
     if (!text) return '';
-    return text.length > limit ? `${text.slice(0, limit).trimEnd()}…` : text;
+    const normalized = text.replace(/\s+/g, ' ').trim();
+    return normalized.length > limit ? `${normalized.slice(0, limit).trimEnd()}…` : normalized;
+  };
+
+  const formatDateByLanguage = (dateStr: string, lang: Language): string => {
+    const [yy, mm, dd] = dateStr.split('-').map(Number);
+    const date = new Date(2000 + yy, mm - 1, dd);
+    const locale = lang === 'ko' ? 'ko-KR' : lang === 'zh' ? 'zh-CN' : 'en-US';
+    return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+  };
+
+  const getReadTimeText = (content: string, lang: Language): string => {
+    const minutes = estimateReadTime(content);
+    return `${minutes} ${readTimeLabel[lang]}`;
+  };
+
+  const getLocalizedPost = (post: BlogPost, lang: Language) => {
+    const localized = post.translations?.[lang];
+    return {
+      title: localized?.title ?? post.title,
+      summary: localized?.summary ?? post.summary,
+      content: localized?.content ?? post.content,
+      tags: localized?.tags ?? post.tags
+    };
   };
 
   const activeTab: TabKey = location.pathname.startsWith('/blog/diary') ? 'diary' : 'blog';
@@ -228,20 +251,26 @@ const BlogPage: React.FC = () => {
     return encodedContent.slice(start, start + 200) || encodedContent.slice(0, 200);
   };
 
-  const blogListItems: PostListItem[] = BLOG_POSTS.map((post) => {
-    const readTime = estimateReadTime(post.content);
-    const summaryPreview = truncateText(post.summary, 160);
-    return {
-      id: post.slug,
-      title: post.title,
-      dateLabel: `${formatDiaryDate(post.date)} · ${readTime} min read`,
-      description: (
-        <>
-          <p className="text-gray-600 text-xs md:text-sm mb-2">
-            {summaryPreview}
-            <span className="ml-2 text-sky-300 font-medium text-[11px]">(Read more)</span>
-          </p>
-          {post.tags?.length ? (
+  const blogListItems: PostListItem[] = sortedBlogPosts.map((post) => {
+    const localized = getLocalizedPost(post, language);
+    const readTimeText = getReadTimeText(localized.content, language);
+    const summaryPreview = buildPreviewText(localized.content, 300);
+    const [yearStr] = post.date.split('-');
+    const year = yearStr ? 2000 + Number(yearStr) : undefined;
+    const tags = localized.tags;
+    const hasTags = Boolean(tags && tags.length);
+    const subMetaContent =
+      year || hasTags ? (
+        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+          {year ? (
+            <span className="inline-flex items-center gap-2">
+              <span role="img" aria-label="calendar">
+                📅
+              </span>
+              {year}
+            </span>
+          ) : null}
+          {hasTags ? (
             <div className="flex flex-wrap gap-2">
               {tags!.map((tag) => (
                 <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
@@ -250,9 +279,21 @@ const BlogPage: React.FC = () => {
               ))}
             </div>
           ) : null}
-        </>
+        </div>
+      ) : null;
+    return {
+      id: post.slug,
+      title: localized.title,
+      summary: (
+        <p className="text-gray-400 group-hover:text-gray-700 text-xs md:text-sm leading-relaxed transition-colors">
+          {summaryPreview}{' '}
+          <span className="text-sky-600 font-medium group-hover:text-sky-700 transition-colors">
+            {readMoreLabel[language]}
+          </span>
+        </p>
       ),
-      locked: false,
+      meta: `${readTimeText} \u00B7 ${formatDateByLanguage(post.date, language)}`,
+      subMeta: subMetaContent,
       onSelect: () => navigate(`/blog/post/${post.slug}`)
     };
   });
@@ -261,24 +302,34 @@ const BlogPage: React.FC = () => {
   const prevBlogSlug = blogIndex > 0 ? sortedBlogPosts[blogIndex - 1].slug : null; // older
   const nextBlogSlug = blogIndex >= 0 && blogIndex < sortedBlogPosts.length - 1 ? sortedBlogPosts[blogIndex + 1].slug : null; // newer
 
-  const diaryListItems: PostListItem[] = DIARY_ENTRIES_META.slice(
-    (currentPage - 1) * ENTRIES_PER_PAGE,
-    currentPage * ENTRIES_PER_PAGE
-  ).map((entry, idx) => {
-    const snippetIndex = ((currentPage - 1) * ENTRIES_PER_PAGE + idx) * 200;
-    const snippet = encodedContent.slice(snippetIndex, snippetIndex + 200) || encodedContent.slice(0, 200);
-    const preview = truncateText(snippet, 140);
+  const paginatedDiaryEntries = orderedMeta.slice((currentPage - 1) * ENTRIES_PER_PAGE, currentPage * ENTRIES_PER_PAGE);
+
+  const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry, idx) => {
+    const globalIndex = (currentPage - 1) * ENTRIES_PER_PAGE + idx;
+    const preview = buildPreviewText(getDiaryPreviewSource(entry.date, globalIndex), 300);
+    const readTime = estimateReadTime(preview);
+    const [yy] = entry.date.split('-').map(Number);
+    const year = yy ? 2000 + yy : undefined;
     return {
       id: entry.date,
       title: entry.title,
-      dateLabel: formatDiaryDate(entry.date),
-      description: (
-        <p className="text-gray-500 text-xs md:text-sm font-mono leading-relaxed break-all">
-          {preview}
-          <span className="ml-2 text-sky-300 font-medium text-[11px]">(Read more)</span>
+      summary: (
+        <p className="text-gray-400 group-hover:text-gray-700 text-xs md:text-sm leading-relaxed break-all transition-colors">
+          {preview}{' '}
+          <span className="text-sky-600 font-medium group-hover:text-sky-700 transition-colors">
+            {readMoreLabel[language]}
+          </span>
         </p>
       ),
-      locked: true,
+      meta: `${readTime} ${readTimeLabel[language]} \u00B7 ${formatDiaryDate(entry.date)}`,
+      subMeta: year ? (
+        <div className="flex items-center gap-2 text-sm text-gray-400">
+          <span role="img" aria-label="calendar">
+            📅
+          </span>
+          {year}
+        </div>
+      ) : null,
       onSelect: () => navigate(`/blog/diary/${entry.date}`)
     };
   });
