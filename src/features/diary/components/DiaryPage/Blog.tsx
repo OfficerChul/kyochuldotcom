@@ -82,6 +82,11 @@ const uiCopy = {
     ko: '이 일기는 잠겨 있습니다. 상단의 키를 입력해 주세요.',
     zh: '此日记已锁定。请在上方输入密钥解锁。'
   },
+  lockedTitle: {
+    en: '🔒 Locked entry',
+    ko: '🔒 잠긴 일기',
+    zh: '🔒 已锁定日记'
+  },
   unlockedLabel: {
     en: 'Unlocked ✓',
     ko: '잠금 해제 ✓',
@@ -258,15 +263,16 @@ const BlogPage: React.FC = () => {
     () =>
       localizedDiaryEntries.map((entry) => ({
         date: entry.date,
-        title: entry.title || formatDateByLanguage(entry.date, language)
+        title: diaryUnlocked ? entry.title || formatDateByLanguage(entry.date, language) : uiCopy.lockedTitle[language]
       })),
-    [localizedDiaryEntries, language]
+    [localizedDiaryEntries, language, diaryUnlocked]
   );
   const totalDiaryEntries = localizedDiaryEntries.length;
 
   const currentIndex = dateParam ? orderedMeta.findIndex((item) => item.date === dateParam) : -1;
   const prevDate = currentIndex >= 0 && currentIndex < orderedMeta.length - 1 ? orderedMeta[currentIndex + 1].date : null;
   const nextDate = currentIndex > 0 ? orderedMeta[currentIndex - 1].date : null;
+  const selectedMeta = dateParam ? orderedMeta.find((meta) => meta.date === dateParam) : null;
 
   useEffect(() => {
     if (!dateParam) return;
@@ -347,9 +353,10 @@ const BlogPage: React.FC = () => {
   const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry, idx) => {
     const preview = buildPreviewText(getDiaryPreviewSource(entry.date), 300);
     const readTime = estimateReadTime(preview);
+    const title = diaryUnlocked ? entry.title || formatDateByLanguage(entry.date, language) : uiCopy.lockedTitle[language];
     return {
       id: entry.date,
-      title: entry.title,
+      title,
       summary: (
         <p className="text-gray-400 group-hover:text-gray-700 text-xs md:text-sm leading-relaxed break-all transition-colors">
           {preview}{' '}
@@ -425,7 +432,12 @@ const BlogPage: React.FC = () => {
   const diaryDetailView = dateParam ? (
     <PostDetailLayout
       dateLabel={formatDateByLanguage(dateParam, language)}
-      title={selectedEntry?.title || orderedMeta.find((meta) => meta.date === dateParam)?.title || 'Diary'}
+      title={
+        diaryUnlocked && selectedEntry
+          ? selectedEntry.title || formatDateByLanguage(selectedEntry.date, language)
+          : selectedMeta?.title ||
+            (diaryUnlocked ? formatDateByLanguage(dateParam, language) : uiCopy.lockedTitle[language])
+      }
       prev={prevDate ? { label: 'Previous', onClick: () => navigate(`/blog/diary/${prevDate}`) } : null}
       next={nextDate ? { label: 'Next', onClick: () => navigate(`/blog/diary/${nextDate}`) } : null}
       onBack={() => navigate('/blog/diary')}
