@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import Modal from 'react-modal';
 import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope, FaBook } from 'react-icons/fa';
-import LoadingQuote from '../../../../shared/components/ui/LoadingQuote';
 import SocialLinkButton from './SocialLinkButton';
 import './animations.css';
 
@@ -28,6 +27,15 @@ type LinkConfig = {
   onClick?: () => void;
   isPortfolio?: boolean;
 };
+
+const LoadingSpinner: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <div className={`flex items-center justify-center ${className}`}>
+    <div className="text-center px-6">
+      <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-600 mx-auto" />
+      <p className="mt-3 text-sm text-gray-500">Loading...</p>
+    </div>
+  </div>
+);
 
 const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -234,7 +242,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
           {/* PDF Viewer - react-pdf for cross-platform support */}
           <Suspense
             fallback={
-              <LoadingQuote className="absolute inset-0 bg-white" quoteClassName="text-gray-700" />
+              <LoadingSpinner className="absolute inset-0 bg-white" />
             }
           >
             <PDFViewer file="/Kyochul_Jang___CV.pdf" width={modalWidth} />

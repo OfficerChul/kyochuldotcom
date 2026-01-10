@@ -3,7 +3,6 @@ import { FaSearch } from 'react-icons/fa';
 import logo from '../../../../assets/images/logos/triangle-skyblue.png';
 import Navigation from '../../../../shared/components/ui/Navigation';
 import NavBar from '../../../../shared/components/ui/NavBar';
-import LoadingQuote from '../../../../shared/components/ui/LoadingQuote';
 import WorldClock from '../WorldClock';
 import './animations.css';
 
@@ -297,7 +296,12 @@ const Main: React.FC = () => {
         <div className="mt-4 sm:mt-8 pointer-events-auto">
           <Suspense
             fallback={
-              <LoadingQuote className="py-6 sm:py-8 bg-white/70 rounded-xl shadow-lg" />
+              <div className="flex items-center justify-center py-6 sm:py-8 bg-white/70 rounded-xl shadow-lg">
+                <div className="text-center px-6">
+                  <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-600 mx-auto" />
+                  <p className="mt-3 text-sm text-gray-500">Loading...</p>
+                </div>
+              </div>
             }
           >
             <SocialLinks variant={timeStage.stage === 'night' ? 'dark' : 'light'} />

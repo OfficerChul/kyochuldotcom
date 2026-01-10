@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { getRandomQuote } from '../../../../shared/data/loadingQuotes';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
@@ -16,24 +15,15 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ file, width }) => {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
 
-  // Pick a random quote on each mount
-  const randomQuote = useMemo(() => getRandomQuote(), []);
-
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
   };
 
-  // Loading component with quote
   const LoadingComponent = (
     <div className="absolute inset-0 flex items-center justify-center">
-      <div className="text-center px-8 max-w-md">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-600 mx-auto mb-6"></div>
-        <p className="text-gray-600 italic text-lg leading-relaxed">
-          "{randomQuote.quote}"
-        </p>
-        <p className="text-gray-500 mt-3 text-sm">
-          — {randomQuote.author}
-        </p>
+      <div className="text-center px-6">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-600 mx-auto"></div>
+        <p className="text-gray-500 mt-3 text-sm">Loading...</p>
       </div>
     </div>
   );
