@@ -55,7 +55,7 @@ const RAW_DIARY_ENTRIES: Omit<DiaryEntry, 'rawDate'>[] = [
     `
   },
   {
-    date: '99-01-25',
+    date: '00-01-25',
     title: 'template',
     content: `content`
   }

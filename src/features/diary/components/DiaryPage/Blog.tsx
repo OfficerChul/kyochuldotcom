@@ -429,9 +429,18 @@ const BlogPage: React.FC = () => {
     <PostList items={blogListItems} />
   );
 
+  const diaryDetailDateLabel =
+    diaryUnlocked && selectedEntry
+      ? `${formatDateByLanguage(selectedEntry.date, language)} · ${estimateReadTime(selectedEntry.content)} ${
+          readTimeLabel[language]
+        }`
+      : dateParam
+        ? formatDateByLanguage(dateParam, language)
+        : '';
+
   const diaryDetailView = dateParam ? (
     <PostDetailLayout
-      dateLabel={formatDateByLanguage(dateParam, language)}
+      dateLabel={diaryDetailDateLabel}
       title={
         diaryUnlocked && selectedEntry
           ? selectedEntry.title || formatDateByLanguage(selectedEntry.date, language)
@@ -444,11 +453,7 @@ const BlogPage: React.FC = () => {
     >
       {diaryUnlocked ? (
         selectedEntry ? (
-          <DiaryEntryDetail
-            entry={selectedEntry}
-            readTimeSuffix={readTimeLabel[language]}
-            formattedDate={formatDateByLanguage(selectedEntry.date, language)}
-          />
+          <DiaryEntryDetail entry={selectedEntry} />
         ) : (
           <p className="text-sm text-red-400">Entry not found.</p>
         )
