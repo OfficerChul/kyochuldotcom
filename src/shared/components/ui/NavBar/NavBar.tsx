@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-type NavPage = 'home' | 'about' | 'publications' | 'blog';
+export type NavPage = 'home' | 'about' | 'publications' | 'blog';
 
 interface NavBarProps {
   variant?: 'light' | 'dark';
@@ -11,18 +11,16 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = ({ variant = 'light', currentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const baseClass = variant === 'dark'
-    ? 'text-white/80 hover:text-white drop-shadow-md'
-    : 'text-gray-500 hover:text-sky-500';
+  const baseClass =
+    variant === 'dark'
+      ? 'text-white/80 hover:text-white drop-shadow-md'
+      : 'text-gray-500 hover:text-sky-500';
 
-  const activeClass = variant === 'dark'
-    ? 'text-white drop-shadow-md'
-    : 'text-sky-500';
+  const activeClass = variant === 'dark' ? 'text-white drop-shadow-md' : 'text-sky-500';
 
   const burgerColor = variant === 'dark' ? 'bg-white' : 'bg-gray-600';
-  const menuBg = variant === 'dark'
-    ? 'bg-gray-900/95 backdrop-blur-sm'
-    : 'bg-white/95 backdrop-blur-sm';
+  const menuBg =
+    variant === 'dark' ? 'bg-gray-900/95 backdrop-blur-sm' : 'bg-white/95 backdrop-blur-sm';
 
   const navLinks = (
     <>
@@ -72,14 +70,22 @@ const NavBar: React.FC<NavBarProps> = ({ variant = 'light', currentPage }) => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
-        <span className={`block w-5 h-0.5 ${burgerColor} transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-        <span className={`block w-5 h-0.5 ${burgerColor} transition-opacity ${isOpen ? 'opacity-0' : ''}`} />
-        <span className={`block w-5 h-0.5 ${burgerColor} transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+        <span
+          className={`block w-5 h-0.5 ${burgerColor} transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}
+        />
+        <span
+          className={`block w-5 h-0.5 ${burgerColor} transition-opacity ${isOpen ? 'opacity-0' : ''}`}
+        />
+        <span
+          className={`block w-5 h-0.5 ${burgerColor} transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}
+        />
       </button>
 
       {/* Mobile menu dropdown */}
       {isOpen && (
-        <div className={`md:hidden absolute top-full right-0 ${menuBg} rounded-lg shadow-lg py-3 px-5 flex flex-col gap-3 text-sm min-w-[140px]`}>
+        <div
+          className={`md:hidden absolute top-full right-0 ${menuBg} rounded-lg shadow-lg py-3 px-5 flex flex-col gap-3 text-sm min-w-[140px]`}
+        >
           {navLinks}
         </div>
       )}

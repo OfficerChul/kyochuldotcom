@@ -2,31 +2,36 @@ import React, { useState } from 'react';
 import FancyBtn from '../Button';
 import TypingAnimation from '../TypingAnimation';
 import NavBar from '../NavBar';
+import type { NavPage } from '../NavBar/NavBar';
 import backgroundImage from '../../../../assets/images/backgrounds/background.jpg';
 
 interface HeroSectionProps {
   showAboutButton?: boolean;
-  currentPage?: string;
+  currentPage?: NavPage;
   secondLineText?: string;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ showAboutButton = false, currentPage, secondLineText = "My Website :)" }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({
+  showAboutButton = false,
+  currentPage,
+  secondLineText = 'My Website :)',
+}) => {
   const [showSecondLine, setShowSecondLine] = useState(false);
   const [showThirdLine, setShowThirdLine] = useState(false);
 
   return (
     <>
       <header
-      className={`font-['Bungee'] bg-no-repeat bg-cover bg-center h-screen relative`}
-      style={{
-        backgroundImage: `url(${backgroundImage})`
-      }}
-    >
-      <div className="absolute top-0 right-0 z-50 font-sans">
-        <NavBar variant="dark" currentPage={currentPage} />
-      </div>
+        className={`font-['Bungee'] bg-no-repeat bg-cover bg-center h-screen relative`}
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
+      >
+        <div className="absolute top-0 right-0 z-50 font-sans">
+          <NavBar variant="dark" currentPage={currentPage} />
+        </div>
 
-      <div id="top" className="pt-12">
+        <div id="top" className="pt-12">
           <h1 className="text-black text-left pl-[1%] text-[7vw] lg:text-[4vw] font-black h-[1.2em]">
             <span className="[-webkit-text-stroke:1px_#ffffff]">
               <TypingAnimation
@@ -56,20 +61,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ showAboutButton = false, curr
           {showThirdLine && (
             <div className="relative ml-1 md:bottom-10">
               <h2 className="absolute text-[12vw] [-webkit-text-stroke:2px_#000000] min-[481px]:[-webkit-text-stroke:3px_#000000] min-[641px]:[-webkit-text-stroke:5px_#000000] text-transparent">
-                <TypingAnimation
-                  text="Kyochul Jang"
-                  delay={100}
-                  speed={60}
-                  cursor={false}
-                />
+                <TypingAnimation text="Kyochul Jang" delay={100} speed={60} cursor={false} />
               </h2>
               <h2 className="absolute text-[12vw] [-webkit-text-stroke:2px_#000000] min-[481px]:[-webkit-text-stroke:3px_#000000] min-[641px]:[-webkit-text-stroke:5px_#000000] text-[#b5ff08] animate-[animate_4s_ease-in-out_infinite]">
-                <TypingAnimation
-                  text="Kyochul Jang"
-                  delay={100}
-                  speed={60}
-                  cursor={false}
-                />
+                <TypingAnimation text="Kyochul Jang" delay={100} speed={60} cursor={false} />
               </h2>
             </div>
           )}

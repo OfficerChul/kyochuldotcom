@@ -15,7 +15,7 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
   speed = 100,
   className = '',
   onComplete,
-  cursor = true
+  cursor = true,
 }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,21 +51,26 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
   useEffect(() => {
     if (!isTyping) return;
 
+    let timeoutId: number | undefined;
+
     if (currentIndex < text.length) {
       // Use the pre-calculated speed for this character
       const charSpeed = charSpeeds[currentIndex];
 
-      const timeout = setTimeout(() => {
+      timeoutId = window.setTimeout(() => {
         setDisplayText((prev) => prev + text[currentIndex]);
         setCurrentIndex((prev) => prev + 1);
       }, charSpeed);
-
-      return () => clearTimeout(timeout);
     } else {
       if (onComplete) onComplete();
-      // Hide cursor after typing is complete
-      setTimeout(() => setShowCursor(false), 500);
+      timeoutId = window.setTimeout(() => setShowCursor(false), 500);
     }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [currentIndex, text, charSpeeds, isTyping, onComplete]);
 
   return (
@@ -77,7 +82,7 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
           style={{
             opacity: isTyping ? 1 : 0,
             transition: 'opacity 0.3s',
-            marginLeft: '2px'
+            marginLeft: '2px',
           }}
         >
           |

@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 
 interface ExpandableListProps<T> {
   items: T[];
@@ -70,16 +70,13 @@ const ExpandableList = <T,>({
             showAll && !isAnimating && isExpandedItem
               ? 'expandableSlideDown 0.3s ease-out forwards'
               : isAnimating && isExpandedItem
-              ? 'expandableSlideUp 0.3s ease-out forwards'
-              : undefined;
+                ? 'expandableSlideUp 0.3s ease-out forwards'
+                : undefined;
 
           const animationDelay = isExpandedItem ? `${(index - initialCount) * 0.1}s` : undefined;
 
           return (
-            <div
-              key={index}
-              style={{ animation, animationDelay }}
-            >
+            <div key={index} style={{ animation, animationDelay }}>
               {renderItem(item, index, showAll, isAnimating)}
             </div>
           );

@@ -18,7 +18,7 @@ type Language = 'en' | 'ko' | 'zh';
 const LANG_OPTIONS: { code: Language; label: string }[] = [
   { code: 'en', label: 'Eng' },
   { code: 'zh', label: '中' },
-  { code: 'ko', label: '한' }
+  { code: 'ko', label: '한' },
 ];
 
 const ENTRIES_PER_PAGE = 5;
@@ -26,13 +26,13 @@ const ENTRIES_PER_PAGE = 5;
 const readTimeLabel: Record<Language, string> = {
   en: 'min read',
   ko: '분 소요',
-  zh: '分钟阅读'
+  zh: '分钟阅读',
 };
 
 const readMoreLabel: Record<Language, string> = {
   en: '(Read more)',
   ko: '(더 보기)',
-  zh: '(阅读全文)'
+  zh: '(阅读全文)',
 };
 
 const DIARY_KEY = process.env.REACT_APP_DIARY_KEY || 'diary-demo-key';
@@ -42,7 +42,7 @@ const getLocalizedDiaryEntry = (entry: DiaryEntryType, lang: Language): DiaryEnt
   return {
     ...entry,
     title: localized?.title ?? entry.title,
-    content: localized?.content ?? entry.content
+    content: localized?.content ?? entry.content,
   };
 };
 
@@ -50,48 +50,48 @@ const uiCopy = {
   decodePlaceholder: {
     en: 'Enter decode key...',
     ko: '디코드 키를 입력하세요...',
-    zh: '请输入解锁密钥...'
+    zh: '请输入解锁密钥...',
   },
   decodeButton: {
     en: 'Unlock',
     ko: '잠금 해제',
-    zh: '解锁'
+    zh: '解锁',
   },
   decodeButtonLoading: {
     en: 'Unlocking...',
     ko: '해제 중...',
-    zh: '解锁中...'
+    zh: '解锁中...',
   },
   decodeEmptyError: {
     en: 'Please enter a decode key',
     ko: '디코드 키를 입력하세요',
-    zh: '请输入解锁密钥'
+    zh: '请输入解锁密钥',
   },
   decodeInvalidError: {
     en: 'Invalid key',
     ko: '키가 맞지 않습니다',
-    zh: '密钥不正确'
+    zh: '密钥不正确',
   },
   lockedPreview: {
     en: '🔒 Locked. Enter the key to view.',
     ko: '🔒 잠겨 있습니다. 키를 입력해 주세요.',
-    zh: '🔒 已锁定。请输入密钥查看。'
+    zh: '🔒 已锁定。请输入密钥查看。',
   },
   lockedDetail: {
     en: 'This diary entry is locked. Enter the key above to read it.',
     ko: '이 일기는 잠겨 있습니다. 상단의 키를 입력해 주세요.',
-    zh: '此日记已锁定。请在上方输入密钥解锁。'
+    zh: '此日记已锁定。请在上方输入密钥解锁。',
   },
   lockedTitle: {
     en: '🔒 Locked entry',
     ko: '🔒 잠긴 일기',
-    zh: '🔒 已锁定日记'
+    zh: '🔒 已锁定日记',
   },
   unlockedLabel: {
     en: 'Unlocked ✓',
     ko: '잠금 해제 ✓',
-    zh: '已解锁 ✓'
-  }
+    zh: '已解锁 ✓',
+  },
 };
 
 const markdownComponents: MarkdownComponents = {
@@ -115,17 +115,17 @@ const markdownComponents: MarkdownComponents = {
       {children}
     </p>
   ),
-  ul: ({ node, ordered, children, ...props }) => (
+  ul: ({ node, children, ...props }) => (
     <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-700" {...props}>
       {children}
     </ul>
   ),
-  ol: ({ node, ordered, children, ...props }) => (
+  ol: ({ node, children, ...props }) => (
     <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-700" {...props}>
       {children}
     </ol>
   ),
-  li: ({ node, ordered, children, ...props }) => (
+  li: ({ node, children, ...props }) => (
     <li className="leading-relaxed" {...props}>
       {children}
     </li>
@@ -135,9 +135,12 @@ const markdownComponents: MarkdownComponents = {
       {children}
     </blockquote>
   ),
-  code: ({ node, inline, className, children, ...props }) =>
+  code: ({ inline, className, children, ...props }: any) =>
     inline ? (
-      <code className="px-1.5 py-0.5 rounded bg-gray-100 text-sm font-mono text-gray-800" {...props}>
+      <code
+        className="px-1.5 py-0.5 rounded bg-gray-100 text-sm font-mono text-gray-800"
+        {...props}
+      >
         {children}
       </code>
     ) : (
@@ -147,12 +150,15 @@ const markdownComponents: MarkdownComponents = {
         </code>
       </pre>
     ),
+
   a: ({ node, children, ...props }) => (
     <a className="text-sky-600 hover:underline" target="_blank" rel="noreferrer" {...props}>
       {children}
     </a>
   ),
-  img: ({ node, alt, ...props }) => <img className="my-4 rounded-lg shadow-sm" alt={alt || ''} {...props} />
+  img: ({ node, alt, ...props }) => (
+    <img className="my-4 rounded-lg shadow-sm" alt={alt || ''} {...props} />
+  ),
 };
 
 const BlogPage: React.FC = () => {
@@ -225,7 +231,11 @@ const BlogPage: React.FC = () => {
     const [yy, mm, dd] = dateStr.split('-').map(Number);
     const date = new Date(2000 + yy, mm - 1, dd);
     const locale = lang === 'ko' ? 'ko-KR' : lang === 'zh' ? 'zh-CN' : 'en-US';
-    return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+    return new Intl.DateTimeFormat(locale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(date);
   };
 
   const getReadTimeText = (content: string, lang: Language): string => {
@@ -239,7 +249,7 @@ const BlogPage: React.FC = () => {
       title: localized?.title ?? post.title,
       summary: localized?.summary ?? post.summary,
       content: localized?.content ?? post.content,
-      tags: localized?.tags ?? post.tags
+      tags: localized?.tags ?? post.tags,
     };
   };
 
@@ -257,20 +267,27 @@ const BlogPage: React.FC = () => {
   const selectedBlogPost: BlogPost | undefined = slugParam
     ? sortedBlogPosts.find((post) => post.slug === slugParam)
     : undefined;
-  const localizedSelected = selectedBlogPost ? getLocalizedPost(selectedBlogPost, language) : undefined;
+  const localizedSelected = selectedBlogPost
+    ? getLocalizedPost(selectedBlogPost, language)
+    : undefined;
 
   const orderedMeta = useMemo(
     () =>
       localizedDiaryEntries.map((entry) => ({
         date: entry.date,
-        title: diaryUnlocked ? entry.title || formatDateByLanguage(entry.date, language) : uiCopy.lockedTitle[language]
+        title: diaryUnlocked
+          ? entry.title || formatDateByLanguage(entry.date, language)
+          : uiCopy.lockedTitle[language],
       })),
     [localizedDiaryEntries, language, diaryUnlocked]
   );
   const totalDiaryEntries = localizedDiaryEntries.length;
 
   const currentIndex = dateParam ? orderedMeta.findIndex((item) => item.date === dateParam) : -1;
-  const prevDate = currentIndex >= 0 && currentIndex < orderedMeta.length - 1 ? orderedMeta[currentIndex + 1].date : null;
+  const prevDate =
+    currentIndex >= 0 && currentIndex < orderedMeta.length - 1
+      ? orderedMeta[currentIndex + 1].date
+      : null;
   const nextDate = currentIndex > 0 ? orderedMeta[currentIndex - 1].date : null;
   const selectedMeta = dateParam ? orderedMeta.find((meta) => meta.date === dateParam) : null;
 
@@ -337,23 +354,28 @@ const BlogPage: React.FC = () => {
       ),
       meta: `\u{1F4C5} ${formatDateByLanguage(post.date, language)} \u00B7 ${readTimeText}`,
       subMeta: subMetaContent,
-      onSelect: () => navigate(`/blog/post/${post.slug}`)
+      onSelect: () => navigate(`/blog/post/${post.slug}`),
     };
   });
 
   const blogIndex = slugParam ? sortedBlogPosts.findIndex((post) => post.slug === slugParam) : -1;
   const prevBlogSlug = blogIndex > 0 ? sortedBlogPosts[blogIndex - 1].slug : null; // older
-  const nextBlogSlug = blogIndex >= 0 && blogIndex < sortedBlogPosts.length - 1 ? sortedBlogPosts[blogIndex + 1].slug : null; // newer
+  const nextBlogSlug =
+    blogIndex >= 0 && blogIndex < sortedBlogPosts.length - 1
+      ? sortedBlogPosts[blogIndex + 1].slug
+      : null; // newer
 
   const paginatedDiaryEntries = localizedDiaryEntries.slice(
     (currentPage - 1) * ENTRIES_PER_PAGE,
     currentPage * ENTRIES_PER_PAGE
   );
 
-  const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry, idx) => {
+  const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry) => {
     const preview = buildPreviewText(getDiaryPreviewSource(entry.date), 300);
     const readTime = estimateReadTime(preview);
-    const title = diaryUnlocked ? entry.title || formatDateByLanguage(entry.date, language) : uiCopy.lockedTitle[language];
+    const title = diaryUnlocked
+      ? entry.title || formatDateByLanguage(entry.date, language)
+      : uiCopy.lockedTitle[language];
     return {
       id: entry.date,
       title,
@@ -367,19 +389,24 @@ const BlogPage: React.FC = () => {
       ),
       meta: `\u{1F4C5} ${formatDateByLanguage(entry.date, language)} \u00B7 ${readTime} ${readTimeLabel[language]}`,
       subMeta: null,
-      onSelect: () => navigate(`/blog/diary/${entry.date}`)
+      onSelect: () => navigate(`/blog/diary/${entry.date}`),
     };
   });
 
   const diaryPagination =
     Math.ceil(totalDiaryEntries / ENTRIES_PER_PAGE) > 1 ? (
       <div className="flex justify-center gap-2 mt-8">
-        {Array.from({ length: Math.ceil(totalDiaryEntries / ENTRIES_PER_PAGE) }, (_, i) => i + 1).map((page) => (
+        {Array.from(
+          { length: Math.ceil(totalDiaryEntries / ENTRIES_PER_PAGE) },
+          (_, i) => i + 1
+        ).map((page) => (
           <button
             key={page}
             onClick={() => handleChangePage(page)}
             className={`group relative overflow-hidden w-9 h-9 rounded-full text-sm transition-colors ${
-              currentPage === page ? 'bg-sky-500 text-white' : 'text-sky-500 border border-sky-300 hover:bg-sky-50'
+              currentPage === page
+                ? 'bg-sky-500 text-white'
+                : 'text-sky-500 border border-sky-300 hover:bg-sky-50'
             }`}
           >
             <span className="relative z-10">{page}</span>
@@ -393,16 +420,25 @@ const BlogPage: React.FC = () => {
       </div>
     ) : null;
 
+  const blogDateLabel =
+    selectedBlogPost && localizedSelected
+      ? `📅 ${formatDateByLanguage(selectedBlogPost.date, language)} · ${getReadTimeText(localizedSelected.content, language)}`
+      : '';
+
   const blogDetailView = slugParam ? (
     <PostDetailLayout
-      dateLabel={
-        localizedSelected
-          ? `\u{1F4C5} ${formatDateByLanguage(selectedBlogPost.date, language)} · ${getReadTimeText(localizedSelected.content, language)}`
-          : ''
-      }
+      dateLabel={blogDateLabel}
       title={localizedSelected?.title || 'Post'}
-      prev={prevBlogSlug ? { label: 'Previous', onClick: () => navigate(`/blog/post/${prevBlogSlug}`) } : null}
-      next={nextBlogSlug ? { label: 'Next', onClick: () => navigate(`/blog/post/${nextBlogSlug}`) } : null}
+      prev={
+        prevBlogSlug
+          ? { label: 'Previous', onClick: () => navigate(`/blog/post/${prevBlogSlug}`) }
+          : null
+      }
+      next={
+        nextBlogSlug
+          ? { label: 'Next', onClick: () => navigate(`/blog/post/${nextBlogSlug}`) }
+          : null
+      }
       onBack={() => navigate('/blog')}
       backLabel="← Back to blog"
     >
@@ -445,9 +481,13 @@ const BlogPage: React.FC = () => {
         diaryUnlocked && selectedEntry
           ? selectedEntry.title || formatDateByLanguage(selectedEntry.date, language)
           : selectedMeta?.title ||
-            (diaryUnlocked ? formatDateByLanguage(dateParam, language) : uiCopy.lockedTitle[language])
+            (diaryUnlocked
+              ? formatDateByLanguage(dateParam, language)
+              : uiCopy.lockedTitle[language])
       }
-      prev={prevDate ? { label: 'Previous', onClick: () => navigate(`/blog/diary/${prevDate}`) } : null}
+      prev={
+        prevDate ? { label: 'Previous', onClick: () => navigate(`/blog/diary/${prevDate}`) } : null
+      }
       next={nextDate ? { label: 'Next', onClick: () => navigate(`/blog/diary/${nextDate}`) } : null}
       onBack={() => navigate('/blog/diary')}
     >
@@ -521,7 +561,7 @@ const BlogPage: React.FC = () => {
                       className="absolute top-0 bottom-0 left-0 lang-highlight transition-transform duration-300 ease-out"
                       style={{
                         width: `${100 / LANG_OPTIONS.length}%`,
-                        transform: `translateX(${LANG_OPTIONS.findIndex((opt) => opt.code === language) * 100}%)`
+                        transform: `translateX(${LANG_OPTIONS.findIndex((opt) => opt.code === language) * 100}%)`,
                       }}
                       aria-hidden
                     />
@@ -569,10 +609,16 @@ const BlogPage: React.FC = () => {
                     ariaLabel="Decode diary"
                   >
                     <i className="fa fa-unlock-alt"></i>
-                    <span>{isDecoding ? uiCopy.decodeButtonLoading[language] : uiCopy.decodeButton[language]}</span>
+                    <span>
+                      {isDecoding
+                        ? uiCopy.decodeButtonLoading[language]
+                        : uiCopy.decodeButton[language]}
+                    </span>
                   </FancyButtonSmall>
                   {diaryUnlocked ? (
-                    <span className="text-[11px] text-sky-600 font-mono">{uiCopy.unlockedLabel[language]}</span>
+                    <span className="text-[11px] text-sky-600 font-mono">
+                      {uiCopy.unlockedLabel[language]}
+                    </span>
                   ) : null}
                 </div>
               ) : null}
@@ -601,7 +647,9 @@ const BlogPage: React.FC = () => {
 
       <Fade direction="up" triggerOnce>
         <footer className="border-t border-gray-200 py-8 mt-auto">
-          <p className="text-center text-xs text-gray-400">© Copyright {new Date().getFullYear()} Kyochul Jang</p>
+          <p className="text-center text-xs text-gray-400">
+            © Copyright {new Date().getFullYear()} Kyochul Jang
+          </p>
         </footer>
       </Fade>
     </div>

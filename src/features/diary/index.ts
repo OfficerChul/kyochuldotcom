@@ -1,2 +1,3 @@
 export * from './types';
-export * from './components';
+export { default as BlogPage } from './components/DiaryPage';
+export { default as DiaryEntryCard } from './components/DiaryEntry';
