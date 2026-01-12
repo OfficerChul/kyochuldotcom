@@ -13,27 +13,41 @@ const VisitorMap = lazy(() => import('../VisitorMap'));
 const Portfolio: React.FC = () => {
   return (
     <>
-      <HeroSection currentPage="about" />
+      <HeroSection currentPage="portfolio" />
 
-      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+      <Suspense
+        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
+      >
         <AboutMe id="about1" />
       </Suspense>
-      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+      <Suspense
+        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
+      >
         <Publications id="publications" />
       </Suspense>
-      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+      <Suspense
+        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
+      >
         <News id="news" />
       </Suspense>
-      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+      <Suspense
+        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
+      >
         <Education id="education" />
       </Suspense>
-      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+      <Suspense
+        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
+      >
         <Projects id="projects" />
       </Suspense>
-      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+      <Suspense
+        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
+      >
         <Timeline id="timeline" />
       </Suspense>
-      <Suspense fallback={<div className="h-48 flex items-center justify-center">Loading map...</div>}>
+      <Suspense
+        fallback={<div className="h-48 flex items-center justify-center">Loading map...</div>}
+      >
         <VisitorMap />
       </Suspense>
 

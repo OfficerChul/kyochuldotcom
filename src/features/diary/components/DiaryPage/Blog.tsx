@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import { Fade } from 'react-awesome-reveal';
 import ReactMarkdown, { Components as MarkdownComponents } from 'react-markdown';
@@ -36,6 +36,43 @@ const readMoreLabel: Record<Language, string> = {
 };
 
 const DIARY_KEY = process.env.REACT_APP_DIARY_KEY || 'diary-demo-key';
+
+const parseShortDate = (dateStr: string): number => {
+  const [yy, mm, dd] = dateStr.split('-').map(Number);
+  return new Date(2000 + yy, mm - 1, dd).getTime();
+};
+
+const formatDateByLanguage = (dateStr: string, lang: Language): string => {
+  const [yy, mm, dd] = dateStr.split('-').map(Number);
+  const date = new Date(2000 + yy, mm - 1, dd);
+  const locale = lang === 'ko' ? 'ko-KR' : lang === 'zh' ? 'zh-CN' : 'en-US';
+  return new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+};
+
+const buildPreviewText = (text: string, limit = 300) => {
+  if (!text) return '';
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  return normalized.length > limit ? `${normalized.slice(0, limit).trimEnd()}…` : normalized;
+};
+
+const getReadTimeText = (content: string, lang: Language): string => {
+  const minutes = estimateReadTime(content);
+  return `${minutes} ${readTimeLabel[lang]}`;
+};
+
+const getLocalizedPost = (post: BlogPost, lang: Language) => {
+  const localized = post.translations?.[lang];
+  return {
+    title: localized?.title ?? post.title,
+    summary: localized?.summary ?? post.summary,
+    content: localized?.content ?? post.content,
+    tags: localized?.tags ?? post.tags,
+  };
+};
 
 const getLocalizedDiaryEntry = (entry: DiaryEntryType, lang: Language): DiaryEntryType => {
   const localized = entry.translations?.[lang];
@@ -176,31 +213,29 @@ const BlogPage: React.FC = () => {
   const [decodeError, setDecodeError] = useState<string | null>(null);
   const [isDecoding, setIsDecoding] = useState(false);
 
-  const parseShortDate = (dateStr: string): number => {
-    const [yy, mm, dd] = dateStr.split('-').map(Number);
-    return new Date(2000 + yy, mm - 1, dd).getTime();
-  };
-
-  const handleDecode = () => {
-    if (!decodeInput.trim()) {
+  const handleDecode = useCallback(() => {
+    const trimmed = decodeInput.trim();
+    if (!trimmed) {
       setDecodeError(uiCopy.decodeEmptyError[language]);
       return;
     }
     setIsDecoding(true);
-    const trimmed = decodeInput.trim();
     const matched = trimmed === DIARY_KEY;
     setTimeout(() => {
       setDiaryUnlocked(matched);
       setDecodeError(matched ? null : uiCopy.decodeInvalidError[language]);
       setIsDecoding(false);
     }, 150);
-  };
+  }, [decodeInput, language]);
 
-  const handleDecodeKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleDecode();
-    }
-  };
+  const handleDecodeKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        handleDecode();
+      }
+    },
+    [handleDecode]
+  );
 
   useEffect(() => {
     setDecodeError(null);
@@ -220,38 +255,6 @@ const BlogPage: React.FC = () => {
     () => [...BLOG_POSTS].sort((a, b) => parseShortDate(b.date) - parseShortDate(a.date)),
     []
   );
-
-  const buildPreviewText = (text: string, limit = 300) => {
-    if (!text) return '';
-    const normalized = text.replace(/\s+/g, ' ').trim();
-    return normalized.length > limit ? `${normalized.slice(0, limit).trimEnd()}…` : normalized;
-  };
-
-  const formatDateByLanguage = (dateStr: string, lang: Language): string => {
-    const [yy, mm, dd] = dateStr.split('-').map(Number);
-    const date = new Date(2000 + yy, mm - 1, dd);
-    const locale = lang === 'ko' ? 'ko-KR' : lang === 'zh' ? 'zh-CN' : 'en-US';
-    return new Intl.DateTimeFormat(locale, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }).format(date);
-  };
-
-  const getReadTimeText = (content: string, lang: Language): string => {
-    const minutes = estimateReadTime(content);
-    return `${minutes} ${readTimeLabel[lang]}`;
-  };
-
-  const getLocalizedPost = (post: BlogPost, lang: Language) => {
-    const localized = post.translations?.[lang];
-    return {
-      title: localized?.title ?? post.title,
-      summary: localized?.summary ?? post.summary,
-      content: localized?.content ?? post.content,
-      tags: localized?.tags ?? post.tags,
-    };
-  };
 
   const activeTab: TabKey = location.pathname.startsWith('/blog/diary') ? 'diary' : 'blog';
   const blogActive = activeTab === 'blog';
@@ -301,62 +304,75 @@ const BlogPage: React.FC = () => {
     }
   }, [dateParam, localizedDiaryEntries, currentPage]);
 
-  const handleChangePage = (page: number) => {
-    setCurrentPage(page);
-    navigate('/blog/diary');
-  };
-
-  const handleTabChange = (tab: TabKey) => {
-    if (tab === activeTab) return;
-    if (tab === 'blog') {
-      navigate('/blog');
-    } else {
-      setCurrentPage(1);
+  const handleChangePage = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
       navigate('/blog/diary');
-    }
-  };
+    },
+    [navigate]
+  );
 
-  const getDiaryPreviewSource = (date: string) => {
-    if (!diaryUnlocked) {
-      return uiCopy.lockedPreview[language];
-    }
-    const matchedEntry = localizedDiaryEntries.find((entry) => entry.date === date);
-    return matchedEntry?.content ?? '';
-  };
+  const handleTabChange = useCallback(
+    (tab: TabKey) => {
+      if (tab === activeTab) return;
+      if (tab === 'blog') {
+        navigate('/blog');
+      } else {
+        setCurrentPage(1);
+        navigate('/blog/diary');
+      }
+    },
+    [activeTab, navigate]
+  );
 
-  const blogListItems: PostListItem[] = sortedBlogPosts.map((post) => {
-    const localized = getLocalizedPost(post, language);
-    const readTimeText = getReadTimeText(localized.content, language);
-    const summaryPreview = buildPreviewText(localized.content, 300);
-    const tags = localized.tags;
-    const hasTags = Boolean(tags && tags.length);
-    const subMetaContent = hasTags ? (
-      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400 mt-1">
-        <div className="flex flex-wrap gap-2">
-          {tags!.map((tag) => (
-            <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    ) : null;
-    return {
-      id: post.slug,
-      title: localized.title,
-      summary: (
-        <p className="text-gray-400 group-hover:text-gray-700 text-xs md:text-sm leading-relaxed transition-colors">
-          {summaryPreview}{' '}
-          <span className="text-sky-600 font-medium group-hover:text-sky-700 transition-colors">
-            {readMoreLabel[language]}
-          </span>
-        </p>
-      ),
-      meta: `\u{1F4C5} ${formatDateByLanguage(post.date, language)} \u00B7 ${readTimeText}`,
-      subMeta: subMetaContent,
-      onSelect: () => navigate(`/blog/post/${post.slug}`),
-    };
-  });
+  const getDiaryPreviewSource = useCallback(
+    (date: string) => {
+      if (!diaryUnlocked) {
+        return uiCopy.lockedPreview[language];
+      }
+      const matchedEntry = localizedDiaryEntries.find((entry) => entry.date === date);
+      return matchedEntry?.content ?? '';
+    },
+    [diaryUnlocked, language, localizedDiaryEntries]
+  );
+
+  const blogListItems: PostListItem[] = useMemo(
+    () =>
+      sortedBlogPosts.map((post) => {
+        const localized = getLocalizedPost(post, language);
+        const readTimeText = getReadTimeText(localized.content, language);
+        const summaryPreview = buildPreviewText(localized.content, 300);
+        const tags = localized.tags;
+        const hasTags = Boolean(tags && tags.length);
+        const subMetaContent = hasTags ? (
+          <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400 mt-1">
+            <div className="flex flex-wrap gap-2">
+              {tags!.map((tag) => (
+                <span key={tag} className="text-xs bg-sky-50 text-sky-600 px-3 py-1 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : null;
+        return {
+          id: post.slug,
+          title: localized.title,
+          summary: (
+            <p className="text-gray-400 group-hover:text-gray-700 text-xs md:text-sm leading-relaxed transition-colors">
+              {summaryPreview}{' '}
+              <span className="text-sky-600 font-medium group-hover:text-sky-700 transition-colors">
+                {readMoreLabel[language]}
+              </span>
+            </p>
+          ),
+          meta: `\u{1F4C5} ${formatDateByLanguage(post.date, language)} \u00B7 ${readTimeText}`,
+          subMeta: subMetaContent,
+          onSelect: () => navigate(`/blog/post/${post.slug}`),
+        };
+      }),
+    [language, navigate, sortedBlogPosts]
+  );
 
   const blogIndex = slugParam ? sortedBlogPosts.findIndex((post) => post.slug === slugParam) : -1;
   const prevBlogSlug = blogIndex > 0 ? sortedBlogPosts[blogIndex - 1].slug : null; // older
@@ -370,28 +386,32 @@ const BlogPage: React.FC = () => {
     currentPage * ENTRIES_PER_PAGE
   );
 
-  const diaryListItems: PostListItem[] = paginatedDiaryEntries.map((entry) => {
-    const preview = buildPreviewText(getDiaryPreviewSource(entry.date), 300);
-    const readTime = estimateReadTime(preview);
-    const title = diaryUnlocked
-      ? entry.title || formatDateByLanguage(entry.date, language)
-      : uiCopy.lockedTitle[language];
-    return {
-      id: entry.date,
-      title,
-      summary: (
-        <p className="text-gray-400 group-hover:text-gray-700 text-xs md:text-sm leading-relaxed break-all transition-colors">
-          {preview}{' '}
-          <span className="text-sky-600 font-medium group-hover:text-sky-700 transition-colors">
-            {readMoreLabel[language]}
-          </span>
-        </p>
-      ),
-      meta: `\u{1F4C5} ${formatDateByLanguage(entry.date, language)} \u00B7 ${readTime} ${readTimeLabel[language]}`,
-      subMeta: null,
-      onSelect: () => navigate(`/blog/diary/${entry.date}`),
-    };
-  });
+  const diaryListItems: PostListItem[] = useMemo(
+    () =>
+      paginatedDiaryEntries.map((entry) => {
+        const preview = buildPreviewText(getDiaryPreviewSource(entry.date), 300);
+        const readTime = estimateReadTime(preview);
+        const title = diaryUnlocked
+          ? entry.title || formatDateByLanguage(entry.date, language)
+          : uiCopy.lockedTitle[language];
+        return {
+          id: entry.date,
+          title,
+          summary: (
+            <p className="text-gray-400 group-hover:text-gray-700 text-xs md:text-sm leading-relaxed break-all transition-colors">
+              {preview}{' '}
+              <span className="text-sky-600 font-medium group-hover:text-sky-700 transition-colors">
+                {readMoreLabel[language]}
+              </span>
+            </p>
+          ),
+          meta: `\u{1F4C5} ${formatDateByLanguage(entry.date, language)} \u00B7 ${readTime} ${readTimeLabel[language]}`,
+          subMeta: null,
+          onSelect: () => navigate(`/blog/diary/${entry.date}`),
+        };
+      }),
+    [diaryUnlocked, getDiaryPreviewSource, language, navigate, paginatedDiaryEntries]
+  );
 
   const diaryPagination =
     Math.ceil(totalDiaryEntries / ENTRIES_PER_PAGE) > 1 ? (

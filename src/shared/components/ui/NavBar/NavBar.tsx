@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export type NavPage = 'home' | 'about' | 'publications' | 'blog';
+export type NavPage = 'home' | 'portfolio' | 'publications' | 'blog';
 
 interface NavBarProps {
   variant?: 'light' | 'dark';
@@ -33,7 +33,7 @@ const NavBar: React.FC<NavBarProps> = ({ variant = 'light', currentPage }) => {
       </Link>
       <Link
         to="/portfolio"
-        className={`transition-colors ${currentPage === 'about' ? activeClass : baseClass}`}
+        className={`transition-colors ${currentPage === 'portfolio' ? activeClass : baseClass}`}
         onClick={() => setIsOpen(false)}
       >
         portfolio
