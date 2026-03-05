@@ -43,11 +43,10 @@ const HomeSearchBar: React.FC<HomeSearchBarProps> = ({
               name="q"
               type="text"
               className="shadow-lg border-none w-full rounded-full h-10 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-              placeholder={isMobile ? 'Search Google or type "hello"' : 'Search Google or type "hello"'}
+              placeholder={isMobile ? 'Search Google or Type "Hello"' : 'Search Google or Type "Hello"'}
               aria-label="Search Google"
               autoComplete="off"
               onInput={(event) => syncTypingState(event.currentTarget.value)}
-              onChange={(event) => syncTypingState(event.target.value)}
               onFocus={(event) => syncTypingState(event.target.value)}
               onBlur={(event) => syncTypingState(event.target.value)}
             />
