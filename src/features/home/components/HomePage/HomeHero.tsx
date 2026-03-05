@@ -221,18 +221,22 @@ const HomeHero: React.FC<HomeHeroProps> = ({
 
   useEffect(() => {
     if (!logoLoaded) return;
+    const staticCloudElements = Array.from(document.querySelectorAll<HTMLElement>('.cloud-layer .cloud'));
+    const setHandModeIfChanged = (nextMode: HandMode) => {
+      setHandMode((prevMode) => (prevMode === nextMode ? prevMode : nextMode));
+    };
 
     const updateHandMode = () => {
       const logoRect = logoContainerRef.current?.getBoundingClientRect();
       if (!logoRect) return;
 
       if (isClapping) {
-        setHandMode('clapping');
+        setHandModeIfChanged('clapping');
         return;
       }
 
       if (isTypingInSearch) {
-        setHandMode('covering');
+        setHandModeIfChanged('covering');
         return;
       }
 
@@ -261,7 +265,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({
               beamLength: nextBeamLength,
             };
           });
-          setHandMode('flashlight');
+          setHandModeIfChanged('flashlight');
           return;
         }
 
@@ -271,7 +275,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({
           }
           return { ...prev, beamAngle: 8, beamLength: 260 };
         });
-        setHandMode('idle');
+        setHandModeIfChanged('idle');
         return;
       }
 
@@ -282,7 +286,10 @@ const HomeHero: React.FC<HomeHeroProps> = ({
       const userInteracting = now - pointerRef.current.lastMoveAt < 3000 || pointerDistanceToLogo < 320;
 
       if (userInteracting) {
-        const cloudElements = document.querySelectorAll<HTMLElement>('.cloud-layer .cloud');
+        const cloudElements =
+          staticCloudElements.length > 0
+            ? staticCloudElements
+            : document.querySelectorAll<HTMLElement>('.cloud-layer .cloud');
         let closestCloud: { x: number; y: number; distance: number } | null = null;
 
         for (const cloud of cloudElements) {
@@ -317,7 +324,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({
             if (Math.abs(prev.pointAngle - nextPointAngle) < 1) return prev;
             return { ...prev, pointAngle: nextPointAngle };
           });
-          setHandMode('point-cloud');
+          setHandModeIfChanged('point-cloud');
           return;
         }
       }
@@ -329,7 +336,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({
         sunY < logoRect.top - 8 &&
         sunY > logoRect.top - window.innerHeight * 0.55;
 
-      setHandMode(sunIsAboveLogo ? 'shade-sun' : 'idle');
+      setHandModeIfChanged(sunIsAboveLogo ? 'shade-sun' : 'idle');
     };
 
     updateHandMode();

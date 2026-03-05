@@ -11,8 +11,6 @@ const FancyBtn: React.FC<FancyBtnProps> = ({ url, btnText }) => {
       const uri = window.location.toString();
       if (uri.indexOf('#') > 0) {
         const clean_uri = uri.substring(0, uri.indexOf('#'));
-        console.log(window.location.toString());
-        console.log(clean_uri);
         window.history.replaceState('', document.title, clean_uri);
       }
     }, 5);

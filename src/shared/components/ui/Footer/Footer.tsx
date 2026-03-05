@@ -41,6 +41,7 @@ const Footer: React.FC = () => {
           alink.href = fileURL;
           alink.download = 'Kyochul_Resume.pdf';
           alink.click();
+          window.URL.revokeObjectURL(fileURL);
         });
       })
       .catch((error) => {

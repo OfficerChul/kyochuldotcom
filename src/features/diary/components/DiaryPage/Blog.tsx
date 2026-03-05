@@ -241,10 +241,7 @@ const BlogPage: React.FC = () => {
     setDecodeError(null);
   }, [language]);
 
-  const diaryEntries = useMemo(
-    () => [...DIARY_POSTS].sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()),
-    []
-  );
+  const diaryEntries = useMemo(() => DIARY_POSTS, []);
 
   const localizedDiaryEntries = useMemo(
     () => diaryEntries.map((entry) => getLocalizedDiaryEntry(entry, language)),

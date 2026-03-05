@@ -1,5 +1,17 @@
 [
   {
+    "title": "CodeVoyager: An Interactive Tool for Rapid Code Comprehension through LLM-Assisted Graph Navigation.UIST 2025 Poster  & IUI 2026",
+    "authors": [
+      "Kim, Y.",
+      "Jang, K.",
+      "Song, H.",
+      "Shin, M.",
+      "Suh, B."
+    ],
+    "year": 2025,
+    "link": "https://dl.acm.org/doi/10.1145/3746058.3758378"
+  },
+  {
     "title": "DICE-BENCH: Evaluating the Tool-Use Capabilities of Large Language Models in Multi-Round, Multi-Party Dialogues.ACL 2025 Findings.",
     "authors": [
       "Jang, K.",
@@ -14,7 +26,7 @@
     "link": "https://snuhcc.github.io/DICE-Bench/"
   },
   {
-    "title": "ComPLUG: Efficient Multilingual Medical Reasoning via Compressed Pivot Language-guided Generation.AAAI 2025(Under Review).",
+    "title": "ComPLUG: Efficient Multilingual Medical Reasoning via Compressed Pivot Language-guided Generation.ACM Transactions on Computing for Healthcare(WIP).",
     "authors": [
       "Lee, D.",
       "Song, M.",
@@ -34,19 +46,7 @@
       "Kang, K."
     ],
     "year": 2025,
-    "link": "https://www.researchgate.net/publication/386108841"
-  },
-  {
-    "title": "CodeVoyager: An Interactive Tool for Rapid Code Comprehension through LLM-Assisted Graph Navigation.UIST 2025 Poster  & IUI 2026 (WIP).",
-    "authors": [
-      "Kim, Y.",
-      "Jang, K.",
-      "Song, H.",
-      "Shin, M.",
-      "Suh, B."
-    ],
-    "year": 2025,
-    "link": "https://programs.sigchi.org/uist/2025/program/content/209380"
+    "link": "https://doi.org/10.1061/JCEMD4.COENG-17168"
   },
   {
     "title": "AltAuthor: A Context-Aware Alt Text Authoring Tool with Image Classification and LMM-Powered Accessibility Compliance.IUI 2025 Posters and Demos.",
