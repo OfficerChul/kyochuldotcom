@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 interface HomeSearchBarProps {
   searchInputRef: React.RefObject<HTMLInputElement | null>;
   isMobile: boolean;
+  onTypingChange: (isTyping: boolean) => void;
+  onQueryChange: (query: string) => void;
 }
 
-const HomeSearchBar: React.FC<HomeSearchBarProps> = ({ searchInputRef, isMobile }) => {
+const HomeSearchBar: React.FC<HomeSearchBarProps> = ({
+  searchInputRef,
+  isMobile,
+  onTypingChange,
+  onQueryChange,
+}) => {
+  useEffect(() => {
+    const value = searchInputRef.current?.value ?? '';
+    onTypingChange(Boolean(value.trim()));
+    onQueryChange(value);
+  }, [onQueryChange, onTypingChange, searchInputRef]);
+
+  const syncTypingState = (value: string) => {
+    onTypingChange(value.trim().length > 0);
+    onQueryChange(value);
+  };
+
   return (
     <section className="mt-4 sm:mt-8 pointer-events-auto" aria-label="Google Search">
       <form action="https://www.google.com/search" method="GET">
@@ -25,9 +43,13 @@ const HomeSearchBar: React.FC<HomeSearchBarProps> = ({ searchInputRef, isMobile 
               name="q"
               type="text"
               className="shadow-lg border-none w-full rounded-full h-10 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-              placeholder={isMobile ? 'Search Google' : 'Search Google or type a URL'}
+              placeholder={isMobile ? 'Search Google or type "hello"' : 'Search Google or type "hello"'}
               aria-label="Search Google"
               autoComplete="off"
+              onInput={(event) => syncTypingState(event.currentTarget.value)}
+              onChange={(event) => syncTypingState(event.target.value)}
+              onFocus={(event) => syncTypingState(event.target.value)}
+              onBlur={(event) => syncTypingState(event.target.value)}
             />
           </div>
         </div>
