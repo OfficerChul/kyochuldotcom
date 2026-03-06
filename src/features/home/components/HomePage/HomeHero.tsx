@@ -34,7 +34,7 @@ interface HomeHeroProps {
   socialLinks: ReactNode;
 }
 
-type HandMode = 'idle' | 'covering' | 'point-cloud' | 'shade-sun' | 'flashlight' | 'clapping';
+type HandMode = 'idle' | 'covering' | 'point-cloud' | 'shade-sun' | 'flashlight' | 'waving';
 type EyeMood = 'normal' | 'heart' | 'star';
 
 interface SparklePoint {
@@ -231,7 +231,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({
       if (!logoRect) return;
 
       if (isClapping) {
-        setHandModeIfChanged('clapping');
+        setHandModeIfChanged('waving');
         return;
       }
 
@@ -404,10 +404,10 @@ const HomeHero: React.FC<HomeHeroProps> = ({
 
     setSparkleBurstId((prev) => prev + 1);
     setIsClapping(true);
-    setHandMode('clapping');
+    setHandMode('waving');
     clapTimerRef.current = window.setTimeout(() => {
       setIsClapping(false);
-    }, 920);
+    }, 1400);
   };
 
   const showHelloBubble = /hello/i.test(searchQuery.trim());

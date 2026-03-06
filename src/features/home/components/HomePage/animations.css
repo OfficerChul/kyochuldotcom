@@ -283,7 +283,7 @@
 .logo-hands--point-cloud .logo-hand,
 .logo-hands--shade-sun .logo-hand,
 .logo-hands--flashlight .logo-hand,
-.logo-hands--clapping .logo-hand {
+.logo-hands--waving .logo-hand {
   opacity: 1;
 }
 
@@ -320,16 +320,13 @@
   transform: translate(128%, -16px) rotate(6deg);
 }
 
-.logo-hands--clapping .logo-hand--left {
-  animation: logoClapLeft 860ms ease-in-out 1;
+.logo-hands--waving .logo-hand--left {
+  transform: translate(-248%, 8px) rotate(-10deg);
 }
 
-.logo-hands--clapping .logo-hand--right {
-  animation: logoClapRight 860ms ease-in-out 1;
-}
-
-.logo-hands--clapping .logo-hand::after {
-  animation: logoFingerFlex 210ms ease-in-out 4;
+.logo-hands--waving .logo-hand--right {
+  transform-origin: 40% 90%;
+  animation: logoWaveRight 1.32s ease-in-out 1;
 }
 
 .logo-hand--right .logo-flashlight {
@@ -449,37 +446,34 @@
   }
 }
 
-@keyframes logoClapLeft {
-  0%,
-  100% {
-    transform: translate(-278%, 12px) rotate(-16deg);
-  }
-
-  18%,
-  52% {
-    transform: translate(-192%, -12px) rotate(-3deg);
-  }
-
-  32%,
-  68% {
-    transform: translate(-278%, 12px) rotate(-16deg);
-  }
-}
-
-@keyframes logoClapRight {
+@keyframes logoWaveRight {
   0%,
   100% {
     transform: translate(178%, 12px) rotate(16deg);
   }
 
-  18%,
-  52% {
-    transform: translate(92%, -12px) rotate(3deg);
+  14% {
+    transform: translate(168%, 8px) rotate(34deg);
   }
 
-  32%,
-  68% {
-    transform: translate(178%, 12px) rotate(16deg);
+  28% {
+    transform: translate(168%, 8px) rotate(-2deg);
+  }
+
+  42% {
+    transform: translate(168%, 8px) rotate(32deg);
+  }
+
+  56% {
+    transform: translate(168%, 8px) rotate(0deg);
+  }
+
+  72% {
+    transform: translate(172%, 10px) rotate(24deg);
+  }
+
+  86% {
+    transform: translate(174%, 11px) rotate(10deg);
   }
 }
 
