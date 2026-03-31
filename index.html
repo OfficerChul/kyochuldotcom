@@ -2,25 +2,24 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="naver-site-verification" content="bc02e216c896ae27b259254f3ad24a835379f267" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Kyochul Jang - AI Researcher &amp; Software Developer at Seoul National University"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="%PUBLIC_URL%/logo-optimized.webp" fetchpriority="high">
-    <link rel="dns-prefetch" href="https://kit.fontawesome.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="preload" as="image" href="/logo-optimized.webp" fetchpriority="high">
     <link rel="dns-prefetch" href="https://www.google.com">
     <style>
       /* Critical CSS for portfolio page initial load */
-      .font-\[\'Bungee\'\] {
+      .font-\['Bungee'\] {
         font-family: 'Bungee', cursive;
       }
       /* Preload background placeholder */
@@ -68,45 +67,22 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/manifest.json" />
-    
+
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
-    <script
-      src="https://kit.fontawesome.com/5a5a7ea387.js"
-      crossorigin="anonymous"
-    >
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    <script>
       if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     </script>
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>Kyochul Website</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
     <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

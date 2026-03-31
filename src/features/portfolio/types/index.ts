@@ -14,3 +14,11 @@ export interface ProjectsProps {
 export interface ProjectsBtnProps {
   ghUrl: string;
 }
+
+export type Publication = {
+  title: string;
+  authors: string[];
+  venue?: string;
+  year?: number;
+  link?: string;
+};

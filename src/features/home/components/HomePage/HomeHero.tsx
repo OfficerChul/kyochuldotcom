@@ -1,22 +1,12 @@
-import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import Navigation from '../../../../shared/components/ui/Navigation';
+import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import HomeSkyCanvas from './HomeSkyCanvas';
 import HomeSearchBar from './HomeSearchBar';
 import logo from '../../../../assets/images/logos/triangle-skyblue.png';
-import { Position, StageState } from '../../types/time';
+import { CloudClass, Position, StageState, Star } from '../../types/time';
+import { useEyeTracking } from '../../hooks/useEyeTracking';
+import { useFlashlightCycle } from '../../hooks/useFlashlightCycle';
+import { useHandMode } from '../../hooks/useHandMode';
 import './animations.css';
-
-interface CloudClass {
-  id: string;
-  className: string;
-}
-
-interface Star {
-  top: number;
-  left: number;
-  size: number;
-  delay: number;
-}
 
 interface HomeHeroProps {
   timeStage: StageState;
@@ -34,7 +24,6 @@ interface HomeHeroProps {
   socialLinks: ReactNode;
 }
 
-type HandMode = 'idle' | 'covering' | 'point-cloud' | 'shade-sun' | 'flashlight' | 'waving';
 type EyeMood = 'normal' | 'heart' | 'star';
 
 interface SparklePoint {
@@ -58,8 +47,6 @@ const SPARKLE_POINTS: readonly SparklePoint[] = [
   { x: 26, y: 54, dx: -26, dy: 4, delay: 300 },
 ] as const;
 
-const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
-
 const HomeHero: React.FC<HomeHeroProps> = ({
   timeStage,
   sunPosition,
@@ -75,296 +62,37 @@ const HomeHero: React.FC<HomeHeroProps> = ({
   isMobile,
   socialLinks,
 }) => {
-  const leftEyeRef = useRef<HTMLDivElement | null>(null);
-  const rightEyeRef = useRef<HTMLDivElement | null>(null);
   const logoContainerRef = useRef<HTMLDivElement | null>(null);
-  const pointerRef = useRef({ x: 0, y: 0, lastMoveAt: 0 });
   const hoverEasterEggTimerRef = useRef<number | null>(null);
   const eyeResetTimerRef = useRef<number | null>(null);
   const clapTimerRef = useRef<number | null>(null);
-  const flashlightTimerRef = useRef<number | null>(null);
   const [isTypingInSearch, setIsTypingInSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [eyeMood, setEyeMood] = useState<EyeMood>('normal');
   const [isClapping, setIsClapping] = useState(false);
-  const [isFlashlightOn, setIsFlashlightOn] = useState(false);
   const [sparkleBurstId, setSparkleBurstId] = useState(0);
-  const [handMode, setHandMode] = useState<HandMode>('idle');
-  const [handMotion, setHandMotion] = useState({
-    pointAngle: -20,
-    beamAngle: 8,
-    beamLength: 240,
-  });
 
-  useEffect(
-    () => () => {
-      if (hoverEasterEggTimerRef.current !== null) {
-        window.clearTimeout(hoverEasterEggTimerRef.current);
-      }
-      if (eyeResetTimerRef.current !== null) {
-        window.clearTimeout(eyeResetTimerRef.current);
-      }
-      if (clapTimerRef.current !== null) {
-        window.clearTimeout(clapTimerRef.current);
-      }
-      if (flashlightTimerRef.current !== null) {
-        window.clearTimeout(flashlightTimerRef.current);
-      }
-    },
-    []
-  );
-
-  useEffect(() => {
-    if (flashlightTimerRef.current !== null) {
-      window.clearTimeout(flashlightTimerRef.current);
-    }
-
-    if (!logoLoaded || timeStage.stage !== 'night') {
-      setIsFlashlightOn(false);
-      return;
-    }
-
-    let cancelled = false;
-    const scheduleCycle = () => {
-      const onDuration = 6500 + Math.random() * 8500;
-      const offDuration = 9000 + Math.random() * 9000;
-
-      setIsFlashlightOn(true);
-      flashlightTimerRef.current = window.setTimeout(() => {
-        if (cancelled) return;
-        setIsFlashlightOn(false);
-
-        flashlightTimerRef.current = window.setTimeout(() => {
-          if (!cancelled) {
-            scheduleCycle();
-          }
-        }, offDuration);
-      }, onDuration);
-    };
-
-    scheduleCycle();
-
-    return () => {
-      cancelled = true;
-      if (flashlightTimerRef.current !== null) {
-        window.clearTimeout(flashlightTimerRef.current);
-      }
-    };
-  }, [logoLoaded, timeStage.stage]);
-
-  useEffect(() => {
-    if (!logoLoaded) return;
-
-    const eyes = [leftEyeRef.current, rightEyeRef.current].filter(Boolean) as HTMLDivElement[];
-    if (eyes.length === 0) return;
-
-    let rafId: number | null = null;
-    pointerRef.current = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-      lastMoveAt: Date.now(),
-    };
-
-    const updatePupilPosition = (eye: HTMLDivElement) => {
-      const rect = eye.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = pointerRef.current.x - centerX;
-      const deltaY = pointerRef.current.y - centerY;
-      const distance = Math.hypot(deltaX, deltaY);
-      const maxOffset = rect.width * 0.22;
-      const ratio = distance > maxOffset ? maxOffset / distance : 1;
-
-      eye.style.setProperty('--pupil-x', `${deltaX * ratio}px`);
-      eye.style.setProperty('--pupil-y', `${deltaY * ratio}px`);
-    };
-
-    const render = () => {
-      eyes.forEach(updatePupilPosition);
-      rafId = null;
-    };
-
-    const queueRender = () => {
-      if (rafId !== null) return;
-      rafId = window.requestAnimationFrame(render);
-    };
-
-    const handleMouseMove = (event: MouseEvent) => {
-      pointerRef.current.x = event.clientX;
-      pointerRef.current.y = event.clientY;
-      pointerRef.current.lastMoveAt = Date.now();
-      queueRender();
-    };
-
-    const handleTouchMove = (event: TouchEvent) => {
-      if (!event.touches[0]) return;
-      pointerRef.current.x = event.touches[0].clientX;
-      pointerRef.current.y = event.touches[0].clientY;
-      pointerRef.current.lastMoveAt = Date.now();
-      queueRender();
-    };
-
-    queueRender();
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    window.addEventListener('resize', queueRender);
-
-    return () => {
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId);
-      }
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('resize', queueRender);
-    };
-  }, [logoLoaded]);
-
-  useEffect(() => {
-    if (!logoLoaded) return;
-    const staticCloudElements = Array.from(document.querySelectorAll<HTMLElement>('.cloud-layer .cloud'));
-    const setHandModeIfChanged = (nextMode: HandMode) => {
-      setHandMode((prevMode) => (prevMode === nextMode ? prevMode : nextMode));
-    };
-
-    const updateHandMode = () => {
-      const logoRect = logoContainerRef.current?.getBoundingClientRect();
-      if (!logoRect) return;
-
-      if (isClapping) {
-        setHandModeIfChanged('waving');
-        return;
-      }
-
-      if (isTypingInSearch) {
-        setHandModeIfChanged('covering');
-        return;
-      }
-
-      const logoCenterX = logoRect.left + logoRect.width / 2;
-      const logoCenterY = logoRect.top + logoRect.height / 2;
-      const now = Date.now();
-
-      if (timeStage.stage === 'night') {
-        if (isFlashlightOn) {
-          const sweep = Math.sin(now / 960);
-          const pulse = (Math.cos(now / 1280) + 1) / 2;
-          const nextBeamAngle = clamp(sweep * 44, -44, 44);
-          const nextBeamLength = clamp(220 + pulse * 190, 220, 430);
-
-          setHandMotion((prev) => {
-            if (
-              Math.abs(prev.beamAngle - nextBeamAngle) < 1 &&
-              Math.abs(prev.beamLength - nextBeamLength) < 6
-            ) {
-              return prev;
-            }
-
-            return {
-              ...prev,
-              beamAngle: nextBeamAngle,
-              beamLength: nextBeamLength,
-            };
-          });
-          setHandModeIfChanged('flashlight');
-          return;
-        }
-
-        setHandMotion((prev) => {
-          if (Math.abs(prev.beamAngle - 8) < 0.5 && Math.abs(prev.beamLength - 260) < 4) {
-            return prev;
-          }
-          return { ...prev, beamAngle: 8, beamLength: 260 };
-        });
-        setHandModeIfChanged('idle');
-        return;
-      }
-
-      const pointerDistanceToLogo = Math.hypot(
-        pointerRef.current.x - logoCenterX,
-        pointerRef.current.y - logoCenterY
-      );
-      const userInteracting = now - pointerRef.current.lastMoveAt < 3000 || pointerDistanceToLogo < 320;
-
-      if (userInteracting) {
-        const cloudElements =
-          staticCloudElements.length > 0
-            ? staticCloudElements
-            : document.querySelectorAll<HTMLElement>('.cloud-layer .cloud');
-        let closestCloud: { x: number; y: number; distance: number } | null = null;
-
-        for (const cloud of cloudElements) {
-          const cloudRect = cloud.getBoundingClientRect();
-          const nearLogo =
-            cloudRect.right > logoRect.left - 80 &&
-            cloudRect.left < logoRect.right + 80 &&
-            cloudRect.bottom > logoRect.top - 70 &&
-            cloudRect.top < logoRect.bottom + 40;
-
-          if (!nearLogo) continue;
-
-          const cloudCenterX = cloudRect.left + cloudRect.width / 2;
-          const cloudCenterY = cloudRect.top + cloudRect.height / 2;
-          const distance = Math.hypot(cloudCenterX - logoCenterX, cloudCenterY - logoCenterY);
-
-          if (!closestCloud || distance < closestCloud.distance) {
-            closestCloud = { x: cloudCenterX, y: cloudCenterY, distance };
-          }
-        }
-
-        if (closestCloud) {
-          const originX = logoRect.left + logoRect.width * 0.58;
-          const originY = logoRect.top + logoRect.height * 0.56;
-          const nextPointAngle = clamp(
-            (Math.atan2(closestCloud.y - originY, closestCloud.x - originX) * 180) / Math.PI,
-            -75,
-            35
-          );
-
-          setHandMotion((prev) => {
-            if (Math.abs(prev.pointAngle - nextPointAngle) < 1) return prev;
-            return { ...prev, pointAngle: nextPointAngle };
-          });
-          setHandModeIfChanged('point-cloud');
-          return;
-        }
-      }
-
-      const sunX = (sunPosition.left / 100) * window.innerWidth;
-      const sunY = (sunPosition.top / 100) * window.innerHeight;
-      const sunIsAboveLogo =
-        Math.abs(sunX - logoCenterX) < logoRect.width * 0.95 &&
-        sunY < logoRect.top - 8 &&
-        sunY > logoRect.top - window.innerHeight * 0.55;
-
-      setHandModeIfChanged(sunIsAboveLogo ? 'shade-sun' : 'idle');
-    };
-
-    updateHandMode();
-    const intervalId = window.setInterval(updateHandMode, 240);
-    window.addEventListener('resize', updateHandMode);
-
-    return () => {
-      window.clearInterval(intervalId);
-      window.removeEventListener('resize', updateHandMode);
-    };
-  }, [
+  const isFlashlightOn = useFlashlightCycle(logoLoaded, timeStage.stage);
+  const { leftEyeRef, rightEyeRef, pointerRef } = useEyeTracking(logoLoaded);
+  const { handMode, handStyle } = useHandMode({
+    logoLoaded,
+    stage: timeStage.stage,
     isClapping,
     isFlashlightOn,
     isTypingInSearch,
-    logoLoaded,
-    sunPosition.left,
-    sunPosition.top,
-    timeStage.stage,
-  ]);
+    sunPosition,
+    logoContainerRef,
+    pointerRef,
+  });
 
-  const handStyle = useMemo(
-    () =>
-      ({
-        '--point-angle': `${handMotion.pointAngle}deg`,
-        '--beam-angle': `${handMotion.beamAngle}deg`,
-        '--beam-length': `${handMotion.beamLength}px`,
-      }) as React.CSSProperties,
-    [handMotion.beamAngle, handMotion.beamLength, handMotion.pointAngle]
+  // Cleanup timers on unmount
+  React.useEffect(
+    () => () => {
+      if (hoverEasterEggTimerRef.current !== null) window.clearTimeout(hoverEasterEggTimerRef.current);
+      if (eyeResetTimerRef.current !== null) window.clearTimeout(eyeResetTimerRef.current);
+      if (clapTimerRef.current !== null) window.clearTimeout(clapTimerRef.current);
+    },
+    []
   );
 
   const handleLogoMouseEnter = () => {
@@ -404,7 +132,6 @@ const HomeHero: React.FC<HomeHeroProps> = ({
 
     setSparkleBurstId((prev) => prev + 1);
     setIsClapping(true);
-    setHandMode('waving');
     clapTimerRef.current = window.setTimeout(() => {
       setIsClapping(false);
     }, 1400);
@@ -427,10 +154,6 @@ const HomeHero: React.FC<HomeHeroProps> = ({
         cloudClasses={cloudClasses}
         stars={stars}
       />
-
-      <div className="relative z-20">
-        <Navigation />
-      </div>
 
       <main className="relative z-20 h-screen flex flex-col items-center justify-center pointer-events-none">
         <div className="text-center relative pointer-events-none">

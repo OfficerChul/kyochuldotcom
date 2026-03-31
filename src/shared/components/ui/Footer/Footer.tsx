@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import GitHubCalendar from 'react-github-calendar';
 import type { CalendarData } from 'react-activity-calendar';
 import { FancyButtonSmall } from '../Button';
+import { downloadCV } from '../../../utils/downloadCV';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -30,23 +31,6 @@ const Footer: React.FC = () => {
       setLikes(likes + 1);
       setHasLiked(true);
     }
-  };
-
-  const handleDownloadCV = () => {
-    fetch('Kyochul_Jang___CV.pdf')
-      .then((response) => {
-        response.blob().then((blob) => {
-          const fileURL = window.URL.createObjectURL(blob);
-          const alink = document.createElement('a');
-          alink.href = fileURL;
-          alink.download = 'Kyochul_Resume.pdf';
-          alink.click();
-          window.URL.revokeObjectURL(fileURL);
-        });
-      })
-      .catch((error) => {
-        console.error('Error downloading resume:', error);
-      });
   };
 
   const calendarTransformData = useMemo(() => {
@@ -79,7 +63,7 @@ const Footer: React.FC = () => {
             <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">
               AI Researcher & Software Developer
               <br />
-              Master's Student at Seoul National University
+              PhD Student at Seoul National University
               <br />
               Specializing in GUI Agent, On-device AI, Embodied AI and AI Safety
             </p>
@@ -144,7 +128,7 @@ const Footer: React.FC = () => {
               </FancyButtonSmall>
 
               <FancyButtonSmall
-                onClick={handleDownloadCV}
+                onClick={downloadCV}
                 className="w-full px-3 py-2 text-xs font-medium text-emerald-600 font-mono stroke-emerald-400 hover:stroke-emerald-600"
                 borderColor="rgba(16, 185, 129, 0.5)"
                 noSvgBorder={true}

@@ -2,29 +2,13 @@ import React from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 import SectionTitle from '../../../../shared/components/ui/SectionTitle';
+import { downloadCV } from '../../../../shared/utils/downloadCV';
 
 interface AboutMeProps {
   id?: string;
 }
 
 const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
-  const onButtonClick = (): void => {
-    fetch('Kyochul_Jang___CV.pdf')
-      .then((response) => response.blob())
-      .then((blob) => {
-        const fileURL = window.URL.createObjectURL(blob);
-        const alink = document.createElement('a');
-        alink.href = fileURL;
-        alink.download = 'Kyochul_Resume.pdf';
-        alink.click();
-        // Release blob URL to prevent memory leak
-        window.URL.revokeObjectURL(fileURL);
-      })
-      .catch((error) => {
-        console.error('Error downloading resume:', error);
-      });
-  };
-
   return (
     <div className="bg-gradient-to-br from-gray-50 to-sky-50 py-12 md:py-16 lg:py-20" id={id}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
@@ -37,12 +21,15 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
             <div className="lg:w-1/2 flex justify-center items-center">
               <div className="relative group w-full max-w-lg">
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-500"></div>
-                <img
-                  src="/myPicture-optimized.jpg"
-                  alt="Kyochul Jang profile"
-                  loading="lazy"
-                  className="relative w-full h-auto rounded-2xl shadow-2xl transform transition duration-500 group-hover:scale-[1.02]"
-                />
+                <picture>
+                  <source srcSet="/myPicture-optimized.webp" type="image/webp" />
+                  <img
+                    src="/myPicture-optimized.jpg"
+                    alt="Kyochul Jang profile"
+                    loading="lazy"
+                    className="relative w-full h-auto rounded-2xl shadow-2xl transform transition duration-500 group-hover:scale-[1.02]"
+                  />
+                </picture>
               </div>
             </div>
 
@@ -129,7 +116,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ id }) => {
               </div>
               <div className="mt-6">
                 <FancyButtonSmall
-                  onClick={onButtonClick}
+                  onClick={downloadCV}
                   className="px-4 py-2 text-sky-600 font-mono stroke-sky-400 hover:stroke-sky-600"
                   borderColor="rgba(56, 189, 248, 0.5)"
                   noSvgBorder={true}

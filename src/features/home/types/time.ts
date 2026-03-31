@@ -9,3 +9,15 @@ export interface Position {
   top: number;
   left: number;
 }
+
+export interface CloudClass {
+  id: string;
+  className: string;
+}
+
+export interface Star {
+  top: number;
+  left: number;
+  size: number;
+  delay: number;
+}

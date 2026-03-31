@@ -1,60 +1,32 @@
 {
-  "homepage": ".",
   "name": "kyochuldotcom",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.26.2",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "pdf-parse": "^1.1.1",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.12",
     "react-dom": "^18.2.0",
     "react-github-calendar": "^3.4.0",
-    "react-icons": "^5.5.0",
     "react-markdown": "^10.1.0",
     "react-modal": "^3.15.1",
     "react-pdf": "^10.2.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
-    "remark-gfm": "^4.0.1",
-    "web-vitals": "^2.1.4"
+    "remark-gfm": "^4.0.1"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "preview": "serve -s build",
+    "dev": "vite",
+    "build": "node scripts/gen-publications.js && tsc --noEmit && vite build",
+    "preview": "vite preview",
     "lint": "eslint src --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "gen:pubs": "node scripts/gen-publications.js",
-    "prebuild": "node scripts/gen-publications.js"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "gen:pubs": "node scripts/gen-publications.js"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.5.2",
     "@types/react": "^19.1.13",
@@ -62,11 +34,14 @@
     "@types/react-modal": "^3.16.3",
     "@typescript-eslint/eslint-plugin": "^8.44.0",
     "@typescript-eslint/parser": "^8.44.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.4.27",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "pdf-parse": "^1.1.1",
     "prettier": "^3.6.2",
-    "serve": "^14.2.5",
     "tailwindcss": "^3.2.4",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vite": "^8.0.3"
   }
 }

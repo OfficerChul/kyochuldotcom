@@ -1,4 +1,5 @@
 import { useState, useCallback, CSSProperties } from 'react';
+import './expandableList.css';
 
 interface UseExpandableListOptions {
   initialCount: number;
@@ -12,7 +13,6 @@ interface UseExpandableListReturn<T> {
   getVisibleItems: (items: T[]) => T[];
   hasMore: (items: T[]) => boolean;
   getItemAnimation: (index: number) => CSSProperties | undefined;
-  styles: string;
 }
 
 export function useExpandableList<T>({
@@ -69,30 +69,6 @@ export function useExpandableList<T>({
     [showAll, isAnimating, initialCount]
   );
 
-  const styles = `
-    @keyframes expandableSlideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes expandableSlideUp {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-    }
-  `;
-
   return {
     showAll,
     isAnimating,
@@ -100,7 +76,6 @@ export function useExpandableList<T>({
     getVisibleItems,
     hasMore,
     getItemAnimation,
-    styles,
   };
 }
 

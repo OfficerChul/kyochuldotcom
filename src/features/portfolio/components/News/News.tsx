@@ -4,6 +4,7 @@ import publicationsData from '../Publications/publications.json';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
 import SectionTitle from '../../../../shared/components/ui/SectionTitle';
 import { useExpandableList } from '../../../../shared/hooks';
+import { Publication } from '../../types';
 
 interface NewsProps {
   id?: string;
@@ -14,14 +15,6 @@ interface NewsItem {
   text: string;
   link?: string;
 }
-
-type Publication = {
-  title: string;
-  authors: string[];
-  venue?: string;
-  year?: number;
-  link?: string;
-};
 
 const publications = publicationsData as Publication[];
 
@@ -423,14 +416,12 @@ const News: React.FC<NewsProps> = ({ id }) => {
     getVisibleItems,
     hasMore,
     getItemAnimation,
-    styles,
   } = useExpandableList<NewsItem>({ initialCount: ITEMS_TO_SHOW });
 
   const visibleItems = getVisibleItems(NEWS_ITEMS);
 
   return (
     <>
-      <style>{styles}</style>
       <section className="bg-gradient-to-br from-white to-sky-50 py-8 md:py-12 lg:py-16" id={id}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         <Fade cascade damping={0.1} triggerOnce={true} direction="up">

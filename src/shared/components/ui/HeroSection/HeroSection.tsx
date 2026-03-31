@@ -3,7 +3,8 @@ import FancyBtn from '../Button';
 import TypingAnimation from '../TypingAnimation';
 import NavBar from '../NavBar';
 import type { NavPage } from '../NavBar/NavBar';
-import backgroundImage from '../../../../assets/images/backgrounds/background.jpg';
+import backgroundImageWebP from '../../../../assets/images/backgrounds/background.webp';
+import backgroundImageJpg from '../../../../assets/images/backgrounds/background.jpg';
 
 interface HeroSectionProps {
   showAboutButton?: boolean;
@@ -24,7 +25,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       <header
         className={`font-['Bungee'] bg-no-repeat bg-cover bg-center h-screen relative`}
         style={{
-          backgroundImage: `url(${backgroundImage})`,
+          backgroundImage: `url(${backgroundImageWebP}), url(${backgroundImageJpg})`,
         }}
       >
         <div className="absolute top-0 right-0 z-50 font-sans">

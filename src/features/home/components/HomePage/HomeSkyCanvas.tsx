@@ -1,17 +1,5 @@
 import React from 'react';
-import { Position, StageState } from '../../types/time';
-
-interface CloudClass {
-  id: string;
-  className: string;
-}
-
-interface Star {
-  top: number;
-  left: number;
-  size: number;
-  delay: number;
-}
+import { CloudClass, Position, StageState, Star } from '../../types/time';
 
 interface HomeSkyCanvasProps {
   timeStage: StageState;
@@ -88,4 +76,4 @@ const HomeSkyCanvas: React.FC<HomeSkyCanvasProps> = ({
   );
 };
 
-export default HomeSkyCanvas;
+export default React.memo(HomeSkyCanvas);

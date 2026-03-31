@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 interface HomeSearchBarProps {
   searchInputRef: React.RefObject<HTMLInputElement | null>;
@@ -33,7 +34,8 @@ const HomeSearchBar: React.FC<HomeSearchBarProps> = ({
             <label htmlFor="search-bar" className="sr-only">
               Search Google or type a URL
             </label>
-            <FaSearch
+            <FontAwesomeIcon
+              icon={faSearch}
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               aria-hidden="true"
             />
@@ -57,4 +59,4 @@ const HomeSearchBar: React.FC<HomeSearchBarProps> = ({
   );
 };
 
-export default HomeSearchBar;
+export default React.memo(HomeSearchBar);

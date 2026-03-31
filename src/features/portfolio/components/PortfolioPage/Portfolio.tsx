@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import HeroSection from '../../../../shared/components/ui/HeroSection';
+import LoadingFallback from '../../../../shared/components/ui/LoadingFallback';
 
 const AboutMe = lazy(() => import('../AboutSection'));
 const Timeline = lazy(() => import('../Timeline'));
@@ -15,34 +16,22 @@ const Portfolio: React.FC = () => {
     <>
       <HeroSection currentPage="portfolio" />
 
-      <Suspense
-        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
-      >
+      <Suspense fallback={<LoadingFallback />}>
         <AboutMe id="about1" />
       </Suspense>
-      <Suspense
-        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
-      >
+      <Suspense fallback={<LoadingFallback />}>
         <Publications id="publications" />
       </Suspense>
-      <Suspense
-        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
-      >
+      <Suspense fallback={<LoadingFallback />}>
         <News id="news" />
       </Suspense>
-      <Suspense
-        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
-      >
+      <Suspense fallback={<LoadingFallback />}>
         <Education id="education" />
       </Suspense>
-      <Suspense
-        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
-      >
+      <Suspense fallback={<LoadingFallback />}>
         <Projects id="projects" />
       </Suspense>
-      <Suspense
-        fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}
-      >
+      <Suspense fallback={<LoadingFallback />}>
         <Timeline id="timeline" />
       </Suspense>
       <Suspense

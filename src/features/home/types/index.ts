@@ -1,10 +1,1 @@
-export interface SocialLink {
-  url: string;
-  icon: string;
-  label: string;
-  color?: string;
-}
-
-export interface SearchFormData {
-  query: string;
-}
+// Unused interfaces removed (SocialLink, SearchFormData were never imported)

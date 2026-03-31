@@ -1,4 +1,4 @@
-import { StageState, TimeStage } from '../types/time';
+import { StageState } from '../types/time';
 
 export const clamp = (value: number, min = 0, max = 1): number =>
   Math.min(max, Math.max(min, value));
@@ -34,5 +34,3 @@ const getStageStateForDate = (date: Date): StageState => {
 export const getStageState = (): StageState => getStageStateForDate(getKSTDate());
 
 export { getStageStateForDate };
-
-export const isNightStage = (stage: TimeStage): boolean => stage === 'night';

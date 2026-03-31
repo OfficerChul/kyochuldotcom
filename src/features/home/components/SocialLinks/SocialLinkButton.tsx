@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './SocialLinkButton.css';
-import '../../../../shared/styles/animations.css';
 
 interface SocialLinkButtonProps {
   href?: string;
@@ -116,18 +115,18 @@ const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
     surface.addEventListener('mousemove', handleMouseMove);
     surface.addEventListener('mouseleave', handleEnd);
 
-    // Mobile: track touch anywhere on screen
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleEnd);
+    // Mobile: track touch on the button surface
+    surface.addEventListener('touchmove', handleTouchMove, { passive: true });
+    surface.addEventListener('touchstart', handleTouchStart, { passive: true });
+    surface.addEventListener('touchend', handleEnd);
 
     return () => {
       cancelAnimationFrame(rafId);
       surface.removeEventListener('mousemove', handleMouseMove);
       surface.removeEventListener('mouseleave', handleEnd);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleEnd);
+      surface.removeEventListener('touchmove', handleTouchMove);
+      surface.removeEventListener('touchstart', handleTouchStart);
+      surface.removeEventListener('touchend', handleEnd);
     };
   }, []);
   const setPortfolioRef = (node: HTMLAnchorElement | HTMLButtonElement | null) => {

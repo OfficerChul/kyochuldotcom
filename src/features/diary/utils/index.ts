@@ -1,1 +1,1 @@
-export { estimateReadTime, formatDiaryDate } from './format';
+export { estimateReadTime, formatDiaryDate, parseShortDate } from './format';

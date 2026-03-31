@@ -8,7 +8,7 @@ import { DiaryEntryDetail } from '../DiaryEntry';
 import HeroSection from '../../../../shared/components/ui/HeroSection';
 import SectionTitle from '../../../../shared/components/ui/SectionTitle';
 import { FancyButtonSmall } from '../../../../shared/components/ui/Button';
-import { estimateReadTime } from '../../utils';
+import { estimateReadTime, parseShortDate } from '../../utils';
 import { BLOG_POSTS } from '../../data/blogPosts';
 import { DIARY_POSTS } from '../../data/diaryPosts';
 import { PostDetailLayout, PostList, PostListItem } from '../PostTemplates';
@@ -35,12 +35,7 @@ const readMoreLabel: Record<Language, string> = {
   zh: '(阅读全文)',
 };
 
-const DIARY_KEY = process.env.REACT_APP_DIARY_KEY || 'diary-demo-key';
-
-const parseShortDate = (dateStr: string): number => {
-  const [yy, mm, dd] = dateStr.split('-').map(Number);
-  return new Date(2000 + yy, mm - 1, dd).getTime();
-};
+const DIARY_KEY = import.meta.env.VITE_DIARY_KEY || 'diary-demo-key';
 
 const formatDateByLanguage = (dateStr: string, lang: Language): string => {
   const [yy, mm, dd] = dateStr.split('-').map(Number);
@@ -249,7 +244,7 @@ const BlogPage: React.FC = () => {
   );
 
   const sortedBlogPosts = useMemo(
-    () => [...BLOG_POSTS].sort((a, b) => parseShortDate(b.date) - parseShortDate(a.date)),
+    () => [...BLOG_POSTS].sort((a, b) => parseShortDate(b.date).getTime() - parseShortDate(a.date).getTime()),
     []
   );
 

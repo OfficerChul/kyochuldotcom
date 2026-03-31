@@ -1,9 +1,5 @@
 import { DiaryEntry } from '../types';
-
-const parseShortDate = (dateStr: string): Date => {
-  const [yy, mm, dd] = dateStr.split('-').map(Number);
-  return new Date(2000 + yy, mm - 1, dd);
-};
+import { parseShortDate } from '../utils';
 
 const RAW_DIARY_ENTRIES: Omit<DiaryEntry, 'rawDate'>[] = [
   {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import Modal from 'react-modal';
-import { FaStar, FaLinkedinIn, FaInstagram, FaGithub, FaEnvelope, FaBook } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faEnvelope, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedinIn, faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
 import SocialLinkButton from './SocialLinkButton';
 import './animations.css';
 
@@ -40,15 +42,14 @@ const LoadingSpinner: React.FC<{ className?: string }> = ({ className = '' }) =>
 const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalWidth, setModalWidth] = useState<number>(0);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const isMobile = modalWidth < 568;
 
   // Calculate modal width for PDF
   useEffect(() => {
     const updateWidth = () => {
       const width = Math.min(window.innerWidth * 0.9, 800) - 32; // 90vw or 800px max, minus padding
       setModalWidth(width);
-      setIsMobile(window.innerWidth < 640);
     };
 
     updateWidth();
@@ -66,23 +67,11 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
     };
   }, []);
 
-  // Handle ESC key to close modal
+  // Focus modal when opened (ESC handling is built into react-modal via shouldCloseOnEsc)
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isModalOpen) {
-        setIsModalOpen(false);
-      }
-    };
-
     if (isModalOpen) {
-      document.addEventListener('keydown', handleEsc);
-      // Focus trap
       modalRef.current?.focus();
     }
-
-    return () => {
-      document.removeEventListener('keydown', handleEsc);
-    };
   }, [isModalOpen]);
 
   const modalStyles: ModalStyles = {
@@ -118,7 +107,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
       ariaLabel: 'View Portfolio',
       to: '/portfolio',
       isPortfolio: true,
-      renderIcon: () => <FaStar className="text-[26px] sm:text-[35px] text-[#fce903]" />
+      renderIcon: () => <FontAwesomeIcon icon={faStar} className="text-[26px] sm:text-[35px] text-[#fce903]" />
     },
     {
       key: 'blog',
@@ -126,7 +115,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
       sonarColor: 'rgba(139, 69, 19, 0.6)',
       ariaLabel: 'View Blog',
       to: '/blog',
-      renderIcon: () => <FaBook className="text-[26px] sm:text-[35px] text-[#8B4513]" />
+      renderIcon: () => <FontAwesomeIcon icon={faBook} className="text-[26px] sm:text-[35px] text-[#8B4513]" />
     },
     {
       key: 'scholar',
@@ -155,7 +144,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
       sonarColor: 'rgba(14, 118, 168, 0.6)',
       ariaLabel: 'LinkedIn Profile',
       href: 'https://www.linkedin.com/in/kyochul-jang-93b263208/',
-      renderIcon: () => <FaLinkedinIn className="text-[26px] sm:text-[35px] text-[#0E76A8]" />
+      renderIcon: () => <FontAwesomeIcon icon={faLinkedinIn} className="text-[26px] sm:text-[35px] text-[#0E76A8]" />
     },
     {
       key: 'instagram',
@@ -163,7 +152,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
       sonarColor: 'rgba(225, 48, 108, 0.6)',
       ariaLabel: 'Instagram Profile',
       href: 'https://www.instagram.com/kjang_hochul/',
-      renderIcon: () => <FaInstagram className="text-[26px] sm:text-[35px] text-[#E1306C]" />
+      renderIcon: () => <FontAwesomeIcon icon={faInstagram} className="text-[26px] sm:text-[35px] text-[#E1306C]" />
     },
     {
       key: 'github',
@@ -171,7 +160,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
       sonarColor: 'rgba(119, 87, 157, 0.6)',
       ariaLabel: 'GitHub Profile',
       href: 'https://github.com/OfficerChul',
-      renderIcon: () => <FaGithub className="text-[26px] sm:text-[35px] text-[#77579d]" />
+      renderIcon: () => <FontAwesomeIcon icon={faGithub} className="text-[26px] sm:text-[35px] text-[#77579d]" />
     },
     {
       key: 'email',
@@ -179,7 +168,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'light' }) => {
       sonarColor: 'rgba(54, 139, 254, 0.6)',
       ariaLabel: 'Send Email',
       href: 'mailto:gcj1234567890@gmail.com',
-      renderIcon: () => <FaEnvelope className="text-[26px] sm:text-[35px] text-[#368BFE]" />
+      renderIcon: () => <FontAwesomeIcon icon={faEnvelope} className="text-[26px] sm:text-[35px] text-[#368BFE]" />
     }
   ];
 

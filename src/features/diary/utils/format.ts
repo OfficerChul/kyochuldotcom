@@ -14,3 +14,8 @@ export function estimateReadTime(content: string): number {
   const words = content.split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
 }
+
+export function parseShortDate(dateStr: string): Date {
+  const [yy, mm, dd] = dateStr.split('-').map(Number);
+  return new Date(2000 + yy, mm - 1, dd);
+}
